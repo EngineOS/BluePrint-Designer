@@ -1,0 +1,2 @@
+class LangframeworksController < ApplicationController
+end

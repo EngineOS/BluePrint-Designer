@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sedstr: MyString
+  file: MyString
+  comment: MyText
+  software_id: 
+
+two:
+  sedstr: MyString
+  file: MyString
+  comment: MyText
+  software_id: 

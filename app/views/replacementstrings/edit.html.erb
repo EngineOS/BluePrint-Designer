@@ -1,0 +1,41 @@
+<h1>Editing Software</h1>
+
+ 
+  <%= form_for :replacementstring , url:[  @replacementstring.software, @replacementstring] ,method: :patch do |f| %> 
+
+ <% if @replacementstring.errors.any? %>
+        <div id="error_explanation">
+    <h2><%= pluralize(@replacementstring.errors.count , "error") %> prohibited
+      this Program from being saved:</h2>
+        <ul>
+    <% @replacementstring.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  
+  <p>
+    <%= f.label :sedstr %><br>
+    <%= f.text_field :sedstr %>
+  </p>
+<p>
+    <%= f.label :file %><br>
+    <%= f.text_field :file %>
+  </p>
+  <p>
+    <%= f.label :dest %><br>
+    <%= f.text_field :dest %>
+  </p>
+
+  <p>
+    <%= f.label :comment %><br>
+    <%= f.text_area :comment %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+<% @soft=Software.find(params[:software_id]) %>
+<%= link_to 'Back', [:editDetails , @soft ] %>

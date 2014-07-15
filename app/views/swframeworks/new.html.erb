@@ -1,0 +1,19 @@
+<%= form_for :swframework ,url: swframeworks_path do |f| %>
+<p>
+ <%= f.label :name %>
+ <%= f.text_field :name %>
+</p>
+
+<p>
+ <%= f.label :description %>
+ <%= f.text_field :description %>
+ </p>
+ <p>
+ <%= f.label :langauge_id %>
+    <%= f.select :langauge_id,   Langauge.all.collect {|l| [ l.name, l.id ] } %>
+</p>
+
+<p>
+<%= f.submit %>
+</p>
+<% end %>

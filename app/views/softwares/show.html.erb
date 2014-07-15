@@ -1,0 +1,202 @@
+
+<p>
+<strong>Name:</strong>
+<%= @software.name %>
+</p>
+<p>Owner</p>
+<p><strong>License</strong> <%= License.find(@software.license_id).name %></p>
+<p>Version</p>
+<p>status Deployed? </p>
+<p>Groups private,shared,forsale,public etc</p>
+<p>
+<strong>Description:</strong>
+<%= @software.description %>
+</p>
+<p><strong>Langauge:</strong>
+<%= Langauge.find(@software.langauge_id).name %>
+<strong>Framework</strong>
+<%= Swframework.find(@software.swframework_id).name %>
+
+<p>
+<strong>Style</strong>               
+<%= Softwaredeploytype.find(@software.softwaredeploytype_id).name %>
+
+</p>
+<p>
+<strong>Memory:</strong>
+<%= @software.requiredmemory %>
+</p>
+<%= link_to 'Edit Software', edit_software_path %><br>
+<%= link_to 'Edit Details', editDetails_software_path %><br>
+	<%= link_to 'Test', testBuild_software_path %><br />
+
+<h3>Services</h3>
+
+ 
+<table>
+	<th>Service Type</th>
+	<th>Name</th>
+	<th>Comment</th>
+	
+	 <% @software.softwareservices.each  do |softwareservice| %>
+<tr>
+	 	<td><%= Servicetype.find(softwareservice.servicetype_id).name %></td>
+	 	<td><%=  softwareservice.name %></td>
+	 	<td><%=  softwareservice.comment %></td>
+	 </tr>
+	 <% end %>
+	 
+	
+
+</table>
+
+
+<h2> Persistant Dirs</h2>
+
+<table>
+<th><strong>Directory:</strong></th>
+<th><strong>Comment:</strong></th>
+<% @software.persistantdirs.each do |persistantdir| %>
+<tr>
+  <td> 
+    <%= persistantdir.path%>
+  </td>
+ 
+  <td>
+    <%= persistantdir.comment %>
+  </td>
+</tr>
+<% end %>
+
+
+</table>
+
+<hr>
+<p>
+<h2> Persistant Files</h2>
+<table>
+<th><strong>File:</strong></th>
+<th><strong>Comment:</strong></th>
+
+<% @software.persistantfiles.each do |persistantfile| %>
+<tr>
+  <td>
+    <%= persistantfile.path%>
+ </td>
+
+  <td>
+    <%= persistantfile.comment %>
+ </td>
+</tr>
+<% end %>
+
+
+</table>
+<h2Configuration state files></h2>
+<strong>Configured File</strong><br/>
+<%= @software.configuredfile %> <br />
+<strong>Install File</strong><br />
+<%= @software.toconfigurefile %>
+
+<h2>Replacement Strings</h2>
+<table>
+<th><strong>Replacement String:</strong></th>
+<th><strong>File:</strong></th>
+<th><strong>Comment:</strong></th>
+
+<% @software.replacementstrings.each do |replacementstring| %>
+<tr>
+  <td>
+    <%= replacementstring.sedstr %>
+ </td>
+
+  <td>
+    <%= replacementstring.file %>
+ </td>
+  <td>
+    <%= replacementstring.comment %>
+ </td>
+</tr>
+<% end %>
+
+
+</table>
+
+<hr>
+<h2>Packages</h2>
+<table>
+<th><strong>Package:</strong></th>
+<th><strong>Source URI:</strong></th>
+<th><strong>Destination:</strong></th>
+<th><strong>Extract Cmd:</strong></th>
+<th><strong>Comment:</strong></th>
+
+<% @software.installedpackages.each do |installedpackage| %>
+<tr>
+  <td>
+    <%= installedpackage.name %>
+ </td>
+ <td>
+    <%= installedpackage.src %>
+ </td>
+ <td>
+    <%= installedpackage.dest %>
+ </td>
+ <td>
+    <%= installedpackage.extractcmd %>
+ </td>
+
+  <td>
+    <%= installedpackage.comment %>
+ </td>
+</tr>
+<% end %>
+
+
+</table>
+
+<hr>
+
+<h2>OS Packages</h2>
+<table>
+<th><strong>Package:</strong></th>
+<th><strong>Comment:</strong></th>
+
+<% @software.ospackages.each  do |ospackage| %>
+<tr>
+  <td>
+    <%= ospackage.name %>
+ </td>
+  <td>
+    <%= ospackage.comment %>
+ </td>
+</tr>
+<% end %>
+
+</table>
+<h2>CronJobs</h2>
+<table>
+	<th>Cronjob</th>
+<th>Description</th>
+	<% @software.cron_jobs.each  do |cronjob| %>
+<tr>
+  <td>
+    <%= cronjob.cronjob %>
+ </td>
+  <td>
+    <%= cronjob.description %>
+ </td>
+</tr>
+<% end %>
+
+
+</table>
+
+<hr>
+
+
+
+
+
+
+ <%= link_to 'Back', softwares_path %>

@@ -1,0 +1,2 @@
+class PackagestoinstallController < ApplicationController
+end

@@ -1,0 +1,10 @@
+<table>
+ <tr>
+  <td><%= @swframework.name %></td>
+  <td><%=  Langauge.find(@swframework.langauge_id).name  %></td>
+  <td><%= @swframework.description %></td>
+ </tr>
+</table>
+
+<%= link_to 'Frameworks', swframeworks_path %>
+

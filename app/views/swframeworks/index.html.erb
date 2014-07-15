@@ -1,0 +1,21 @@
+<h1>Listing Frameworks</h1>
+
+<table>
+ <tr>
+  <td>
+   <th>Name</th>
+   <th>Comment</th>
+ </tr>
+ <% @swframeworks.each do |swframework| %>
+ <tr>
+  <td><%= swframework.name %></td>
+   <td><%=  Langauge.find(swframework.langauge_id).name  %></td>
+  <td><%= swframework.description %></td>
+  <td><%= link_to 'Edit', [:edit, swframework]   %></td>
+   <td><%= link_to 'Remove', [  swframework],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+ </tr>
+ <% end %>
+</table>
+
+<%= link_to 'New Framework', new_swframework_path %>

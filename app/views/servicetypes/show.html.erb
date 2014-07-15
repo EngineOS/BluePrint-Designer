@@ -1,0 +1,14 @@
+
+<table>
+ <tr>
+  <td><%= @servicetype.name %></td>
+  <td><%= @servicetype.comment %></td>
+ </tr>
+<tr>
+<td><%= link_to 'Edit', [:edit, @servicetype]   %></td>
+<%= link_to 'Service Types', servicetypes_path %>
+<%= link_to 'Remove', servicetype_path(@servicetype),
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    </tr>
+                    </table>
+                    
