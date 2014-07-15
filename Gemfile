@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
 
+gem 'therubyracer'
+gem 'mysql'
 gem 'thin'
 
 #For GIT
