@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 gem 'therubyracer'
-gem 'mysql'
+gem 'mysql2'
 gem 'thin'
 
 #For GIT
