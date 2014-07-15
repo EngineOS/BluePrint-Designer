@@ -3,7 +3,7 @@
 </p>
 <%
 
-reponame="/var/lib/git/testdeploy/"+ @software.name + "-test"
+reponame="git://127.0.0.1/testdeploy/"+ @software.name + "-test"
 
  if File.exists?(reponame)
    		%>Opening Repository<br> <%= reponame %><%
