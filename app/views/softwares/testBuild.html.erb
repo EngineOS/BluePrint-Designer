@@ -40,7 +40,7 @@ stackato = String.new
   stackato+=" type: "+ fm +"\n"
   if(fm.start_with?('rails'))
   	stackato+=" runtime: " +  Langauge.find(@software.langauge_id).name + "\n"
-  	stackato+="buildpack: git://git@54.79.79.134/ruby_buildpack.git\n"
+  #	stackato+="buildpack: git://git@54.79.79.134/ruby_buildpack.git\n"
   end
   
   @services = Softwareservice.where("software_id = ?",  @software.id )
@@ -59,9 +59,13 @@ stackato = String.new
   		stackato+="requirements:\n"
   		stackato+=" running:\n"
   		stackato+="  ubuntu:\n"
+  		stackato+="   - "
   		@ospackages.each do |ospackage|
-  			stackato+="   - " + ospackage.name + "\n"
+  			stackato+= ospackage.name + " "  		
   		end
+  		
+  		stackato+="\n"
+  		  
   	end
   	
   	stackato+="\nhooks:\n pre-staging:\n"
