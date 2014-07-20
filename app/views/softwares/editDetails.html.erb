@@ -1,4 +1,4 @@
-
+<%= link_to 'Back', software_path %>
 <p>
 	<% @software = Software.find(params[:id])%>
 <strong>Name:</strong>
@@ -57,11 +57,11 @@
  </td>
  <td>
     <%= f.text_field :comment %>
- <td>
+ </td>
  	
     <td>
     <%= f.submit %>
-  <td>
+  </td>
 </tr>
 <%= f.hidden_field :software_id, :value => @software.id  %>
 <% end %>
@@ -95,12 +95,12 @@
  </td>
  <td>
     <%= f.text_field :comment %>
- <td>
+ </td>
 </tr>
 <tr>
  <td>
     <%= f.submit %>
-  <td>
+  </td>
 </tr>
 <% end %>
 </table>
@@ -142,7 +142,7 @@
 <tr>
  <td>
     <%= f.submit %>
- <td>
+ </td>
 </tr>
 <% end %>
 </table>
@@ -203,7 +203,7 @@
 <tr>
  <td>
     <%= f.submit %>
- <td>
+ </td>
 </tr>
 <% end %>
 </table>
@@ -263,12 +263,12 @@
  </td>
  <td>
     <%= f.text_field :comment %>
- <td>
+ </td>
 </tr>
 <tr>
  <td>
     <%= f.submit %>
- <td>
+ </td>
 </tr>
 <% end %>
 </table>
@@ -303,19 +303,20 @@
 
  <td>
     <%= f.text_field :comment %>
- <td>
+ </td>
 </tr>
 <tr>
  <td>
     <%= f.submit %>
- <td>
+ </td>
 </tr>
 <% end %>
 </table>
 <h2>CronJobs</h2>
 <table>
-<th>Cronjob</th>
-<th>Description</th>
+<th><strong>Cronjob</strong></th>
+<th><strong>Description</strong></th>
+
 <% @software.cron_jobs.each  do |cronjob| %>
 <tr>
   <td>
@@ -331,7 +332,8 @@
 </tr>
 <% end %>
 </table>
-<table>
+
+
 <%= form_for([@software, @software.cron_jobs.build]) do |f| %>
 <tr>
   <td>
@@ -340,7 +342,102 @@
 
  <td>
     <%= f.text_field :description %>
+ </td>
+</tr>
+<tr>
  <td>
+    <%= f.submit %>
+ </td>
+</tr>
+<% end %>
+</table>
+<h2>Workers</h2>
+<p><strong>Ports</strong></p>
+<table>
+	<tr>
+<td><th>Port </th></td>
+<td><th>Name</th></td>
+<td><th>comment</th></td>
+</tr>
+<% @software.work_ports.each  do |port| %>
+<tr>
+  <td>
+    <%= port.port %>
+ </td>
+  <td>
+    <%= port.name %>
+ </td>
+ <td>
+    <%= port.comment %>
+ </td>
+ <td>
+	<%= link_to 'Edit', [:edit, port.software, port]   %></td>
+	<td><%= link_to 'Remove', [ port.software, port],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<% end %>
+
+
+<%= form_for([@software, @software.work_ports.build]) do |f| %>
+	
+	<tr>
+  <td>
+    <%= f.text_field :port %>
+ </td>
+
+ <td>
+    <%= f.text_field :name %>
+ </td>
+ 	<td>
+    <%= f.text_field :comment %>
+ </td>
+ 	
+</tr>
+<tr>
+ <td>
+    <%= f.submit %>
+ </td>
+</tr>
+<% end %>
+</table>
+<p><strong>Commands</strong></p>
+<table>
+	
+<th>Name</th>
+<th>Command</th>
+<th>comment</th>
+
+<% @software.worker_commands.each  do |worker| %>
+<tr>
+  <td>
+    <%= worker.name %>
+ </td>
+  <td>
+    <%= worker.command %>
+ </td>
+ <td>
+    <%= worker.comment %>
+ </td>
+ <td>
+	<%= link_to 'Edit', [:edit, worker.software, worker]   %></td>
+	<td><%= link_to 'Remove', [ worker.software, worker],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<% end %>
+<%= form_for([@software, @software.worker_commands.build]) do |f| %>
+	
+	<tr>
+  <td>
+    <%= f.text_field :name %>
+ </td>
+
+ <td>
+    <%= f.text_field :command %>
+ </td>
+ 	<td>
+    <%= f.text_field :comment %>
+ </td>
+ 	
 </tr>
 <tr>
  <td>
@@ -349,6 +446,37 @@
 </tr>
 <% end %>
 </table>
+
+
+<p><strong>Blocking Command</strong></p>
+<table>
+	<tr>
+<td><th>Name </th></td>
+<td><th>Command</th></td>
+<td><th>comment</th></td>
+</tr>
+<% @software.blocking_worker  do |worker| %>
+<tr>
+  <td>
+    <%= worker.name %>
+ </td>
+  <td>
+    <%= worker.command %>
+ </td>
+ <td>
+    <%= worker.comment %>
+ </td>
+ <td>
+	<%= link_to 'Edit', [:edit, blocking_worker.software, worker]   %></td>
+	<td><%= link_to 'Remove', [ blocking_worker.software, worker],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<% end %>
+</table>
+
+<table>
+</table>
+
 <hr>
 
 

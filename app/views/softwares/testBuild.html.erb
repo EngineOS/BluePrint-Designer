@@ -1,5 +1,5 @@
   <p>
-  
+  <%= link_to 'Back', software_path %>
 </p>
 <%
 
@@ -68,6 +68,24 @@ stackato = String.new
   		  
   	end
   	
+  	@work_ports = WorkPort.where("software_id = ?",  @software.id)
+  		if @work_ports.count >0
+  			stackato+="workerports: "
+  				@work_ports.each do |port|
+  					stackato+=port.port.to_s + " "
+  				end
+  			stackato+="\n"
+  		end
+  		
+  	@worker_commands =WorkerCommand.where("software_id = ?",  @software.id)
+  		if @worker_commands.count >0
+  			stackato+="workercommand: "
+  				@worker_commands.each do |cmd|
+  					stackato+=cmd.command + ";"
+  				end
+  			stackato+="\n"
+  		end
+  					
   	stackato+="\nhooks:\n pre-staging:\n"
   	stackato+="  - bash stackato-pre-setup.sh\n"
   	stackato+=" post-staging:\n"

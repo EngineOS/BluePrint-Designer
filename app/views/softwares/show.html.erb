@@ -1,4 +1,4 @@
-
+<%= link_to 'Back', software_path %>
 <p>
 <strong>Name:</strong>
 <%= @software.name %>
@@ -176,7 +176,7 @@
 </table>
 <h2>CronJobs</h2>
 <table>
-	<th>Cronjob</th>
+<th>Cronjob</th>
 <th>Description</th>
 	<% @software.cron_jobs.each  do |cronjob| %>
 <tr>
@@ -191,8 +191,87 @@
 
 
 </table>
+<h2>Workers</h2>
+<p><strong>Ports</strong></p>
+<table>
+	<tr>
+<td><th>Port </th></td>
+<td><th>Name</th></td>
+<td><th>comment</th></td>
+</tr>
+<% @software.work_ports.each  do |port| %>
+<tr>
+  <td>
+    <%= port.port %>
+ </td>
+  <td>
+    <%= port.name %>
+ </td>
+ <td>
+    <%= port.comment %>
+ </td>
+ 
+</tr>
+<% end %>
+</table>
+
+<p><strong>Commands</strong></p>
+<table>
+	<tr>
+<td><th>Name </th></td>
+<td><th>Command</th></td>
+<td><th>comment</th></td>
+</tr>
+<% @software.worker_commands.each  do |worker| %>
+<tr>
+  <td>
+    <%= worker.name %>
+ </td>
+  <td>
+    <%= worker.command %>
+ </td>
+ <td>
+    <%= worker.comment %>
+ </td>
+ 
+	
+</tr>
+<% end %>
+</table>
+
+
+
+
+<p><strong>Blocking Command</strong></p>
+<table>
+	<tr>
+<td><th>Name </th></td>
+<td><th>Command</th></td>
+<td><th>comment</th></td>
+</tr>
+<% @software.blocking_worker  do |worker| %>
+<tr>
+  <td>
+    <%= worker.name %>
+ </td>
+  <td>
+    <%= worker.command %>
+ </td>
+ <td>
+    <%= worker.comment %>
+ </td>
+ 
+
+</tr>
+<% end %>
+</table>
+
+<table>
+</table>
 
 <hr>
+
+
 
 
 

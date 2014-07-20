@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  port: 1
+  name: MyString
+  comment: MyText
+
+two:
+  port: 1
+  name: MyString
+  comment: MyText

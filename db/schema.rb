@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140712101419) do
+ActiveRecord::Schema.define(version: 20140720093142) do
+
+  create_table "blocking_workers", force: true do |t|
+    t.string   "command"
+    t.string   "name"
+    t.text     "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "software_id"
+  end
+
+  add_index "blocking_workers", ["software_id"], name: "index_blocking_workers_on_software_id"
 
   create_table "cron_jobs", force: true do |t|
     t.string   "cronjob"
@@ -153,6 +164,9 @@ ActiveRecord::Schema.define(version: 20140712101419) do
     t.string   "toconfigurefile"
     t.string   "configuredfile"
     t.integer  "cronjob_id"
+    t.integer  "work_port_id"
+    t.integer  "worker_command_id"
+    t.integer  "blocking_worker_id"
   end
 
   create_table "softwareservices", force: true do |t|
@@ -174,5 +188,27 @@ ActiveRecord::Schema.define(version: 20140712101419) do
     t.datetime "updated_at"
     t.integer  "langauge_id"
   end
+
+  create_table "work_ports", force: true do |t|
+    t.integer  "port"
+    t.string   "name"
+    t.text     "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "software_id"
+  end
+
+  add_index "work_ports", ["software_id"], name: "index_work_ports_on_software_id"
+
+  create_table "worker_commands", force: true do |t|
+    t.string   "command"
+    t.string   "name"
+    t.text     "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "software_id"
+  end
+
+  add_index "worker_commands", ["software_id"], name: "index_worker_commands_on_software_id"
 
 end

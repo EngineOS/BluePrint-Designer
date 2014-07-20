@@ -1,0 +1,2 @@
+class BlockingWorkersController < ApplicationController
+end
