@@ -17,11 +17,11 @@ class WorkerCommandsController < ApplicationController
        
        
       def edit
-            @worker_command = WorkPort.find(params[:id])
+            @worker_command = WorkerCommand.find(params[:id])
       end
          
         def update
-            @worker_command = WorkPort.find(params[:id])
+            @worker_command = WorkerCommand.find(params[:id])
         
              if @worker_command.update(worker_commands_params)
                       sid = @worker_command.software_id
