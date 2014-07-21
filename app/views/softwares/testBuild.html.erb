@@ -192,7 +192,7 @@ filesname+="\""
   	setup_env+="\nINSTALL_SCRIPT="+@software.toconfigurefile 
   	setup_env+="\n"
   end 
-  setup_env+="dbname=`echo $VCAP_SERVICES | json mysql | json -a credentials.name`\ndbport=`echo $VCAP_SERVICES | json mysql | json -a credentials.hostname`\ndbuser=`echo $VCAP_SERVICES | json mysql | json -a credentials.username`\ndbpasswd=`echo $VCAP_SERVICES | json mysql | json -a credentials.password`\ndbhost=`echo $VCAP_SERVICES | json mysql | json -a credentials.host`"
+ # setup_env+="dbname=`echo $VCAP_SERVICES | json mysql | json -a credentials.name`\ndbport=`echo $VCAP_SERVICES | json mysql | json -a credentials.hostname`\ndbuser=`echo $VCAP_SERVICES | json mysql | json -a credentials.username`\ndbpasswd=`echo $VCAP_SERVICES | json mysql | json -a credentials.password`\ndbhost=`echo $VCAP_SERVICES | json mysql | json -a credentials.host`"
    if(dirsname)
   	setup_env+="\nPERSISTANT_DIRS="+dirsname
    end
