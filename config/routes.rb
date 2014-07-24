@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :work_ports
     resources :blocking_workers
     resources :worker_commands
-   
+    resources :environment_variables
 	end
  
   resources :softwaredeploytypes

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140720093142) do
+ActiveRecord::Schema.define(version: 20140721080026) do
 
   create_table "blocking_workers", force: true do |t|
     t.string   "command"
@@ -33,6 +33,18 @@ ActiveRecord::Schema.define(version: 20140720093142) do
   end
 
   add_index "cron_jobs", ["software_id"], name: "index_cron_jobs_on_software_id"
+
+  create_table "environment_variables", force: true do |t|
+    t.text     "name"
+    t.string   "value"
+    t.string   "comment"
+    t.integer  "software_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "ask_at_runtime"
+  end
+
+  add_index "environment_variables", ["software_id"], name: "index_environment_variables_on_software_id"
 
   create_table "generates", force: true do |t|
     t.string   "model"
@@ -167,6 +179,7 @@ ActiveRecord::Schema.define(version: 20140720093142) do
     t.integer  "work_port_id"
     t.integer  "worker_command_id"
     t.integer  "blocking_worker_id"
+    t.integer  "environment_variable_id"
   end
 
   create_table "softwareservices", force: true do |t|

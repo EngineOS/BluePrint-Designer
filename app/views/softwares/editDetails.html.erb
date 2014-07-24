@@ -476,6 +476,58 @@
 
 <table>
 </table>
+<p><strong>Environment Variables</strong></p>
+<table>
+	
+<th>Name</th>
+<th>Value</th>
+<th>Comment</th>
+
+<% @software.environment_variables.each  do |variable| %>
+<tr>
+  <td>
+    <%= variable.name %>
+ </td>
+  <td>
+    <%= variable.value %>
+ </td>
+   <td>
+    <%= variable.ask_at_runtime %>
+ </td>
+ <td>
+    <%= variable.comment %>
+ </td>
+ <td>
+	<%= link_to 'Edit', [:edit, variable.software, variable]   %></td>
+	<td><%= link_to 'Remove', [ variable.software, variable],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<% end %>
+<%= form_for([@software, @software.environment_variables.build]) do |f| %>
+	
+	<tr>
+  <td>
+    <%= f.text_field :name %>
+ </td>
+
+ <td>
+    <%= f.text_field :value %>
+ </td>
+ <td>
+    <%= f.check_box :ask_at_runtime %>
+ </td>
+ 	<td>
+    <%= f.text_field :comment %>
+ </td>
+ 	
+</tr>
+<tr>
+ <td>
+    <%= f.submit %>
+ <td>
+</tr>
+<% end %>
+</table>
 
 <hr>
 

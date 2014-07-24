@@ -211,7 +211,19 @@ filesname+="\""
     	setup_env+="\ndeclare -a CRONJOBS=("+cronjobsstrings+")\n"
     end
     	
-     
+          
+     envstrings=String.new
+ 
+ @variables = EnvironmentVariable.where("software_id = ?",  @software.id )
+  if @variables.count >0
+  	@variables.each do | variable|
+  			if variable.ask_at_runtime == false
+ 	  			envstrings=variable.name + "=" + variable.value + "\n"
+ 	  		else
+ 	  			envstrings=variable.name + "=$" + variable.name + "\n"
+ 	  		end
+ 	 end
+  end 
 
 %>
 <p><strong>Stackato.yml</strong></p>
@@ -283,7 +295,10 @@ commit_sha = Digest::SHA1.hexdigest 'reponame'
 		oid = repo.write(setup_env, :blob)
 		index.add(:path => "setup.env", :oid => oid, :mode => 0100644)
 
-		
+		line = "#app.env\n" + setup_env
+		oid = repo.write(envstrings, :blob)
+		index.add(:path => "app.env", :oid => oid, :mode => 0100644)
+
 
 		options = {}
 		options[:tree] = index.write_tree(repo)

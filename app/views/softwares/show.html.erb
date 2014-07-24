@@ -266,8 +266,36 @@
 <% end %>
 </table>
 
+<p><strong>Environment Variables</strong></p>
 <table>
+	<tr>
+<td><th>Name </th></td>
+<td><th>Value</th></td>
+<td><th>comment</th></td>
+</tr>
+<% @software.environment_variables.each  do |variable| %>
+<tr>
+  <td>
+    <%= variable.name %>
+ </td>
+  <td>
+    <%= variable.value %>
+ </td>
+ <td>
+    <%= variable.ask_at_runtime %>
+ </td>
+ <td>
+    <%= variable.comment %>
+ </td>
+ 
+
+</tr>
+<% end %>
 </table>
+
+
+
+
 
 <hr>
 
