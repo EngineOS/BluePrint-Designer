@@ -56,6 +56,8 @@ class SoftwaresController < ApplicationController
     @software = Software.find(params[:id])
 	end
 
+ 
+ 
 private
   def software_params
     params.require(:software).permit(:name, :description, :langauge_id, :mysql , :pgsql, :filesystem, :swframework_id,:license_id, :softwaredeploytype_id, :requiredmemory,:toconfigurefile,:configuredfile)

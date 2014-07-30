@@ -1,7 +1,15 @@
   <p>
   <%= link_to 'Back', software_path %>
 </p>
+
+<hr>
+
+ <p>
+
 <%
+
+
+
 
 reponame="/var/lib/git/testdeploy/"+ @software.name + "-test"
 
@@ -265,10 +273,38 @@ SETUPFIELDVALUES
 	
 	 </p>
 <%
-  
-  
-   
 
+ ActiveRecord::Base.include_root_in_json = true
+cjs = @software.to_json( 
+						include: 
+							[                             					
+							{softwareservices: { 
+								only: 
+									[:name,:comment],   
+								methods:
+									[:servicetype_name]
+									}},
+							{persistantdirs: {only: [:path,:comment]}},
+							{persistantfiles: {only: [:path,:comment]}},
+							{replacementstrings: {only: [:sedstr,:file,:dest,:comment]}},
+						
+							{installedpackages: {only: [:name,:src,:dest,:extractcmd,:extractdir,:comment]}},
+							{cron_jobs: {only: [ :cronjob,:description]}},
+							{ospackages: {only: [:name,:comment]}},
+							{blocking_worker: {only: [:name,:comment,:command]}},
+							{environment_variables: {only: [:name,:comment,:value,:ask_at_runtime]}},
+							{worker_commands: {only: [:name,:comment,:command]}},
+							{work_ports: {only: [:name,:comment,:port]}},
+							] , 
+						only:
+						#[ :name,:description],
+							[ :name,:description,:version,:updated_at,:requiredmemory,:toconfigurefile,:configuredfile],
+						methods: 
+						       [:langauge_name,:swframework_name,:license_name]
+						       )
+
+   
+cjs_str= cjs.to_s
 
 require 'digest/sha1'
 #FIXME to be dynamic value and not just filename
@@ -295,9 +331,13 @@ commit_sha = Digest::SHA1.hexdigest 'reponame'
 		oid = repo.write(setup_env, :blob)
 		index.add(:path => "setup.env", :oid => oid, :mode => 0100644)
 
-		line = "#app.env\n" + setup_env
+		line = "#app.env\n" + envstrings
 		oid = repo.write(envstrings, :blob)
 		index.add(:path => "app.env", :oid => oid, :mode => 0100644)
+
+		line = "#blueprint.json\n" + cjs_str
+		oid = repo.write(cjs_str, :blob)
+		index.add(:path => "blueprint.json", :oid => oid, :mode => 0100644)
 
 
 		options = {}
@@ -313,6 +353,7 @@ commit_sha = Digest::SHA1.hexdigest 'reponame'
 		
     
   %>
+  <%= cjs_str %> <hr>
   Committed <%= repo.path %>
 
  <%= link_to 'Back', software_path %>

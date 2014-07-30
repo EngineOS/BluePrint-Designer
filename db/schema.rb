@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20140721080026) do
     t.integer  "software_id"
   end
 
-  add_index "blocking_workers", ["software_id"], name: "index_blocking_workers_on_software_id"
+  add_index "blocking_workers", ["software_id"], name: "index_blocking_workers_on_software_id", using: :btree
 
   create_table "cron_jobs", force: true do |t|
     t.string   "cronjob"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20140721080026) do
     t.integer  "software_id"
   end
 
-  add_index "cron_jobs", ["software_id"], name: "index_cron_jobs_on_software_id"
+  add_index "cron_jobs", ["software_id"], name: "index_cron_jobs_on_software_id", using: :btree
 
   create_table "environment_variables", force: true do |t|
     t.text     "name"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20140721080026) do
     t.boolean  "ask_at_runtime"
   end
 
-  add_index "environment_variables", ["software_id"], name: "index_environment_variables_on_software_id"
+  add_index "environment_variables", ["software_id"], name: "index_environment_variables_on_software_id", using: :btree
 
   create_table "generates", force: true do |t|
     t.string   "model"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20140721080026) do
     t.string   "extractdir"
   end
 
-  add_index "installedpackages", ["software_id"], name: "index_installedpackages_on_software_id"
+  add_index "installedpackages", ["software_id"], name: "index_installedpackages_on_software_id", using: :btree
 
   create_table "langauges", force: true do |t|
     t.string   "name"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20140721080026) do
     t.datetime "updated_at"
   end
 
-  add_index "langframeworks", ["langauge_id"], name: "index_langframeworks_on_langauge_id"
+  add_index "langframeworks", ["langauge_id"], name: "index_langframeworks_on_langauge_id", using: :btree
 
   create_table "licenses", force: true do |t|
     t.string   "name"
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 20140721080026) do
     t.datetime "updated_at"
   end
 
-  add_index "ospackages", ["software_id"], name: "index_ospackages_on_software_id"
+  add_index "ospackages", ["software_id"], name: "index_ospackages_on_software_id", using: :btree
 
   create_table "owners", force: true do |t|
     t.string   "firstname"
@@ -118,7 +118,7 @@ ActiveRecord::Schema.define(version: 20140721080026) do
     t.datetime "updated_at"
   end
 
-  add_index "persistantdirs", ["software_id"], name: "index_persistantdirs_on_software_id"
+  add_index "persistantdirs", ["software_id"], name: "index_persistantdirs_on_software_id", using: :btree
 
   create_table "persistantfiles", force: true do |t|
     t.string   "path"
@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 20140721080026) do
     t.datetime "updated_at"
   end
 
-  add_index "persistantfiles", ["software_id"], name: "index_persistantfiles_on_software_id"
+  add_index "persistantfiles", ["software_id"], name: "index_persistantfiles_on_software_id", using: :btree
 
   create_table "replacementstrings", force: true do |t|
     t.string   "sedstr"
@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(version: 20140721080026) do
     t.string   "dest"
   end
 
-  add_index "replacementstrings", ["software_id"], name: "index_replacementstrings_on_software_id"
+  add_index "replacementstrings", ["software_id"], name: "index_replacementstrings_on_software_id", using: :btree
 
   create_table "servicetypes", force: true do |t|
     t.string   "name"
@@ -175,7 +175,6 @@ ActiveRecord::Schema.define(version: 20140721080026) do
     t.integer  "requiredmemory"
     t.string   "toconfigurefile"
     t.string   "configuredfile"
-    t.integer  "cronjob_id"
     t.integer  "work_port_id"
     t.integer  "worker_command_id"
     t.integer  "blocking_worker_id"
@@ -191,8 +190,8 @@ ActiveRecord::Schema.define(version: 20140721080026) do
     t.datetime "updated_at"
   end
 
-  add_index "softwareservices", ["servicetype_id"], name: "index_softwareservices_on_servicetype_id"
-  add_index "softwareservices", ["software_id"], name: "index_softwareservices_on_software_id"
+  add_index "softwareservices", ["servicetype_id"], name: "index_softwareservices_on_servicetype_id", using: :btree
+  add_index "softwareservices", ["software_id"], name: "index_softwareservices_on_software_id", using: :btree
 
   create_table "swframeworks", force: true do |t|
     t.string   "name"
@@ -211,7 +210,7 @@ ActiveRecord::Schema.define(version: 20140721080026) do
     t.integer  "software_id"
   end
 
-  add_index "work_ports", ["software_id"], name: "index_work_ports_on_software_id"
+  add_index "work_ports", ["software_id"], name: "index_work_ports_on_software_id", using: :btree
 
   create_table "worker_commands", force: true do |t|
     t.string   "command"
@@ -222,6 +221,6 @@ ActiveRecord::Schema.define(version: 20140721080026) do
     t.integer  "software_id"
   end
 
-  add_index "worker_commands", ["software_id"], name: "index_worker_commands_on_software_id"
+  add_index "worker_commands", ["software_id"], name: "index_worker_commands_on_software_id", using: :btree
 
 end

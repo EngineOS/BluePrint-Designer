@@ -18,5 +18,19 @@ class Software < ActiveRecord::Base
  validates :name, presence:true, length: { minimum: 5}
  validates :description, presence:true, length: { minimum: 15}
 
+ def langauge_name
+   lang = Langauge.where("id = " + self.langauge_id.to_s)
+   l = lang[0]
+   return l.name
+ end
+ def swframework_name
+   swf = Swframework.where("id = " + self.swframework_id.to_s)
+     return swf.first.name
+  
+ end
+  def license_name
+    lic = License.where("id = " + self.license_id.to_s)  
+        return  lic.first.name
+  end
 end
 
