@@ -10,8 +10,11 @@
 
 
 
-
-reponame="/var/lib/git/testdeploy/"+ @software.name + "-test"
+gitdir=ENV["GITDIR"]
+	if gitdir == nil
+		gitdir="/var/lib/git"
+	end
+reponame=gitdir + "/testdeploy/"+ @software.name + "-test"
 
  if File.exists?(reponame)
    		%>Opening Repository<br> <%= reponame %><%
