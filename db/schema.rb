@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140721080026) do
+ActiveRecord::Schema.define(version: 20140805022250) do
 
   create_table "blocking_workers", force: true do |t|
     t.string   "command"
@@ -188,6 +188,7 @@ ActiveRecord::Schema.define(version: 20140721080026) do
     t.integer  "software_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "dest"
   end
 
   add_index "softwareservices", ["servicetype_id"], name: "index_softwareservices_on_servicetype_id", using: :btree
@@ -208,6 +209,7 @@ ActiveRecord::Schema.define(version: 20140721080026) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "software_id"
+    t.integer  "external"
   end
 
   add_index "work_ports", ["software_id"], name: "index_work_ports_on_software_id", using: :btree
