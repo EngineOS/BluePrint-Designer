@@ -36,12 +36,14 @@
 <table>
 	<th>Service Type</th>
 	<th>Name</th>
+	<th>Destination</th>
 	<th>Comment</th>
 	
 	 <% @software.softwareservices.each  do |softwareservice| %>
 <tr>
 	 	<td><%= Servicetype.find(softwareservice.servicetype_id).name %></td>
 	 	<td><%=  softwareservice.name %></td>
+	 	<td><%=  softwareservice.dest %></td>
 	 	<td><%=  softwareservice.comment %></td>
 	 </tr>
 	 <% end %>
@@ -196,6 +198,7 @@
 <table>
 	<tr>
 <td><th>Port </th></td>
+<th>External</th>
 <td><th>Name</th></td>
 <td><th>comment</th></td>
 </tr>
@@ -203,6 +206,9 @@
 <tr>
   <td>
     <%= port.port %>
+ </td>
+   <td>
+    <%= port.external %>
  </td>
   <td>
     <%= port.name %>

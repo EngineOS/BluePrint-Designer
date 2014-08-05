@@ -42,6 +42,6 @@ class SoftwareservicesController < ApplicationController
       
    private
      def softwareservices_params
-       params.require(:softwareservice).permit(:name , :comment, :software_id, :servicetype_id)
+       params.require(:softwareservice).permit(:name , :dest, :comment, :software_id, :servicetype_id)
      end
 end

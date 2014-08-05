@@ -33,12 +33,14 @@
 <table>
 	<th>Service Type</th>
 	<th>Name</th>
+	<th>Destination</th>
 	<th>Comment</th>
 	
 	 <% @software.softwareservices.each  do |softwareservice| %>
 <tr>
 	 	<td><%= Servicetype.find(softwareservice.servicetype_id).name %></td>
 	 	<td><%=  softwareservice.name %></td>
+	 	<td><%=  softwareservice.dest %></td>
 	 	<td><%=  softwareservice.comment %></td>
 	 	<td><%= link_to 'Edit', [:edit, softwareservice.software, softwareservice]   %></td>
 	  <td><%= link_to 'Remove', [ softwareservice.software, softwareservice],
@@ -54,6 +56,9 @@
     </td>
      <td>
     <%= f.text_field :name %>
+ </td>
+   <td>
+    <%= f.text_field :dest %> local for mysql /home/app/ for web accessible /home/ for non web
  </td>
  <td>
     <%= f.text_field :comment %>
@@ -355,20 +360,24 @@
 <p><strong>Ports</strong></p>
 <table>
 	<tr>
-<td><th>Port </th></td>
-<td><th>Name</th></td>
-<td><th>comment</th></td>
+<th>Port </th>
+<th>External</th>
+<th>Name</th>
+<th>comment</th>
 </tr>
 <% @software.work_ports.each  do |port| %>
 <tr>
   <td>
-    <%= port.port %>
- </td>
-  <td>
-    <%= port.name %>
+    p <%= port.port %>
  </td>
  <td>
-    <%= port.comment %>
+    e <%= port.external %>
+ </td>
+  <td>
+    n <%= port.name %>
+ </td>
+ <td>
+    c <%= port.comment %>
  </td>
  <td>
 	<%= link_to 'Edit', [:edit, port.software, port]   %></td>
@@ -384,7 +393,9 @@
   <td>
     <%= f.text_field :port %>
  </td>
-
+<td>
+    <%= f.text_field :external %>
+ </td>
  <td>
     <%= f.text_field :name %>
  </td>

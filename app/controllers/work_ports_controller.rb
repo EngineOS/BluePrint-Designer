@@ -9,8 +9,7 @@ class WorkPortsController < ApplicationController
        
        @work_port = WorkPort.find(params[:id])
        sid = @work_port.software_id
-       @work_port.destroy()     
-    
+       @work_port.destroy()         
        redirect_to  :controller => 'softwares', :action => 'editDetails', :id => sid
          
      end
@@ -30,11 +29,10 @@ class WorkPortsController < ApplicationController
                render 'edit'
            end
        end
-       
-     
+            
     private
       def work_ports_params
-        params.require(:work_port).permit(:port, :name , :comment)
+        params.require(:work_port).permit(:port,:external, :name , :comment)
       end
 
 end

@@ -283,7 +283,7 @@ cjs = @software.to_json(
 							[                             					
 							{softwareservices: { 
 								only: 
-									[:name,:comment],   
+									[:name,:dest,:comment],   
 								methods:
 									[:servicetype_name]
 									}},
@@ -296,8 +296,8 @@ cjs = @software.to_json(
 							{ospackages: {only: [:name,:comment]}},
 							{blocking_worker: {only: [:name,:comment,:command]}},
 							{environment_variables: {only: [:name,:comment,:value,:ask_at_runtime]}},
-							{worker_commands: {only: [:name,:comment,:command]}},
-							{work_ports: {only: [:name,:comment,:port]}},
+							{worker_commands: {only: [:name, :comment,:command]}},
+							{work_ports: {only: [:name,:external,:port,:comment]}},
 							] , 
 						only:
 						#[ :name,:description],
