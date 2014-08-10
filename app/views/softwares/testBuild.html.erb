@@ -28,13 +28,7 @@ reponame=gitdir + "/testdeploy/"+ @software.name + "-test"
    		system(mkdircmd)
    		touchcmd="touch "+ reponame +"/.git/git-daemon-export-ok"
    		system(touchcmd ) 
-   		#touchfile = reponame +"/.git/git-daemon-export-ok"
-   		#tf = File.new(touchfile)
-   		#tf.close  	
-   		#cpcmd = "cp /var/lib/git/StackatoScriptSource/*sh  " + reponame
-   		#system(cpcmd)
    		
-#   		ref = repo.references.create("refs/heads/master", commit_sha)
    end
    
    
