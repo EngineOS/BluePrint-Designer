@@ -1,4 +1,4 @@
-require 'lib/Publisher.rb'
+require 'Publisher.rb'
 class SoftwaresController < ApplicationController
 
 	def new
