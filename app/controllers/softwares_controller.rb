@@ -1,4 +1,4 @@
-require '/opt/engos/lib/ruby/Publisher.rb'
+require '../classes/Publisher.rb'
 class SoftwaresController < ApplicationController
 
 	def new
