@@ -1,3 +1,4 @@
+require '/opt/engos/lib/ruby/Publisher.rb'
 class SoftwaresController < ApplicationController
 
 	def new
@@ -54,6 +55,7 @@ class SoftwaresController < ApplicationController
 	
 	def testBuild
     @software = Software.find(params[:id])
+     @result =  Publisher.publishtest @software 
 	end
 
  
