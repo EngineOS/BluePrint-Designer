@@ -1,2 +1,1 @@
-Read Me for Ovidentia
-software.description
+This is the Blueprint desinger for defining blueprints for applications services and servers for EngineOS

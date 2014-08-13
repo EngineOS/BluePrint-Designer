@@ -25,7 +25,7 @@ class Publisher
     
   
    ActiveRecord::Base.include_root_in_json = true
-  cjs = software.to_json( 
+  blueprint_json = software.to_json( 
               include: 
                 [                                       
                 {softwareservices: { 
@@ -54,7 +54,7 @@ class Publisher
                      )
   
      
-  cjs_str= cjs.to_s
+blueprint_json_str= cjs.to_s
   
   require 'digest/sha1'
   #FIXME to be dynamic value and not just filename
@@ -70,8 +70,8 @@ class Publisher
       index.add(:path => "README.md", :oid => oid, :mode => 0100644)
       
       
-      line = "#blueprint.json\n" + cjs_str
-      oid = repo.write(cjs_str, :blob)
+      line = "#blueprint.json\n" + blueprint_json_str
+      oid = repo.write(blueprint_json_str, :blob)
       index.add(:path => "blueprint.json", :oid => oid, :mode => 0100644)
   
   
@@ -85,7 +85,7 @@ class Publisher
       options[:update_ref] = 'HEAD'
   
       Rugged::Commit.create(repo, options)
-      puts cjs_str
-      return cjs_str
+      puts blueprint_json_str
+      return blueprint_json_str
   end
 end

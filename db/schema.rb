@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140805022250) do
+ActiveRecord::Schema.define(version: 20140813051551) do
 
   create_table "blocking_workers", force: true do |t|
     t.string   "command"
@@ -129,6 +129,17 @@ ActiveRecord::Schema.define(version: 20140805022250) do
   end
 
   add_index "persistantfiles", ["software_id"], name: "index_persistantfiles_on_software_id", using: :btree
+
+  create_table "published_softwares", force: true do |t|
+    t.string   "short_name"
+    t.string   "full_name"
+    t.text     "description"
+    t.string   "home_page"
+    t.string   "image_url"
+    t.string   "repository"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "replacementstrings", force: true do |t|
     t.string   "sedstr"

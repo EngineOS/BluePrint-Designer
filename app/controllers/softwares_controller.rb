@@ -8,6 +8,7 @@ class SoftwaresController < ApplicationController
 	  def publish
       @software = Software.find(params[:id])
 	  end
+	  
 	def create
 	 @software = Software.new(software_params)
  
@@ -16,12 +17,13 @@ class SoftwaresController < ApplicationController
 		else
 			render 'new'
 		end
+	end
 		
 		def editDetails
       @software = Software.find(params[:id])
 		end
 	
-	end
+	
 
 	def show
 	  @software = Software.find(params[:id])
