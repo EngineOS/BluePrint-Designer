@@ -7,9 +7,9 @@ class EnvironmentVariablesController < ApplicationController
    
       def destroy
         
-        @cronjob = EnvironmentVariable.find(params[:id])
-        sid = @cronjob.software_id
-        @cronjob.destroy()     
+        @environment_variable = EnvironmentVariable.find(params[:id])
+        sid = @environment_variable.software_id
+        @environment_variable.destroy()     
      
         redirect_to  :controller => 'softwares', :action => 'editDetails', :id => sid
           
@@ -17,14 +17,14 @@ class EnvironmentVariablesController < ApplicationController
       
       
      def edit
-           @cronjob = EnvironmentVariable.find(params[:id])
+           @environment_variable = EnvironmentVariable.find(params[:id])
      end
         
        def update
-           @cronjob = EnvironmentVariable.find(params[:id])
+           @environment_variable = EnvironmentVariable.find(params[:id])
        
-            if @cronjob.update(environment_variables_params)
-                     sid = @cronjob.software_id
+            if @environment_variable.update(environment_variables_params)
+                     sid = @environment_variable.software_id
                     redirect_to  :controller => 'softwares', :action => 'editDetails', :id => sid        
             else
                 render 'edit'
