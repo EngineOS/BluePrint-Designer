@@ -18,3 +18,5 @@ git::
 vendor
 git::/127.0.0.1
 git::
+git::/127.0.0.1
+git::
