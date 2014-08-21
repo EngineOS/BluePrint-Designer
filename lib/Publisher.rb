@@ -50,7 +50,7 @@ class Publisher
               #[ :name,:description],
                 [ :name,:description,:version,:updated_at,:requiredmemory,:toconfigurefile,:configuredfile],
               methods: 
-                     [:langauge_name,:swframework_name,:license_name]
+                     [:langauge_name,:swframework_name,:license_name,:license_sourceurl]
                      )
   
      

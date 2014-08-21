@@ -32,5 +32,10 @@ class Software < ActiveRecord::Base
     lic = License.where("id = " + self.license_id.to_s)  
         return  lic.first.name
   end
+  
+def license_sourceurl
+   lic = License.where("id = " + self.license_id.to_s)  
+       return  lic.first.sourceurl
+ end
 end
 
