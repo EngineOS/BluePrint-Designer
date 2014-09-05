@@ -30,7 +30,7 @@ class Publisher
     [
       {softwareservices: {
       only:
-      [:name,:dest,:comment],
+      [:name,:icon_url,:dest,:comment],
       methods:
       [:servicetype_name]
       }},

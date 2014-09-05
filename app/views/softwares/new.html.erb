@@ -17,10 +17,13 @@
   </p>
  
   <p>
+    <%= f.label :icon_url %><br>
+    <%= f.text_field :icon_url %>
+  </p>
+    <p>
     <%= f.label :description %><br>
     <%= f.text_area :description %>
   </p>
-  
   <p> <%= f.label :license_id %>
     <%= f.select :license_id,   License.all.collect {|l| [ l.name, l.id ] } %>
     </p>
