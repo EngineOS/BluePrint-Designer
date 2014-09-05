@@ -12,6 +12,11 @@
 <strong>Description:</strong>
 <%= @software.description %>
 </p>
+<p>
+<strong>Image</strong>
+<%= @software.icon_url %>
+<img src="<%=@software.icon_url%>">
+</p>    
 <p><strong>Langauge:</strong>
 <%= Langauge.find(@software.langauge_id).name %>
 <strong>Framework</strong>

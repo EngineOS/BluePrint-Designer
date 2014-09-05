@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813051551) do
+ActiveRecord::Schema.define(version: 20140905230236) do
 
   create_table "blocking_workers", force: true do |t|
     t.string   "command"
@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(version: 20140813051551) do
     t.integer  "worker_command_id"
     t.integer  "blocking_worker_id"
     t.integer  "environment_variable_id"
+    t.string   "icon_url"
   end
 
   create_table "softwareservices", force: true do |t|
