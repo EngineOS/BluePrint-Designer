@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :blocking_workers
     resources :worker_commands
     resources :environment_variables
+    resources :rake_tasks
 	end
  
   resources :softwaredeploytypes

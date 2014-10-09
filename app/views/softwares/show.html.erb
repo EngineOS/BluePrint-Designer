@@ -276,7 +276,26 @@
 </tr>
 <% end %>
 </table>
-
+IF Rails
+<p>
+	<strong>Rake tasks</strong>
+<table>
+	<% @software.rake_tasks.each  do |rake| %>
+<tr>
+  <td>
+    <%= rake.name %>
+ </td>
+  <td>
+    <%= rake.action %>
+ </td>
+ 
+ <td>
+	<%= link_to 'Edit', [:edit, rake.software, rake]   %></td>
+	<td><%= link_to 'Remove', [ rake.software, rake],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<% end %>
+</table></p>
 <p><strong>Environment Variables</strong></p>
 <table>
 	<tr>

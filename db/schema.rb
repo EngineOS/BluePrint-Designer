@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140905230236) do
+ActiveRecord::Schema.define(version: 20140906014052) do
 
   create_table "blocking_workers", force: true do |t|
     t.string   "command"
@@ -141,6 +141,16 @@ ActiveRecord::Schema.define(version: 20140905230236) do
     t.datetime "updated_at"
   end
 
+  create_table "rake_tasks", force: true do |t|
+    t.string   "name"
+    t.string   "action"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "software_id"
+  end
+
+  add_index "rake_tasks", ["software_id"], name: "index_rake_tasks_on_software_id", using: :btree
+
   create_table "replacementstrings", force: true do |t|
     t.string   "sedstr"
     t.string   "file"
@@ -191,6 +201,7 @@ ActiveRecord::Schema.define(version: 20140905230236) do
     t.integer  "blocking_worker_id"
     t.integer  "environment_variable_id"
     t.string   "icon_url"
+    t.integer  "rake_task_id"
   end
 
   create_table "softwareservices", force: true do |t|

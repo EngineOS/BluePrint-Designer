@@ -30,7 +30,7 @@ class Publisher
     [
       {softwareservices: {
       only:
-      [:name,:icon_url,:dest,:comment],
+      [:name,:dest,:comment],
       methods:
       [:servicetype_name]
       }},
@@ -42,13 +42,14 @@ class Publisher
       {cron_jobs: {only: [ :cronjob,:description]}},
       {ospackages: {only: [:name,:comment]}},
       {blocking_worker: {only: [:name,:comment,:command]}},
+      {rake_tasks: {only: [:name,:action]}},
       {environment_variables: {only: [:name,:comment,:value,:ask_at_runtime]}},
       {worker_commands: {only: [:name, :comment,:command]}},
       {work_ports: {only: [:name,:external,:port,:comment]}},
     ] ,
     only:
     #[ :name,:description],
-    [ :name,:description,:version,:updated_at,:requiredmemory,:toconfigurefile,:configuredfile],
+    [ :name,:icon_url,:description,:version,:updated_at,:requiredmemory,:toconfigurefile,:configuredfile],
     methods:
     [:langauge_name,:swframework_name,:license_name,:license_sourceurl]
     )

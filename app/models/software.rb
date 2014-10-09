@@ -14,9 +14,10 @@ class Software < ActiveRecord::Base
  has_many :work_ports, dependent: :destroy
  has_many :worker_commands, dependent: :destroy
  has_many :environment_variables, dependent: :destroy
+ has_many :rake_tasks, dependent: :destroy
  has_one :blocking_worker, dependent: :destroy
- validates :name, presence:true, length: { minimum: 5}
- validates :description, presence:true, length: { minimum: 15}
+ validates :name, presence: true, length: { minimum: 5}
+ validates :description, presence: true, length: { minimum: 15}
 
  def langauge_name
    lang = Langauge.where("id = " + self.langauge_id.to_s)
