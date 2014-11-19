@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :worker_commands
     resources :environment_variables
     resources :rake_tasks
+    resources :template_files
 	end
  
   resources :softwaredeploytypes

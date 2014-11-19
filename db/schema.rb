@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140906014052) do
+ActiveRecord::Schema.define(version: 20141119020800) do
 
   create_table "blocking_workers", force: true do |t|
     t.string   "command"
@@ -224,6 +224,17 @@ ActiveRecord::Schema.define(version: 20140906014052) do
     t.datetime "updated_at"
     t.integer  "langauge_id"
   end
+
+  create_table "template_files", force: true do |t|
+    t.string   "title"
+    t.string   "path"
+    t.text     "content"
+    t.integer  "software_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "template_files", ["software_id"], name: "index_template_files_on_software_id", using: :btree
 
   create_table "work_ports", force: true do |t|
     t.integer  "port"

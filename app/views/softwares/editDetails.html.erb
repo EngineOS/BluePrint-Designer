@@ -579,6 +579,36 @@ IF Rails
 </tr>
 <% end %>
 </table>
+p><strong>Template Files </strong></p>
+<table>
+	<tr>
+<td><th>Name </th></td>
+<td><th>Value</th></td>
+<td><th>comment</th></td>
+</tr>
+<% @software.template_files.each  do |template| %>
+<tr>
+  <td>
+    <%= template.title %>
+ </td>
+  <td>
+    <%= template.path %>
+ </td>
+  <td>
+   <%= link_to 'Show',  template_file_path(template)  %>
+   |
+   <%= link_to 'Edit',  template_file_path(template)  %>
+   |
+   <%= link_to 'Delete',  template_file_path(template)  %>
+ </td>
+</tr>
+<% end %>
+<tr>
+	<td>
+		<%= link_to 'Add',  template_file_path(template)  %>
+	</td>
+
+</table>
 
 <hr>
 
