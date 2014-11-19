@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resources :environment_variables
     resources :rake_tasks
     resources :template_files
+    resources :file_write_permissions
+    resources :custom_php_inis
 	end
  
   resources :softwaredeploytypes

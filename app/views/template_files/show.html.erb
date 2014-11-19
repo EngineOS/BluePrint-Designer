@@ -11,10 +11,9 @@
   </td>
  </tr>
 <tr>
-<td><%= link_to 'Edit', [:edit, @template_file]   %></td>
-<%= link_to 'Service Types', template_files_path %>
-<%= link_to 'Remove', template_file_path(@template_file),
-                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<td><%= link_to 'Edit',  [:edit, @template_file.software, @template_file]  %></td>
+| <%= link_to 'Delete',  [ @template_file.software, @template_file],  method: :delete, data: { confirm: 'Are you sure?' } %>
+</td>
                     </tr>
                     </table>
                     

@@ -128,7 +128,14 @@
 
 
 </table>
-
+if php
+<h2>Custom PHP.ini </h2>
+<% custom_php=@software.custom_php_ini 
+if custom_php != nil %>
+<%=custom_php.title %><br>
+<pre>
+<%=custom_php.content %>
+</pre>
 <hr>
 <h2>Packages</h2>
 <table>
@@ -329,9 +336,8 @@ IF Rails
 <p><strong>Template Files </strong></p>
 <table>
 	<tr>
-<td><th>Name </th></td>
-<td><th>Value</th></td>
-<td><th>comment</th></td>
+<td><th>Title </th></td>
+<td><th>Path</th></td>
 </tr>
 <% @software.template_files.each  do |template| %>
 <tr>
@@ -342,13 +348,38 @@ IF Rails
     <%= template.path %>
  </td>
   <td>
-   <%= link_to 'Show',  template_file_path(template)  %>
+   <%= link_to 'Show',  [ template.software, template]   %>
  </td>
+</tr>
+<% end %>
+</table>
+<p><strong>Write Permissions  </strong></p>
+<table>
+	<tr>
+<td><th>Title </th></td>	
+<td><th>Path </th></td>
+<td><th>and Children</th></td>
+</tr>
+<% @software.file_write_permissions.each  do |file_write_permission| %>
+<tr>
+  <td>
+    <%= file_write_permission.title %>
+ </td>
+  <td>
+    <%= file_write_permission.path %>
+ </td>
+ 
+ <td>
+    <%= file_write_permission.recursive %>
+ </td>
+ 
 </tr>
 <% end %>
 
 
 </table>
+
+
 
 
 

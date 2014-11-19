@@ -214,6 +214,23 @@
 </table>
 
 <hr>
+if php
+<h2>Custom PHP.ini </h2>
+<% custom_php=@software.custom_php_ini 
+if custom_php != nil %>
+<%=custom_php.title %><br>
+<pre>
+<%=custom_php.content %>
+</pre>
+<br>
+
+
+		<%= link_to 'Edit', [:edit, custom_php.software, custom_php]   %> | 
+ 		<%= link_to 'Clear', [ custom_php.software, custom_php],
+                    method: :delete, data: { confirm: 'Are you sure?' } %>
+<%else%>
+                 <%= link_to 'Add',  new_software_custom_php_ini_path(@software)  %>  
+<%end%>
 <h2>Packages</h2>
 <table>
 <th><strong>Package:</strong></th>
@@ -336,7 +353,7 @@
                     method: :delete, data: { confirm: 'Are you sure?' } %></td>
 </tr>
 <% end %>
-</table>
+
 
 
 <%= form_for([@software, @software.cron_jobs.build]) do |f| %>
@@ -525,7 +542,7 @@ IF Rails
 <% end %>
 </table>
 
-</table>
+
 </p>
 <p><strong>Environment Variables</strong></p>
 <table>
@@ -579,7 +596,7 @@ IF Rails
 </tr>
 <% end %>
 </table>
-p><strong>Template Files </strong></p>
+<p><strong>Template Files </strong></p>
 <table>
 	<tr>
 <td><th>Name </th></td>
@@ -595,21 +612,80 @@ p><strong>Template Files </strong></p>
     <%= template.path %>
  </td>
   <td>
-   <%= link_to 'Show',  template_file_path(template)  %>
+   <%= link_to 'Show',  [ template.software, template]  %>
+   
    |
-   <%= link_to 'Edit',  template_file_path(template)  %>
+   <%= link_to 'Edit',  [:edit, template.software, template]  %>
    |
-   <%= link_to 'Delete',  template_file_path(template)  %>
+   <%= link_to 'Delete',  [ template.software, template],  method: :delete, data: { confirm: 'Are you sure?' } %>
  </td>
 </tr>
 <% end %>
 <tr>
 	<td>
-		<%= link_to 'Add',  template_file_path(template)  %>
+		<%= link_to 'Add',  new_software_template_file_path(@software)  %>
 	</td>
 
 </table>
 
+
+
+<p><strong>Write Permissions  </strong></p>
+<table>
+	<tr>
+<th>Title </th>
+<th>Path </th>
+<th>and Children</th>
+</tr>
+<% @software.file_write_permissions.each  do |file_write_permission| %>
+<tr>
+  <td>
+    <%= file_write_permission.title %>
+ </td>
+  <td>
+    <%= file_write_permission.path %>
+ </td>
+ 
+ <td>
+ 	<% if file_write_permission.recursive == true
+ 		recursion= "yes"
+ 	  else
+ 	  	recursion = "no"
+ 	  end
+ 	%>
+    <%= recursion %>
+ </td>
+ <td>
+ 	 <%= link_to 'Delete',  [ file_write_permission.software, file_write_permission],  method: :delete, data: { confirm: 'Are you sure?' } %>
+ 	 |
+ 	 
+    Remove | toggle recursion | Edit
+ </td>
+ 
+</tr>
+<% end %>
+
+<tr>
+	<%= form_for([@software, @software.file_write_permissions.build]) do |f| %>
+	<td>
+	
+    <%= f.text_field :title %>
+ </td>
+
+ <td>
+    <%= f.text_field :path %>
+ </td>
+<td>
+    <%= f.check_box :recursive %>
+ </td>
+</tr>
+<tr>
+ <td>
+    <%= f.submit %>
+ <td>
+</tr>
+<% end %>
+</table>
 <hr>
 
 

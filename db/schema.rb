@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119020800) do
+ActiveRecord::Schema.define(version: 20141119224223) do
 
   create_table "blocking_workers", force: true do |t|
     t.string   "command"
@@ -34,6 +34,14 @@ ActiveRecord::Schema.define(version: 20141119020800) do
 
   add_index "cron_jobs", ["software_id"], name: "index_cron_jobs_on_software_id", using: :btree
 
+  create_table "custom_php_inis", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "software_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "environment_variables", force: true do |t|
     t.text     "name"
     t.string   "value"
@@ -45,6 +53,17 @@ ActiveRecord::Schema.define(version: 20141119020800) do
   end
 
   add_index "environment_variables", ["software_id"], name: "index_environment_variables_on_software_id", using: :btree
+
+  create_table "file_write_permissions", force: true do |t|
+    t.string   "title"
+    t.string   "path"
+    t.boolean  "recursive"
+    t.integer  "software_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "file_write_permissions", ["software_id"], name: "index_file_write_permissions_on_software_id", using: :btree
 
   create_table "generates", force: true do |t|
     t.string   "model"

@@ -16,6 +16,8 @@ class Software < ActiveRecord::Base
  has_many :environment_variables, dependent: :destroy
  has_many :rake_tasks, dependent: :destroy
  has_many :template_files, dependent: :destroy
+ has_many :file_write_permissions, dependent: :destroy
+ has_one :custom_php_ini, dependent: :destroy
  has_one :blocking_worker, dependent: :destroy
  
  validates :name, presence: true, length: { minimum: 5}
