@@ -30,6 +30,7 @@ class Publisher
           {persistantfiles: {only: [:path,:comment]}},
           {template_files: {only: [:path,:title]}},
           {file_write_permissions: {only: [:path , :title,:recursive]}},
+          {custom_php_inis: {only: [:title]}}, 
           {replacementstrings: {only: [:sedstr,:file,:dest,:comment]}},    
           {installedpackages: {only: [:name,:src,:dest,:extractcmd,:extractdir,:comment]}},
           {cron_jobs: {only: [ :cronjob,:description]}},
@@ -101,6 +102,18 @@ class Publisher
         index.add(:path => "engines/templates/" + template_file.path, :oid => oid, :mode => 0100644)
       end
     
+      php_ini = String.new
+      software.custom_php_inis.each() do |custom_php|
+        php_ini+="#" + custom_php.title + "\n" + custom_php.content + "\n"        
+      end
+      
+      if php_ini.length >0
+        oid = repo.write(php_ini, :blob)
+         index.add(:path => "engines/configs/php/71-custom.ini", :oid => oid, :mode => 0100644)
+      end
+      
+      
+      
     options = set_repo_options(index,repo)   
     Rugged::Commit.create(repo, options)
        

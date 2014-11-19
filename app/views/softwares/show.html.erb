@@ -130,12 +130,15 @@
 </table>
 if php
 <h2>Custom PHP.ini </h2>
-<% custom_php=@software.custom_php_ini 
+<% @software.custom_php_inis.each do |custom_php| 
+
 if custom_php != nil %>
 <%=custom_php.title %><br>
 <pre>
 <%=custom_php.content %>
 </pre>
+<% end %>
+<% end %>
 <hr>
 <h2>Packages</h2>
 <table>

@@ -215,22 +215,25 @@
 
 <hr>
 if php
+
+
 <h2>Custom PHP.ini </h2>
-<% custom_php=@software.custom_php_ini 
+<% @software.custom_php_inis.each do |custom_php| 
+
 if custom_php != nil %>
 <%=custom_php.title %><br>
 <pre>
 <%=custom_php.content %>
+
 </pre>
-<br>
-
-
-		<%= link_to 'Edit', [:edit, custom_php.software, custom_php]   %> | 
+<%= link_to 'Edit', [:edit, custom_php.software, custom_php]   %> | 
  		<%= link_to 'Clear', [ custom_php.software, custom_php],
                     method: :delete, data: { confirm: 'Are you sure?' } %>
-<%else%>
-                 <%= link_to 'Add',  new_software_custom_php_ini_path(@software)  %>  
-<%end%>
+<% end %>
+<% end %>
+<br>
+<%= link_to 'Add',  new_software_custom_php_ini_path(@software)  %>  
+
 <h2>Packages</h2>
 <table>
 <th><strong>Package:</strong></th>
