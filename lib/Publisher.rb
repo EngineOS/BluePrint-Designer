@@ -37,7 +37,8 @@ class Publisher
           {ospackages: {only: [:name,:comment]}},
           {blocking_worker: {only: [:name,:comment,:command]}},
           {rake_tasks: {only: [:name,:action]}},
-          {environment_variables: {only: [:name,:comment,:value,:ask_at_runtime]}},
+          {template_files: {only: [:title,:path]}},
+          {environment_variables: {only: [:name,:comment,:value,:ask_at_runtime,:build_time_only]}},
           {worker_commands: {only: [:name, :comment,:command]}},
           {work_ports: {only: [:name,:external,:port,:comment]}},
         ] ,
@@ -45,9 +46,9 @@ class Publisher
         #[ :name,:description],
         [ :name,:icon_url,:description,:version,:updated_at,:requiredmemory,:toconfigurefile,:configuredfile],
         methods:
-        [:langauge_name,:swframework_name,:license_name,:license_sourceurl]
+        [:langauge_name,:swframework_name,:license_name,:license_sourceurl,:have_custom_start_script,:have_custom_install_script,:have_custom_post_install_script,:have_php_ini]
         )
-    
+
         blueprint_json_str = blueprint_json.to_s
         return blueprint_json_str
   end
@@ -107,12 +108,25 @@ class Publisher
         php_ini+="#" + custom_php.title + "\n" + custom_php.content + "\n"        
       end
       
-      if php_ini.length >0
+      if have_php_ini  == true
         oid = repo.write(php_ini, :blob)
          index.add(:path => "engines/configs/php/71-custom.ini", :oid => oid, :mode => 0100644)
-      end
+      end      
       
-      
+       if have_custom_start_script == true
+         oid = repo.write(software.custom_start_script, :blob)
+         index.add(:path => "engines/scripts/start.sh", :oid => oid, :mode => 0100755)
+       end
+       
+       if have_custom_install_script == true
+         oid = repo.write(software.custom_install_script, :blob)
+         index.add(:path => "engines/scripts/install.sh", :oid => oid, :mode => 0100755)
+       end
+       
+       if have_custom_post_install_script == true
+         oid = repo.write(software.custom_post_install_script, :blob)
+         index.add(:path => "engines/scripts/post_install.sh", :oid => oid, :mode => 0100755)
+       end
       
     options = set_repo_options(index,repo)   
     Rugged::Commit.create(repo, options)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119224223) do
+ActiveRecord::Schema.define(version: 20141124042408) do
 
   create_table "blocking_workers", force: true do |t|
     t.string   "command"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20141119224223) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "ask_at_runtime"
+    t.boolean  "build_time_only", default: false
   end
 
   add_index "environment_variables", ["software_id"], name: "index_environment_variables_on_software_id", using: :btree
@@ -158,6 +159,7 @@ ActiveRecord::Schema.define(version: 20141119224223) do
     t.string   "repository"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "software_id"
   end
 
   create_table "rake_tasks", force: true do |t|
@@ -181,6 +183,29 @@ ActiveRecord::Schema.define(version: 20141119224223) do
   end
 
   add_index "replacementstrings", ["software_id"], name: "index_replacementstrings_on_software_id", using: :btree
+
+  create_table "service_environment_variables", force: true do |t|
+    t.string   "name"
+    t.string   "value"
+    t.text     "comment"
+    t.boolean  "ask_at_runtime"
+    t.integer  "softwareservice_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "service_type_environment_variables", force: true do |t|
+    t.string   "name"
+    t.string   "value"
+    t.text     "comment"
+    t.boolean  "ask_at_runtime"
+    t.integer  "servicetype_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "build_time_only", default: false
+  end
+
+  add_index "service_type_environment_variables", ["servicetype_id"], name: "index_service_type_environment_variables_on_servicetype_id", using: :btree
 
   create_table "servicetypes", force: true do |t|
     t.string   "name"
@@ -218,9 +243,11 @@ ActiveRecord::Schema.define(version: 20141119224223) do
     t.integer  "work_port_id"
     t.integer  "worker_command_id"
     t.integer  "blocking_worker_id"
-    t.integer  "environment_variable_id"
     t.string   "icon_url"
     t.integer  "rake_task_id"
+    t.text     "custom_start_script"
+    t.text     "custom_install_script"
+    t.text     "custom_post_install_script"
   end
 
   create_table "softwareservices", force: true do |t|

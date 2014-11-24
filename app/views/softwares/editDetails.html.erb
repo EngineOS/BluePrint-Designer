@@ -73,6 +73,31 @@
 </table>
 
 
+<%= form_for :software, url: software_path(@software) ,method: :patch do |f| %>
+ <% if @software.errors.any? %>
+        <div id="error_explanation">
+    <h2><%= pluralize(@software.errors.count , "error") %> prohibited
+      this Program from being saved:</h2>
+        <ul>
+    <% @software.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div> 
+  <% end %>
+<h3>Custom start script</h3>
+      <%= f.text_area :custom_start_script %>
+ <p>
+ 	<h3>Custom Install</h3>
+ 	 <%= f.text_area :custom_install_script %>
+ </p>
+ <p>
+ 	<h3>Post Install</h3>
+ 	 <%= f.text_area :custom_post_install_script %>
+ </p>
+    <%= f.submit %>
+  <%end%>
+  
 <h2> Persistant Dirs</h2>
 
 <table>
@@ -167,6 +192,7 @@
 <table>
 <th><strong>Replacement String:</strong></th>
 <th><strong>File:</strong></th>
+<th><strong>Destination:</strong></th>
 <th><strong>Comment:</strong></th>
 
 <% @software.replacementstrings.each do |replacementstring| %>
@@ -240,6 +266,7 @@ if custom_php != nil %>
 <th><strong>Source URI:</strong></th>
 <th><strong>Destination:</strong></th>
 <th><strong>Extract Cmd:</strong></th>
+<th><strong>Extracted Dir:</strong></th>
 <th><strong>Comment:</strong></th>
 
 <% @software.installedpackages.each do |installedpackage| %>
@@ -509,6 +536,8 @@ IF Rails
 <p>
 	<strong>Rake tasks</strong>
 <table>
+	<th>Name</th>
+	<th>Action</th>
 	<% @software.rake_tasks.each  do |rake| %>
 <tr>
   <td>
@@ -552,6 +581,8 @@ IF Rails
 	
 <th>Name</th>
 <th>Value</th>
+<th>Ask At runtime</th>
+<th>For build only</th>
 <th>Comment</th>
 
 <% @software.environment_variables.each  do |variable| %>
@@ -565,6 +596,10 @@ IF Rails
    <td>
     <%= variable.ask_at_runtime %>
  </td>
+    <td>
+    <%= variable.build_time_only %>
+ </td>
+ 
  <td>
     <%= variable.comment %>
  </td>
@@ -586,6 +621,9 @@ IF Rails
  </td>
  <td>
     <%= f.check_box :ask_at_runtime %>
+ </td>
+  <td>
+    <%= f.check_box :build_time_only %>
  </td>
  	<td>
     <%= f.text_field :comment %>

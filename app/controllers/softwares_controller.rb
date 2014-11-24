@@ -62,9 +62,9 @@ class SoftwaresController < ApplicationController
 
  
  
-private
+
   def software_params
-    params.require(:software).permit(:name, :icon_url,:description, :langauge_id, :mysql , :pgsql, :filesystem, :swframework_id,:license_id, :softwaredeploytype_id, :requiredmemory,:toconfigurefile,:configuredfile)
+    params.require(:software).permit(:custom_start_script, :custom_install_script, :custom_post_install_script,:name, :icon_url,:description, :langauge_id, :mysql , :pgsql, :filesystem, :swframework_id,:license_id, :softwaredeploytype_id, :requiredmemory,:toconfigurefile,:configuredfile)
 end
 
 end

@@ -19,7 +19,7 @@ class Software < ActiveRecord::Base
  has_many :file_write_permissions, dependent: :destroy
  has_many :custom_php_inis, dependent: :destroy
  has_one :blocking_worker, dependent: :destroy
- 
+ has_one :published_software, dependent: :destroy
  validates :name, presence: true, length: { minimum: 5}
  validates :description, presence: true, length: { minimum: 15}
 
@@ -42,5 +42,37 @@ def license_sourceurl
    lic = License.where("id = " + self.license_id.to_s)  
        return  lic.first.sourceurl
  end
-end
 
+ 
+ def have_custom_start_script
+   if custom_start_script ==nil  || custom_start_script.length <1
+     return false
+   else
+     return true
+  end
+ end
+ 
+ def have_custom_install_script
+   if custom_install_script ==nil  || custom_install_script.length <1
+        return false
+      else
+        return true
+   end
+ end
+ def   have_custom_post_install_script
+   if custom_install_script ==nil  || custom_post_install_script.length <1
+        return false
+      else
+        return true
+   end
+ end
+ 
+ def have_php_ini
+   if php_ini ==nil  ||  php_ini.length >0
+     return true
+   else
+     return false
+   end
+ end
+
+end

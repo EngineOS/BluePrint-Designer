@@ -1,10 +1,31 @@
 
 <table>
+		<th>
+		Name
+	</th>
+	<th>
+		Value
+	</th>
+	<th>
+		Ask at runtime
+	</th>
  <tr>
   <td><%= @servicetype.name %></td>
   <td><%= @servicetype.comment %></td>
  </tr>
-<tr>
+ 
+ 	<% @servicetype.service_type_environment_variables.each do |environment_variable| %>
+ 	<tr>
+ 	<td> <%= environment_variable.name %>
+ 	</td>
+ 	<td> <%= environment_variable.value %>
+ 	</td>
+ 	<td> <%= environment_variable.ask_at_runtime %>
+ 	</td>
+ 	
+ </tr>
+ <%end%>
+
 <td><%= link_to 'Edit', [:edit, @servicetype]   %></td>
 <%= link_to 'Service Types', servicetypes_path %>
 <%= link_to 'Remove', servicetype_path(@servicetype),

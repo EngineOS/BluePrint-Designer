@@ -18,11 +18,15 @@ Rails.application.routes.draw do
     resources :template_files
     resources :file_write_permissions
     resources :custom_php_inis
+    resources :published_softwares
+    
 	end
  
   resources :softwaredeploytypes
 	resources :langauges
-  resources :servicetypes 
+  resources :servicetypes do
+    resources :service_type_environment_variables
+  end
   resources :swframeworks
   resources :licenses
    root 'welcome#index'

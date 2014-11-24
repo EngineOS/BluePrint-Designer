@@ -1,0 +1,19 @@
+
+<table width=90%>
+ <tr>
+  <td><%= @template_file.title %></td>
+    <td><%= @template_file.path %></td>
+    </tr>
+    <tr>
+  <td><textarea>
+  	<%= @template_file.content %>
+  	</textarea>
+  </td>
+ </tr>
+<tr>
+<td><%= link_to 'Edit',  [:edit, @template_file.software, @template_file]  %></td>
+| <%= link_to 'Delete',  [ @template_file.software, @template_file],  method: :delete, data: { confirm: 'Are you sure?' } %>
+</td>
+                    </tr>
+                    </table>
+                    

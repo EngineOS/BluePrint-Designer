@@ -25,8 +25,54 @@
   </p>
 
   <p>
+ 
     <%= f.submit %>
   </p>
 <% end %>
-<
+<table>
+	<th>
+		Name
+	</th>
+	<th>
+		Value
+	</th>
+	<th>
+		Ask at runtime
+	</th>
+	<% @servicetype.service_type_environment_variables.each do |environment_variable| %>
+ 	<tr>
+ 	<td> <%= environment_variable.name %>
+ 	</td>
+ 	<td> <%= environment_variable.value %>
+ 	</td>
+ 	<td> <%= environment_variable.ask_at_runtime %>
+ 	</td>
+ 	<td>edit|del</td>
+ 	
+ </tr>
+ <%end%>
+<%= form_for([@servicetype, @servicetype.service_type_environment_variables.build]) do |f| %> 
+	<tr>
+  <td>
+    <%= f.text_field :name %>
+ </td>
+
+ <td>
+    <%= f.text_field :value %>
+ </td>
+ <td>
+    <%= f.check_box :ask_at_runtime %>
+ </td>
+ 	<td>
+    <%= f.text_field :comment %>
+ </td>
+ 	
+</tr>
+<tr>
+ <td>
+    <%= f.submit %>
+ <td>
+</tr>
+<%end%>
+</table>
 <%= link_to 'Back', servicetype_path %>

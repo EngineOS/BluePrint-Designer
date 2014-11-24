@@ -5,6 +5,20 @@ class SoftwareservicesController < ApplicationController
  def create
    @software = Software.find(params[:software_id])
       @softwareservice= @software.softwareservices.create(softwareservices_params)
+      environments = ServiceTypeEnvironmentVariable.where( servicetype_id: softwareservices_params[:servicetype_id])
+        environments.each do |variable|
+          p variable 
+          p variable.name
+          @software.environment_variables.create(
+                                                software_id: params[:software_id],
+                                                name: variable.name, 
+                                                value: variable.value,
+                                                ask_at_runtime: variable.ask_at_runtime,
+                                                comment: variable.comment,
+                                                build_time_only: variable.build_time_only
+                                                )
+        end
+      
       redirect_to editDetails_software_path(@software)
    
  end
@@ -15,7 +29,7 @@ class SoftwareservicesController < ApplicationController
        sid = @softwareservice.software_id
        @softwareservice.destroy()     
     
-       redirect_to  :controller => 'softwares', :action => 'editDetails', :id => sid
+       redirect_to  controller:  'softwares', action:  'editDetails', id:  sid
          
      end
    

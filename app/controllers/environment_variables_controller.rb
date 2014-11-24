@@ -34,7 +34,7 @@ class EnvironmentVariablesController < ApplicationController
       
      private
        def environment_variables_params
-         params.require(:environment_variable).permit(:name ,:value, :ask_at_runtime, :description, :comment)
+         params.require(:environment_variable).permit(:name ,:value, :ask_at_runtime,:ask_at_runtime, :description, :comment)
        end
 
 end

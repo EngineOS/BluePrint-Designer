@@ -35,6 +35,17 @@
 <%= link_to 'Edit Details', editDetails_software_path %><br>
 	<%= link_to 'Test', testBuild_software_path %><br />
 
+<h3>Custom start script</h3>
+      <%= @software.custom_start_script %>
+ <p>
+ 	<h3>Custom Install</h3>
+ 	 <%= @software.custom_install_script %>
+ </p>
+ <p>
+ 	<h3>Post Install</h3>
+ 	 <%= @software.custom_post_install_script %>
+ </p>
+
 <h3>Services</h3>
 
  
