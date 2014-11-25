@@ -18,10 +18,15 @@ Rails.application.routes.draw do
     resources :template_files
     resources :file_write_permissions
     resources :custom_php_inis
-    resources :published_softwares
+    resources :apache_htaccess_files
     
 	end
+  resources :published_softwares      do
+     get :detailslist, :on => :collection
+   end
  
+  resources :published_softwares, :path => "json_published_softwares", :only => [:index,:show,:detailslist ], :defaults => { :format => 'json' }
+
   resources :softwaredeploytypes
 	resources :langauges
   resources :servicetypes do

@@ -46,7 +46,11 @@
     <%= f.text_field :requiredmemory %>
   		</p>
   		<p>
-  	
+  	<strong>Recommend Protocol</strong>
+<p>
+	<%= @software.http_protocol.humanize %>
+	<%= f.select :http_protocol, options_for_select(Software.http_protocols.collect { |s| [s[0].humanize, s[0]] }, selected:  @software.http_protocol.humanize ), {} %>
+</p>
   <p>
     <%= f.submit %>
   </p>

@@ -1,0 +1,2 @@
+module ApacheHtaccessFilesHelper
+end

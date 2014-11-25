@@ -1,0 +1,44 @@
+<h1>Locally Published Blueprints</h1>
+
+<% if @result != nil%>
+<%=@result %>
+<%end%>
+
+<table>
+ <tr>
+  
+   <th>Name</th>
+   <th>short</th>
+   <th>description</th>
+   <th>Home Page</th>
+   <th>Image </th>
+   <th>Local repo </th>
+     
+   <th></th>
+   
+   <th>Comment</th>
+ </tr>
+ <% @published_softwares.each do |software| %>
+ <tr>
+  <td><%= software.short_name %></td>
+   <td>
+   	<%= software.full_name %>
+   </td>
+   <td>
+   	<%= software.description %>
+   </td> 
+  <td><%= software.image_url %></td>
+  <td><%=software.home_page %></td>
+  
+  <td><%=software.repository %></td>
+  
+  <td><%= link_to 'Show', published_software_path(software) %></td>
+    <td><%= link_to 'Edit', [:edit, software]   %></td>
+   <td><%= link_to 'Remove', [  software],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+ </tr>
+ 
+ <% end %>
+</table>
+
+<%= link_to 'Software', softwares_path %>

@@ -1,9 +1,15 @@
 class Software < ActiveRecord::Base
+  
+ belongs_to :owner
+  
  has_one :swframeworks
  has_one :langauge
- belongs_to :owner
+ has_one :blocking_worker, dependent: :destroy
+ has_one :published_software, dependent: :destroy
  has_one :license
  has_one :softwaredeploytype
+
+
  has_many :softwareservices
  has_many :persistantdirs , dependent: :destroy
  has_many :replacementstrings, dependent: :destroy
@@ -18,11 +24,13 @@ class Software < ActiveRecord::Base
  has_many :template_files, dependent: :destroy
  has_many :file_write_permissions, dependent: :destroy
  has_many :custom_php_inis, dependent: :destroy
- has_one :blocking_worker, dependent: :destroy
- has_one :published_software, dependent: :destroy
+ has_many :apache_htaccess_files, dependent: :destroy
+ 
  validates :name, presence: true, length: { minimum: 5}
  validates :description, presence: true, length: { minimum: 15}
 
+   enum http_protocol: [:http_only, :http_and_https, :https_only]
+   
  def langauge_name
    lang = Langauge.where("id = " + self.langauge_id.to_s)
    l = lang[0]
@@ -67,12 +75,6 @@ def license_sourceurl
    end
  end
  
- def have_php_ini
-   if php_ini ==nil  ||  php_ini.length >0
-     return true
-   else
-     return false
-   end
- end
+ 
 
 end

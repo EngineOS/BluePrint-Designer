@@ -32,7 +32,7 @@ class WorkPortsController < ApplicationController
             
     private
       def work_ports_params
-        params.require(:work_port).permit(:port,:external, :name , :comment)
+        params.require(:work_port).permit(:port,:external, :name , :comment,:protocol)
       end
 
 end

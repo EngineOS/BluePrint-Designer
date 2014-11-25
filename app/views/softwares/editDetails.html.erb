@@ -23,10 +23,13 @@
 <%= Softwaredeploytype.find(@software.softwaredeploytype_id).name %>
 
 </p>
+
 <p>
 <strong>Memory:</strong>
 <%= @software.requiredmemory %>
 </p>
+
+
 <h3>Services</h3>
 
  
@@ -406,17 +409,21 @@ if custom_php != nil %>
 <h2>Workers</h2>
 <p><strong>Ports</strong></p>
 <table>
-	<tr>
+	
 <th>Port </th>
+<th>Protocol</th>
 <th>External</th>
 <th>Name</th>
 <th>comment</th>
-</tr>
+
 <% @software.work_ports.each  do |port| %>
 <tr>
   <td>
     p <%= port.port %>
  </td>
+ <td>
+	<%= port.protocol.humanize %>	
+</td>
  <td>
     e <%= port.external %>
  </td>
@@ -426,6 +433,7 @@ if custom_php != nil %>
  <td>
     c <%= port.comment %>
  </td>
+
  <td>
 	<%= link_to 'Edit', [:edit, port.software, port]   %></td>
 	<td><%= link_to 'Remove', [ port.software, port],
@@ -440,6 +448,9 @@ if custom_php != nil %>
   <td>
     <%= f.text_field :port %>
  </td>
+ <td>
+ 	<%= f.select :protocol, options_for_select(WorkPort.protocols.collect { |s| [s[0].humanize, s[0]] } ), {} %>
+ </td>
 <td>
     <%= f.text_field :external %>
  </td>
@@ -449,7 +460,7 @@ if custom_php != nil %>
  	<td>
     <%= f.text_field :comment %>
  </td>
- 	
+ 
 </tr>
 <tr>
  <td>
@@ -509,9 +520,9 @@ if custom_php != nil %>
 <p><strong>Blocking Command</strong></p>
 <table>
 	<tr>
-<td><th>Name </th></td>
-<td><th>Command</th></td>
-<td><th>comment</th></td>
+<th>Name </th>
+<th>Command</th>
+<th>comment</th>
 </tr>
 <% @software.blocking_worker  do |worker| %>
 <tr>
@@ -640,9 +651,9 @@ IF Rails
 <p><strong>Template Files </strong></p>
 <table>
 	<tr>
-<td><th>Name </th></td>
-<td><th>Value</th></td>
-<td><th>comment</th></td>
+<th>Name </th>
+<th>Value</th>
+<th>comment</th>
 </tr>
 <% @software.template_files.each  do |template| %>
 <tr>
@@ -727,6 +738,53 @@ IF Rails
 </tr>
 <% end %>
 </table>
+
+<p><strong>Htaccess settings  </strong></p>
+<table>
+
+<th>Directory </th>
+<th>Content </th>
+<th>Comment</th>
+
+<% @software.apache_htaccess_files.each  do |apache_htaccess_file| %>
+<tr>
+  <td>
+    <%= apache_htaccess_file.directory %>
+ </td>
+  <td>
+    <%= apache_htaccess_file.htaccess_content %>
+ </td>
+ 
+ <td>
+    <%= apache_htaccess_file.comment %>
+ </td>
+ 
+</tr>
+<tr>
+<% end %>
+	<%= form_for([@software, @software.apache_htaccess_files.build]) do |f| %>
+	<td>
+	
+    <%= f.text_field :directory %>
+ </td>
+
+ <td >
+    <%= f.text_area :htaccess_content %>
+ </td>
+ 
+<td >
+    <%= f.text_area  :comment %>
+ </td>
+</tr>
+<tr>
+ <td>
+    <%= f.submit %>
+ <td>
+</tr>
+<% end %>
+
+</table>
+
 <hr>
 
 

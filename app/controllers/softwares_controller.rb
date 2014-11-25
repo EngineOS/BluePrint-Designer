@@ -2,11 +2,13 @@ require 'Publisher.rb'
 class SoftwaresController < ApplicationController
 
 	def new
-	 @software = Software.new
+	 software = Software.new
+  
 	end
 
 	  def publish
       @software = Software.find(params[:id])
+      redirect_to software.published_software.build
 	  end
 	  
 	def create

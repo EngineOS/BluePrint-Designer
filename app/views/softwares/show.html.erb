@@ -28,12 +28,18 @@
 
 </p>
 <p>
+<strong>Recommend Protocol</strong>
+<p>
+	<%= @software.http_protocol.humanize %>
+</p>
+<p>
 <strong>Memory:</strong>
 <%= @software.requiredmemory %>
 </p>
 <%= link_to 'Edit Software', edit_software_path %><br>
 <%= link_to 'Edit Details', editDetails_software_path %><br>
-	<%= link_to 'Test', testBuild_software_path %><br />
+<%= link_to 'Test', testBuild_software_path %><br />
+<%= link_to 'Publish', new_published_software_path(software_id: @software.id) %><br />
 
 <h3>Custom start script</h3>
       <%= @software.custom_start_script %>
@@ -394,6 +400,31 @@ IF Rails
 </table>
 
 
+<p><strong>Htaccess settings  </strong></p>
+<table>
+	<tr>
+<td><th>Directory </th></td>	
+<td><th>Content </th></td>
+<td><th>Comment</th></td>
+</tr>
+<% @software.apache_htaccess_files.each  do |apache_htaccess_file| %>
+<tr>
+  <td>
+    <%= apache_htaccess_file.directory %>
+ </td>
+  <td>
+    <%= apache_htaccess_file.htaccess_content %>
+ </td>
+ 
+ <td>
+    <%= apache_htaccess_file.comment %>
+ </td>
+ 
+</tr>
+<% end %>
+
+
+</table>
 
 
 

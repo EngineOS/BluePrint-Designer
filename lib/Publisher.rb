@@ -41,6 +41,7 @@ class Publisher
           {environment_variables: {only: [:name,:comment,:value,:ask_at_runtime,:build_time_only]}},
           {worker_commands: {only: [:name, :comment,:command]}},
           {work_ports: {only: [:name,:external,:port,:comment]}},
+          {apache_httaccess_files: {only: [:directory,:comment]}}, 
         ] ,
         only:
         #[ :name,:description],
@@ -58,7 +59,7 @@ class Publisher
       if gitdir == nil
         gitdir="/var/lib/git"
       end
-      reponame=gitdir + "/testdeploy/"+ software_name 
+      reponame=gitdir + "/test-deploy/"+ software_name 
   
       if File.exists?(reponame)
         repo = Rugged::Repository.new(reponame)
@@ -103,27 +104,33 @@ class Publisher
         index.add(:path => "engines/templates/" + template_file.path, :oid => oid, :mode => 0100644)
       end
     
+      software.apache_htacess_files.each do |htaccess_file|
+        oid = repo.write(htaccess_file.htaccess_content, :blob)
+        index.add(:path => "engines/htaccess_files/" + htaccess_file.directory + "/htaccess", :oid => oid, :mode => 0100644)
+      end
+      
+      
       php_ini = String.new
       software.custom_php_inis.each() do |custom_php|
         php_ini+="#" + custom_php.title + "\n" + custom_php.content + "\n"        
       end
       
-      if have_php_ini  == true
+      if php_ini.length >1
         oid = repo.write(php_ini, :blob)
          index.add(:path => "engines/configs/php/71-custom.ini", :oid => oid, :mode => 0100644)
       end      
       
-       if have_custom_start_script == true
+       if software.have_custom_start_script == true
          oid = repo.write(software.custom_start_script, :blob)
          index.add(:path => "engines/scripts/start.sh", :oid => oid, :mode => 0100755)
        end
        
-       if have_custom_install_script == true
+       if software.have_custom_install_script == true
          oid = repo.write(software.custom_install_script, :blob)
          index.add(:path => "engines/scripts/install.sh", :oid => oid, :mode => 0100755)
        end
        
-       if have_custom_post_install_script == true
+       if software.have_custom_post_install_script == true
          oid = repo.write(software.custom_post_install_script, :blob)
          index.add(:path => "engines/scripts/post_install.sh", :oid => oid, :mode => 0100755)
        end

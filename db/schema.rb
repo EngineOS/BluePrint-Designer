@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141124042408) do
+ActiveRecord::Schema.define(version: 20141125044413) do
+
+  create_table "apache_htaccess_files", force: true do |t|
+    t.string   "directory"
+    t.text     "htaccess_content"
+    t.text     "comment"
+    t.integer  "software_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "apache_htaccess_files", ["software_id"], name: "index_apache_htaccess_files_on_software_id", using: :btree
 
   create_table "blocking_workers", force: true do |t|
     t.string   "command"
@@ -248,6 +259,7 @@ ActiveRecord::Schema.define(version: 20141124042408) do
     t.text     "custom_start_script"
     t.text     "custom_install_script"
     t.text     "custom_post_install_script"
+    t.integer  "http_protocol",              default: 1
   end
 
   create_table "softwareservices", force: true do |t|
@@ -290,6 +302,7 @@ ActiveRecord::Schema.define(version: 20141124042408) do
     t.datetime "updated_at"
     t.integer  "software_id"
     t.integer  "external"
+    t.integer  "protocol",    default: 1
   end
 
   add_index "work_ports", ["software_id"], name: "index_work_ports_on_software_id", using: :btree
