@@ -59,7 +59,8 @@ class SoftwaresController < ApplicationController
 	
 	def testBuild
     @software = Software.find(params[:id])
-     @result =  Publisher.publishtest @software 
+      publisher = Publisher.new(@software)
+     @result =  publisher.publishtest 
 	end
 
  
