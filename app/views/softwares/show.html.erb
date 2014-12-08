@@ -156,6 +156,23 @@ if custom_php != nil %>
 </pre>
 <% end %>
 <% end %>
+<table>
+	if php or perhaps rails  perhaps even node and python (depends)
+<h3>Apache Modules PHP.ini </h3>
+<% @software.apache_modules.each do |ap_module|
+
+if ap_module != nil %>
+ <tr>
+<td>
+<%=ap_module.module %>
+</td><td>
+<%=ap_module.comment %>
+</td>
+
+<% end %>
+</tr>
+<% end %>
+</table>
 <hr>
 <h2>Packages</h2>
 <table>

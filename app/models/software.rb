@@ -25,6 +25,7 @@ class Software < ActiveRecord::Base
  has_many :file_write_permissions, dependent: :destroy
  has_many :custom_php_inis, dependent: :destroy
  has_many :apache_htaccess_files, dependent: :destroy
+ has_many :apache_modules, dependent: :destroy
  
  validates :name, presence: true, length: { minimum: 5}
  validates :description, presence: true, length: { minimum: 15}

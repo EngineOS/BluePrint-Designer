@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141125044413) do
+ActiveRecord::Schema.define(version: 20141208023254) do
+
+  create_table "apache_custom_files", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "apache_custom_site_files", force: true do |t|
+    t.string   "name"
+    t.text     "site_conf_content"
+    t.text     "comment"
+    t.integer  "software_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "apache_custom_site_files", ["software_id"], name: "index_apache_custom_site_files_on_software_id", using: :btree
 
   create_table "apache_htaccess_files", force: true do |t|
     t.string   "directory"
@@ -23,6 +39,37 @@ ActiveRecord::Schema.define(version: 20141125044413) do
   end
 
   add_index "apache_htaccess_files", ["software_id"], name: "index_apache_htaccess_files_on_software_id", using: :btree
+
+  create_table "apache_httpd_conf_files", force: true do |t|
+    t.string   "name"
+    t.text     "httpd_conf_content"
+    t.text     "comment"
+    t.integer  "software_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "apache_httpd_conf_files", ["software_id"], name: "index_apache_httpd_conf_files_on_software_id", using: :btree
+
+  create_table "apache_moduals", force: true do |t|
+    t.string   "modual"
+    t.text     "comment"
+    t.integer  "software_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "apache_moduals", ["software_id"], name: "index_apache_moduals_on_software_id", using: :btree
+
+  create_table "apache_modules", force: true do |t|
+    t.string   "module"
+    t.text     "comment"
+    t.integer  "software_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "apache_modules", ["software_id"], name: "index_apache_modules_on_software_id", using: :btree
 
   create_table "blocking_workers", force: true do |t|
     t.string   "command"
@@ -60,8 +107,9 @@ ActiveRecord::Schema.define(version: 20141125044413) do
     t.integer  "software_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "ask_at_runtime"
-    t.boolean  "build_time_only", default: false
+    t.boolean  "build_time_only",  default: false
+    t.boolean  "mandatory"
+    t.boolean  "ask_at_buildtime"
   end
 
   add_index "environment_variables", ["software_id"], name: "index_environment_variables_on_software_id", using: :btree
@@ -209,11 +257,12 @@ ActiveRecord::Schema.define(version: 20141125044413) do
     t.string   "name"
     t.string   "value"
     t.text     "comment"
-    t.boolean  "ask_at_runtime"
     t.integer  "servicetype_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "build_time_only", default: false
+    t.boolean  "build_time_only",  default: false
+    t.boolean  "mandatory"
+    t.boolean  "ask_at_buildtime"
   end
 
   add_index "service_type_environment_variables", ["servicetype_id"], name: "index_service_type_environment_variables_on_servicetype_id", using: :btree

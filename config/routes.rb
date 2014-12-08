@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :file_write_permissions
     resources :custom_php_inis
     resources :apache_htaccess_files
-    
+    resources :apache_modules
 	end
   resources :published_softwares      do
      get :detailslist, :on => :collection

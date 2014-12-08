@@ -32,8 +32,8 @@ class CustomPhpInisController < ApplicationController
   
     def destroy
       @software = Software.find(params[:software_id])
-      @template_file = CustomPhpIni.find(params[:id])
-      @template_file.destroy
+      @custom_php_ini = CustomPhpIni.find(params[:id])
+      @custom_php_ini.destroy
   
       redirect_to software_path(@software)
     end

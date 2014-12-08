@@ -22,7 +22,7 @@ class Publisher
         [
           {softwareservices: {
           only:
-          [:name,:dest,:comment],
+          [:name,:dest,:comment,:http_protocol], 
           methods:
           [:servicetype_name]
           }},
@@ -41,7 +41,8 @@ class Publisher
           {environment_variables: {only: [:name,:comment,:value,:ask_at_runtime,:build_time_only]}},
           {worker_commands: {only: [:name, :comment,:command]}},
           {work_ports: {only: [:name,:external,:port,:comment]}},
-          {apache_httaccess_files: {only: [:directory,:comment]}}, 
+          {apache_htaccess_files: {only: [:directory,:comment]}}, 
+          {apache_modules: {only: [:module,:comment]}},  
         ] ,
         only:
         #[ :name,:description],
@@ -103,8 +104,8 @@ class Publisher
         oid = repo.write(template_file.content, :blob)
         index.add(:path => "engines/templates/" + template_file.path, :oid => oid, :mode => 0100644)
       end
-    
-      software.apache_htacess_files.each do |htaccess_file|
+  
+      software.apache_htaccess_files.each() do |htaccess_file|
         oid = repo.write(htaccess_file.htaccess_content, :blob)
         index.add(:path => "engines/htaccess_files/" + htaccess_file.directory + "/htaccess", :oid => oid, :mode => 0100644)
       end

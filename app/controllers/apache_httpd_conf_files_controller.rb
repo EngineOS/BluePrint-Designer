@@ -1,0 +1,2 @@
+class ApacheHttpdConfFilesController < ApplicationController
+end

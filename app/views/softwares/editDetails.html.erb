@@ -243,6 +243,37 @@
 </table>
 
 <hr>
+<h2>apache module </h2>
+<table>  
+<% @software.apache_modules.each do |ap_module| %>
+
+<% if ap_module != nil %>
+<tr>
+	<td>
+<%= ap_module.module %></td>
+<td>
+<%= ap_module.comment %>
+
+</td><td>
+<%= link_to 'Edit', [:edit, ap_module.software, ap_module]   %> | 
+ 		<%= link_to 'Clear', [ ap_module.software, ap_module],
+                    method: :delete, data: { confirm: 'Are you sure?' } %>
+   </td></tr>
+<% end %>
+<% end %>
+
+<%= form_for([@software, @software.apache_modules.build]) do |f| %>
+<tr>
+	<td>module</td>
+	<td> <%= f.text_field :module %></td>
+	<td>comment</td>
+	<td> <%= f.text_field :comment %></td>
+	<td>  <%= f.submit %></td>
+</tr>
+<% end %>
+</table>
+<br>
+
 if php
 
 
