@@ -38,7 +38,7 @@ class Publisher
           {blocking_worker: {only: [:name,:comment,:command]}},
           {rake_tasks: {only: [:name,:action]}},
           {template_files: {only: [:title,:path]}},
-          {environment_variables: {only: [:name,:comment,:value,:ask_at_runtime,:build_time_only]}},
+          {environment_variables: {only: [:name,:comment,:value,:ask_at_build_time,:mandatory,:build_time_only]}},
           {worker_commands: {only: [:name, :comment,:command]}},
           {work_ports: {only: [:name,:external,:port,:comment]}},
           {apache_htaccess_files: {only: [:directory,:comment]}}, 
@@ -53,6 +53,9 @@ class Publisher
 
         blueprint_json_str = blueprint_json.to_s
         return blueprint_json_str
+rescue  Exception=>e
+       log_exception(e)
+       return false
   end
   
   def Publisher.setup_repo  software_name
@@ -77,6 +80,9 @@ class Publisher
       end
       
     return repo
+    rescue  Exception=>e
+           log_exception(e)
+           return false
   end
   
   def Publisher.publishtest software
@@ -140,7 +146,18 @@ class Publisher
     Rugged::Commit.create(repo, options)
        
     return blueprint_json_str
+    rescue  Exception=>e
+           log_exception(e)
+           return false
   end
-
+  protected 
+def log_exception(e)
+   e_str = e.to_s()
+   e.backtrace.each do |bt |
+     e_str += bt
+   end
+   @last_error = e_str
+   SystemUtils.log_output(e_str,10)
+ end
     
 end

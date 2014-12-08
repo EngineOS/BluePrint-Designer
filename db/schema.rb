@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141208023254) do
+ActiveRecord::Schema.define(version: 20141208025952) do
 
   create_table "apache_custom_files", force: true do |t|
     t.datetime "created_at"
@@ -107,9 +107,10 @@ ActiveRecord::Schema.define(version: 20141208023254) do
     t.integer  "software_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "build_time_only",  default: false
-    t.boolean  "mandatory"
-    t.boolean  "ask_at_buildtime"
+    t.boolean  "build_time_only",   default: false
+    t.boolean  "mandatory",         default: false
+    t.string   "label"
+    t.boolean  "ask_at_build_time", default: false
   end
 
   add_index "environment_variables", ["software_id"], name: "index_environment_variables_on_software_id", using: :btree
@@ -260,9 +261,9 @@ ActiveRecord::Schema.define(version: 20141208023254) do
     t.integer  "servicetype_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "build_time_only",  default: false
+    t.boolean  "build_time_only",   default: false
     t.boolean  "mandatory"
-    t.boolean  "ask_at_buildtime"
+    t.boolean  "ask_at_build_time"
   end
 
   add_index "service_type_environment_variables", ["servicetype_id"], name: "index_service_type_environment_variables_on_servicetype_id", using: :btree

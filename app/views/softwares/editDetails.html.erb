@@ -636,7 +636,7 @@ IF Rails
     <%= variable.value %>
  </td>
    <td>
-    <%= variable.ask_at_runtime %>
+    <%= variable.ask_at_build_time %>
  </td>
     <td>
     <%= variable.build_time_only %>
@@ -661,9 +661,13 @@ IF Rails
  <td>
     <%= f.text_field :value %>
  </td>
- <td>
-    <%= f.check_box :ask_at_runtime %>
+  <td>
+    <%= f.text_field :mandatory %>
  </td>
+ <td>
+    <%= f.check_box :ask_at_build_time %>
+ </td>
+ 
   <td>
     <%= f.check_box :build_time_only %>
  </td>

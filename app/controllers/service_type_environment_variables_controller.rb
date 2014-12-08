@@ -43,7 +43,7 @@ class ServiceTypeEnvironmentVariablesController < ApplicationController
   private
   def service_type_environment_varaibles_params
     #NB. I have used 'title' instead of 'name' so it isn't confused with file_name which is included in the path
-    params.require(:service_type_environment_variable).permit(:name,:value,:comment,:ask_at_runtime,:ask_at_runtime)
+    params.require(:service_type_environment_variable).permit(:name,:value,:comment,:ask_at_build_time,:mandatory,:build_time_only)
   end
   
 end  

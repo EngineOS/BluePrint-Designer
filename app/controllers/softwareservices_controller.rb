@@ -13,9 +13,11 @@ class SoftwareservicesController < ApplicationController
                                                 software_id: params[:software_id],
                                                 name: variable.name, 
                                                 value: variable.value,
-                                                ask_at_runtime: variable.ask_at_runtime,
+                                                ask_at_build_time: variable.ask_at_runtime,
                                                 comment: variable.comment,
-                                                build_time_only: variable.build_time_only
+                                                build_time_only: variable.build_time_only,
+                                                mandatory: variable.mandatory
+                                                
                                                 )
         end
       

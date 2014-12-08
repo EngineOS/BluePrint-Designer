@@ -356,13 +356,19 @@ IF Rails
     <%= variable.value %>
  </td>
  <td>
-    <%= variable.ask_at_runtime %>
+    <%= variable.ask_at_build_time %>
  </td>
  <td>
     <%= variable.comment %>
  </td>
+ <td>
+    <%= variable.mandatory %>
+ </td>
  
-
+  <td>
+    <%= variable.build_time_only %>
+ </td>
+  
 </tr>
 <% end %>
 
