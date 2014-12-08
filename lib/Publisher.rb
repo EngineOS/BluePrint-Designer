@@ -1,10 +1,16 @@
 require 'rugged'
 
 class Publisher
-    
+
   
   def Publisher.set_repo_options(index,repo)
+    p :repo
+   p repo
+   p :index
+   p index
+   
     options = {}
+    
     options[:tree] = index.write_tree(repo)
     #FIXME email address is of  publisher not system
     options[:author] = { :email => "deploy@engines.onl", :name => 'Software Deployer', :time => Time.now }
@@ -13,6 +19,10 @@ class Publisher
     options[:parents] = repo.empty? ? [] : [ repo.head.target ].compact
     options[:update_ref] = 'HEAD'
     return options
+    
+    rescue  Exception=>e
+     log_exception(e)
+     return false 
   end
   
   def Publisher.get_blueprint software
@@ -52,7 +62,9 @@ class Publisher
         )
 
         blueprint_json_str = blueprint_json.to_s
+        p blueprint_json_str
         return blueprint_json_str
+        
 rescue  Exception=>e
        log_exception(e)
        return false
@@ -65,15 +77,30 @@ rescue  Exception=>e
       end
       reponame=gitdir + "/test-deploy/"+ software_name 
   
+  p :reponame
+  p reponame
+  
       if File.exists?(reponame)
         repo = Rugged::Repository.new(reponame)
+       
+
       else
         repo  = Rugged::Repository.init_at(reponame)
         touchcmd= String.new
         cpcmd = String.new
   
         FileUtils.mkdir_p(reponame +"/.git/")
-       
+
+        FileUtils.mkdir_p(reponame + "/engines/scripts/")
+        FileUtils.mkdir_p(reponame + "/engines/templates/")
+        FileUtils.mkdir_p(reponame + "/engines/configs/")
+        FileUtils.mkdir_p(reponame + "/engines/htaccess_files")
+        
+#        index.add_entry(IndexEntry.new(:path => "engines",:mode => 0100755))
+#       index.add_entry(:path => "engines/templates",:mode => 0100755)
+   #      htaccess
+   #      configs
+   #      scripts
         touchcmd="touch \""+ reponame +"/.git/git-daemon-export-ok\""
         system(touchcmd )
                 
@@ -86,15 +113,15 @@ rescue  Exception=>e
   end
   
   def Publisher.publishtest software
-    
+    p software.name
    repo =  setup_repo(software.name)
     
     blueprint_json = get_blueprint(software) 
     blueprint_json_str =blueprint_json.to_s
 
     require 'digest/sha1'
-    #FIXME to be dynamic value and not just filename
-    commit_sha = Digest::SHA1.hexdigest 'reponame'
+ 
+    commit_sha = Digest::SHA1.hexdigest(blueprint_json.to_s)
 
     #FIXME Make more informative
     line = "ReadMe for " + software.name + "\n" + software.description
@@ -105,7 +132,14 @@ rescue  Exception=>e
     line = "#blueprint.json\n" + blueprint_json_str
     oid = repo.write(blueprint_json_str, :blob)
     index.add(:path => "blueprint.json", :oid => oid, :mode => 0100644)
-
+    
+      #engines_index = Index.new("engines")
+      index.add_entry(IndexEntry.new(:path => "engines",:mode => 0100755))
+    index.add_entry(:path => "engines/templates",:mode => 0100755)
+#      htaccess
+#      configs
+#      scripts
+      
       software.template_files.each() do |template_file |         
         oid = repo.write(template_file.content, :blob)
         index.add(:path => "engines/templates/" + template_file.path, :oid => oid, :mode => 0100644)
@@ -115,8 +149,7 @@ rescue  Exception=>e
         oid = repo.write(htaccess_file.htaccess_content, :blob)
         index.add(:path => "engines/htaccess_files/" + htaccess_file.directory + "/htaccess", :oid => oid, :mode => 0100644)
       end
-      
-      
+            
       php_ini = String.new
       software.custom_php_inis.each() do |custom_php|
         php_ini+="#" + custom_php.title + "\n" + custom_php.content + "\n"        
@@ -144,20 +177,28 @@ rescue  Exception=>e
       
     options = set_repo_options(index,repo)   
     Rugged::Commit.create(repo, options)
-       
+   
+    index.write #????
+    
     return blueprint_json_str
     rescue  Exception=>e
            log_exception(e)
            return false
   end
-  protected 
-def log_exception(e)
+
+  protected
+def Publisher.log_exception(e)
+  
    e_str = e.to_s()
+   p e_str
+   puts e_str
+   e_str=""
    e.backtrace.each do |bt |
      e_str += bt
    end
-   @last_error = e_str
-   SystemUtils.log_output(e_str,10)
- end
-    
-end
+  
+   p  e_str
+ end  
+
+end 
+
