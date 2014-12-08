@@ -10,7 +10,7 @@ class Publisher
         if gitdir == nil
           gitdir="/var/lib/git"
         end
-       @reponame=gitdir + "/test-deploy/"+ software_name 
+       @reponame=gitdir + "/test-deploy/"+  @software.name 
     
   end
   
@@ -82,7 +82,7 @@ rescue  Exception=>e
        return false
   end
   
-  def setup_repo  software_name
+  def setup_repo 
   
   
   p :reponame
@@ -118,7 +118,7 @@ rescue  Exception=>e
   
   def publishtest 
     p @software.name
-   repo =  setup_repo(@software.name)
+   repo =  setup_repo()
     
     blueprint_json = get_blueprint(@software) 
     blueprint_json_str =blueprint_json.to_s
