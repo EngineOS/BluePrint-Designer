@@ -156,7 +156,8 @@ rescue  Exception=>e
       end
   
       @software.apache_htaccess_files.each() do |htaccess_file|
-        file_path =  "/" + "engines/htaccess_files/" + htaccess_file.directory + "/htaccess"
+        file_path =  "/" + "engines/htaccess_files/" + htaccess_file.directory + "/.htaccess"
+          Dir.mkdir_p(File.basename(@reponame +file_path))
         out_file = File.new(@reponame +file_path,"w" )
         out_file.write(htaccess_file.htaccess_content)
         out_file.close
