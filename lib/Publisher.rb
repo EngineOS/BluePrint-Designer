@@ -136,7 +136,7 @@ rescue  Exception=>e
     
     
     file_path = @reponame + "/" + "blueprint.json","w" 
-    out_file = File.new(path_path)
+    out_file = File.new(file_path)
     out_file.write(blueprint_json_str)
     out_file.close
     index.add(file_path)
