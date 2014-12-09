@@ -623,7 +623,8 @@ IF Rails
 	
 <th>Name</th>
 <th>Value</th>
-<th>Ask At runtime</th>
+<th>Ask At Buildtime</th>
+<th>Manadatory</th>
 <th>For build only</th>
 <th>Comment</th>
 
@@ -639,9 +640,12 @@ IF Rails
     <%= variable.ask_at_build_time %>
  </td>
     <td>
+    <%= variable.mandatory %>
+ </td>
+    <td>
     <%= variable.build_time_only %>
  </td>
- 
+
  <td>
     <%= variable.comment %>
  </td>
@@ -652,22 +656,19 @@ IF Rails
 </tr>
 <% end %>
 <%= form_for([@software, @software.environment_variables.build]) do |f| %>
-	
 	<tr>
   <td>
     <%= f.text_field :name %>
  </td>
-
  <td>
     <%= f.text_field :value %>
- </td>
-  <td>
-    <%= f.text_field :mandatory %>
  </td>
  <td>
     <%= f.check_box :ask_at_build_time %>
  </td>
- 
+   <td>
+    <%= f.check_box :mandatory %>
+ </td>
   <td>
     <%= f.check_box :build_time_only %>
  </td>

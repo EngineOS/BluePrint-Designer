@@ -14,21 +14,24 @@ class Publisher
     
   end
   
-  def set_repo_options(index,repo)
+  def set_repo_options(repo)
     p :repo
    p repo
+   index = repo.index
    p :index
    p index
    
     options = {}
     
     options[:tree] = index.write_tree(repo)
+
     #FIXME email address is of  publisher not system
     options[:author] = { :email => "deploy@engines.onl", :name => 'Software Deployer', :time => Time.now }
     options[:committer] = { :email => "deploy@engines.onl", :name => 'Software Deployer', :time => Time.now }
     options[:message] ||= "updated by Software Deployer at dd-mm-yy:h:m:s logged in as user"
     options[:parents] = repo.empty? ? [] : [ repo.head.target ].compact
     options[:update_ref] = 'HEAD'
+      
     return options
     
     rescue  Exception=>e
@@ -93,11 +96,13 @@ rescue  Exception=>e
        
 
       else
+        FileUtils.mkdir_p(@reponame )
         repo  = Rugged::Repository.init_at(@reponame)
-        touchcmd= String.new
-        cpcmd = String.new
-  
-        FileUtils.mkdir_p(@reponame +"/.git/")
+        index = repo.index
+
+          
+          
+        
 
         FileUtils.mkdir_p(@reponame + "/engines/scripts/")
         FileUtils.mkdir_p(@reponame + "/engines/templates/")
@@ -119,53 +124,66 @@ rescue  Exception=>e
   def publishtest 
     p @software.name
    repo =  setup_repo()
-    
-    blueprint_json = get_blueprint(@software) 
-    blueprint_json_str =blueprint_json.to_s
-
+  
+   
+ 
+   
+   index = repo.index
 
     require 'digest/sha1'
  
-    commit_sha = Digest::SHA1.hexdigest(blueprint_json.to_s)
+#    commit_sha = Digest::SHA1.hexdigest(blueprint_json.to_s)
 
     #FIXME Make more informative
     line = "ReadMe for " + @software.name + "\n" + @software.description
-    oid = repo.write(line, :blob)
-    index = repo.index
-    index.add(:path => "README.md", :oid => oid, :mode => 0100644)
+    file_path =   "README.md" 
+    out_file = File.new(@reponame + "/" + file_path,'w')
+    out_file.write(line)
+    out_file.close
+#    index.add(file_path)
+#          
+#    oid = repo.write(line, :blob)            
+#    index.add(:path => "README.md", :oid => oid, :mode => 0100644)
     
-    
-    file_path =  "/" + "blueprint.json" 
-    out_file = File.new(@reponame + file_path,'w')
+    blueprint_json = get_blueprint(@software) 
+    blueprint_json_str =blueprint_json.to_s
+     
+    file_path =  "blueprint.json" 
+    out_file = File.new(@reponame + "/" + file_path,'w')
     out_file.write(blueprint_json_str)
     out_file.close
-    index.add(file_path)
+#    index.add(file_path)
+#    index.write
 #    line = "#blueprint.json\n" + blueprint_json_str
 #    oid = repo.write(blueprint_json_str, :blob)
 #    index.add(:path => "blueprint.json", :oid => oid, :mode => 0100644)
 
-      
+#      
       @software.template_files.each() do |template_file |         
-        file_path =  "/" + "engines/templates/"+ template_file.path
-        out_file = File.new(@reponame + file_path,"w" )
+        file_path =   "engines/templates/"+ template_file.path
+        out_file = File.new(@reponame + "/" + file_path,"w" )
          out_file.write(template_file.content)
          out_file.close
-        index.add(file_path)
+#        index.add(file_path)
+#        index.write
 #        oid = repo.write(template_file.content, :blob)
 #        index.add(:path => "engines/templates/" + template_file.path, :oid => oid, :mode => 0100644)
       end
-  
+#  
       @software.apache_htaccess_files.each() do |htaccess_file|
-        file_path =  "/" + "engines/htaccess_files/" + htaccess_file.directory + "/.htaccess"
-          Dir.mkdir_p(File.basename(@reponame +file_path))
-        out_file = File.new(@reponame +file_path,"w" )
+        file_path =   "engines/htaccess_files/" + htaccess_file.directory + "/.htaccess"
+          p :basename
+          p File.basename(@reponame +file_path)
+        FileUtils.mkdir_p(File.dirname(@reponame + "/" + file_path))
+        out_file = File.new(@reponame + "/" +file_path,"w" )
         out_file.write(htaccess_file.htaccess_content)
         out_file.close
-        index.add(file_path)
+#        index.add(file_path)
+#        index.write
 #        oid = repo.write(htaccess_file.htaccess_content, :blob)
 #        index.add(:path => "engines/htaccess_files/" + htaccess_file.directory + "/htaccess", :oid => oid, :mode => 0100644)
       end
-            
+#            
       php_ini = String.new
       @software.custom_php_inis.each() do |custom_php|
      
@@ -174,49 +192,59 @@ rescue  Exception=>e
       end
       
       if php_ini.length >1
-        file_path = "/" + "engines/configs/php/71-custom.ini"
-        out_file = File.new( @reponame + file_path,"w" )
+        FileUtils.mkdir_p(@reponame + "/engines/configs/php")
+        file_path ="engines/configs/php/71-custom.ini"
+        out_file = File.new( @reponame + "/" + file_path,"w" )
         out_file.write(php_ini)
         out_file.close        
-        index.add(file_path)
+#        index.add(file_path)
+#        index.write
 #        oid = repo.write(php_ini, :blob)
 #         index.add(:path => "engines/configs/php/71-custom.ini", :oid => oid, :mode => 0100644)
       end      
-      
+#      
        if @software.have_custom_start_script == true
-         file_path =  "/" + "engines/scripts/start.sh"
-         out_file = File.new( @reponame + file_path,"w" )
+         file_path =  "engines/scripts/start.sh"
+         out_file = File.new( @reponame + "/" + file_path,"w" )
          out_file.write(@software.custom_start_script)
          out_file.close    
-         index.add(file_path)
+#         index.add(file_path)
+#         index.write
 #         oid = repo.write(@software.custom_start_script, :blob)
 #         index.add(:path => "engines/scripts/start.sh", :oid => oid, :mode => 0100755)
        end
-       
+#       
        if @software.have_custom_install_script == true
-         file_path =  "/" + "engines/scripts/install.sh"
-         out_file = File.new(@reponame + file_path ,"w" )
+         file_path = "engines/scripts/install.sh"
+         out_file = File.new(@reponame + "/" + file_path ,"w" )
          out_file.write(@software.custom_install_script)
          out_file.close        
-         index.add(file_path)
+#         index.add(file_path)
+#         index.write
 #         oid = repo.write(@software.custom_install_script, :blob)
 #         index.add(:path => "engines/scripts/install.sh", :oid => oid, :mode => 0100755)
        end
-       
+#       
        if @software.have_custom_post_install_script == true
-         file_path =  "/" + "engines/scripts/post_install.sh" 
-         out_file = File.new(@reponame + file_path,"w" )
+         file_path =  "engines/scripts/post_install.sh" 
+         out_file = File.new(@reponame + "/" + file_path,"w" )
          out_file.write(@software.custom_post_install_script)
          out_file.close    
-         
+#         index.add(file_path)
+#         index.write
 #         oid = repo.write(@software.custom_post_install_script, :blob)
 #         index.add(:path => "engines/scripts/post_install.sh", :oid => oid, :mode => 0100755)
        end
-      
-    options = set_repo_options(index,repo)   
-    Rugged::Commit.create(repo, options)
+ #   tree = index.write_tree
+  #  options = set_repo_options(repo)   
+#    p :options
+#  p options
+#  p :repo
+#  p repo
+  
+   # Rugged::Commit.create(repo, options)
    
-    index.write #????
+   # index.write #????
     
     return blueprint_json_str
     rescue  Exception=>e

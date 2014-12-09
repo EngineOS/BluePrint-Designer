@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 20141208025952) do
     t.string   "label"
     t.boolean  "ask_at_build_time", default: false
   end
-
+  
   add_index "environment_variables", ["software_id"], name: "index_environment_variables_on_software_id", using: :btree
 
   create_table "file_write_permissions", force: true do |t|
