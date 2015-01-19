@@ -1,6 +1,6 @@
 require 'Publisher.rb'
 class SoftwaresController < ApplicationController
-
+  require 'json'
 	def new
 	 software = Software.new
   
@@ -67,7 +67,7 @@ class SoftwaresController < ApplicationController
  
 
   def software_params
-    params.require(:software).permit(:custom_start_script, :custom_install_script, :custom_post_install_script,:name, :icon_url,:description, :langauge_id, :mysql , :pgsql, :filesystem, :swframework_id,:license_id, :softwaredeploytype_id, :requiredmemory,:toconfigurefile,:configuredfile)
+    params.require(:software).permit(:web_port_overide,:custom_start_script, :custom_install_script, :custom_post_install_script,:name, :icon_url,:description, :langauge_id, :mysql , :pgsql, :filesystem, :swframework_id,:license_id, :softwaredeploytype_id, :requiredmemory,:toconfigurefile,:configuredfile)
 end
 
 end

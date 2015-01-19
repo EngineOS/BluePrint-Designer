@@ -46,7 +46,7 @@ class Publisher
         [
           {softwareservices: {
           only:
-          [:name,:dest,:comment,:http_protocol], 
+          [:name,:dest,:comment], #,:http_protocol], 
           methods:
           [:servicetype_name]
           }},
@@ -70,7 +70,7 @@ class Publisher
         ] ,
         only:
         #[ :name,:description],
-        [ :name,:icon_url,:description,:version,:updated_at,:requiredmemory,:toconfigurefile,:configuredfile],
+        [ :name,:icon_url,:description,:version,:updated_at,:requiredmemory,:toconfigurefile,:configuredfile,:http_protocol,:web_port_overide],
         methods:
         [:langauge_name,:swframework_name,:license_name,:license_sourceurl,:have_custom_start_script,:have_custom_install_script,:have_custom_post_install_script,:have_php_ini]
         )
@@ -78,7 +78,7 @@ class Publisher
         blueprint_json_str = blueprint_json.to_s
         p blueprint_json_str
     
-        return blueprint_json_str
+        return blueprint_json
         
 rescue  Exception=>e
        log_exception(e)
@@ -246,7 +246,7 @@ rescue  Exception=>e
    
    # index.write #????
     
-    return blueprint_json_str
+    return blueprint_json
     rescue  Exception=>e
            log_exception(e)
            return false

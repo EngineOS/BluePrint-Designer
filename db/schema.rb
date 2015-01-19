@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141208025952) do
+ActiveRecord::Schema.define(version: 20150118233905) do
 
   create_table "apache_custom_files", force: true do |t|
     t.datetime "created_at"
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 20141208025952) do
     t.string   "label"
     t.boolean  "ask_at_build_time", default: false
   end
-  
+
   add_index "environment_variables", ["software_id"], name: "index_environment_variables_on_software_id", using: :btree
 
   create_table "file_write_permissions", force: true do |t|
@@ -310,6 +310,7 @@ ActiveRecord::Schema.define(version: 20141208025952) do
     t.text     "custom_install_script"
     t.text     "custom_post_install_script"
     t.integer  "http_protocol",              default: 1
+    t.integer  "web_port_overide"
   end
 
   create_table "softwareservices", force: true do |t|

@@ -37,6 +37,9 @@
     <%= f.select :swframework_id,   Swframework.all.collect {|l| [ l.name, l.id ] } %>
  
   	</p>
+  	<%= f.label :web_port_overide%>
+    <%= f.text_field :web_port_overide %>
+     
   	<p>
   		<%= f.label :softwaredeploytype_id %>
     <%= f.select :softwaredeploytype_id,   Softwaredeploytype.all.collect {|dt| [ dt.name, dt.id ] } %>

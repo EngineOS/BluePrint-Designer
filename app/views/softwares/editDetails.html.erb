@@ -17,7 +17,8 @@
 <%= Langauge.find(@software.langauge_id).name %>
 <strong>Framework</strong>
 <%= Swframework.find(@software.swframework_id).name %>
-
+<br>Web Port Overide
+<%= @software.web_port_overide %>
 <p>
 <strong>Style</strong>               
 <%= Softwaredeploytype.find(@software.softwaredeploytype_id).name %>
