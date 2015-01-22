@@ -5,10 +5,15 @@
 <hr>
 
  <p>
+<% vals=Array.new
+vals.push(@result) %>
+<pre>
+  <%= JSON.pretty_generate(JSON.parse( @result)) %>
+  </pre>
+  
+  be
+   
 
-
-
-  Committed <%= @result %>
 
  <%= link_to 'Back', software_path %>
  
