@@ -149,7 +149,7 @@ rescue  Exception=>e
     blueprint_json_str =blueprint_json.to_s
      
     file_path =  "blueprint.json" 
-    out_file = File.new(@reponame + "/" + file_path,'w')
+    out_file = File.new(@reponame + "/" + file_path,'w', :crlf_newline => false)
     out_file.write(blueprint_json_str)
     out_file.close
 #    index.add(file_path)
@@ -161,7 +161,7 @@ rescue  Exception=>e
 #      
       @software.template_files.each() do |template_file |         
         file_path =   "engines/templates/"+ template_file.path
-        out_file = File.new(@reponame + "/" + file_path,"w" )
+        out_file = File.new(@reponame + "/" + file_path,"w", :crlf_newline => false )
          out_file.write(template_file.content)
          out_file.close
 #        index.add(file_path)
@@ -175,7 +175,7 @@ rescue  Exception=>e
           p :basename
           p File.basename(@reponame +file_path)
         FileUtils.mkdir_p(File.dirname(@reponame + "/" + file_path))
-        out_file = File.new(@reponame + "/" +file_path,"w" )
+        out_file = File.new(@reponame + "/" +file_path,"w", :crlf_newline => false )
         out_file.write(htaccess_file.htaccess_content)
         out_file.close
 #        index.add(file_path)
@@ -194,7 +194,7 @@ rescue  Exception=>e
       if php_ini.length >1
         FileUtils.mkdir_p(@reponame + "/engines/configs/php")
         file_path ="engines/configs/php/71-custom.ini"
-        out_file = File.new( @reponame + "/" + file_path,"w" )
+        out_file = File.new( @reponame + "/" + file_path,"w", :crlf_newline => false )
         out_file.write(php_ini)
         out_file.close        
 #        index.add(file_path)
@@ -205,7 +205,7 @@ rescue  Exception=>e
 #      
        if @software.have_custom_start_script == true
          file_path =  "engines/scripts/start.sh"
-         out_file = File.new( @reponame + "/" + file_path,"w" )
+         out_file = File.new( @reponame + "/" + file_path,"w", :crlf_newline => false )
          out_file.write(@software.custom_start_script)
          out_file.close    
 #         index.add(file_path)
@@ -216,7 +216,7 @@ rescue  Exception=>e
 #       
        if @software.have_custom_install_script == true
          file_path = "engines/scripts/install.sh"
-         out_file = File.new(@reponame + "/" + file_path ,"w" )
+         out_file = File.new(@reponame + "/" + file_path ,"w" , :crlf_newline => false)
          out_file.write(@software.custom_install_script)
          out_file.close        
 #         index.add(file_path)
@@ -227,7 +227,7 @@ rescue  Exception=>e
 #       
        if @software.have_custom_post_install_script == true
          file_path =  "engines/scripts/post_install.sh" 
-         out_file = File.new(@reponame + "/" + file_path,"w" )
+         out_file = File.new(@reponame + "/" + file_path,"w", :crlf_newline => false )
          out_file.write(@software.custom_post_install_script)
          out_file.close    
 #         index.add(file_path)
