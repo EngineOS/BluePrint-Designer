@@ -1,5 +1,5 @@
 <%
-  back_path = ['/', @variable.variable_consumer_type.pluralize,
+  back_path = ['/', @variable.variable_consumer_type.underscore.pluralize,
                '/', @variable.variable_consumer_id.to_s,
                '#variables' ].join
 %>

@@ -19,6 +19,11 @@ class VariablesController < ApplicationController
     @variable = Variable.find(params[:id])
   end
 
+def index
+  # Variable.destroy_all
+  @variables = Variable.all
+end
+
   def edit
     @variable = Variable.find(params[:id])
   end

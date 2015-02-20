@@ -1,4 +1,4 @@
 <%
   cancel_path = url_for(@service_configuration.blueprint_version) + '#' + @service_configuration.class.name.underscore.pluralize
 %>
-<%= render 'shared/new/default', record_object: @service_configuration, fa: :'caret-right', cancel_path: cancel_path %>
+<%= render 'shared/new/default', record_object: @service_configuration, fa: :'caret-right', cancel_path: cancel_path, nest_in: :blueprint_version %>

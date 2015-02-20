@@ -36,22 +36,26 @@
           <%= render "shared/form/hidden_field", f: f, name: (attribute.to_s + '_id') %>
           <%= render "shared/form/hidden_field", f: f, name: (attribute.to_s + '_type') %>
 
+    <%  elsif nest_in.to_s == attribute.to_s %>
+
+          <%= render "shared/form/hidden_field", f: f, name: (attribute.to_s + '_id') %>
+
     <%  else %>
 
           <%= render 'shared/form/association_select', f: f, name: attribute, label: label, offset: offset, width: width, buffer: buffer, nest_in: nest_in %>
    <%   end
 
       else
-        attribute_object = record_class.columns_hash[attribute.to_s]
-        if attribute_object
+        attribute_detail = record_class.columns_hash[attribute.to_s]
+        if attribute_detail
           if attribute == (nest_in.to_s.underscore + '_id').to_sym ||
              attribute.to_s.ends_with?('_consumer_type' )
             attribute_type = :hidden
           else
-            attribute_type = attribute_object.type
+            attribute_type = attribute_detail.type
           end
         else
-          attribute_object = 'WTF!'
+          attribute_detail = 'WTF!'
         end
 
         field_type = case attribute_type

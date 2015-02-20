@@ -1,4 +1,5 @@
 <%  record_object ||= nil
+    nest_in ||= nil
     show_all_associations ||= false
     model_name = record_object.class.to_s
     label ||= model_name.to_s.underscore.humanize
@@ -8,7 +9,7 @@
                         ['id', 'created_at', 'updated_at'].include?(attribute)
                       end.
                       reject do |attribute|
-                        attribute.ends_with?('_consumer_id')
+                        attribute.ends_with?('_consumer_type')
                       end.
                       map do |attribute|
                         attribute.sub(/_id\z/, '')
@@ -32,19 +33,21 @@
     </div>
   </div>
   <div class="panel-body">
-
     <%  attributes.each do |attribute|
           if attribute.kind_of?(Array)
             label = attribute[1]
             attribute = attribute[0]
           else
-            label = attribute.to_s.humanize
+            if record_object.class.reflect_on_all_associations.select{|association| association.options[:polymorphic]}.map(&:name).include? attribute.to_sym
+                label = record_object.send(attribute.to_s + '_type').humanize
+            else
+              label = attribute.to_s.humanize
+            end
           end
     %>
 
     <div class="row">
-
-      <%= render 'shared/show/inline_labelled_text', label: label, object: record_object, field: attribute, association_label_method: association_label_method %>
+      <%= render 'shared/show/inline_labelled_text', label: label, object: record_object, field: attribute, nest_in: nest_in, association_label_method: association_label_method %>
     </div>
 
     <% end %>
