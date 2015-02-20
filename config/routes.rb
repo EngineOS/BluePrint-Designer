@@ -9,6 +9,7 @@ Rails.application.routes.draw do
             :service_blueprints,
             :softwares,
             :software_versions,
+            :blueprint_versions,
             :service_configurations,
             :persistent_directories,
             :replacement_strings,
@@ -26,10 +27,6 @@ Rails.application.routes.draw do
             :variables,
             :component_directories,
             :component_sources
-
-  resources :blueprint_versions do
-      resources :variables
-  end
 
   devise_for :users
   devise_scope :user do

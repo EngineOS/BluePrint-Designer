@@ -1,15 +1,16 @@
 <%  items ||= []
-    nest_in ||= nil
+    nest_routes ||= false
+    nest_in ||= nest_routes ? record_object : nil
     model_name = items.model_name.to_s
     label ||= model_name.humanize
     new_item_path ||= [:new, model_name.underscore]
     attributes ||= items.model.column_names.
                       map{ |attribute| attribute.sub(/_id\z/, '') }.
-                      reject{ |attribute| ['id', 'created_at', 'updated_at'].include?(attribute) }
+                      reject{ |attribute| ['id', 'created_at', 'updated_at', 'record_comment'].include?(attribute) }.
+                      reject{ |attribute| attribute == nest_in.to_s}
 %>
 
 <div class="col-sm-12">
-
   <table class="table table-condensed top-gap">
     <tr>
       <%  attributes.each do |attribute| 
@@ -43,7 +44,7 @@
 
     <%  items.each do |item|
 
-          url_for_item = url_for (nest_in.present? ? [nest_in, item] : item) %>
+          url_for_item = url_for (nest_routes ? [nest_in, item] : item) %>
 
           <tr id="<%= item.class.name.underscore + '_' + item.id.to_s %>" class='clickable-table-row' href='<%= url_for_item %>'>
             <% attributes.each do |attribute| %>

@@ -1,6 +1,8 @@
 <%  items ||= record_object.send( association )
     nest_routes ||= false
-    nest_in = nest_routes ? record_object : nil
+    nest_in ||= record_object.class.name.underscore.to_sym
+    fa ||= false
+    attributes ||= nil
 
     # show_in ||= nil
     id_field_name = (record_object.class.name.underscore + "_id").to_sym
@@ -12,11 +14,6 @@
                                 else
                                   [ :new, association.to_s.singularize, id_field_name => record_object.id ]
                                 end )
-
-    fa ||= false
-    attributes ||= record_object.column_names.
-                      map{ |attribute| attribute.sub(/_id\z/, '') }.
-                      reject{ |attribute| ['id', 'created_at', 'updated_at'].include?(attribute) }
 %>
 
 <div class="col-sm-12">
@@ -24,9 +21,9 @@
     <div class="panel-body">
       <div class="col-sm-12">
         <h3><% if fa %><%= content_tag(:i , nil, class: "fa fa-#{fa}") + ' ' %><% end %><%= label %></h3>
-        <%= link_to (content_tag(:i, nil, class: 'fa fa-plus').html_safe + " Add"), new_item_path, class: "btn btn-default" %>
+        <%= link_to (content_tag(:i, nil, class: 'fa fa-plus').html_safe + " Add"), new_item_path, class: "btn btn-primary trigger-response-modal" %>
       </div>
-      <%= render 'shared/index/table', items: items, nest_in: nest_in, attributes: attributes %>
+      <%= render 'shared/index/table', items: items, nest_routes: nest_routes, nest_in: nest_in, attributes: attributes %>
     </div>
   </div>
 </div>

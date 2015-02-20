@@ -1,3 +1,23 @@
+<div class="col-md-10">
+  <%= render partial: 'shared/show/default', locals: {record_object: @blueprint_version, fa: :'file-text', back_path: @blueprint_version.software_version } %>
+  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :service_configurations, fa: :'caret-right' %>
+  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :persistent_directories, fa: :'caret-right' %>
+  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :replacement_strings, fa: :'caret-right' %>
+  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :persistent_files, fa: :'caret-right' %>
+  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :installed_packages, fa: :'caret-right' %>
+  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :system_packages, fa: :'caret-right' %>
+  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :workers, fa: :'caret-right' %>
+  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :rake_tasks, fa: :'caret-right' %>
+  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :template_files, fa: :'caret-right' %>
+  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :file_write_permissions, fa: :'caret-right' %>
+  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :custom_php_inis, fa: :'caret-right' %>
+  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :apache_htaccess_files, fa: :'caret-right' %>
+  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :apache_modules, fa: :'caret-right' %>
+  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :variables, fa: :'caret-right', attributes: [:record_name, :type, :value], new_item_path: url_for([:new, :variable, variable_consumer_id: @blueprint_version.id, variable_consumer_type: :blueprint_version]) %>
+  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :component_directories, fa: :'caret-right' %>
+  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :component_sources, fa: :'caret-right' %>
+</div>
+
 <div class="col-md-2" role="complementary">
   <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix top-gap" >
     <ul class="nav bs-docs-sidenav">
@@ -24,22 +44,5 @@
   </nav>
 </div>
 
-<div class="col-md-10">
-  <%= render partial: 'shared/show/default', locals: {record_object: @blueprint_version, fa: :'file-text', back_path: @blueprint_version.software_version } %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :service_configurations, fa: :'caret-right', attributes: [:record_name, :record_comment] %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :persistent_directories, fa: :'caret-right', attributes: [:record_name, :record_comment] %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :replacement_strings, fa: :'caret-right', attributes: [:record_name, :record_comment] %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :persistent_files, fa: :'caret-right', attributes: [:record_name, :record_comment] %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :installed_packages, fa: :'caret-right', attributes: [:record_name, :record_comment] %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :system_packages, fa: :'caret-right', attributes: [:record_name, :record_comment] %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :workers, fa: :'caret-right', attributes: [:record_name, :record_comment] %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :rake_tasks, fa: :'caret-right', attributes: [:record_name, :record_comment] %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :template_files, fa: :'caret-right', attributes: [:record_name, :record_comment] %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :file_write_permissions, fa: :'caret-right', attributes: [:record_name, :record_comment] %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :custom_php_inis, fa: :'caret-right', attributes: [:record_name, :record_comment] %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :apache_htaccess_files, fa: :'caret-right', attributes: [:record_name, :record_comment] %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :apache_modules, fa: :'caret-right', attributes: [:record_name, :record_comment] %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :variables, fa: :'caret-right', attributes: [:record_name, :record_comment], new_item_path: url_for([:new, :variable, variable_consumer_id: @blueprint_version.id, variable_consumer_type: :blueprint_version]) %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :component_directories, fa: :'caret-right', attributes: [:record_name, :record_comment] %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :component_sources, fa: :'caret-right', attributes: [:record_name, :record_comment] %>
-</div>
+
+

@@ -1,2 +1,2 @@
 <%= render 'shared/show/default', record_object: @software_version, fa: :'code-fork', back_path: software_path(@software_version.software) %>
-<%= render 'shared/show/association_table', record_object: @software_version, association: :blueprint_versions, fa: :'file-text', attributes: [:record_name, :record_comment] %>
+<%= render 'shared/show/association_table', record_object: @software_version, association: :blueprint_versions, fa: :'file-text', attributes: [:record_name, :major, :minor, :release_level, :patch] %>

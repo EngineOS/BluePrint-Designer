@@ -1,4 +1,4 @@
 <%
   cancel_path = url_for(@persistent_directory.blueprint_version) + '#' + @persistent_directory.class.name.underscore.pluralize
 %>
-<%= render 'shared/new/default', record_object: @persistent_directory, fa: :'caret-right', cancel_path: cancel_path %>
+<%= render 'shared/new/default', record_object: @persistent_directory, fa: :'caret-right', cancel_path: cancel_path, nest_in: :blueprint_version %>
