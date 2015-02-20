@@ -1,2 +1,0 @@
-module PersistantfilesHelper
-end

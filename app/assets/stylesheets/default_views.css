@@ -1,0 +1,42 @@
+.record-info-dropdown {
+  color: #000;
+  width: inherit;
+}
+
+.record-info-dropdown .show-labelled-text-label  {
+  margin-bottom: 0px;
+}
+
+.record-info-dropdown .show-labelled-text-value {
+  margin-top: -5px;
+  margin-bottom: 10px;
+}
+
+.show-labelled-text-label {
+  margin-bottom: 0px;
+}
+
+.show-labelled-text-value {
+  margin-bottom: 10px;
+}
+
+@media (max-width:767px) {
+
+  .show-labelled-text-label {
+    margin-bottom: 0px;
+  }
+
+  .show-labelled-text-value {
+    margin-bottom: 10px;
+  }
+
+  .pull-left-on-collapse {
+    float: left !important;
+  }
+
+  .grid-buffer-col {
+    display: none;
+  }
+
+}
+

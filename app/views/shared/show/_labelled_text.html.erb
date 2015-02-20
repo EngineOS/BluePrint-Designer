@@ -1,0 +1,18 @@
+<%  field ||= :inspect
+    text ||= false
+    object ||= nil
+    association_label_method ||= nil
+    value ||= text || (object.present? ? (SharedViews.resolve_value_for object, field, label_method: association_label_method) : '?')
+    label ||= field.to_s.humanize.capitalize
+    offset ||= 4
+    width ||= (12 - offset.to_i)
+ %>
+
+<div class="col-sm-offset-<%= offset %> col-sm-<%= width %>">
+  <label class="control-label no-text-wrap show-labelled-text-label">
+    <%= label %>&nbsp;
+  </label>
+  <div class="show-labelled-text-value">
+    <%= value %>&nbsp;
+  </div>
+</div>

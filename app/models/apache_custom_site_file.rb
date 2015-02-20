@@ -1,3 +1,3 @@
 class ApacheCustomSiteFile < ActiveRecord::Base
-  belongs_to :software
+  belongs_to :blueprint_version
 end

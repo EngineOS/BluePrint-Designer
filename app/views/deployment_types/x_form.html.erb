@@ -1,0 +1,6 @@
+<%= form_for @deployment_type do |f| %>
+  <%= render 'shared/form/errors', f: f %>
+  <%= render 'shared/form/text_field', name: :name, f: f %>
+  <%= render 'shared/form/text_field', name: :comment, f: f %>
+  <%= render 'shared/form/cancel_and_submit_buttons', f: f, cancel_path: @deployment_type  %>
+<% end %>

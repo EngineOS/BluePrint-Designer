@@ -12,5 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
 //x= require turbolinks
+//= require selectize
+//x= require dependent-fields
+//= require underscore
+//= require cocoon
 //= require_tree .

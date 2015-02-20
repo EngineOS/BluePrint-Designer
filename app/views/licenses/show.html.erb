@@ -1,12 +1,1 @@
-
-<table>
- <tr>
-  <td><%= @license.name %></td>
-    <td><%= @license.sourceurl %></td>
-  <td><%= @license.comment %></td>
- </tr>
-</table>
-
-<%= link_to 'Licenses', licenses_path %>
-<%= link_to 'Remove', license_path(@license),
-                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<%= render 'shared/show/default', record_object: @license, fa: :copyright %>

@@ -1,14 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Softwarepackages</title>
+  <title>Engines</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<%= render partial: 'layouts/navbar' %>
+
+    <div class="navbar-buffer">
+      <%= render partial: 'shared/flash_messages' %>
+    </div>      
+
+<div id="content">
+  <div class="container">
+    <div class="row">
+      <%= yield %>
+    </div>      
+  </div>
+</div>
+
+
+<div id="footer">
+</div>
+
+<%= render partial: 'shared/waiting_for_response' %>
 
 </body>
 </html>

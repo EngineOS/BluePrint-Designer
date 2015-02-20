@@ -1,15 +1,48 @@
 source 'https://rubygems.org'
 
+gem 'git'
 
-gem 'therubyracer'
-gem 'mysql2'
-gem 'thin'
-
-#For GIT
+# for git
 gem 'rugged'
 
-#For Cloud foundary
-#gem 'cloudfoundry-client'
+# auth
+gem 'devise'
+
+# styling
+gem 'bootstrap3-rails'
+gem "font-awesome-rails"
+gem "selectize-rails"
+gem 'twitter-bootstrap-rails-confirm'
+gem 'awesome_print', '~> 1.2.0'
+gem 'i18n_country_select'
+
+# file uploader
+gem "paperclip", "~> 4.2"
+
+# allow URI to handle redirections
+gem 'open_uri_redirections'
+
+# forms
+gem "cocoon"
+gem 'dependent-fields-rails'
+
+# for 'dependent-fields-rails'
+gem 'underscore-rails'
+
+# db admin
+gem 'rails_admin'
+
+# js runtime
+gem 'therubyracer'
+
+# db
+gem 'mysql2'
+
+# webserver
+gem 'thin'
+
+
+#thank Rails for the rest...
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'

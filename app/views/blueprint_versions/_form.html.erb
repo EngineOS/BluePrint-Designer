@@ -1,0 +1,52 @@
+<%= form_for @blueprint_version do |f| %>
+
+  <%= render 'shared/form/errors', f: f %>
+
+  <%= render 'shared/show/labelled_text', label: "Software", text: @blueprint_version.software_version.record_name, offset: 2 %>
+  <%= render 'shared/form/hidden_field', name: :software_version_id, f: f %>
+
+  <%= render 'shared/form/text_field', name: :record_name, f: f %>
+  <%= render 'shared/form/text_field', name: :record_comment, f: f %>
+
+  <%= render 'shared/form/legend', text: "Blueprint version" %>
+  <%= render 'shared/form/number_field', name: :major, label: "Major", f: f, width: 2, buffer: 0 %>
+  <%= render 'shared/form/number_field', name: :minor, label: "Minor", f: f, offset: 0, width: 2, buffer: 0 %>
+  <%= render 'shared/form/select', name: :release_level, label: "Release level", f: f, offset: 0, width: 2, buffer: 0 %>
+  <%= render 'shared/form/number_field', name: :patch, label: "Patch", f: f, offset: 0, width: 2 %>
+
+  <%= render 'shared/form/legend', text: "Memory" %>
+  <%= render 'shared/form/number_field', name: :required_memory, label: "Required", f: f, width: 4, buffer: 0 %>
+  <%= render 'shared/form/number_field', name: :recommended_memory, label: "Recommended", f: f, offset: 0, width: 4 %>
+
+  <%= render 'shared/form/legend', text: "Deployment" %>
+  <%= render 'shared/form/radio_buttons', name: :http_protocol, label: "Protocol", f: f %>
+  <%= render 'shared/form/number_field', name: :framework_port_overide, f: f %>
+
+  <%= render 'shared/form/association_select', name: :blocking_worker, class_name: :worker, f: f %>
+
+  <%= render 'shared/form/legend', text: "Scripts" %>
+  <%= render 'shared/form/text_area', name: :custom_install_script, code: true, rows: 6, label: "Install", f: f %>
+  <%= render 'shared/form/text_area', name: :custom_post_install_script, code: true, rows: 6, label: "Post-install", f: f %>
+  <%= render 'shared/form/text_area', name: :custom_start_script, code: true, rows: 6, label: "Start", f: f %>
+
+  <% cancel_path = @blueprint_version.new_record? ? software_version_path(@blueprint_version.software_version) : blueprint_version_path(@blueprint_version) %>
+
+  <%= render 'shared/form/cancel_and_submit_buttons', f: f, cancel_path: @blueprint_version.software_version %>
+
+<% end %>
+
+<% if false %>
+<!--   <%= render 'shared/form/legend', text: "System" %>
+  <%= render 'shared/form/checkbox', name: :mysql, label: "MySQL", f: f %>
+  <%= render 'shared/form/checkbox', name: :pgsql, label: "Postgres", f: f %>
+  <%= render 'shared/form/checkbox', name: :file_system, label: "File system", f: f %> -->
+
+  <%= f.fields_for :blocking_worker do |ff| %>
+    <%= render 'shared/form/text_field', name: :name, f: ff %>
+    <%= render 'shared/form/text_field', name: :comment, f: ff %>
+    <%= render 'shared/form/text_field', name: :command, code: true, f: ff %>
+  <% end %>
+
+
+<% end %>
+

@@ -1,0 +1,5 @@
+<%= form_for @service_blueprint do |f| %>
+  <%= render 'shared/form/errors', f: f %>
+  <%= render 'service_blueprints/fields', f: f %>
+  <%= render 'shared/form/cancel_and_submit_buttons', f: f, cancel_path: @service_blueprint  %>
+<% end %>

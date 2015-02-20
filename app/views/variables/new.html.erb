@@ -1,0 +1,6 @@
+<%
+  cancel_path =   ['/', @variable.variable_consumer_type.pluralize,
+                   '/', @variable.variable_consumer_id.to_s,
+                   '#variables' ].join
+%>
+<%= render 'shared/new/default', record_object: @variable, fa: :'caret-right', cancel_path: cancel_path %>

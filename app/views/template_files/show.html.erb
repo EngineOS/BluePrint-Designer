@@ -1,19 +1,4 @@
-
-<table width=90%>
- <tr>
-  <td><%= @template_file.title %></td>
-    <td><%= @template_file.path %></td>
-    </tr>
-    <tr>
-  <td><textarea>
-  	<%= @template_file.content %>
-  	</textarea>
-  </td>
- </tr>
-<tr>
-<td><%= link_to 'Edit',  [:edit, @template_file.software, @template_file]  %></td>
-| <%= link_to 'Delete',  [ @template_file.software, @template_file],  method: :delete, data: { confirm: 'Are you sure?' } %>
-</td>
-                    </tr>
-                    </table>
-                    
+<%
+  back_path = url_for(@template_file.blueprint_version) + '#' + @template_file.class.name.underscore + '_' + @template_file.id.to_s
+%>
+<%= render 'shared/show/default', record_object: @template_file, fa: :'caret-right', back_path: back_path %>

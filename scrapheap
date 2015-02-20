@@ -1,0 +1,10 @@
+
+ langframework language_stack_support
+ ospackages system_packages
+ installedpackage installed_package
+ persistantdirs persistant_dirs
+ persistantfile persistant_file
+ replacementstring replacement_string
+ servicetype service_type
+ softwaredeploymenttype software_deployment_type
+ softwareservice software_service

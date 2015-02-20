@@ -1,48 +1,46 @@
 class CustomPhpInisController < ApplicationController
+
+  def new
+    @custom_php_ini = CustomPhpIni.new(blueprint_version_id: params[:blueprint_version_id])
+  end
+
   def create
-      @software = Software.find(params[:software_id])
-      @custom_php_ini = @software.custom_php_inis.create(custom_php_ini_params)
-      redirect_to software_path(@software)
+    @custom_php_ini = CustomPhpIni.new(custom_php_ini_params)
+    if @custom_php_ini.save
+      redirect_to @custom_php_ini
+    else
+      render 'new'
     end
-  
-    def new
-      @software = Software.find(params[:software_id])
-      @custom_php_ini = CustomPhpIni.new
+  end
+
+  def show
+    @custom_php_ini = CustomPhpIni.find(params[:id])
+  end
+
+  def edit
+    @custom_php_ini = CustomPhpIni.find(params[:id])
+  end
+
+  def update
+    @custom_php_ini = CustomPhpIni.find(params[:id])
+
+    if @custom_php_ini.update(custom_php_ini_params)
+      redirect_to @custom_php_ini
+    else
+      render 'edit'
     end
-    
-    def show
-       @custom_php_ini = CustomPhpIni.find(params[:id])
-    end
-    
-    def edit
-      @software = Software.find(params[:software_id])
-      @custom_php_ini = CustomPhpIni.find(params[:id])
-    end
-  
-    
-    def update
-      @custom_php_ini = CustomPhpIni.find(params[:id])
-      @software = Software.find(params[:software_id])
-      if @custom_php_ini.update(custom_php_ini_params)
-        redirect_to software_custom_php_ini_path(@software,@custom_php_ini)
-      else
-        render 'edit'
-      end
-    end
-  
-    def destroy
-      @software = Software.find(params[:software_id])
-      @custom_php_ini = CustomPhpIni.find(params[:id])
-      @custom_php_ini.destroy
-  
-      redirect_to software_path(@software)
-    end
-     
-    
-    private
-    def custom_php_ini_params
-      #NB. I have used 'title' instead of 'name' so it isn't confused with file_name which is included in the path
-      params.require(:custom_php_ini).permit(:title,:content)
-    end
-    
+  end
+
+  def destroy
+    @custom_php_ini = CustomPhpIni.find(params[:id])
+    @custom_php_ini.destroy
+    redirect_to @custom_php_ini.blueprint_version
+  end
+
+private
+
+  def custom_php_ini_params
+    params.require(:custom_php_ini).permit!
+  end
+
 end

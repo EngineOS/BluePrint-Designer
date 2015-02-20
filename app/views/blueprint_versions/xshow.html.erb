@@ -1,0 +1,465 @@
+<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+<button type="button" class="btn btn-default btn-lg">
+  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Star
+</button>
+
+<%= link_to 'Back', softwares_path %>
+<p>
+<strong>Name:</strong>
+<%= @software.name %>
+</p>
+<p>Owner</p>
+<p><strong>License</strong> <%= License.find(@software.license_id).name %></p>
+<p>BlueprintVersion</p>
+<p>status Deployed? </p>
+<p>Groups private,shared,forsale,public etc</p>
+<p>
+<strong>Description:</strong>
+<%= @software.description %>
+</p>
+<p>
+<strong>Image</strong>
+<%= @software.icon_url %>
+<img src="<%=@software.icon_url%>">
+</p>    
+<p><strong>Language:</strong>
+<%= Language.find(@software.language_id).name %>
+<strong>Framework</strong>
+<%= Framework.find(@software.framework_id).name %>
+<strong>
+	<br>Web Port Overide</strong>
+	<%= @software.web_port_overide %>
+<p>
+<strong>Style</strong>               
+<%= DeploymentType.find(@software.deployment_type_id).name %>
+
+</p>
+<p>
+<strong>Recommend Protocol</strong>
+<p>
+	<%= @software.http_protocol.humanize %>
+</p>
+<p>
+<strong>Memory:</strong>
+<%= @software.required_memory %>
+</p>
+<%= link_to 'Edit Software', edit_software_path %><br>
+<%= link_to 'Edit Details', edit_details_software_path %><br>
+<%= link_to 'Test', test_build_software_path %><br />
+<%= link_to 'Publish', new_published_software_path(software_id: @software.id) %><br />
+
+<h3>Custom start script</h3>
+      <%= @software.custom_start_script %>
+ <p>
+ 	<h3>Custom Install</h3>
+ 	 <%= @software.custom_install_script %>
+ </p>
+ <p>
+ 	<h3>Post Install</h3>
+ 	 <%= @software.custom_post_install_script %>
+ </p>
+
+<h3>Services</h3>
+
+ 
+<table>
+	<th>Service Type</th>
+	<th>Name</th>
+	<th>Destination</th>
+	<th>Comment</th>
+	
+	 <% @software.software_services.each  do |software_service| %>
+<tr>
+	 	<td><%= Service.find(software_service.service_id).name %></td>
+	 	<td><%=  software_service.name %></td>
+	 	<td><%=  software_service.dest %></td>
+	 	<td><%=  software_service.comment %></td>
+	 </tr>
+	 <% end %>
+	 
+	
+
+</table>
+
+
+<h2> Persistent Dirs</h2>
+
+<table>
+<th><strong>Directory:</strong></th>
+<th><strong>Comment:</strong></th>
+<% @software.persistent_directories.each do |persistent_directory| %>
+<tr>
+  <td> 
+    <%= persistent_directory.path%>
+  </td>
+ 
+  <td>
+    <%= persistent_directory.comment %>
+  </td>
+</tr>
+<% end %>
+
+
+</table>
+
+<hr>
+<p>
+<h2> Persistent Files</h2>
+<table>
+<th><strong>File:</strong></th>
+<th><strong>Comment:</strong></th>
+
+<% @software.persistent_files.each do |persistent_file| %>
+<tr>
+  <td>
+    <%= persistent_file.path%>
+ </td>
+
+  <td>
+    <%= persistent_file.comment %>
+ </td>
+</tr>
+<% end %>
+
+</table>
+
+<h2>Replacement Strings</h2>
+<table>
+<th><strong>Replacement String:</strong></th>
+<th><strong>File:</strong></th>
+<th><strong>Comment:</strong></th>
+
+<% @software.replacement_strings.each do |replacement_string| %>
+<tr>
+  <td>
+    <%= replacement_string.sedstr %>
+ </td>
+
+  <td>
+    <%= replacement_string.file %>
+ </td>
+  <td>
+    <%= replacement_string.comment %>
+ </td>
+</tr>
+<% end %>
+
+
+</table>
+if php
+<h2>Custom PHP.ini </h2>
+<% @software.custom_php_inis.each do |custom_php| 
+
+if custom_php != nil %>
+<%=custom_php.name %><br>
+<pre>
+<%=custom_php.content %>
+</pre>
+<% end %>
+<% end %>
+<table>
+	if php or perhaps rails  perhaps even node and python (depends)
+<h3>Apache Modules PHP.ini </h3>
+<% @software.apache_modules.each do |ap_module|
+
+if ap_module != nil %>
+ <tr>
+<td>
+<%=ap_module.module %>
+</td><td>
+<%=ap_module.comment %>
+</td>
+
+<% end %>
+</tr>
+<% end %>
+</table>
+<hr>
+<h2>Packages</h2>
+<table>
+<th><strong>Package:</strong></th>
+<th><strong>Source URI:</strong></th>
+<th><strong>Destination:</strong></th>
+<th><strong>Extract Cmd:</strong></th>
+<th><strong>Comment:</strong></th>
+
+<% @software.installed_packages.each do |installed_package| %>
+<tr>
+  <td>
+    <%= installed_package.name %>
+ </td>
+ <td>
+    <%= installed_package.src %>
+ </td>
+ <td>
+    <%= installed_package.dest %>
+ </td>
+ <td>
+    <%= installed_package.extractcmd %>
+ </td>
+
+  <td>
+    <%= installed_package.comment %>
+ </td>
+</tr>
+<% end %>
+
+
+</table>
+
+<hr>
+
+<h2>OS Packages</h2>
+<table>
+<th><strong>Package:</strong></th>
+<th><strong>Comment:</strong></th>
+
+<% @software.system_packages.each  do |system_package| %>
+<tr>
+  <td>
+    <%= system_package.name %>
+ </td>
+  <td>
+    <%= system_package.comment %>
+ </td>
+</tr>
+<% end %>
+
+</table>
+<h2>CronJobs</h2>
+<table>
+<th>Cronjob</th>
+<th>Description</th>
+	<% @software.cron_jobs.each  do |cronjob| %>
+<tr>
+  <td>
+    <%= cronjob.cronjob %>
+ </td>
+  <td>
+    <%= cronjob.description %>
+ </td>
+</tr>
+<% end %>
+
+
+</table>
+<h2>Workers</h2>
+<p><strong>Ports</strong></p>
+<table>
+	<tr>
+<td><th>Port </th></td>
+<th>External</th>
+<td><th>Name</th></td>
+<td><th>comment</th></td>
+</tr>
+<% @software.ports.each  do |port| %>
+<tr>
+  <td>
+    <%= port.port %>
+ </td>
+   <td>
+    <%= port.external %>
+ </td>
+  <td>
+    <%= port.name %>
+ </td>
+ <td>
+    <%= port.comment %>
+ </td>
+ 
+</tr>
+<% end %>
+</table>
+
+<p><strong>Commands</strong></p>
+<table>
+	<tr>
+<td><th>Name </th></td>
+<td><th>Command</th></td>
+<td><th>comment</th></td>
+</tr>
+<% @software.workers.each  do |worker| %>
+<tr>
+  <td>
+    <%= worker.name %>
+ </td>
+  <td>
+    <%= worker.command %>
+ </td>
+ <td>
+    <%= worker.comment %>
+ </td>
+ 
+	
+</tr>
+<% end %>
+</table>
+
+
+
+
+<p><strong>Blocking Command</strong></p>
+<table>
+	<tr>
+<td><th>Name </th></td>
+<td><th>Command</th></td>
+<td><th>comment</th></td>
+</tr>
+<% @software.blocking_worker  do |worker| %>
+<tr>
+  <td>
+    <%= worker.name %>
+ </td>
+  <td>
+    <%= worker.command %>
+ </td>
+ <td>
+    <%= worker.comment %>
+ </td>
+ 
+
+</tr>
+<% end %>
+</table>
+IF Rails
+<p>
+	<strong>Rake tasks</strong>
+<table>
+	<% @software.rake_tasks.each  do |rake| %>
+<tr>
+  <td>
+    <%= rake.name %>
+ </td>
+  <td>
+    <%= rake.action %>
+ </td>
+ 
+ <td>
+	<%= link_to 'Edit', [:edit, rake.software, rake]   %></td>
+	<td><%= link_to 'Remove', [ rake.software, rake],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<% end %>
+</table></p>
+<p><strong>Environment Variables</strong></p>
+<table>
+	<tr>
+<td><th>Name </th></td>
+<td><th>Value</th></td>
+<td><th>comment</th></td>
+</tr>
+<% @software.variables.each  do |variable| %>
+<tr>
+  <td>
+    <%= variable.name %>
+ </td>
+  <td>
+    <%= variable.value %>
+ </td>
+ <td>
+    <%= variable.ask_at_build_time %>
+ </td>
+ <td>
+    <%= variable.comment %>
+ </td>
+ <td>
+    <%= variable.mandatory %>
+ </td>
+ 
+  <td>
+    <%= variable.build_time_only %>
+ </td>
+  
+</tr>
+<% end %>
+
+
+</table>
+
+
+<p><strong>Template Files </strong></p>
+<table>
+	<tr>
+<td><th>Title </th></td>
+<td><th>Path</th></td>
+</tr>
+<% @software.template_files.each  do |template| %>
+<tr>
+  <td>
+    <%= template.title %>
+ </td>
+  <td>
+    <%= template.path %>
+ </td>
+  <td>
+   <%= link_to 'Show',  [ template.software, template]   %>
+ </td>
+</tr>
+<% end %>
+</table>
+<p><strong>Write Permissions  </strong></p>
+<table>
+	<tr>
+<td><th>Title </th></td>	
+<td><th>Path </th></td>
+<td><th>and Children</th></td>
+</tr>
+<% @software.file_write_permissions.each  do |file_write_permission| %>
+<tr>
+  <td>
+    <%= file_write_permission.title %>
+ </td>
+  <td>
+    <%= file_write_permission.path %>
+ </td>
+ 
+ <td>
+    <%= file_write_permission.recursive %>
+ </td>
+ 
+</tr>
+<% end %>
+
+
+</table>
+
+
+<p><strong>Htaccess settings  </strong></p>
+<table>
+	<tr>
+<td><th>Directory </th></td>	
+<td><th>Content </th></td>
+<td><th>Comment</th></td>
+</tr>
+<% @software.apache_htaccess_files.each  do |apache_htaccess_file| %>
+<tr>
+  <td>
+    <%= apache_htaccess_file.directory %>
+ </td>
+  <td>
+    <%= apache_htaccess_file.htaccess_content %>
+ </td>
+ 
+ <td>
+    <%= apache_htaccess_file.comment %>
+ </td>
+ 
+</tr>
+<% end %>
+
+
+</table>
+
+
+
+
+<hr>
+
+
+
+
+
+
+
+
+ <%= link_to 'Back', softwares_path %>

@@ -1,0 +1,4 @@
+<%
+  back_path = url_for(@service_configuration.blueprint_version) + '#' + @service_configuration.class.name.underscore + '_' + @service_configuration.id.to_s
+%>
+<%= render 'shared/show/default', record_object: @service_configuration, fa: :'caret-right', back_path: back_path %>

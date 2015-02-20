@@ -1,0 +1,47 @@
+<h1>Editing Installed Package</h1>
+
+ 
+  <%= form_for :installed_package , url:[  @installed_package.software, @installed_package] ,method: :patch do |f| %> 
+
+ <% if @installed_package.errors.any? %>
+        <div id="error_explanation">
+    <h2><%= pluralize(@installed_package.errors.count , "error") %> prohibited
+      this Program from being saved:</h2>
+        <ul>
+    <% @installed_package.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :comment %><br>
+    <%= f.text_area :comment %>
+  </p>
+<p>
+    <%= f.label :src %><br>
+    <%= f.text_area :src %>
+  </p>
+  <p>
+    <%= f.label :dest %><br>
+    <%= f.text_area :dest %>
+  </p>
+  <p>
+    <%= f.label :extractcmd %><br>
+    <%= f.text_area :extractcmd %>
+  </p>
+  <p>
+    <%= f.label :extractdir %><br>
+    <%= f.text_area :extractdir %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+<% @soft=Software.find(params[:software_id]) %>
+<%= link_to 'Back', [:editDetails , @soft ] %>

@@ -1,11 +1,11 @@
 class LicensesController < ApplicationController
+
   def new
     @license = License.new
   end
 
   def create
     @license = License.new(license_params)
-
     if @license.save
       redirect_to @license
     else
@@ -43,8 +43,9 @@ class LicensesController < ApplicationController
   end
 
 private
+
   def license_params
-    params.require(:license).permit(:name, :comment, :sourceurl)
+    params.require(:license).permit! #(:name, :comment, :sourceurl)
   end
 
 end

@@ -1,0 +1,35 @@
+<h1>Editing Software</h1>
+
+ 
+  <%= form_for :worker , url:[  @worker.software, @worker] ,method: :patch do |f| %> 
+
+ <% if @worker.errors.any? %>
+        <div id="error_explanation">
+    <h2><%= pluralize(@worker.errors.count , "error") %> prohibited
+      this Program from being saved:</h2>
+        <ul>
+    <% @worker.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+<p>
+    <%= f.label :command %><br>
+    <%= f.text_field :command %>
+  </p>
+  <p>
+    <%= f.label :comment %><br>
+    <%= f.text_area :comment %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+<% @soft=Software.find(params[:software_id]) %>
+<%= link_to 'Back', [:editDetails , @soft ] %>

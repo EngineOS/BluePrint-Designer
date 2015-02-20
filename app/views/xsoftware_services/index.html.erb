@@ -1,0 +1,21 @@
+<h1>Listing Frameworks</h1>
+
+<table>
+ <tr>
+  <td>
+   <th>Name</th>
+   <th>Comment</th>
+ </tr>
+ <% @frameworks.each do |framework| %>
+ <tr>
+  <td><%= framework.record_name %></td>
+   <td><%=  Language.find(framework.language_id).record_name  %></td>
+  <td><%= framework.description %></td>
+  <td><%= link_to 'Edit', [:edit, framework]   %></td>
+   <td><%= link_to 'Remove', [  framework],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+ </tr>
+ <% end %>
+</table>
+
+<%= link_to 'New Framework', new_framework_path %>

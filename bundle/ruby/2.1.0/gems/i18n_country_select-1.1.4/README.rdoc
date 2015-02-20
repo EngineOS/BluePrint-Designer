@@ -1,0 +1,64 @@
+== Country Code Select
+
+A simple country code select helper with I18n translations for the countries. Works exactly the same as country_select but uses country codes instead and has i18n translations for the country names.
+
+NOTE: The old country_code_select repository that this one was forked from is outdated and no longer maintained. This i18_country_select repository is the most corrent.
+
+== Requirements
+
+* Rails 3+
+* Ruby 1.9.2+
+
+== Installation
+Put the following in your Gemfile
+
+  gem 'i18n_country_select'
+
+== Example
+Simple use supplying model and attribute as parameters:
+
+  country_code_select(:user, :country)
+
+Supplying priority countries to be placed at the top of the list:
+
+  country_code_select(:user, :country, [[ 'US', 'United States' ], [ 'CA', 'Canada' ]])
+  
+
+== Contributors
+
+* Brian McQuay (https://github.com/onomojo)
+* Brad Carson from Base 3 Media
+* (https://github.com/dmilisic)
+* Andreas Wolff (https://github.com/rubyphunk)
+* Valentin Rabanelly (https://github.com/vjrabanelly)
+* Karl-Petter Åkesson (https://github.com/karl-petter)
+* Hélder Tavares da Silva (https://github.com/heldersilva)
+* Marten Klitzke (https://github.com/mortik)
+* Victor D. (https://github.com/V1c70r)
+* Alexey Degtyarev (https://github.com/alexhifer)
+* Björn Wilmsmann (https://github.com/BjoernKW)
+* https://github.com/durandom
+* Stefan Slaveykov (https://github.com/wizardone)
+* Leonardo D. Schlossmacher (https://github.com/leods92)
+
+Based on the deprecated country_code_select by: Russ Smith (russ@bashme.org) and Frank Wambutt (frank@mo-stud.io)
+
+== Version History
+* 1.1.4 - Fixed options being ignored when running Rails 4
+* 1.1.3 - Removed Netherlands Antilles. Added Bonaire, Curacao, Sint Maarten, and South Sudan
+* 1.1.2 - Adding Thread variable to speed up rendering
+* 1.1.1 - Bumping required version of country translations
+* 1.1.0 - Rails 4 support
+* 1.0.19 - Added Macedonia
+* 1.0.18 - Fixed translated sorting
+* 1.0.17 - Removing duplicate country code IE
+* 1.0.16 - Removing unnecessary value attribute and corrected spelling error on the include_blank option tag
+* 1.0.15 - Removing more duplicate country codes
+* 1.0.14 - Removing duplicate country codes and adding Norway
+* 1.0.13 - Ignore missing translations from i18n-country-translations
+* 1.0.12 - Adds the ability to specify text to use in a blank option
+
+== License
+
+MIT or GPL
+

@@ -1,0 +1,32 @@
+<h1>Editing Software</h1>
+
+ 
+  <%= form_for :persistent_file , url:[  @persistent_file.software, @persistent_file] ,method: :patch do |f| %> 
+
+ <% if @persistent_file.errors.any? %>
+        <div id="error_explanation">
+    <h2><%= pluralize(@persistent_file.errors.count , "error") %> prohibited
+      this Program from being saved:</h2>
+        <ul>
+    <% @persistent_file.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <p>
+    <%= f.label :path %><br>
+    <%= f.text_field :path %>
+  </p>
+
+  <p>
+    <%= f.label :comment %><br>
+    <%= f.text_area :comment %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+<% @soft=Software.find(params[:software_id]) %>
+<%= link_to 'Back', [:editDetails , @soft ] %>

@@ -11,362 +11,350 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150118233905) do
-
-  create_table "apache_custom_files", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20150206032537) do
 
   create_table "apache_custom_site_files", force: true do |t|
-    t.string   "name"
-    t.text     "site_conf_content"
-    t.text     "comment"
-    t.integer  "software_id"
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.text     "site_configuration"
+    t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "apache_custom_site_files", ["software_id"], name: "index_apache_custom_site_files_on_software_id", using: :btree
 
   create_table "apache_htaccess_files", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
     t.string   "directory"
     t.text     "htaccess_content"
-    t.text     "comment"
-    t.integer  "software_id"
+    t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "apache_htaccess_files", ["software_id"], name: "index_apache_htaccess_files_on_software_id", using: :btree
 
   create_table "apache_httpd_conf_files", force: true do |t|
-    t.string   "name"
-    t.text     "httpd_conf_content"
-    t.text     "comment"
-    t.integer  "software_id"
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.text     "httpd_configuration"
+    t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "apache_httpd_conf_files", ["software_id"], name: "index_apache_httpd_conf_files_on_software_id", using: :btree
-
-  create_table "apache_moduals", force: true do |t|
-    t.string   "modual"
-    t.text     "comment"
-    t.integer  "software_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "apache_moduals", ["software_id"], name: "index_apache_moduals_on_software_id", using: :btree
 
   create_table "apache_modules", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.string   "os_package"
     t.string   "module"
-    t.text     "comment"
-    t.integer  "software_id"
+    t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "apache_modules", ["software_id"], name: "index_apache_modules_on_software_id", using: :btree
-
-  create_table "blocking_workers", force: true do |t|
-    t.string   "command"
-    t.string   "name"
-    t.text     "comment"
+  create_table "blueprint_versions", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.integer  "major"
+    t.integer  "minor"
+    t.integer  "release_level"
+    t.integer  "patch"
+    t.integer  "software_version_id"
+    t.integer  "blocking_worker_id"
+    t.integer  "required_memory"
+    t.integer  "recommended_memory"
+    t.integer  "http_protocol"
+    t.integer  "framework_port_overide"
+    t.text     "custom_start_script"
+    t.text     "custom_install_script"
+    t.text     "custom_post_install_script"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "software_id"
   end
 
-  add_index "blocking_workers", ["software_id"], name: "index_blocking_workers_on_software_id", using: :btree
-
-  create_table "cron_jobs", force: true do |t|
-    t.string   "cronjob"
-    t.text     "description"
+  create_table "component_directories", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.string   "destination_path"
+    t.boolean  "extract"
+    t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "software_id"
   end
 
-  add_index "cron_jobs", ["software_id"], name: "index_cron_jobs_on_software_id", using: :btree
+  create_table "component_sources", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.string   "url"
+    t.integer  "blueprint_version_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "custom_php_inis", force: true do |t|
-    t.string   "title"
+    t.string   "record_name"
+    t.string   "record_comment"
     t.text     "content"
-    t.integer  "software_id"
+    t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "environment_variables", force: true do |t|
-    t.text     "name"
-    t.string   "value"
-    t.string   "comment"
-    t.integer  "software_id"
+  create_table "deployment_types", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "build_time_only",   default: false
-    t.boolean  "mandatory",         default: false
-    t.string   "label"
-    t.boolean  "ask_at_build_time", default: false
   end
-
-  add_index "environment_variables", ["software_id"], name: "index_environment_variables_on_software_id", using: :btree
 
   create_table "file_write_permissions", force: true do |t|
-    t.string   "title"
+    t.string   "record_name"
+    t.string   "record_comment"
     t.string   "path"
-    t.boolean  "recursive"
-    t.integer  "software_id"
+    t.boolean  "recursive",            default: false
+    t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "file_write_permissions", ["software_id"], name: "index_file_write_permissions_on_software_id", using: :btree
-
-  create_table "generates", force: true do |t|
-    t.string   "model"
-    t.string   "cronjob"
-    t.text     "description"
+  create_table "frameworks", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.integer  "language_id"
+    t.boolean  "service_configurations"
+    t.boolean  "persistent_directories"
+    t.boolean  "replacement_strings"
+    t.boolean  "persistent_files"
+    t.boolean  "installed_packages"
+    t.boolean  "system_packages"
+    t.boolean  "workers"
+    t.boolean  "rake_tasks"
+    t.boolean  "template_files"
+    t.boolean  "file_write_permissions"
+    t.boolean  "custom_php_inis"
+    t.boolean  "apache_htaccess_files"
+    t.boolean  "apache_modules"
+    t.boolean  "variables"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "installedpackages", force: true do |t|
-    t.string   "name"
-    t.string   "src"
-    t.string   "dest"
-    t.text     "comment"
-    t.integer  "software_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "extractcmd"
-    t.string   "extractdir"
-  end
-
-  add_index "installedpackages", ["software_id"], name: "index_installedpackages_on_software_id", using: :btree
-
-  create_table "langauges", force: true do |t|
-    t.string   "name"
-    t.text     "comment"
+  create_table "installed_packages", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.string   "source_url"
+    t.string   "destination"
+    t.string   "extraction_command"
+    t.string   "extraction_directory"
+    t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "langframeworks", force: true do |t|
-    t.string   "name"
-    t.text     "comment"
-    t.integer  "langauge_id"
+  create_table "languages", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "langframeworks", ["langauge_id"], name: "index_langframeworks_on_langauge_id", using: :btree
 
   create_table "licenses", force: true do |t|
-    t.string   "name"
-    t.string   "sourceurl"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "comment"
-  end
-
-  create_table "ospackages", force: true do |t|
-    t.string   "name"
-    t.text     "comment"
-    t.integer  "software_id"
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.string   "source_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "ospackages", ["software_id"], name: "index_ospackages_on_software_id", using: :btree
-
-  create_table "owners", force: true do |t|
-    t.string   "firstname"
-    t.string   "lastname"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "persistantdirs", force: true do |t|
+  create_table "persistent_directories", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
     t.string   "path"
-    t.text     "comment"
-    t.integer  "software_id"
+    t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "persistantdirs", ["software_id"], name: "index_persistantdirs_on_software_id", using: :btree
-
-  create_table "persistantfiles", force: true do |t|
+  create_table "persistent_files", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
     t.string   "path"
-    t.text     "comment"
-    t.integer  "software_id"
+    t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "persistantfiles", ["software_id"], name: "index_persistantfiles_on_software_id", using: :btree
-
-  create_table "published_softwares", force: true do |t|
-    t.string   "short_name"
-    t.string   "full_name"
-    t.text     "description"
-    t.string   "home_page"
-    t.string   "image_url"
-    t.string   "repository"
+  create_table "ports", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.integer  "port"
+    t.integer  "blueprint_version_id"
+    t.integer  "external"
+    t.integer  "protocol"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "software_id"
+  end
+
+  create_table "publishers", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "rake_tasks", force: true do |t|
-    t.string   "name"
+    t.string   "record_name"
+    t.string   "record_comment"
     t.string   "action"
+    t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "software_id"
   end
 
-  add_index "rake_tasks", ["software_id"], name: "index_rake_tasks_on_software_id", using: :btree
-
-  create_table "replacementstrings", force: true do |t|
+  create_table "replacement_strings", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
     t.string   "sedstr"
     t.string   "file"
-    t.text     "comment"
-    t.integer  "software_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "dest"
-  end
-
-  add_index "replacementstrings", ["software_id"], name: "index_replacementstrings_on_software_id", using: :btree
-
-  create_table "service_environment_variables", force: true do |t|
-    t.string   "name"
-    t.string   "value"
-    t.text     "comment"
-    t.boolean  "ask_at_runtime"
-    t.integer  "softwareservice_id"
+    t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "service_type_environment_variables", force: true do |t|
-    t.string   "name"
-    t.string   "value"
-    t.text     "comment"
-    t.integer  "servicetype_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "build_time_only",   default: false
-    t.boolean  "mandatory"
-    t.boolean  "ask_at_build_time"
-  end
-
-  add_index "service_type_environment_variables", ["servicetype_id"], name: "index_service_type_environment_variables_on_servicetype_id", using: :btree
-
-  create_table "servicetypes", force: true do |t|
-    t.string   "name"
-    t.text     "comment"
+  create_table "service_blueprints", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.string   "image_name"
+    t.boolean  "persistent",      default: false
+    t.boolean  "exclusive",       default: false
+    t.boolean  "dedicated",       default: false
+    t.integer  "service_type_id"
+    t.integer  "publisher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "softwaredeploytypes", force: true do |t|
-    t.string   "name"
-    t.text     "comment"
+  create_table "service_configurations", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.string   "service_definition_id"
+    t.integer  "blueprint_version_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "service_types", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "software_versions", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.string   "title"
+    t.string   "display_name"
+    t.text     "description"
+    t.string   "icon_url"
+    t.integer  "software_id"
+    t.integer  "language_id"
+    t.integer  "license_id"
+    t.integer  "framework_id"
+    t.integer  "deployment_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "softwares", force: true do |t|
-    t.string   "name"
-    t.text     "description"
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.integer  "publisher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "source"
-    t.boolean  "mysql"
-    t.boolean  "pgsql"
-    t.boolean  "filesystem"
-    t.boolean  "deployed"
-    t.string   "version"
-    t.integer  "langauge_id"
-    t.integer  "license_id"
-    t.integer  "owner_id"
-    t.integer  "swframework_id"
-    t.integer  "softwaredeploytype_id"
-    t.integer  "requiredmemory"
-    t.string   "toconfigurefile"
-    t.string   "configuredfile"
-    t.integer  "work_port_id"
-    t.integer  "worker_command_id"
-    t.integer  "blocking_worker_id"
-    t.string   "icon_url"
-    t.integer  "rake_task_id"
-    t.text     "custom_start_script"
-    t.text     "custom_install_script"
-    t.text     "custom_post_install_script"
-    t.integer  "http_protocol",              default: 1
-    t.integer  "web_port_overide"
   end
 
-  create_table "softwareservices", force: true do |t|
-    t.string   "name"
-    t.text     "comment"
-    t.integer  "servicetype_id"
-    t.integer  "software_id"
+  create_table "system_packages", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "dest"
-  end
-
-  add_index "softwareservices", ["servicetype_id"], name: "index_softwareservices_on_servicetype_id", using: :btree
-  add_index "softwareservices", ["software_id"], name: "index_softwareservices_on_software_id", using: :btree
-
-  create_table "swframeworks", force: true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "langauge_id"
   end
 
   create_table "template_files", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
     t.string   "title"
     t.string   "path"
     t.text     "content"
-    t.integer  "software_id"
+    t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "template_files", ["software_id"], name: "index_template_files_on_software_id", using: :btree
-
-  create_table "work_ports", force: true do |t|
-    t.integer  "port"
-    t.string   "name"
-    t.text     "comment"
+  create_table "users", force: true do |t|
+    t.string   "username"
+    t.string   "user_type"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "software_id"
-    t.integer  "external"
-    t.integer  "protocol",    default: 1
   end
 
-  add_index "work_ports", ["software_id"], name: "index_work_ports_on_software_id", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
-  create_table "worker_commands", force: true do |t|
+  create_table "variables", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.integer  "variable_consumer_id"
+    t.string   "variable_consumer_type"
+    t.string   "value"
+    t.string   "value_confirmation"
+    t.string   "label"
+    t.string   "type"
+    t.string   "select_collection"
+    t.string   "tooltip"
+    t.string   "hint"
+    t.string   "placeholder"
+    t.string   "comment"
+    t.string   "regex_validator"
+    t.string   "regex_invalid_message"
+    t.boolean  "mandatory",              default: false
+    t.boolean  "ask_at_build_time",      default: false
+    t.boolean  "build_time_only",        default: false
+    t.boolean  "immutable",              default: false
+    t.boolean  "lookup_system_values",   default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "worker_ports", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
     t.string   "command"
-    t.string   "name"
-    t.text     "comment"
+    t.integer  "worker_id"
+    t.integer  "port_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "software_id"
   end
 
-  add_index "worker_commands", ["software_id"], name: "index_worker_commands_on_software_id", using: :btree
+  create_table "workers", force: true do |t|
+    t.string   "record_name"
+    t.string   "record_comment"
+    t.string   "command"
+    t.integer  "blueprint_version_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

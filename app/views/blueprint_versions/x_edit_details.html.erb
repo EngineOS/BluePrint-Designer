@@ -1,0 +1,836 @@
+<%= link_to 'Back', software_path %>
+<p>
+	<% @software = Software.find(params[:id])%>
+<strong>Name:</strong>
+<%= @software.name %>
+</p>
+<p>Owner</p>
+<p><strong>License</strong> <%= License.find(@software.license_id).name %></p>
+<p>BlueprintVersion</p>
+<p>status Deployed? </p>
+<p>Groups private,shared,forsale,public etc</p>
+<p>
+<strong>Description:</strong>
+<%= @software.description %>
+</p>
+<p><strong>Language:</strong>
+<%= Language.find(@software.language_id).name %>
+<strong>Framework</strong>
+<%= Framework.find(@software.framework_id).name %>
+<br>Web Port Overide
+<%= @software.web_port_overide %>
+<p>
+<strong>Style</strong>               
+<%= DeploymentType.find(@software.deployment_type_id).name %>
+
+</p>
+
+<p>
+<strong>Memory:</strong>
+<%= @software.required_memory %>
+</p>
+
+
+<h3>Services</h3>
+
+ 
+<table>
+	<th>Service Type</th>
+	<th>Name</th>
+	<th>Destination</th>
+	<th>Comment</th>
+	
+	 <% @software.software_services.each  do |software_service| %>
+<tr>
+	 	<td><%= Service.find(software_service.service_id).name %></td>
+	 	<td><%=  software_service.name %></td>
+	 	<td><%=  software_service.dest %></td>
+	 	<td><%=  software_service.comment %></td>
+	 	<td><%= link_to 'Edit', [:edit, software_service.software, software_service]   %></td>
+	  <td><%= link_to 'Remove', [ software_service.software, software_service],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+	 <% end %>
+	 
+	
+<%= form_for([@software, @software.software_services.build]) do |f| %>
+	<tr>
+	<td>
+    <%= f.select :service_id,   Service.all.collect {|st| [ st.name, st.id ] } %>
+    </td>
+     <td>
+    <%= f.text_field :name %>
+ </td>
+   <td>
+    <%= f.text_field :dest %> local for mysql /home/app/ for web accessible /home/ for non web
+ </td>
+ <td>
+    <%= f.text_field :comment %>
+ </td>
+ 	
+    <td>
+    <%= f.submit %>
+  </td>
+</tr>
+<%= f.hidden_field :software_id, :value => @software.id  %>
+<% end %>
+</table>
+
+
+<%= form_for :software, url: software_path(@software) ,method: :patch do |f| %>
+ <% if @software.errors.any? %>
+        <div id="error_explanation">
+    <h2><%= pluralize(@software.errors.count , "error") %> prohibited
+      this Program from being saved:</h2>
+        <ul>
+    <% @software.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div> 
+  <% end %>
+<h3>Custom start script</h3>
+      <%= f.text_area :custom_start_script %>
+ <p>
+ 	<h3>Custom Install</h3>
+ 	 <%= f.text_area :custom_install_script %>
+ </p>
+ <p>
+ 	<h3>Post Install</h3>
+ 	 <%= f.text_area :custom_post_install_script %>
+ </p>
+    <%= f.submit %>
+  <%end%>
+  
+<h2> Persistent Dirs</h2>
+Relative to /home/<br>
+<table>
+<th><strong>Directory:</strong></th>
+<th><strong>Comment:</strong></th>
+<% @software.persistent_directories.each do |persistent_directory| %>
+<tr>
+  <td> 
+    <%= persistent_directory.path%>
+  </td>
+ 
+  <td>
+    <%= persistent_directory.comment %>
+  </td>
+  <td><%= link_to 'Edit', [:edit, persistent_directory.software, persistent_directory]   %></td>
+  <td><%= link_to 'Remove', [ persistent_directory.software, persistent_directory],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+</tr>
+<% end %>
+<%= form_for([@software, @software.persistent_directories.build]) do |f| %>
+<tr>
+ <td>
+    <%= f.text_field :path %>
+ </td>
+ <td>
+    <%= f.text_field :comment %>
+ </td>
+</tr>
+<tr>
+ <td>
+    <%= f.submit %>
+  </td>
+</tr>
+<% end %>
+</table>
+
+<hr>
+<p>
+<h2> Persistent Files</h2>
+Relative to /home/<br>
+<table>
+<th><strong>File:</strong></th>
+<th><strong>Comment:</strong></th>
+
+<% @software.persistent_files.each do |persistent_file| %>
+<tr>
+  <td>
+    <%= persistent_file.path%>
+ </td>
+
+  <td>
+    <%= persistent_file.comment %>
+ </td>
+ 
+ <td>
+ <%= link_to 'Edit', [:edit, persistent_file.software, persistent_file]   %></td>
+
+ <td><%= link_to 'Remove', [ persistent_file.software, persistent_file],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<% end %>
+
+
+<%= form_for(@software) do |f| %>
+  <%= f.fields_for :persistent_files do |ff| %> 
+    <%= ff.text_field :path %>
+    <%= ff.text_field :comment %>
+    <%= f.submit %>
+  <% end %>
+<% end %>
+
+
+
+<%= form_for([@software, @software.persistent_files.build]) do |f| %>
+<tr>
+ <td>
+    <%= f.text_field :path %>
+ </td>
+ <td>
+    <%= f.text_field :comment %>
+ <td>
+</tr>
+<tr>
+ <td>
+    <%= f.submit %>
+ </td>
+</tr>
+<% end %>
+</table>
+<p>
+
+<h2>Replacement Strings</h2>
+<table>
+<th><strong>Replacement String:</strong></th>
+<th><strong>File:</strong></th>
+<th><strong>Destination:</strong></th>
+<th><strong>Comment:</strong></th>
+
+<% @software.replacement_strings.each do |replacement_string| %>
+<tr>
+  <td>
+    <%= replacement_string.sedstr %>
+ </td>
+
+  <td>
+    <%= replacement_string.file %>
+ </td>
+  <td>
+    <%= replacement_string.dest %>
+ </td>
+  <td>
+    <%= replacement_string.comment %>
+ </td>
+ <td>
+	<%= link_to 'Edit', [:edit, replacement_string.software, replacement_string]   %></td>
+</tr><td><%= link_to 'Remove', [ replacement_string.software, replacement_string],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<% end %>
+
+<%= form_for([@software, @software.replacement_strings.build]) do |f| %>
+<tr>
+ <td>
+    <%= f.text_field :sedstr %>
+ </td>
+  <td>
+    <%= f.text_field :file %>
+ </td>
+<td>
+    <%= f.text_field :dest %>
+ </td>
+ <td>
+    <%= f.text_field :comment %>
+ <td>
+</tr>
+<tr>
+ <td>
+    <%= f.submit %>
+ </td>
+</tr>
+<% end %>
+</table>
+
+<hr>
+<h2>apache module </h2>
+<table>  
+<% @software.apache_modules.each do |ap_module| %>
+
+<% if ap_module != nil %>
+<tr>
+	<td>
+<%= ap_module.module %></td>
+<td>
+<%= ap_module.comment %>
+
+</td><td>
+<%= link_to 'Edit', [:edit, ap_module.software, ap_module]   %> | 
+ 		<%= link_to 'Clear', [ ap_module.software, ap_module],
+                    method: :delete, data: { confirm: 'Are you sure?' } %>
+   </td></tr>
+<% end %>
+<% end %>
+
+<%= form_for([@software, @software.apache_modules.build]) do |f| %>
+<tr>
+	<td>module</td>
+	<td> <%= f.text_field :module %></td>
+	<td>comment</td>
+	<td> <%= f.text_field :comment %></td>
+	<td>  <%= f.submit %></td>
+</tr>
+<% end %>
+</table>
+<br>
+
+if php
+
+
+<h2>Custom PHP.ini </h2>
+<% @software.custom_php_inis.each do |custom_php| 
+
+if custom_php != nil %>
+<%=custom_php.name %><br>
+<pre>
+<%=custom_php.content %>
+
+</pre>
+<%= link_to 'Edit', [:edit, custom_php]   %> | 
+ 		<%= link_to 'Clear', custom_php,
+                    method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+<% end %>
+<br>
+<%= link_to 'Add',  new_software_custom_php_ini_path(@software)  %>  
+
+<h2>Packages</h2>
+<table>
+<th><strong>Package:</strong></th>
+<th><strong>Source URI:</strong></th>
+<th><strong>Destination:</strong></th>
+<th><strong>Extract Cmd:</strong></th>
+<th><strong>Extracted Dir:</strong></th>
+<th><strong>Comment:</strong></th>
+
+<% @software.installed_packages.each do |installed_package| %>
+<tr>
+  <td>
+    <%= installed_package.name %>
+ </td>
+ <td>
+    <%= installed_package.src %>
+ </td>
+ <td>
+    <%= installed_package.dest %>
+ </td>
+ <td>
+    <%= installed_package.extractcmd %>
+ </td>
+<td>
+    <%= installed_package.extractdir %>
+ </td>
+  <td>
+    <%= installed_package.comment %>
+ </td>
+ <td>
+	<%= link_to 'Edit', [:edit, installed_package.software, installed_package]   %></td>
+ <td><%= link_to 'Remove', [ installed_package.software, installed_package],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<% end %>
+
+<%= form_for([@software, @software.installed_packages.build]) do |f| %>
+<tr>
+  <td>
+    <%= f.text_field :name %>
+ </td>
+  <td>
+    <%= f.text_field :source_url %>
+ </td>
+  <td>
+    <%= f.text_field :destination %>
+ </td>
+  <td>
+    <%= f.text_field :extraction_command %>
+ </td>
+<td>
+    <%= f.text_field :extraction_dir %>
+ </td>
+ <td>
+    <%= f.text_field :comment %>
+ </td>
+</tr>
+<tr>
+ <td>
+    <%= f.submit %>
+ </td>
+</tr>
+<% end %>
+</table>
+
+<hr>
+
+<h2>OS Packages</h2>
+<table>
+<th><strong>Package:</strong></th>
+<th><strong>Comment:</strong></th>
+
+<% @software.system_packages.each do |system_package| %>
+<tr>
+  <td>
+    <%= system_package.name %>
+ </td>
+  <td>
+    <%= system_package.comment %>
+ </td>
+<td>
+	<%= link_to 'Edit', [:edit, system_package.software, system_package]   %></td>
+	<td><%= link_to 'Remove', [ system_package.software, system_package],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<% end %>
+
+<%= form_for([@software, @software.system_packages.build]) do |f| %>
+<tr>
+  <td>
+    <%= f.text_field :name %>
+ </td>
+
+ <td>
+    <%= f.text_field :comment %>
+ </td>
+</tr>
+<tr>
+ <td>
+    <%= f.submit %>
+ </td>
+</tr>
+<% end %>
+</table>
+<h2>CronJobs</h2>
+<table>
+<th><strong>Cronjob</strong></th>
+<th><strong>Description</strong></th>
+
+<% @software.cron_jobs.each  do |cronjob| %>
+<tr>
+  <td>
+    <%= cronjob.cronjob %>
+ </td>
+  <td>
+    <%= cronjob.description %>
+ </td>
+ <td>
+	<%= link_to 'Edit', [:edit, cronjob.software, cronjob]   %></td>
+	<td><%= link_to 'Remove', [ cronjob.software, cronjob],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<% end %>
+
+
+
+<%= form_for([@software, @software.cron_jobs.build]) do |f| %>
+<tr>
+  <td>
+    <%= f.text_field :cronjob %>
+ </td>
+
+ <td>
+    <%= f.text_field :comment %>
+ </td>
+</tr>
+<tr>
+ <td>
+    <%= f.submit %>
+ </td>
+</tr>
+<% end %>
+</table>
+<h2>Workers</h2>
+<p><strong>Ports</strong></p>
+<table>
+	
+<th>Port </th>
+<th>Protocol</th>
+<th>External</th>
+<th>Name</th>
+<th>comment</th>
+
+<% @software.ports.each  do |port| %>
+<tr>
+  <td>
+    p <%= port.port %>
+ </td>
+ <td>
+	<%= port.protocol.humanize %>	
+</td>
+ <td>
+    e <%= port.external %>
+ </td>
+  <td>
+    n <%= port.name %>
+ </td>
+ <td>
+    c <%= port.comment %>
+ </td>
+
+ <td>
+	<%= link_to 'Edit', [:edit, port.software, port]   %></td>
+	<td><%= link_to 'Remove', [ port.software, port],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<% end %>
+
+
+<%= form_for([@software, @software.ports.build]) do |f| %>
+	
+	<tr>
+  <td>
+    <%= f.text_field :port %>
+ </td>
+ <td>
+ 	<%= f.select :protocol, options_for_select(Port.protocols.collect { |s| [s[0].humanize, s[0]] } ), {} %>
+ </td>
+<td>
+    <%= f.text_field :external %>
+ </td>
+ <td>
+    <%= f.text_field :name %>
+ </td>
+ 	<td>
+    <%= f.text_field :comment %>
+ </td>
+ 
+</tr>
+<tr>
+ <td>
+    <%= f.submit %>
+ </td>
+</tr>
+<% end %>
+</table>
+<p><strong>Commands</strong></p>
+<table>
+	
+<th>Name</th>
+<th>Command</th>
+<th>comment</th>
+
+<% @software.workers.each  do |worker| %>
+<tr>
+  <td>
+    <%= worker.name %>
+ </td>
+  <td>
+    <%= worker.command %>
+ </td>
+ <td>
+    <%= worker.comment %>
+ </td>
+ <td>
+	<%= link_to 'Edit', [:edit, worker.software, worker]   %></td>
+	<td><%= link_to 'Remove', [ worker.software, worker],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<% end %>
+<%= form_for([@software, @software.workers.build]) do |f| %>
+	
+	<tr>
+  <td>
+    <%= f.text_field :name %>
+ </td>
+
+ <td>
+    <%= f.text_field :command %>
+ </td>
+ 	<td>
+    <%= f.text_field :comment %>
+ </td>
+ 	
+</tr>
+<tr>
+ <td>
+    <%= f.submit %>
+ <td>
+</tr>
+<% end %>
+</table>
+
+
+<p><strong>Blocking Command</strong></p>
+<table>
+	<tr>
+<th>Name </th>
+<th>Command</th>
+<th>comment</th>
+</tr>
+<% @software.blocking_worker  do |worker| %>
+<tr>
+  <td>
+    <%= worker.name %>
+ </td>
+  <td>
+    <%= worker.command %>
+ </td>
+ <td>
+    <%= worker.comment %>
+ </td>
+ <td>
+	<%= link_to 'Edit', [:edit, blocking_worker.software, worker]   %></td>
+	<td><%= link_to 'Remove', [ blocking_worker.software, worker],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<% end %>
+</table>
+<br>
+IF Rails
+<p>
+	<strong>Rake tasks</strong>
+<table>
+	<th>Name</th>
+	<th>Action</th>
+	<% @software.rake_tasks.each  do |rake| %>
+<tr>
+  <td>
+    <%= rake.name %>
+ </td>
+  <td>
+    <%= rake.action %>
+ </td>
+ 
+ <td>
+	<%= link_to 'Edit', [:edit, rake.software, rake]   %></td>
+	<td><%= link_to 'Remove', [ rake.software, rake],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<% end %>
+
+<%= form_for([@software, @software.rake_tasks.build]) do |f| %>
+	
+	<tr>
+  <td>
+    <%= f.text_field :name %>
+ </td>
+
+ <td>
+    <%= f.text_field :action %>
+ </td>
+	
+</tr>
+<tr>
+ <td>
+    <%= f.submit %>
+ <td>
+</tr>
+<% end %>
+</table>
+
+
+</p>
+<p><strong>Environment Variables</strong></p>
+<table>
+	
+<th>Name</th>
+<th>Value</th>
+<th>Ask At Buildtime</th>
+<th>Manadatory</th>
+<th>For build only</th>
+<th>Comment</th>
+
+<% @software.variables.each  do |variable| %>
+<tr>
+  <td>
+    <%= variable.name %>
+ </td>
+  <td>
+    <%= variable.value %>
+ </td>
+   <td>
+    <%= variable.ask_at_build_time %>
+ </td>
+    <td>
+    <%= variable.mandatory %>
+ </td>
+    <td>
+    <%= variable.build_time_only %>
+ </td>
+
+ <td>
+    <%= variable.comment %>
+ </td>
+ <td>
+	<%= link_to 'Edit', [:edit, variable.software, variable]   %></td>
+	<td><%= link_to 'Remove', [ variable.software, variable],
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
+<% end %>
+<%= form_for([@software, @software.variables.build]) do |f| %>
+	<tr>
+  <td>
+    <%= f.text_field :name %>
+ </td>
+ <td>
+    <%= f.text_field :value %>
+ </td>
+ <td>
+    <%= f.check_box :ask_at_build_time %>
+ </td>
+   <td>
+    <%= f.check_box :mandatory %>
+ </td>
+  <td>
+    <%= f.check_box :build_time_only %>
+ </td>
+ 	<td>
+    <%= f.text_field :comment %>
+ </td>
+ 	
+</tr>
+<tr>
+ <td>
+    <%= f.submit %>
+ <td>
+</tr>
+<% end %>
+</table>
+
+<p><strong>Template Files </strong></p>
+Relative to /home/<br>
+<table>
+	<tr>
+<th>Name </th>
+<th>Value</th>
+<th>comment</th>
+</tr>
+<% @software.template_files.each  do |template| %>
+<tr>
+  <td>
+    <%= template.title %>
+ </td>
+  <td>
+    <%= template.path %>
+ </td>
+  <td>
+   <%= link_to 'Show',  [ template.software, template]  %>
+   
+   |
+   <%= link_to 'Edit',  [:edit, template.software, template]  %>
+   |
+   <%= link_to 'Delete',  [ template.software, template],  method: :delete, data: { confirm: 'Are you sure?' } %>
+ </td>
+</tr>
+<% end %>
+<tr>
+	<td>
+		<%= link_to 'Add',  new_software_template_file_path(@software)  %>
+	</td>
+
+</table>
+
+
+
+<p><strong>Write Permissions  </strong></p>
+<table>
+	<tr>
+<th>Title </th>
+<th>Path </th>
+<th>and Children</th>
+</tr>
+<% @software.file_write_permissions.each  do |file_write_permission| %>
+<tr>
+  <td>
+    <%= file_write_permission.title %>
+ </td>
+  <td>
+    <%= file_write_permission.path %>
+ </td>
+ 
+ <td>
+ 	<% if file_write_permission.recursive == true
+ 		recursion= "yes"
+ 	  else
+ 	  	recursion = "no"
+ 	  end
+ 	%>
+    <%= recursion %>
+ </td>
+ <td>
+ 	 <%= link_to 'Delete',  [ file_write_permission.software, file_write_permission],  method: :delete, data: { confirm: 'Are you sure?' } %>
+ 	 |
+ 	 
+    Remove | toggle recursion | Edit
+ </td>
+ 
+</tr>
+<% end %>
+
+<tr>
+	<%= form_for([@software, @software.file_write_permissions.build]) do |f| %>
+	<td>
+	
+    <%= f.text_field :name %>
+ </td>
+
+ <td>
+    <%= f.text_field :path %>
+ </td>
+<td>
+    <%= f.check_box :recursive %>
+ </td>
+</tr>
+<tr>
+ <td>
+    <%= f.submit %>
+ <td>
+</tr>
+<% end %>
+</table>
+
+<p><strong>Htaccess settings  </strong></p>
+<table>
+
+<th>Directory </th>
+<th>Content </th>
+<th>Comment</th>
+
+<% @software.apache_htaccess_files.each  do |apache_htaccess_file| %>
+<tr>
+  <td>
+    <%= apache_htaccess_file.directory %>
+ </td>
+  <td>
+    <%= apache_htaccess_file.htaccess_content %>
+ </td>
+ 
+ <td>
+    <%= apache_htaccess_file.comment %>
+ </td>
+ 
+</tr>
+<tr>
+<% end %>
+	<%= form_for([@software, @software.apache_htaccess_files.build]) do |f| %>
+	<td>
+	
+    <%= f.text_field :directory %>
+ </td>
+
+ <td >
+    <%= f.text_area :htaccess_content %>
+ </td>
+ 
+<td >
+    <%= f.text_area  :comment %>
+ </td>
+</tr>
+<tr>
+ <td>
+    <%= f.submit %>
+ <td>
+</tr>
+<% end %>
+
+</table>
+
+<hr>
+
+
+
+
+
+
+ <%= link_to 'Back', software_path %>

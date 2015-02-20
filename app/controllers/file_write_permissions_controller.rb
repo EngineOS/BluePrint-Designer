@@ -1,44 +1,46 @@
 class FileWritePermissionsController < ApplicationController
-  
 
   def new
+    @file_write_permission = FileWritePermission.new(blueprint_version_id: params[:blueprint_version_id])
   end
- 
-def create
-    @software = Software.find(params[:software_id])
-    @file_write_permission = @software.file_write_permissions.create(file_write_permissions_params)
-    redirect_to editDetails_software_path(@software)
+
+  def create
+    @file_write_permission = FileWritePermission.new(file_write_permission_params)
+    if @file_write_permission.save
+      redirect_to @file_write_permission
+    else
+      render 'new'
+    end
   end
-  
-  def destroy
-         
-         @file_write_permissions = FileWritePermission.find(params[:id])
-         sid = @file_write_permissions.software_id
-         @file_write_permissions.destroy()     
-      
-         redirect_to  :controller => 'softwares', :action => 'editDetails', :id => sid
-           
-       end
-       
+
+  def show
+    @file_write_permission = FileWritePermission.find(params[:id])
+  end
+
   def edit
-      @file_write_permissions = FileWritePermission.find(params[:id])
-   end
-   
+    @file_write_permission = FileWritePermission.find(params[:id])
+  end
 
   def update
-      @file_write_permissions = FileWritePermission.find(params[:id])
-  
-       if @file_write_permissions.update(file_write_permissions_params)
-                sid = @file_write_permissions.software_id
-               redirect_to  :controller => 'softwares', :action => 'editDetails', :id => sid        
-       else
-           render 'edit'
-       end
-   end
-   
-  private
-    def file_write_permissions_params
-      params.require(:file_write_permission).permit(:path , :title,:recursive)
- 
+    @file_write_permission = FileWritePermission.find(params[:id])
+
+    if @file_write_permission.update(file_write_permission_params)
+      redirect_to @file_write_permission
+    else
+      render 'edit'
     end
+  end
+
+  def destroy
+    @file_write_permission = FileWritePermission.find(params[:id])
+    @file_write_permission.destroy
+    redirect_to @file_write_permission.blueprint_version
+  end
+
+private
+
+  def file_write_permission_params
+    params.require(:file_write_permission).permit!
+  end
+
 end

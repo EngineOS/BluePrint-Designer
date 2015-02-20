@@ -1,0 +1,370 @@
+find_executable: checking for gmake... -------------------- no
+
+--------------------
+
+find_executable: checking for make... -------------------- yes
+
+--------------------
+
+"/usr/bin/make -f Makefile.embed"
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/attr.o src/attr.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/attr_file.o src/attr_file.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/blob.o src/blob.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/branch.o src/branch.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/buffer.o src/buffer.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/buf_text.o src/buf_text.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/cache.o src/cache.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/checkout.o src/checkout.c
+src/checkout.c: In function ‘git_checkout_iterator’:
+src/checkout.c:1269:2: warning: missing initializer for field ‘interhunk_lines’ of ‘git_diff_options’ [-Wmissing-field-initializers]
+  git_diff_options diff_opts = GIT_DIFF_OPTIONS_INIT;
+  ^
+In file included from include/git2/checkout.h:12:0,
+                 from src/checkout.h:10,
+                 from src/checkout.c:10:
+include/git2/diff.h:322:11: note: ‘interhunk_lines’ declared here
+  uint16_t interhunk_lines;  /**< defaults to 0 */
+           ^
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/clone.o src/clone.c
+src/clone.c: In function ‘normalize_options’:
+src/clone.c:423:2: warning: missing initializer for field ‘disable_filters’ of ‘git_checkout_opts’ [-Wmissing-field-initializers]
+  git_clone_options default_options = GIT_CLONE_OPTIONS_INIT;
+  ^
+In file included from include/git2/clone.h:13:0,
+                 from src/clone.c:10:
+include/git2/checkout.h:219:6: note: ‘disable_filters’ declared here
+  int disable_filters;    /** don't apply filters like CRLF conversion */
+      ^
+src/clone.c:423:2: warning: missing initializer for field ‘bare’ of ‘git_clone_options’ [-Wmissing-field-initializers]
+  git_clone_options default_options = GIT_CLONE_OPTIONS_INIT;
+  ^
+In file included from src/clone.c:10:0:
+include/git2/clone.h:70:6: note: ‘bare’ declared here
+  int bare;
+      ^
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/commit.o src/commit.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/commit_list.o src/commit_list.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/compress.o src/compress.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/config.o src/config.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/config_cache.o src/config_cache.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/config_file.o src/config_file.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/crlf.o src/crlf.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/date.o src/date.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/delta-apply.o src/delta-apply.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/delta.o src/delta.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/diff.o src/diff.c
+src/diff.c: In function ‘diff_list_alloc’:
+src/diff.c:331:2: warning: missing initializer for field ‘interhunk_lines’ of ‘git_diff_options’ [-Wmissing-field-initializers]
+  git_diff_options dflt = GIT_DIFF_OPTIONS_INIT;
+  ^
+In file included from src/diff.h:10:0,
+                 from src/diff.c:8:
+include/git2/diff.h:322:11: note: ‘interhunk_lines’ declared here
+  uint16_t interhunk_lines;  /**< defaults to 0 */
+           ^
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/diff_driver.o src/diff_driver.c
+src/diff_driver.c:51:2: warning: missing initializer for field ‘fn_patterns’ of ‘git_diff_driver’ [-Wmissing-field-initializers]
+  { DIFF_DRIVER_AUTO,   0, 0, },
+  ^
+src/diff_driver.c:39:23: note: ‘fn_patterns’ declared here
+  git_array_t(regex_t) fn_patterns;
+                       ^
+src/diff_driver.c:52:2: warning: missing initializer for field ‘fn_patterns’ of ‘git_diff_driver’ [-Wmissing-field-initializers]
+  { DIFF_DRIVER_BINARY, GIT_DIFF_FORCE_BINARY, 0 },
+  ^
+src/diff_driver.c:39:23: note: ‘fn_patterns’ declared here
+  git_array_t(regex_t) fn_patterns;
+                       ^
+src/diff_driver.c:53:2: warning: missing initializer for field ‘fn_patterns’ of ‘git_diff_driver’ [-Wmissing-field-initializers]
+  { DIFF_DRIVER_TEXT,   GIT_DIFF_FORCE_TEXT, 0 },
+  ^
+src/diff_driver.c:39:23: note: ‘fn_patterns’ declared here
+  git_array_t(regex_t) fn_patterns;
+                       ^
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/diff_file.o src/diff_file.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/diff_patch.o src/diff_patch.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/diff_print.o src/diff_print.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/diff_tform.o src/diff_tform.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/diff_xdiff.o src/diff_xdiff.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/errors.o src/errors.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/fetch.o src/fetch.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/fetchhead.o src/fetchhead.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/filebuf.o src/filebuf.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/fileops.o src/fileops.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/filter.o src/filter.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/fnmatch.o src/fnmatch.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/global.o src/global.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/graph.o src/graph.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/hash.o src/hash.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/hashsig.o src/hashsig.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/ignore.o src/ignore.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/index.o src/index.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/indexer.o src/indexer.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/iterator.o src/iterator.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/merge.o src/merge.c
+src/merge.c: In function ‘index_entry_similarity_calc’:
+src/merge.c:649:2: warning: missing initializer for field ‘path’ of ‘git_diff_file’ [-Wmissing-field-initializers]
+  git_diff_file diff_file = {{{0}}};
+  ^
+In file included from include/git2/checkout.h:12:0,
+                 from include/git2/merge.h:13,
+                 from src/merge.h:14,
+                 from src/merge.c:14:
+include/git2/diff.h:225:14: note: ‘path’ declared here
+  const char *path;
+              ^
+src/merge.c: In function ‘merge_tree_normalize_opts’:
+src/merge.c:1389:3: warning: missing initializer for field ‘flags’ of ‘git_merge_tree_opts’ [-Wmissing-field-initializers]
+   git_merge_tree_opts init = GIT_MERGE_TREE_OPTS_INIT;
+   ^
+In file included from src/merge.h:14:0,
+                 from src/merge.c:14:
+include/git2/merge.h:47:24: note: ‘flags’ declared here
+  git_merge_tree_flag_t flags;
+                        ^
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/merge_file.o src/merge_file.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/message.o src/message.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/mwindow.o src/mwindow.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/netops.o src/netops.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/notes.o src/notes.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/object_api.o src/object_api.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/object.o src/object.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/odb.o src/odb.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/odb_loose.o src/odb_loose.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/odb_pack.o src/odb_pack.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/oid.o src/oid.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/pack.o src/pack.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/pack-objects.o src/pack-objects.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/path.o src/path.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/pathspec.o src/pathspec.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/pool.o src/pool.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/posix.o src/posix.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/pqueue.o src/pqueue.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/push.o src/push.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/refdb.o src/refdb.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/refdb_fs.o src/refdb_fs.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/reflog.o src/reflog.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/refs.o src/refs.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/refspec.o src/refspec.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/remote.o src/remote.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/repository.o src/repository.c
+src/repository.c: In function ‘git_repository_init’:
+src/repository.c:1348:2: warning: missing initializer for field ‘flags’ of ‘git_repository_init_options’ [-Wmissing-field-initializers]
+  git_repository_init_options opts = GIT_REPOSITORY_INIT_OPTIONS_INIT;
+  ^
+In file included from src/repository.h:13:0,
+                 from src/repository.c:15:
+include/git2/repository.h:256:14: note: ‘flags’ declared here
+  uint32_t    flags;
+              ^
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/reset.o src/reset.c
+src/reset.c: In function ‘git_reset_default’:
+src/reset.c:28:2: warning: missing initializer for field ‘interhunk_lines’ of ‘git_diff_options’ [-Wmissing-field-initializers]
+  git_diff_options opts = GIT_DIFF_OPTIONS_INIT;
+  ^
+In file included from include/git2/checkout.h:12:0,
+                 from include/git2/merge.h:13,
+                 from src/merge.h:14,
+                 from src/reset.c:11:
+include/git2/diff.h:322:11: note: ‘interhunk_lines’ declared here
+  uint16_t interhunk_lines;  /**< defaults to 0 */
+           ^
+src/reset.c: In function ‘git_reset’:
+src/reset.c:102:2: warning: missing initializer for field ‘checkout_strategy’ of ‘git_checkout_opts’ [-Wmissing-field-initializers]
+  git_checkout_opts opts = GIT_CHECKOUT_OPTS_INIT;
+  ^
+In file included from include/git2/merge.h:13:0,
+                 from src/merge.h:14,
+                 from src/reset.c:11:
+include/git2/checkout.h:217:15: note: ‘checkout_strategy’ declared here
+  unsigned int checkout_strategy; /** default will be a dry run */
+               ^
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/revparse.o src/revparse.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/revwalk.o src/revwalk.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/sha1_lookup.o src/sha1_lookup.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/signature.o src/signature.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/stash.o src/stash.c
+src/stash.c: In function ‘build_untracked_tree’:
+src/stash.c:225:2: warning: missing initializer for field ‘interhunk_lines’ of ‘git_diff_options’ [-Wmissing-field-initializers]
+  git_diff_options opts = GIT_DIFF_OPTIONS_INIT;
+  ^
+In file included from src/stash.c:13:0:
+include/git2/diff.h:322:11: note: ‘interhunk_lines’ declared here
+  uint16_t interhunk_lines;  /**< defaults to 0 */
+           ^
+src/stash.c: In function ‘build_workdir_tree’:
+src/stash.c:315:2: warning: missing initializer for field ‘interhunk_lines’ of ‘git_diff_options’ [-Wmissing-field-initializers]
+  git_diff_options opts = GIT_DIFF_OPTIONS_INIT;
+  ^
+In file included from src/stash.c:13:0:
+include/git2/diff.h:322:11: note: ‘interhunk_lines’ declared here
+  uint16_t interhunk_lines;  /**< defaults to 0 */
+           ^
+src/stash.c: In function ‘ensure_there_are_changes_to_stash’:
+src/stash.c:474:2: warning: missing initializer for field ‘show’ of ‘git_status_options’ [-Wmissing-field-initializers]
+  git_status_options opts = GIT_STATUS_OPTIONS_INIT;
+  ^
+In file included from src/stash.c:15:0:
+include/git2/status.h:163:20: note: ‘show’ declared here
+  git_status_show_t show;
+                    ^
+src/stash.c: In function ‘reset_index_and_workdir’:
+src/stash.c:500:2: warning: missing initializer for field ‘checkout_strategy’ of ‘git_checkout_opts’ [-Wmissing-field-initializers]
+  git_checkout_opts opts = GIT_CHECKOUT_OPTS_INIT;
+  ^
+In file included from src/stash.c:16:0:
+include/git2/checkout.h:217:15: note: ‘checkout_strategy’ declared here
+  unsigned int checkout_strategy; /** default will be a dry run */
+               ^
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/status.o src/status.c
+src/status.c: In function ‘git_status_list_new’:
+src/status.c:253:2: warning: missing initializer for field ‘interhunk_lines’ of ‘git_diff_options’ [-Wmissing-field-initializers]
+  git_diff_options diffopt = GIT_DIFF_OPTIONS_INIT;
+  ^
+In file included from include/git2/checkout.h:12:0,
+                 from include/git2/merge.h:13,
+                 from include/git2.h:25,
+                 from src/status.c:9:
+include/git2/diff.h:322:11: note: ‘interhunk_lines’ declared here
+  uint16_t interhunk_lines;  /**< defaults to 0 */
+           ^
+src/status.c:254:2: warning: missing initializer for field ‘flags’ of ‘git_diff_find_options’ [-Wmissing-field-initializers]
+  git_diff_find_options findopts_i2w = GIT_DIFF_FIND_OPTIONS_INIT;
+  ^
+In file included from include/git2/checkout.h:12:0,
+                 from include/git2/merge.h:13,
+                 from include/git2.h:25,
+                 from src/status.c:9:
+include/git2/diff.h:495:11: note: ‘flags’ declared here
+  uint32_t flags;
+           ^
+src/status.c: In function ‘git_status_file’:
+src/status.c:469:2: warning: missing initializer for field ‘show’ of ‘git_status_options’ [-Wmissing-field-initializers]
+  git_status_options opts = GIT_STATUS_OPTIONS_INIT;
+  ^
+In file included from include/git2.h:51:0,
+                 from src/status.c:9:
+include/git2/status.h:163:20: note: ‘show’ declared here
+  git_status_show_t show;
+                    ^
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/submodule.o src/submodule.c
+src/submodule.c: In function ‘git_submodule_add_setup’:
+src/submodule.c:215:2: warning: missing initializer for field ‘flags’ of ‘git_repository_init_options’ [-Wmissing-field-initializers]
+  git_repository_init_options initopt = GIT_REPOSITORY_INIT_OPTIONS_INIT;
+  ^
+In file included from src/submodule.c:12:0:
+include/git2/repository.h:256:14: note: ‘flags’ declared here
+  uint32_t    flags;
+              ^
+src/submodule.c: In function ‘submodule_wd_status’:
+src/submodule.c:1466:3: warning: missing initializer for field ‘interhunk_lines’ of ‘git_diff_options’ [-Wmissing-field-initializers]
+   git_diff_options opt = GIT_DIFF_OPTIONS_INIT;
+   ^
+In file included from include/git2/checkout.h:12:0,
+                 from include/git2/merge.h:13,
+                 from include/git2.h:25,
+                 from src/config.h:10,
+                 from src/submodule.c:20:
+include/git2/diff.h:322:11: note: ‘interhunk_lines’ declared here
+  uint16_t interhunk_lines;  /**< defaults to 0 */
+           ^
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/tag.o src/tag.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/thread-utils.o src/thread-utils.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/trace.o src/trace.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/transport.o src/transport.c
+src/transport.c:42:2: warning: missing initializer for field ‘param’ of ‘transport_definition’ [-Wmissing-field-initializers]
+  {NULL, 0, 0}
+  ^
+src/transport.c:18:8: note: ‘param’ declared here
+  void *param;
+        ^
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/tree.o src/tree.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/tree-cache.o src/tree-cache.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/tsort.o src/tsort.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/util.o src/util.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/vector.o src/vector.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/transports/cred.o src/transports/cred.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/transports/cred_helpers.o src/transports/cred_helpers.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/transports/git.o src/transports/git.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/transports/http.o src/transports/http.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/transports/local.o src/transports/local.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/transports/smart.o src/transports/smart.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/transports/smart_pkt.o src/transports/smart_pkt.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/transports/smart_protocol.o src/transports/smart_protocol.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/transports/ssh.o src/transports/ssh.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/transports/winhttp.o src/transports/winhttp.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/xdiff/xdiffi.o src/xdiff/xdiffi.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/xdiff/xemit.o src/xdiff/xemit.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/xdiff/xhistogram.o src/xdiff/xhistogram.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/xdiff/xmerge.o src/xdiff/xmerge.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/xdiff/xpatience.o src/xdiff/xpatience.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/xdiff/xprepare.o src/xdiff/xprepare.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/xdiff/xutils.o src/xdiff/xutils.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o deps/http-parser/http_parser.o deps/http-parser/http_parser.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o deps/zlib/adler32.o deps/zlib/adler32.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o deps/zlib/crc32.o deps/zlib/crc32.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o deps/zlib/deflate.o deps/zlib/deflate.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o deps/zlib/inffast.o deps/zlib/inffast.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o deps/zlib/inflate.o deps/zlib/inflate.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o deps/zlib/inftrees.o deps/zlib/inftrees.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o deps/zlib/trees.o deps/zlib/trees.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o deps/zlib/zutil.o deps/zlib/zutil.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/hash/hash_generic.o src/hash/hash_generic.c
+src/hash/hash_generic.c: In function ‘git_hash_final’:
+src/hash/hash_generic.c:284:3: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+   put_be32(out->id + i*4, ctx->H[i]);
+   ^
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/unix/map.o src/unix/map.c
+cc -g -I. -Isrc -Iinclude -Ideps/http-parser -Ideps/zlib -DNO_VIZ -DSTDC -DNO_GZIP -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wall -Wextra -O2  -fPIC   -c -o src/unix/realpath.o src/unix/realpath.c
+rm -f libgit2.a
+ar cq libgit2.a src/attr.o src/attr_file.o src/blob.o src/branch.o src/buffer.o src/buf_text.o src/cache.o src/checkout.o src/clone.o src/commit.o src/commit_list.o src/compress.o src/config.o src/config_cache.o src/config_file.o src/crlf.o src/date.o src/delta-apply.o src/delta.o src/diff.o src/diff_driver.o src/diff_file.o src/diff_patch.o src/diff_print.o src/diff_tform.o src/diff_xdiff.o src/errors.o src/fetch.o src/fetchhead.o src/filebuf.o src/fileops.o src/filter.o src/fnmatch.o src/global.o src/graph.o src/hash.o src/hashsig.o src/ignore.o src/index.o src/indexer.o src/iterator.o src/merge.o src/merge_file.o src/message.o src/mwindow.o src/netops.o src/notes.o src/object_api.o src/object.o src/odb.o src/odb_loose.o src/odb_pack.o src/oid.o src/pack.o src/pack-objects.o src/path.o src/pathspec.o src/pool.o src/posix.o src/pqueue.o src/push.o src/refdb.o src/refdb_fs.o src/reflog.o src/refs.o src/refspec.o src/remote.o src/repository.o src/reset.o src/revparse.o src/revwalk.o src/sha1_lookup.o src/signature.o src/stash.o src/status.o src/submodule.o src/tag.o src/thread-utils.o src/trace.o src/transport.o src/tree.o src/tree-cache.o src/tsort.o src/util.o src/vector.o src/transports/cred.o src/transports/cred_helpers.o src/transports/git.o src/transports/http.o src/transports/local.o src/transports/smart.o src/transports/smart_pkt.o src/transports/smart_protocol.o src/transports/ssh.o src/transports/winhttp.o src/xdiff/xdiffi.o src/xdiff/xemit.o src/xdiff/xhistogram.o src/xdiff/xmerge.o src/xdiff/xpatience.o src/xdiff/xprepare.o src/xdiff/xutils.o deps/http-parser/http_parser.o deps/zlib/adler32.o deps/zlib/crc32.o deps/zlib/deflate.o deps/zlib/inffast.o deps/zlib/inflate.o deps/zlib/inftrees.o deps/zlib/trees.o deps/zlib/zutil.o src/hash/hash_generic.o src/unix/map.o src/unix/realpath.o
+ranlib libgit2.a
+have_library: checking for main() in -lgit2_embed... -------------------- yes
+
+"gcc -o conftest  -I/opt/engines/BluePrint-Designer/bundle/ruby/2.1.0/gems/rugged-0.19.0/ext/rugged/../../vendor/libgit2/include -I/home/lachlan/.rvm/rubies/ruby-2.1.2/include/ruby-2.1.0/x86_64-linux -I/home/lachlan/.rvm/rubies/ruby-2.1.2/include/ruby-2.1.0/ruby/backward -I/home/lachlan/.rvm/rubies/ruby-2.1.2/include/ruby-2.1.0 -I.     -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC  -g -O3 -Wall conftest.c  -L. -L/home/lachlan/.rvm/rubies/ruby-2.1.2/lib -Wl,-R/home/lachlan/.rvm/rubies/ruby-2.1.2/lib -L. -fstack-protector -rdynamic -Wl,-export-dynamic -L/opt/engines/BluePrint-Designer/bundle/ruby/2.1.0/gems/rugged-0.19.0/ext/rugged      -Wl,-rpath,'/../lib' -Wl,-R -Wl,'/../lib' -L'/../lib' -lruby  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return 0;
+6: }
+/* end */
+
+"gcc -o conftest  -I/opt/engines/BluePrint-Designer/bundle/ruby/2.1.0/gems/rugged-0.19.0/ext/rugged/../../vendor/libgit2/include -I/home/lachlan/.rvm/rubies/ruby-2.1.2/include/ruby-2.1.0/x86_64-linux -I/home/lachlan/.rvm/rubies/ruby-2.1.2/include/ruby-2.1.0/ruby/backward -I/home/lachlan/.rvm/rubies/ruby-2.1.2/include/ruby-2.1.0 -I.     -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC  -g -O3 -Wall conftest.c  -L. -L/home/lachlan/.rvm/rubies/ruby-2.1.2/lib -Wl,-R/home/lachlan/.rvm/rubies/ruby-2.1.2/lib -L. -fstack-protector -rdynamic -Wl,-export-dynamic -L/opt/engines/BluePrint-Designer/bundle/ruby/2.1.0/gems/rugged-0.19.0/ext/rugged      -Wl,-rpath,'/../lib' -Wl,-R -Wl,'/../lib' -L'/../lib' -lruby -lgit2_embed  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:13:32: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+ int t(void) { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+                                ^
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+13: int t(void) { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+/* end */
+
+--------------------
+
+have_header: checking for git2.h... -------------------- yes
+
+"gcc -E  -I/opt/engines/BluePrint-Designer/bundle/ruby/2.1.0/gems/rugged-0.19.0/ext/rugged/../../vendor/libgit2/include -I/home/lachlan/.rvm/rubies/ruby-2.1.2/include/ruby-2.1.0/x86_64-linux -I/home/lachlan/.rvm/rubies/ruby-2.1.2/include/ruby-2.1.0/ruby/backward -I/home/lachlan/.rvm/rubies/ruby-2.1.2/include/ruby-2.1.0 -I.     -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration  -fPIC  -g -O3 -Wall  conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: #include <git2.h>
+/* end */
+
+--------------------
+

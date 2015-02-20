@@ -1,0 +1,127 @@
+/*.label-lg{
+  font-size: 1em;
+  color: #555;
+  font-weight: normal;
+}*/
+
+/*input[type="radio"] {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+input[type="checkbox"] {
+  width: 1.1em;
+  height: 1.1em;
+}*/
+
+/*legend {
+  padding-top: 20px;
+}
+*/
+.form-field-hint {
+  padding-left: 10px;
+  font-size: 90%;
+}
+
+.form-field-errors {
+  padding-left: 10px;
+  color: #f00;
+  font-style: italic;
+  font-size: 90%;
+}
+
+
+.selectize-input {
+  height: 44px;
+  font-size: 18px;
+  padding: 10px 16px;
+}
+
+.selectize-input .item{
+  padding-top: 2px;
+}
+
+.selectize-dropdown-content {
+  line-height: 44px;
+  font-size: 18px;
+  padding: 10px 16px;
+}
+
+.form-image-control {
+  margin-bottom: 10px;
+  margin-right: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  height: 84px;
+  width: 84px;
+  display: inline-table;
+}
+
+.form-image-centering {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.form-engine-icon {
+  max-height: 64px;
+  max-width: 64px;
+  border-radius: 5px;
+}
+
+.field_with_errors label {
+  color: #F00;
+}
+
+.field_with_errors input {
+  border-color: #F00;
+}
+
+.field_with_errors textarea {
+  border-color: #F00;
+}
+
+.error-well {
+  background-color: #FEE;
+  border-color: #F00;
+}
+
+.form-text-lg {
+  font-size: 18px;
+  font-weight: normal;
+};
+
+
+/*.radio_button_collection_item{
+  display: block;
+  margin-bottom: 5px;
+}
+
+.radio_button_collection_item label{
+  vertical-align: top;
+  padding-left: 5px;
+}
+
+input[type="radio"], input[type="checkbox"] {
+  vertical-align: top;
+  margin-top: 0px;
+}
+
+
+
+label {
+  color: #777;
+  margin-right: 5px;
+  margin-bottom: 0px;
+}
+
+
+fieldset {
+  margin-top: 20px;
+}
+
+
+
+
+*/

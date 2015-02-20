@@ -1,2 +1,0 @@
-class SWframeworksController < ApplicationController
-end

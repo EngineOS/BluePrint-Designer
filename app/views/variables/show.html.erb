@@ -1,0 +1,6 @@
+<%
+  back_path = ['/', @variable.variable_consumer_type.pluralize,
+               '/', @variable.variable_consumer_id.to_s,
+               '#variables' ].join
+%>
+<%= render 'shared/show/default', record_object: @variable, fa: :'caret-right', back_path: back_path %>
