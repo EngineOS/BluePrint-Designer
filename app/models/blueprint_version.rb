@@ -4,7 +4,7 @@ class BlueprintVersion < ActiveRecord::Base
 
   belongs_to :software_version
  
-  belongs_to :blocking_worker, class_name: :worker
+  belongs_to :blocking_worker, class_name: :Worker
 
   has_many :service_configurations, dependent: :destroy
   has_many :persistent_directories, dependent: :destroy

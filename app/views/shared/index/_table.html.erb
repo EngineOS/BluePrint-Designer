@@ -22,7 +22,13 @@
             end
       %>
         
-        <th><%= label unless attribute.to_sym == :record_name %></th>
+        <th>
+          <% if attribute.to_sym == :record_name %>
+            &nbsp
+          <% else %>
+            <%= label %>
+          <% end %>
+        </th>
 
       <% end %>
 
