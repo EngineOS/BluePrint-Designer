@@ -60,9 +60,9 @@ class BlueprintVersionsController < ApplicationController
     redirect_to @blueprint_version.software_version
   end
   
-  def testBuild
+  def build_test
     @blueprint_version = BlueprintVersion.find(params[:id])
-    publisher = Publisher.new(@blueprint_version)
+    publisher = BlueprintGiterator.new(@blueprint_version)
     @result =  publisher.publishtest 
   end
 

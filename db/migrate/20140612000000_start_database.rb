@@ -193,7 +193,7 @@ class StartDatabase < ActiveRecord::Migration
     create_table "service_configurations" do |t|
       t.string   "record_name"
       t.string   "record_comment"
-      t.string   "service_definition_id"
+      t.string   "service_blueprint_id"
       t.integer  "blueprint_version_id"
       t.timestamps
     end

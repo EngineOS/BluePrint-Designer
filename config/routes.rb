@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'blueprint_versions/:id/build_test', to: "blueprint_versions#build_test", as: :blueprint_version_build_test
+  get 'blueprint_versions/:id/blueprint_json', to: "blueprint_versions#blueprint_json", as: :blueprint_version_blueprint_json
+  get 'blueprint_versions/:id/reload_service_blueprints', to: "blueprint_versions#reload_service_blueprints", as: :blueprint_version_reload_service_blueprints
+
   resources :publishers,
             :languages,
             :frameworks,

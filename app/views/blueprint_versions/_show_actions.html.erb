@@ -1,0 +1,15 @@
+<div class="btn-group pull-right">
+  <a class="dropdown-toggle btn btn-lg btn-info" type="button" data-toggle="dropdown">
+    <i class="fa fa-crosshairs"> Actions</i>
+  </a>
+  <ul class="dropdown-menu record-info-dropdown">
+    <li><%= link_to content_tag(:i, "", class: "fa fa-git") + ' Push to local git', blueprint_version_build_test_path(@blueprint_version), class: "btn-lg trigger-response-modal" %></li>
+    <li><%= link_to content_tag(:i, "", class: "fa fa-git-square") + ' Push to repository', blueprint_version_build_test_path(@blueprint_version), class: "btn-lg trigger-response-modal" %></li>
+    <li role="presentation" class="divider"></li>
+    <li><%= link_to content_tag(:strong, '{ }') + ' Blueprint JSON', blueprint_version_blueprint_json_path(@blueprint_version), class: "btn-lg trigger-response-modal" %></li>
+    <li role="presentation" class="divider"></li>
+    <li><%= link_to content_tag(:i, "", class: "fa fa-copy") + ' Create copy', blueprint_version_reload_service_blueprints_path(@blueprint_version), class: "btn-lg trigger-response-modal" %></li>
+    <li role="presentation" class="divider"></li>
+    <li><%= link_to content_tag(:i, "", class: "fa fa-refresh") + ' Reload service blueprints', blueprint_version_reload_service_blueprints_path(@blueprint_version), class: "btn-lg trigger-response-modal" %></li>
+  </ul>
+</div>
