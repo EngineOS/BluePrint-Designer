@@ -2,7 +2,7 @@ class ServiceBlueprintsController < ApplicationController
 
   def new
     @service_blueprint = ServiceBlueprint.new
-    @service_blueprint.variables.build
+    # @service_blueprint.variables.build
   end
 
   def create

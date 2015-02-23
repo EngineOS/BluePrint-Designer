@@ -37,6 +37,13 @@ class ServiceConfigurationsController < ApplicationController
     redirect_to @service_configuration.blueprint_version
   end
 
+  def reload_service_definition
+    @service_configuration = ServiceConfiguration.find(params[:id])
+    @service_configuration.reload_service_definition
+    @service_configuration.save
+      render 'show'
+  end
+
 private
 
   def service_configuration_params

@@ -3,6 +3,7 @@
     nest_in ||= record_object.class.name.underscore.to_sym
     fa ||= false
     attributes ||= nil
+    show_add_button = true if show_add_button.nil?
 
     # show_in ||= nil
     id_field_name = (record_object.class.name.underscore + "_id").to_sym
@@ -21,7 +22,9 @@
     <div class="panel-body">
       <div class="col-sm-12">
         <h3><% if fa %><%= content_tag(:i , nil, class: "fa fa-#{fa}") + ' ' %><% end %><%= label %></h3>
-        <%= link_to (content_tag(:i, nil, class: 'fa fa-plus').html_safe + " Add"), new_item_path, class: "btn btn-primary trigger-response-modal" %>
+        <% if show_add_button %>
+          <%= link_to (content_tag(:i, nil, class: 'fa fa-plus').html_safe + " Add"), new_item_path, class: "btn btn-primary trigger-response-modal" %>
+        <% end %>
       </div>
       <%= render 'shared/index/table', items: items, nest_routes: nest_routes, nest_in: nest_in, attributes: attributes %>
     </div>

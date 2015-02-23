@@ -8,6 +8,9 @@
                       map{ |attribute| attribute.sub(/_id\z/, '') }.
                       reject{ |attribute| ['id', 'created_at', 'updated_at', 'record_comment'].include?(attribute) }.
                       reject{ |attribute| attribute == nest_in.to_s}
+
+    index_actions = File.exists?(Rails.root.join("app", "views", model_name.pluralize.underscore, "_index_item_actions.html.erb"))
+
 %>
 
 <div class="col-sm-12">
@@ -32,11 +35,9 @@
 
       <% end %>
 
-  <% if false %>
-      <th style="width: 30px;"></th>
-      <th style="width: 30px;"></th>
-      <th style="width: 30px;"></th>
-  <% end %>
+      <% if index_actions %>
+          <th></th>
+      <% end %>
 
     </tr>
 
@@ -63,8 +64,15 @@
                 <%= render 'shared/show/html_value', value: value %>
               </td>
             <% end %>
+            <% if index_actions %>
+              <td>
+                <%= render "#{model_name.pluralize.underscore}/index_item_actions", item: item %>
+              </td>
+            <% end %>
           </tr>
+
     <%  end %>
+
   </table>
 </div>
 

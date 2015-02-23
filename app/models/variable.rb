@@ -2,11 +2,11 @@ class Variable < ActiveRecord::Base
 
   belongs_to :variable_consumer, polymorphic: true
 
-  validate :regex_validation
-  validate :value_confirmation_validation
-  validate :value_present_validation
+  validate :regex_validation, on: :update
+  validate :value_confirmation_validation, on: :update
+  validate :value_present_validation, on: :update
 
-  def types
+  def field_types
     { :Text => :text_field,
       :Number => :number_field,
       :Password => :password,
@@ -18,22 +18,36 @@ class Variable < ActiveRecord::Base
       :'Hidden' => :hidden_field }
   end
 
+  def status
+    if deprecated
+      "<i class='fa fa-ban'></i>".html_safe
+    elsif mandatory && !ask_at_build_time && value.blank?
+      "<i class='fa fa-pencil'></i>".html_safe
+    else
+      "<i class='fa fa-check'></i>".html_safe
+    end
+  end
+
+
 private
 
   def regex_validation
-    if (regex_validator.present? && !Regexp.new(regex_validator.to_s).match(value.to_s))
+    if (mandatory == true && 
+        ask_at_build_time == false &&
+        regex_validator.present? &&
+        !Regexp.new(regex_validator.to_s).match(value.to_s))
       errors.add(name, [label, regex_invalid_message] || [label, "is invalid. (Expects regex /#{regex_validator}/ but got `#{value}` from user.)"])
     end
   end
 
   def value_present_validation
-    if (mandatory == true && value.blank?)
+    if (mandatory == true && ask_at_build_time == false && value.blank?)
       errors.add(name, [label, "must not be blank"])
     end
   end
 
   def value_confirmation_validation
-    if (type == "password_with_confirmation" && value != value_confirmation)
+    if (field_type == "password_with_confirmation" && value != value_confirmation)
       errors.add(name, ["Passwords", "must match"])
     end
   end

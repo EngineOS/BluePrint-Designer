@@ -1,5 +1,15 @@
 Rails.application.configure do
 
+  # update service definitions lib file
+  config.before_initialize do
+    FileUtils.cp '/opt/engines/lib/ruby/ManagedServices/SoftwareServices/SoftwareServiceDefinition.rb',
+                  Rails.root.join('lib')
+    FileUtils.cp '/opt/engines/lib/ruby/SystemUtils.rb',
+                  Rails.root.join('lib')
+    FileUtils.cp '/opt/engines/lib/ruby/SysConfig.rb',
+                  Rails.root.join('lib')
+  end
+
   # for devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 

@@ -42,7 +42,11 @@
 
     <%  else %>
 
-          <%= render 'shared/form/association_select', f: f, name: attribute, label: label, offset: offset, width: width, buffer: buffer, nest_in: nest_in %>
+          <% if attribute.to_s.camelcase.constantize.count < 0 %>
+            <%= render 'shared/form/association_radio_buttons', f: f, name: attribute, label: label, offset: offset, width: width, buffer: buffer, nest_in: nest_in %>
+          <% else %>
+            <%= render 'shared/form/association_select', f: f, name: attribute, label: label, offset: offset, width: width, buffer: buffer, nest_in: nest_in %>
+          <% end %>
           
    <%   end
 

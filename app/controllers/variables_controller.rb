@@ -41,7 +41,7 @@ end
   def destroy
     @variable = Variable.find(params[:id])
     @variable.destroy
-    redirect_to @variable.blueprint_version
+    redirect_to (@variable.variable_consumer_type).camelize.constantize.find(@variable.variable_consumer_id)
   end
 
 private

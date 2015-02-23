@@ -197,6 +197,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   create_table "publishers", force: true do |t|
     t.string   "record_name"
     t.string   "record_comment"
+    t.string   "namespace"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -224,10 +225,6 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   create_table "service_blueprints", force: true do |t|
     t.string   "record_name"
     t.string   "record_comment"
-    t.string   "image_name"
-    t.boolean  "persistent",      default: false
-    t.boolean  "exclusive",       default: false
-    t.boolean  "dedicated",       default: false
     t.integer  "service_type_id"
     t.integer  "publisher_id"
     t.datetime "created_at"
@@ -237,6 +234,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   create_table "service_configurations", force: true do |t|
     t.string   "record_name"
     t.string   "record_comment"
+    t.text     "service_definition"
     t.string   "service_blueprint_id"
     t.integer  "blueprint_version_id"
     t.datetime "created_at"
@@ -246,6 +244,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   create_table "service_types", force: true do |t|
     t.string   "record_name"
     t.string   "record_comment"
+    t.string   "path"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -318,10 +317,11 @@ ActiveRecord::Schema.define(version: 20150206032537) do
     t.string   "record_comment"
     t.integer  "variable_consumer_id"
     t.string   "variable_consumer_type"
+    t.string   "name"
     t.string   "value"
     t.string   "value_confirmation"
     t.string   "label"
-    t.string   "type"
+    t.string   "field_type"
     t.string   "select_collection"
     t.string   "tooltip"
     t.string   "hint"
@@ -334,6 +334,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
     t.boolean  "build_time_only",        default: false
     t.boolean  "immutable",              default: false
     t.boolean  "lookup_system_values",   default: false
+    t.boolean  "deprecated",             default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

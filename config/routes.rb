@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'blueprint_versions/:id/blueprint_json', to: "blueprint_versions#blueprint_json", as: :blueprint_version_blueprint_json
   get 'blueprint_versions/:id/reload_service_blueprints', to: "blueprint_versions#reload_service_blueprints", as: :blueprint_version_reload_service_blueprints
 
+  get 'service_configurations/:id/reload_service_definition', to: "service_configurations#reload_service_definition", as: :service_configuration_reload_service_definition
+
   resources :publishers,
             :languages,
             :frameworks,

@@ -4,8 +4,12 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller? 
   before_action :authenticate_user!
   
-  # require "/opt/engines/lib/ruby/ManagedServices/SoftwareServices/SoftwareServiceDefinition.rb"
   require "awesome_print"
+
+  require "#{Rails.root}/lib/SystemUtils.rb"
+  require "#{Rails.root}/lib/SysConfig.rb"
+  require "#{Rails.root}/lib/SoftwareServiceDefinition.rb"
+
 
   # Overwriting the devise sign_out redirect path method
   def after_sign_out_path_for(resource_or_scope)
