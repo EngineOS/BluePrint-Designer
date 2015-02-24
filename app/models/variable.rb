@@ -28,6 +28,21 @@ class Variable < ActiveRecord::Base
     end
   end
 
+  def as_json(options={})
+    options[:except] ||=
+      [ 
+        :created_at,
+        :updated_at,
+        :id,
+        :record_name,
+        :record_comment,
+        :value_confirmation,
+        :variable_consumer_id,
+        :variable_consumer_type,
+        :deprecated
+      ]
+    super
+  end 
 
 private
 

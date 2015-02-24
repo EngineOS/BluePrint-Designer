@@ -352,6 +352,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   create_table "workers", force: true do |t|
     t.string   "record_name"
     t.string   "record_comment"
+    t.string   "name"
     t.string   "command"
     t.integer  "blueprint_version_id"
     t.datetime "created_at"

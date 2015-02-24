@@ -60,7 +60,7 @@
               <% end %>
 
               <td style="vertical-align: middle;">
-                <% value = SharedViews.resolve_value_for item, attribute, label_method: :record_name %>
+                <% value = SharedViews.resolve_value_for item, attribute #, label_method: :record_name %>
                 <%= render 'shared/show/html_value', value: value %>
               </td>
             <% end %>

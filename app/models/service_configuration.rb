@@ -7,6 +7,13 @@ class ServiceConfiguration < ActiveRecord::Base
 
   before_save :reload_service_definition
 
+  def as_json(options={})
+    {
+      publisher: service_blueprint.publisher.namespace,
+      type_path: service_blueprint.service_type.path,
+      variables: variables.as_json
+    }
+  end 
 
   def service_definition_from_file
     # @service_definition_from_file ||= SoftwareServiceDefinition.find service_blueprint.service_type.path, service_blueprint.publisher.namespace

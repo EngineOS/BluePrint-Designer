@@ -7,6 +7,7 @@ module SharedViews
 
     if item.class.reflect_on_association(attribute) && item.class.reflect_on_association(attribute).options[:polymorphic]
       result = item.send(attribute.to_s + '_type').camelize.constantize.find(item.send(attribute.to_s + '_id')).send(label_method)
+
     else
       result = item.send(attribute)
       if result.class.superclass == ActiveRecord::Associations::CollectionProxy
@@ -20,6 +21,7 @@ module SharedViews
       end 
     end 
     result
+
   end
 
 end

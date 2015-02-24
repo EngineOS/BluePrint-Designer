@@ -283,6 +283,7 @@ class StartDatabase < ActiveRecord::Migration
     create_table "workers" do |t|
       t.string   "record_name"
       t.string   "record_comment"
+      t.string   "name"
       t.string   "command"
       t.integer  "blueprint_version_id"
       t.timestamps

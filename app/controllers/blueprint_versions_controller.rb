@@ -60,22 +60,77 @@ class BlueprintVersionsController < ApplicationController
     redirect_to @blueprint_version.software_version
   end
   
-  def build_test
-    @blueprint_version = BlueprintVersion.find(params[:id])
-    publisher = BlueprintGiterator.new(@blueprint_version)
-    @result =  publisher.publishtest 
-  end
-
-  def edit_details
-    @blueprint_version = BlueprintVersion.find(params[:id])
-  end
-
   def publish
     @blueprint_version = BlueprintVersion.find(params[:id])
-    redirect_to software.published_software.build
+  end
+
+  def duplicate
+    existing_blueprint_version = BlueprintVersion.find(params[:id])
+    @blueprint_version = existing_blueprint_version.deep_clone include: attributes_for_duplicate
+    unique_record_name_for_duplicate
+    @blueprint_version.save
+    # render text: @blueprint_version.as_json
+    render :show
+  end
+
+  def push_to_local_repository
+    @blueprint_version = BlueprintVersion.find(params[:id])
+    # publisher = BlueprintGiterator.new(@blueprint_version)
+    # @result =  publisher.publishtest
+    if false #@result.was_success?
+      flash.now[:notice] = "Success"
+    else
+      flash.now[:error] = "Big fat fail."
+    end
+    render :publish
+  end
+
+  def test_install
+    @blueprint_version = BlueprintVersion.find(params[:id])
+    # publisher = BlueprintGiterator.new(@blueprint_version)
+    # @result =  publisher.publishtest
+    if false #@result.was_success?
+      flash.now[:notice] = "Success"
+    else
+      flash.now[:error] = "Big fat fail."
+    end
+    render :publish
+  end
+
+  def push_to_repository
+    @blueprint_version = BlueprintVersion.find(params[:id])
+    # publisher = BlueprintGiterator.new(@blueprint_version)
+    # @result =  publisher.publishtest
+    if false #@result.was_success?
+      flash.now[:notice] = "Success"
+    else
+      flash.now[:error] = "Big fat fail."
+    end
+    render :publish
+  end
+
+  def post_to_gallery
+    @blueprint_version = BlueprintVersion.find(params[:id])
+    # publisher = BlueprintGiterator.new(@blueprint_version)
+    # @result =  publisher.publishtest
+    if false #@result.was_success?
+      flash.now[:notice] = "Success"
+    else
+      flash.now[:error] = "Big fat fail."
+    end
+    render :publish
   end
 
 private
+
+  def unique_record_name_for_duplicate
+    i = 1
+    original_record_name = @blueprint_version.record_name
+    while BlueprintVersion.find_by record_name: @blueprint_version.record_name
+      @blueprint_version.record_name = original_record_name + " (copy#{ i if i > 1})"
+      i += 1
+    end
+  end
 
   def blueprint_version_params
     params.require(:blueprint_version).permit!
@@ -104,6 +159,34 @@ private
     #   :custom_post_install_script,
     #   :http_protocol,
     #   :web_port_overide)
+  end
+
+  def attributes_for_duplicate
+
+    [
+      # :software_version,
+      :blocking_worker,
+      :service_configurations,
+      :persistent_directories,
+      :replacement_strings,
+      :persistent_files,
+      :installed_packages,
+      :system_packages,
+      :workers,
+      :rake_tasks,
+      :template_files,
+      :file_write_permissions,
+      :custom_php_inis,
+      :apache_htaccess_files,
+      :apache_modules,
+      :variables,
+      :component_directories,
+      :component_sources
+    ]
+
+  # has_many :ports, dependent: :destroy
+  # has_many :service_configuration_variables, as: :variable_consumer, through: :service_configurations
+
   end
 
 end

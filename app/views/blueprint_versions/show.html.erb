@@ -1,6 +1,6 @@
 <div class="col-md-10 main-show-col-with-menu">
   <%= render partial: 'shared/show/default', locals: {record_object: @blueprint_version, fa: :'file-text', back_path: @blueprint_version.software_version } %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :service_configurations, fa: :'caret-right' %>
+  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :service_configurations, attributes: [:service_blueprint, :variables], fa: :'caret-right' %>
   <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :persistent_directories, fa: :'caret-right' %>
   <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :replacement_strings, fa: :'caret-right' %>
   <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :persistent_files, fa: :'caret-right' %>

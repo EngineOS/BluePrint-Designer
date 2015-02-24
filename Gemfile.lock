@@ -46,6 +46,8 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     daemons (1.1.9)
+    deep_cloneable (2.0.2)
+      activerecord (>= 3.1.0, < 5.0.0)
     dependent-fields-rails (0.4.2)
       coffee-rails
       jquery-rails
@@ -205,6 +207,7 @@ DEPENDENCIES
   bootstrap3-rails
   cocoon
   coffee-rails (~> 4.0.0)
+  deep_cloneable (~> 2.0.2)
   dependent-fields-rails
   devise
   font-awesome-rails

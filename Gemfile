@@ -29,6 +29,9 @@ gem 'dependent-fields-rails'
 # for 'dependent-fields-rails'
 gem 'underscore-rails'
 
+# duplicate nested records
+gem 'deep_cloneable', '~> 2.0.2'
+
 # db admin
 gem 'rails_admin'
 

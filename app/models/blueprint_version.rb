@@ -7,6 +7,7 @@ class BlueprintVersion < ActiveRecord::Base
   belongs_to :blocking_worker, class_name: :Worker
 
   has_many :service_configurations, dependent: :destroy
+  # has_many :service_configuration_variables, as: :variable_consumer, through: :service_configurations
   has_many :persistent_directories, dependent: :destroy
   has_many :replacement_strings, dependent: :destroy
   has_many :persistent_files, dependent: :destroy
@@ -48,4 +49,40 @@ class BlueprintVersion < ActiveRecord::Base
   enum http_protocol: { :'HTTP and HTTPS' => 0, :'HTTPS only' => 1, :'HTTP only' => 2 }
   enum release_level: { :Alpha => 0, :Beta => 1, :'Release candidate' => 2, :Release => 3} 
 
+  def as_json
+      {
+        record_name: record_name,
+        record_comment: record_comment,
+        major: major,
+        minor: minor,
+        release_level: release_level,
+        patch: patch,
+        blocking_worker_name: (blocking_worker.name if blocking_worker.present?),
+        required_memory: required_memory,
+        recommended_memory: recommended_memory,
+        http_protocol: http_protocol,
+        framework_port_overide: framework_port_overide,
+        custom_start_script: custom_start_script,
+        custom_install_script: custom_install_script,
+        custom_post_install_script: custom_post_install_script,
+        service_configurations: service_configurations.as_json,
+        persistent_directories: persistent_directories.as_json,
+        replacement_strings: replacement_strings.as_json,
+        persistent_files: persistent_files.as_json,
+        installed_packages: installed_packages.as_json,
+        system_packages: system_packages.as_json,
+        workers: workers.as_json,
+        rake_tasks: rake_tasks.as_json,
+        template_files: template_files.as_json,
+        file_write_permissions: file_write_permissions.as_json,
+        custom_php_inis: custom_php_inis.as_json,
+        apache_htaccess_files: apache_htaccess_files.as_json,
+        apache_modules: apache_modules.as_json,
+        variables: variables.as_json,
+        component_directories: component_directories.as_json,
+        component_sources: component_sources.as_json
+      }
+
+  end
+  
 end

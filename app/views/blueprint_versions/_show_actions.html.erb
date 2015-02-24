@@ -1,13 +1,21 @@
-<div class="btn-group pull-right">
-  <a class="dropdown-toggle btn btn-lg btn-info" type="button" data-toggle="dropdown">
-    <i class="fa fa-crosshairs"> Actions</i>
-  </a>
-  <ul class="dropdown-menu record-info-dropdown">
-    <li><%= link_to content_tag(:i, "", class: "fa fa-git") + ' Push to local git', blueprint_version_build_test_path(@blueprint_version), class: "btn-lg trigger-response-modal" %></li>
-    <li><%= link_to content_tag(:i, "", class: "fa fa-send-o") + ' Send to repository', blueprint_version_build_test_path(@blueprint_version), class: "btn-lg trigger-response-modal" %></li>
-    <li role="presentation" class="divider"></li>
-    <li><%= link_to content_tag(:strong, '{ }') + ' Blueprint JSON', blueprint_version_blueprint_json_path(@blueprint_version), class: "btn-lg trigger-response-modal" %></li>
-    <li role="presentation" class="divider"></li>
-    <li><%= link_to content_tag(:i, "", class: "fa fa-copy") + ' Create a copy', blueprint_version_reload_service_blueprints_path(@blueprint_version), class: "btn-lg trigger-response-modal" %></li>
-  </ul>
-</div>
+<% if params[:action] == 'show' %>
+  <div class="btn-group pull-right">
+    <a class="dropdown-toggle btn btn-lg btn-info" type="button" data-toggle="dropdown">
+      <i class="fa fa-crosshairs"> Actions</i>
+    </a>
+    <ul class="dropdown-menu record-info-dropdown">
+      <li><%= link_to content_tag(:i, "", class: "fa fa-book") + ' Publish', blueprint_version_publish_path(@blueprint_version), class: "btn-lg trigger-response-modal" %></li>
+      <li role="presentation" class="divider"></li>
+      <li><%= link_to content_tag(:i, "", class: "fa fa-copy") + ' Duplicate', blueprint_version_duplicate_path(@blueprint_version), class: "btn-lg trigger-response-modal" %></li>
+    </ul>
+  </div>
+
+<% else %>
+  <br>
+  <div class="btn-group top-gap">
+    <%= link_to content_tag(:i, "", class: "fa fa-git-square") + ' Push to local repository', blueprint_version_push_to_local_repository_path(@blueprint_version), class: "btn btn-default btn-lg trigger-response-modal" %>
+    <%= link_to content_tag(:i, "", class: "fa fa-download") + ' Test install', blueprint_version_test_install_path(@blueprint_version), class: "btn btn-default btn-lg trigger-response-modal" %>
+    <%= link_to content_tag(:i, "", class: "fa fa-send") + ' Send to repository', blueprint_version_push_to_repository_path(@blueprint_version), class: "btn btn-default btn-lg trigger-response-modal" %>
+    <%= link_to content_tag(:i, "", class: "fa fa-share") + ' Post to gallery', blueprint_version_post_to_gallery_path(@blueprint_version), class: "btn btn-default btn-lg trigger-response-modal" %>
+  </div>
+<% end %>

@@ -4,7 +4,8 @@
     attributes ||= nil
     page_title ||= model_name.humanize
     fa ||= false
-    as ||= :panel %>
+    as ||= :panel
+    inspect_method ||= nil %>
 
 <div class="show">
 
@@ -22,7 +23,7 @@
 
   <div class="col-sm-12 show clearfix">
 
-    <%= render partial: "shared/show/#{as}", locals: {record_object: record_object, attributes: attributes} %>
+    <%= render partial: "shared/show/#{as}", locals: {record_object: record_object, attributes: attributes, inspect_method: inspect_method} %>
 
   </div>
 
