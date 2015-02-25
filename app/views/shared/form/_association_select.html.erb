@@ -8,7 +8,7 @@
 
     label ||= name.to_s.humanize
 
-    collection = association_model.all.collect {|l| [ l.record_name, l.id ] }
+    collection = association_model.all.collect {|l| [ l.record_label, l.id ] }
 
     %>
 

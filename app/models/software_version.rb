@@ -11,7 +11,7 @@ class SoftwareVersion < ActiveRecord::Base
 
   has_many :blueprint_versions, dependent: :destroy
   
-  validates :record_name, presence: true
-  validates_uniqueness_of :record_name, :case_sensitive => false
+  validates :record_label, presence: true
+  validates_uniqueness_of :record_label, :case_sensitive => false
 
 end

@@ -8,7 +8,7 @@ class Software < ActiveRecord::Base
 
   has_many :blueprint_versions, through: :software_versions
 
-  validates :record_name, presence: true
-  validates_uniqueness_of :record_name, :case_sensitive => false
+  validates :record_label, presence: true
+  validates_uniqueness_of :record_label, :case_sensitive => false
 
 end

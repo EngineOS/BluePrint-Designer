@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20150206032537) do
 
   create_table "apache_custom_site_files", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.text     "site_configuration"
     t.integer  "blueprint_version_id"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "apache_htaccess_files", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.string   "directory"
     t.text     "htaccess_content"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "apache_httpd_conf_files", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.text     "httpd_configuration"
     t.integer  "blueprint_version_id"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "apache_modules", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.string   "os_package"
     t.string   "module"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "blueprint_versions", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.integer  "major"
     t.integer  "minor"
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "component_directories", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.string   "destination_path"
     t.boolean  "extract"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "component_sources", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.string   "url"
     t.integer  "blueprint_version_id"
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "custom_php_inis", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.text     "content"
     t.integer  "blueprint_version_id"
@@ -100,14 +100,14 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "deployment_types", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "file_write_permissions", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.string   "path"
     t.boolean  "recursive",            default: false
@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "frameworks", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.integer  "language_id"
     t.boolean  "service_configurations"
@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "installed_packages", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.string   "source_url"
     t.string   "destination"
@@ -151,14 +151,14 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "languages", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "licenses", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.string   "source_url"
     t.datetime "created_at"
@@ -166,7 +166,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "persistent_directories", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.string   "path"
     t.integer  "blueprint_version_id"
@@ -175,7 +175,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "persistent_files", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.string   "path"
     t.integer  "blueprint_version_id"
@@ -184,7 +184,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "ports", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.integer  "port"
     t.integer  "blueprint_version_id"
@@ -195,7 +195,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "publishers", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.string   "namespace"
     t.datetime "created_at"
@@ -203,7 +203,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "rake_tasks", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.string   "action"
     t.integer  "blueprint_version_id"
@@ -212,7 +212,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "replacement_strings", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.string   "sedstr"
     t.string   "file"
@@ -223,7 +223,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "service_blueprints", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.integer  "service_type_id"
     t.integer  "publisher_id"
@@ -232,7 +232,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "service_configurations", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.text     "service_definition"
     t.string   "service_blueprint_id"
@@ -242,7 +242,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "service_types", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.string   "path"
     t.datetime "created_at"
@@ -250,10 +250,10 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "software_versions", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
-    t.string   "title"
-    t.string   "display_name"
+    t.string   "full_title"
+    t.string   "short_title"
     t.text     "description"
     t.string   "icon_url"
     t.integer  "software_id"
@@ -266,15 +266,16 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "softwares", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
+    t.string   "name"
     t.integer  "publisher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "system_packages", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.integer  "blueprint_version_id"
     t.datetime "created_at"
@@ -282,7 +283,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "template_files", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.string   "title"
     t.string   "path"
@@ -313,7 +314,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "variables", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.integer  "variable_consumer_id"
     t.string   "variable_consumer_type"
@@ -340,7 +341,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "worker_ports", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.string   "command"
     t.integer  "worker_id"
@@ -350,7 +351,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
   end
 
   create_table "workers", force: true do |t|
-    t.string   "record_name"
+    t.string   "record_label"
     t.string   "record_comment"
     t.string   "name"
     t.string   "command"

@@ -34,7 +34,7 @@ class Variable < ActiveRecord::Base
         :created_at,
         :updated_at,
         :id,
-        :record_name,
+        :record_label,
         :record_comment,
         :value_confirmation,
         :variable_consumer_id,

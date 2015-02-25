@@ -18,7 +18,7 @@
       attributes += record_object.class.reflect_on_all_associations(:has_many).map(&:name) + 
                       record_object.class.reflect_on_all_associations(:has_one).map(&:name)
     end
-    association_label_method ||= :record_name %>
+    association_label_method ||= :record_label %>
 
 <div class="panel panel-info top-gap">
   <div class="panel-heading clearfix">

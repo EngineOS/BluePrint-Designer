@@ -2,7 +2,7 @@ class StartDatabase < ActiveRecord::Migration
   def change
 
     create_table "apache_custom_site_files" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.text     "site_configuration"
       t.integer  "blueprint_version_id"
@@ -10,7 +10,7 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "apache_htaccess_files" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.string   "directory"
       t.text     "htaccess_content"
@@ -19,7 +19,7 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "apache_httpd_conf_files" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.text     "httpd_configuration"
       t.integer  "blueprint_version_id"
@@ -27,7 +27,7 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "apache_modules" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.string   "os_package"
       t.string   "module"
@@ -36,7 +36,7 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "blueprint_versions" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.integer  "major"
       t.integer  "minor"
@@ -55,7 +55,7 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "component_directories" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.string   "destination_path"
       t.boolean  "extract"
@@ -64,7 +64,7 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "component_sources" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.string   "url"
       t.integer  "blueprint_version_id"
@@ -72,7 +72,7 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "custom_php_inis" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.text     "content"
       t.integer  "blueprint_version_id"
@@ -80,13 +80,13 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "deployment_types" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.timestamps
     end
 
     create_table "file_write_permissions" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.string   "path"
       t.boolean  "recursive", default: false
@@ -95,7 +95,7 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "installed_packages" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.string   "source_url"
       t.string   "destination"
@@ -106,20 +106,20 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "languages" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.timestamps
     end
 
     create_table "licenses" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.string   "source_url"
       t.timestamps
     end
 
     create_table "frameworks" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.integer  "language_id"
       t.boolean  "service_configurations"
@@ -141,7 +141,7 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "persistent_directories" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.string   "path"
       t.integer  "blueprint_version_id"
@@ -149,7 +149,7 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "persistent_files" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.string   "path"
       t.integer  "blueprint_version_id"
@@ -157,7 +157,7 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "ports" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.integer  "port"
       t.integer  "blueprint_version_id"
@@ -167,14 +167,14 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "publishers" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.string   "namespace"      
       t.timestamps
     end
 
     create_table "rake_tasks" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.string   "action"
       t.integer  "blueprint_version_id"
@@ -182,7 +182,7 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "replacement_strings" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.string   "sedstr"
       t.string   "file"
@@ -192,7 +192,7 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "service_configurations" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.text     "service_definition"
       t.string   "service_blueprint_id"
@@ -201,7 +201,7 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "service_blueprints" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.integer  "service_type_id"
       t.integer  "publisher_id"
@@ -209,24 +209,25 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "service_types" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.string   "path"
       t.timestamps
     end
 
     create_table "softwares" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
+      t.string   "name"
       t.integer  "publisher_id"
       t.timestamps
     end
 
     create_table "software_versions" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
-      t.string   "title"
-      t.string   "display_name"
+      t.string   "full_title"
+      t.string   "short_title"
       t.text     "description"
       t.string   "icon_url"
       t.integer  "software_id"
@@ -238,14 +239,14 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "system_packages" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.integer  "blueprint_version_id"
       t.timestamps
     end
 
     create_table "template_files" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.string   "title"
       t.string   "path"
@@ -255,7 +256,7 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "variables" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.integer  "variable_consumer_id"
       t.string   "variable_consumer_type"
@@ -281,7 +282,7 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "workers" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.string   "name"
       t.string   "command"
@@ -290,7 +291,7 @@ class StartDatabase < ActiveRecord::Migration
     end
 
     create_table "worker_ports" do |t|
-      t.string   "record_name"
+      t.string   "record_label"
       t.string   "record_comment"
       t.string   "command"
       t.integer  "worker_id"

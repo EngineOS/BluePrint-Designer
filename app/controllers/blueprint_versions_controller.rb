@@ -2,7 +2,6 @@ class BlueprintVersionsController < ApplicationController
 
   before_action :authenticate_user!
 
-  require 'BlueprintGiterator.rb'
   require 'json'
 
   def new
@@ -67,27 +66,33 @@ class BlueprintVersionsController < ApplicationController
   def duplicate
     existing_blueprint_version = BlueprintVersion.find(params[:id])
     @blueprint_version = existing_blueprint_version.deep_clone include: attributes_for_duplicate
-    unique_record_name_for_duplicate
-    @blueprint_version.save
-    # render text: @blueprint_version.as_json
-    render :show
+    unique_record_label_for_duplicate
+    if @blueprint_version.save
+      # render text: @blueprint_version.as_json
+      flash[:notice] = "Success."
+      redirect_to @blueprint_version
+    else
+      flash[:error] = "Unable to duplicate Blueprint version."
+      redirect_to existing_blueprint_version
+    end
+
   end
 
-  def push_to_local_repository
+  def commit_to_local_repository
     @blueprint_version = BlueprintVersion.find(params[:id])
-    # publisher = BlueprintGiterator.new(@blueprint_version)
-    # @result =  publisher.publishtest
-    if false #@result.was_success?
+    publisher = BlueprintPublisher.new(@blueprint_version)
+    @result =  publisher.commit_to_local_repository
+    if @result
       flash.now[:notice] = "Success"
     else
-      flash.now[:error] = "Big fat fail."
+      flash.now[:error] = "Big fat fail." + @result.to_s
     end
     render :publish
   end
 
   def test_install
     @blueprint_version = BlueprintVersion.find(params[:id])
-    # publisher = BlueprintGiterator.new(@blueprint_version)
+    # publisher = Publisher.new(@blueprint_version)
     # @result =  publisher.publishtest
     if false #@result.was_success?
       flash.now[:notice] = "Success"
@@ -97,9 +102,9 @@ class BlueprintVersionsController < ApplicationController
     render :publish
   end
 
-  def push_to_repository
+  def commit_to_repository
     @blueprint_version = BlueprintVersion.find(params[:id])
-    # publisher = BlueprintGiterator.new(@blueprint_version)
+    # publisher = Publisher.new(@blueprint_version)
     # @result =  publisher.publishtest
     if false #@result.was_success?
       flash.now[:notice] = "Success"
@@ -111,7 +116,7 @@ class BlueprintVersionsController < ApplicationController
 
   def post_to_gallery
     @blueprint_version = BlueprintVersion.find(params[:id])
-    # publisher = BlueprintGiterator.new(@blueprint_version)
+    # publisher = Publisher.new(@blueprint_version)
     # @result =  publisher.publishtest
     if false #@result.was_success?
       flash.now[:notice] = "Success"
@@ -123,11 +128,11 @@ class BlueprintVersionsController < ApplicationController
 
 private
 
-  def unique_record_name_for_duplicate
+  def unique_record_label_for_duplicate
     i = 1
-    original_record_name = @blueprint_version.record_name
-    while BlueprintVersion.find_by record_name: @blueprint_version.record_name
-      @blueprint_version.record_name = original_record_name + " (copy#{ i if i > 1})"
+    original_record_label = @blueprint_version.record_label
+    while BlueprintVersion.find_by record_label: @blueprint_version.record_label
+      @blueprint_version.record_label = original_record_label + " (copy#{ i if i > 1})"
       i += 1
     end
   end

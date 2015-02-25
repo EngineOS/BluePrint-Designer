@@ -43,16 +43,15 @@ class BlueprintVersion < ActiveRecord::Base
   # accepts_nested_attributes_for :apache_modules, reject_if: :all_blank, allow_destroy: true
   # accepts_nested_attributes_for :variables, reject_if: :all_blank, allow_destroy: true
   
-  validates :record_name, presence: true
-  validates_uniqueness_of :record_name, :case_sensitive => false
+  validates :record_label, presence: true
+  validates_uniqueness_of :record_label, :case_sensitive => false
 
   enum http_protocol: { :'HTTP and HTTPS' => 0, :'HTTPS only' => 1, :'HTTP only' => 2 }
   enum release_level: { :Alpha => 0, :Beta => 1, :'Release candidate' => 2, :Release => 3} 
 
-  def as_json
+  def as_json(options = {})
       {
-        record_name: record_name,
-        record_comment: record_comment,
+        name: software_version.software.name,
         major: major,
         minor: minor,
         release_level: release_level,
@@ -82,7 +81,6 @@ class BlueprintVersion < ActiveRecord::Base
         component_directories: component_directories.as_json,
         component_sources: component_sources.as_json
       }
-
   end
   
 end

@@ -1,13 +1,19 @@
-class BlueprintGiterator
+class BlueprintPublisher
 
   require 'git'
   require 'rugged'
 
-  def initialize(software)
-    @software = software
+  attr_accessor :reponame
+
+  def reponame
+    @reponame
+  end
+
+  def initialize(blueprint_version)
+    @blueprint_version = blueprint_version
     gitdir = ENV["GITDIR"]
     gitdir = "/var/lib/git" if gitdir == nil
-    @reponame = gitdir + "/test-deploy/" + @software.name 
+    @reponame = gitdir + "/blueprints/" + @blueprint_version.software_version.software.name 
   end
   
   def set_repo_options(repo)
@@ -35,9 +41,9 @@ class BlueprintGiterator
      return false 
   end
   
-  def get_blueprint software
+  def get_blueprint blueprint_version
     ActiveRecord::Base.include_root_in_json = true
-        blueprint_json = software.to_json(
+        blueprint_json = blueprint_version.to_json(
         include:
         [
           {softwareservices: {
@@ -117,21 +123,20 @@ rescue  Exception=>e
            return false
   end
   
-  def publishtest 
-    p @software.name
-   repo =  setup_repo()
-  
-   
- 
-   
-   index = repo.index
+  def publishtest
+
+p :START_PUBLISH_TEST
+    p @blueprint_version.software_version.software.name
+    repo =  setup_repo()
+
+    index = repo.index
 
     require 'digest/sha1'
  
 #    commit_sha = Digest::SHA1.hexdigest(blueprint_json.to_s)
 
     #FIXME Make more informative
-    line = "ReadMe for " + @software.name + "\n" + @software.description
+    line = "ReadMe for " + @blueprint_version.software_version.software.name + "\n" + @blueprint_version.description
     file_path =   "README.md" 
     out_file = File.new(@reponame + "/" + file_path,'w')
     out_file.write(line)
@@ -141,7 +146,7 @@ rescue  Exception=>e
 #    oid = repo.write(line, :blob)            
 #    index.add(:path => "README.md", :oid => oid, :mode => 0100644)
     
-    blueprint_json = get_blueprint(@software) 
+    blueprint_json = get_blueprint(@blueprint_version) 
     blueprint_json_str =blueprint_json.to_s
      
     file_path =  "blueprint.json" 
@@ -155,7 +160,7 @@ rescue  Exception=>e
 #    index.add(:path => "blueprint.json", :oid => oid, :mode => 0100644)
 
 #      
-      @software.template_files.each() do |template_file |         
+      @blueprint_version.template_files.each() do |template_file |         
         file_path =   "engines/templates/"+ template_file.path
         out_file = File.new(@reponame + "/" + file_path,"w", :crlf_newline => false )
          out_file.write(template_file.content)
@@ -166,7 +171,7 @@ rescue  Exception=>e
 #        index.add(:path => "engines/templates/" + template_file.path, :oid => oid, :mode => 0100644)
       end
 #  
-      @software.apache_htaccess_files.each() do |htaccess_file|
+      @blueprint_version.apache_htaccess_files.each() do |htaccess_file|
         file_path =   "engines/htaccess_files/" + htaccess_file.directory + "/.htaccess"
           p :basename
           p File.basename(@reponame +file_path)
@@ -181,7 +186,7 @@ rescue  Exception=>e
       end
 #            
       php_ini = String.new
-      @software.custom_php_inis.each() do |custom_php|
+      @blueprint_version.custom_php_inis.each() do |custom_php|
      
         
         php_ini+="#" + custom_php.title + "\n" + custom_php.content + "\n"        
@@ -199,36 +204,36 @@ rescue  Exception=>e
 #         index.add(:path => "engines/configs/php/71-custom.ini", :oid => oid, :mode => 0100644)
       end      
 #      
-       if @software.have_custom_start_script == true
+       if @blueprint_version.have_custom_start_script == true
          file_path =  "engines/scripts/start.sh"
          out_file = File.new( @reponame + "/" + file_path,"w", :crlf_newline => false )
-         out_file.write(@software.custom_start_script)
+         out_file.write(@blueprint_version.custom_start_script)
          out_file.close    
 #         index.add(file_path)
 #         index.write
-#         oid = repo.write(@software.custom_start_script, :blob)
+#         oid = repo.write(@blueprint_version.custom_start_script, :blob)
 #         index.add(:path => "engines/scripts/start.sh", :oid => oid, :mode => 0100755)
        end
 #       
-       if @software.have_custom_install_script == true
+       if @blueprint_version.have_custom_install_script == true
          file_path = "engines/scripts/install.sh"
          out_file = File.new(@reponame + "/" + file_path ,"w" , :crlf_newline => false)
-         out_file.write(@software.custom_install_script)
+         out_file.write(@blueprint_version.custom_install_script)
          out_file.close        
 #         index.add(file_path)
 #         index.write
-#         oid = repo.write(@software.custom_install_script, :blob)
+#         oid = repo.write(@blueprint_version.custom_install_script, :blob)
 #         index.add(:path => "engines/scripts/install.sh", :oid => oid, :mode => 0100755)
        end
 #       
-       if @software.have_custom_post_install_script == true
+       if @blueprint_version.have_custom_post_install_script == true
          file_path =  "engines/scripts/post_install.sh" 
          out_file = File.new(@reponame + "/" + file_path,"w", :crlf_newline => false )
-         out_file.write(@software.custom_post_install_script)
+         out_file.write(@blueprint_version.custom_post_install_script)
          out_file.close    
 #         index.add(file_path)
 #         index.write
-#         oid = repo.write(@software.custom_post_install_script, :blob)
+#         oid = repo.write(@blueprint_version.custom_post_install_script, :blob)
 #         index.add(:path => "engines/scripts/post_install.sh", :oid => oid, :mode => 0100755)
        end
  #   tree = index.write_tree

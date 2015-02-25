@@ -26,7 +26,7 @@
       %>
         
         <th>
-          <% if attribute.to_sym == :record_name %>
+          <% if attribute.to_sym == :record_label %>
             &nbsp
           <% else %>
             <%= label %>
@@ -60,7 +60,7 @@
               <% end %>
 
               <td style="vertical-align: middle;">
-                <% value = SharedViews.resolve_value_for item, attribute #, label_method: :record_name %>
+                <% value = SharedViews.resolve_value_for item, attribute #, label_method: :record_label %>
                 <%= render 'shared/show/html_value', value: value %>
               </td>
             <% end %>
