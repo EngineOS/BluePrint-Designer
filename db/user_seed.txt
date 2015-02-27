@@ -1,0 +1,3 @@
+User.create!([
+  {username: "admin", user_type: nil, email: "admin@engines.onl", password: "EngOS2014", password_confirmation: "EngOS2014"}
+])

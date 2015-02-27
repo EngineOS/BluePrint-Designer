@@ -222,7 +222,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
     t.integer  "deployment_type_id"
     t.integer  "publisher_id"
     t.string   "component_path"
-    t.boolean  "extract_components"
+    t.boolean  "extract_components", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
