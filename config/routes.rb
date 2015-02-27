@@ -16,7 +16,7 @@ Rails.application.routes.draw do
             :licenses,
             :deployment_types,
             :service_types,
-            :service_blueprints,
+            :service_definitions,
             :softwares,
             :software_versions,
             :blueprint_versions,

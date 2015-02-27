@@ -1,15 +1,20 @@
 <%  items ||= []
     nest_routes ||= false
     nest_in ||= nest_routes ? record_object : nil
+    model_class = items.model
     model_name = items.model_name.to_s
     label ||= model_name.humanize
     new_item_path ||= [:new, model_name.underscore]
-    attributes ||= items.model.column_names.
+    attributes ||=  if model_class.method_defined?(:to_label)
+                      [:to_label]
+                    else
+                      items.model.column_names.
                       map{ |attribute| attribute.sub(/_id\z/, '') }.
-                      reject{ |attribute| ['id', 'created_at', 'updated_at', 'record_comment'].include?(attribute) }.
+                      reject{ |attribute| ['id', 'created_at', 'updated_at'].include?(attribute) }.
                       reject{ |attribute| attribute == nest_in.to_s}
+                    end
 
-    index_actions = File.exists?(Rails.root.join("app", "views", model_name.pluralize.underscore, "_index_item_actions.html.erb"))
+    show_index_actions = File.exists?(Rails.root.join("app", "views", model_name.pluralize.underscore, "_index_item_actions.html.erb"))
 
 %>
 
@@ -26,7 +31,7 @@
       %>
         
         <th>
-          <% if attribute.to_sym == :record_label %>
+          <% if attribute.to_sym == :to_label %>
             &nbsp
           <% else %>
             <%= label %>
@@ -35,7 +40,7 @@
 
       <% end %>
 
-      <% if index_actions %>
+      <% if show_index_actions %>
           <th></th>
       <% end %>
 
@@ -44,7 +49,7 @@
     <% if items.empty? %>
       <tr>
         <td colspan="1000">
-          None
+          <i>none</i>
         </td>
       </tr>
     <% end %>
@@ -60,11 +65,11 @@
               <% end %>
 
               <td style="vertical-align: middle;">
-                <% value = SharedViews.resolve_value_for item, attribute #, label_method: :record_label %>
-                <%= render 'shared/show/html_value', value: value %>
+                <% value = SharedViews.resolve_value_for item, attribute #, label_method: :to_label %>
+                <%= SharedViews.value_as_html value %>
               </td>
             <% end %>
-            <% if index_actions %>
+            <% if show_index_actions %>
               <td>
                 <%= render "#{model_name.pluralize.underscore}/index_item_actions", item: item %>
               </td>

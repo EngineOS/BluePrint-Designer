@@ -1,2 +1,2 @@
 <%= render 'shared/show/default', record_object: @software, fa: :tablet %>
-<%= render 'shared/show/association_table', record_object: @software, association: :software_versions, fa: :tablet, attributes: [:record_label, :short_title, :language, :framework] %>
+<%= render 'shared/show/association_table', record_object: @software, association: :software_versions, fa: :tablet, attributes: [:to_label, :version] %>

@@ -1,41 +1,56 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
-User.create(email: 'admin@engines.onl', username: 'admin', password: 'EngOS2014', password_confirmation: 'EngOS2014')
-Language.create(record_label: 'PHP')
-Language.create(record_label: 'Ruby')
-Language.create(record_label: 'Python')
-Language.create(record_label: 'Java')
-Framework.create(record_label: 'Apache', language_id: 1)
-Framework.create(record_label: 'Nginx', language_id: 1)
-Framework.create(record_label: 'Rails', language_id: 2)
-Framework.create(record_label: 'Sinatra', language_id: 2)
-Framework.create(record_label: 'Django', language_id: 3)
-Framework.create(record_label: 'Flask', language_id: 3)
-Framework.create(record_label: 'Pyramid', language_id: 3)
-Framework.create(record_label: 'Jetty', language_id: 4)
-Framework.create(record_label: 'Tomcat', language_id: 4)
-License.create(record_label: 'GPL v2')
-License.create(record_label: 'GPL v3')
-License.create(record_label: 'MIT')
-License.create(record_label: 'Apache v2')
-DeploymentType.create(record_label: 'Web')
-DeploymentType.create(record_label: 'Worker')
-ServiceType.create(record_label: 'Volume')
-ServiceType.create(record_label: 'DNS')
-ServiceType.create(record_label: 'Cron')
-ServiceType.create(record_label: 'MySQL database', path: 'database/sql/mysql')
-ServiceType.create(record_label: 'Postgres database', path: 'database/sql/pgsql')
-Publisher.create(record_label: 'Engines', namespace: 'EnginesSystem')
-Publisher.create(record_label: 'Odoo S.A.')
-Software.create(record_label: 'Etherpad', publisher_id: 1)
-Software.create(record_label: 'Odoo', publisher_id: 2)
-ServiceBlueprint.create(record_label: "Engines MySQL Database", publisher_id: 1, service_type_id: 4)
-ServiceBlueprint.create(record_label: "Engines Postgres database", publisher_id: 1, service_type_id: 5)
-SoftwareVersion.create(record_label: 'v2', full_title: "Etherpad (version 2.0)", short_title: "Etherpad 2", software_id: 1)
-BlueprintVersion.create(record_label: 'v0.0.0.1', software_version_id: 1)
+User.create!([
+  {username: "admin", user_type: nil, email: "admin@engines.onl", password: "EngOS2014", password_confirmation: "EngOS2014"}
+])
+BlueprintVersion.create!([
+  {name: "v0.0.0.1", software_version_id: 1}
+])
+DeploymentType.create!([
+  {name: "Web"},
+  {name: "Worker"}
+])
+Framework.create!([
+  {name: "Apache PHP", language_id: 1},
+  {name: "Nginx", language_id: 1},
+  {name: "Rails", language_id: 2},
+  {name: "Sinatra", language_id: 2},
+  {name: "Django", language_id: 3},
+  {name: "Flask", language_id: 3},
+  {name: "Pyramid", language_id: 3},
+  {name: "Jetty", language_id: 4},
+  {name: "Tomcat", language_id: 4}
+])
+Language.create!([
+  {name: "PHP"},
+  {name: "Ruby"},
+  {name: "Python"},
+  {name: "Java"},
+  {name: "Node"}
+])
+License.create!([
+  {name: "GPL v2"},
+  {name: "GPL v3"},
+  {name: "MIT"},
+  {name: "Apache v2"}
+])
+Publisher.create!([
+  {name: "Engines", namespace: "EnginesSystem"},
+  {name: "Odoo S.A."}
+])
+ServiceDefinition.create!([
+  {service_type_id: 4, publisher_id: 1},
+  {service_type_id: 5, publisher_id: 1}
+])
+ServiceType.create!([
+  {name: "Volume"},
+  {name: "DNS"},
+  {name: "Cron"},
+  {name: "MySQL database", path: "database/sql/mysql"},
+  {name: "Postgres database", path: "database/sql/pgsql"}
+])
+Software.create!([
+  {full_title: "Etherpad", publisher_id: 1, language_id: 1, license_id: 2, framework_id: 1, icon_url: "http://upload.wikimedia.org/wikipedia/commons/f/ff/Logo_Etherpad.png"},
+  {full_title: "Odoo", publisher_id: 2}
+])
+SoftwareVersion.create!([
+  {version: "1.5.1", software_id: 1}
+])

@@ -1,44 +1,102 @@
 <div class="col-md-10 main-show-col-with-menu">
   <%= render partial: 'shared/show/default', locals: {record_object: @blueprint_version, fa: :'file-text', back_path: @blueprint_version.software_version } %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :service_configurations, attributes: [:service_blueprint, :variables], fa: :'caret-right' %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :persistent_directories, fa: :'caret-right' %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :replacement_strings, fa: :'caret-right' %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :persistent_files, fa: :'caret-right' %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :installed_packages, fa: :'caret-right' %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :system_packages, fa: :'caret-right' %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :workers, fa: :'caret-right' %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :rake_tasks, fa: :'caret-right' %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :template_files, fa: :'caret-right' %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :file_write_permissions, fa: :'caret-right' %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :custom_php_inis, fa: :'caret-right' %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :apache_htaccess_files, fa: :'caret-right' %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :apache_modules, fa: :'caret-right' %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :variables, fa: :'caret-right', attributes: [:record_label, :field_type, :value], new_item_path: url_for([:new, :variable, variable_consumer_id: @blueprint_version.id, variable_consumer_type: :BlueprintVersion]) %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :component_directories, fa: :'caret-right' %>
-  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :component_sources, fa: :'caret-right' %>
+  <% if @blueprint_version.software_version.software.framework.service_configurations %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :service_configurations, attributes: [:service_definition, :variables], fa: :'caret-right' %>
+  <% end %>
+  <% if @blueprint_version.software_version.software.framework.persistent_directories %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :persistent_directories, fa: :'caret-right' %>
+  <% end %>
+  <% if @blueprint_version.software_version.software.framework.replacement_strings %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :replacement_strings, fa: :'caret-right' %>
+  <% end %>
+  <% if @blueprint_version.software_version.software.framework.persistent_files %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :persistent_files, fa: :'caret-right' %>
+  <% end %>
+  <% if @blueprint_version.software_version.software.framework.installed_packages %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :installed_packages, fa: :'caret-right' %>
+  <% end %>
+  <% if @blueprint_version.software_version.software.framework.system_packages %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :system_packages, fa: :'caret-right' %>
+  <% end %>
+  <% if @blueprint_version.software_version.software.framework.workers %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :workers, fa: :'caret-right' %>
+  <% if @blueprint_version.software_version.software.framework.rake_tasks %>
+  <% end %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :rake_tasks, fa: :'caret-right' %>
+  <% if @blueprint_version.software_version.software.framework.template_files %>
+  <% end %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :template_files, fa: :'caret-right' %>
+  <% end %>
+  <% if @blueprint_version.software_version.software.framework.file_write_permissions %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :file_write_permissions, fa: :'caret-right' %>
+  <% end %>
+  <% if @blueprint_version.software_version.software.framework.custom_php_inis %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :custom_php_inis, fa: :'caret-right' %>
+  <% end %>
+  <% if @blueprint_version.software_version.software.framework.apache_htaccess_files %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :apache_htaccess_files, fa: :'caret-right' %>
+  <% end %>
+  <% if @blueprint_version.software_version.software.framework.apache_modules %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :apache_modules, fa: :'caret-right' %>
+  <% end %>
+  <% if @blueprint_version.software_version.software.framework.variables %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :variables, fa: :'caret-right',attributes: [:to_label, :field_type, :value], new_item_path: url_for([:new, :variable, variable_consumer_id: @blueprint_version.id, variable_consumer_type: :BlueprintVersion]) %>
+  <% end %>
+  <% if @blueprint_version.software_version.software.framework.component_sources %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :component_sources, fa: :'caret-right' %>
+  <% end %>
 </div>
 
-<div class="col-md-2">
+<div class="col-md-2"><%= @blueprint_version.software_version.software.framework.apache_htaccess_files %>
   <nav class="affix top-gap hidden-xs hidden-sm" >
     <ul class="nav">
       <small>
         <a href="#"><li>Top</li></a>
-        <a href="#service_configurations"><li>Service configurations</li></a>
-        <a href="#persistent_directories"><li>Persistent directories</li></a>
-        <a href="#replacement_strings"><li>Replacement strings</li></a>
-        <a href="#persistent_files"><li>Persistent files</li></a>
-        <a href="#installed_packages"><li>Installed packages</li></a>
-        <a href="#system_packages"><li>System packages</li></a>
-        <a href="#workers"><li>Workers</li></a>
-        <a href="#rake_tasks"><li>Rake tasks</li></a>
-        <a href="#template_files"><li>Template files</li></a>
-        <a href="#file_write_permissions"><li>File write permissions</li></a>
-        <a href="#custom_php_inis"><li>Custom php.ini files</li></a>
-        <a href="#apache_htaccess_files"><li>Apache .htaccess files</li></a>
-        <a href="#apache_modules"><li>Apache modules</li></a>
-        <a href="#variables"><li>Variables</li></a>
-        <a href="#component_directories"><li>Component directories</li></a>
-        <a href="#component_sources"><li>Component sources</li></a>
+                <% if @blueprint_version.software_version.software.framework.service_configurations %>
+          <a href="#service_configurations"><li>Service configurations</li></a>
+        <% end %>
+        <% if @blueprint_version.software_version.software.framework.persistent_directories %>
+          <a href="#persistent_directories"><li>Persistent directories</li></a>
+        <% end %>
+        <% if @blueprint_version.software_version.software.framework.replacement_strings %>
+          <a href="#replacement_strings"><li>Replacement strings</li></a>
+        <% end %>
+        <% if @blueprint_version.software_version.software.framework.persistent_files %>
+          <a href="#persistent_files"><li>Persistent files</li></a>
+        <% end %>
+        <% if @blueprint_version.software_version.software.framework.installed_packages %>
+          <a href="#installed_packages"><li>Installed packages</li></a>
+        <% end %>
+        <% if @blueprint_version.software_version.software.framework.system_packages %>
+          <a href="#system_packages"><li>System packages</li></a>
+        <% end %>
+        <% if @blueprint_version.software_version.software.framework.workers %>
+          <a href="#workers"><li>Workers</li></a>
+        <% end %>
+        <% if @blueprint_version.software_version.software.framework.rake_tasks %>
+          <a href="#rake_tasks"><li>Rake tasks</li></a>
+        <% end %>
+        <% if @blueprint_version.software_version.software.framework.template_files %>
+          <a href="#template_files"><li>Template files</li></a>
+        <% end %>
+        <% if @blueprint_version.software_version.software.framework.file_write_permissions %>
+          <a href="#file_write_permissions"><li>File write permissions</li></a>
+        <% end %>
+        <% if @blueprint_version.software_version.software.framework.custom_php_inis %>
+          <a href="#custom_php_inis"><li>Custom php.ini files</li></a>
+        <% end %>
+        <% if @blueprint_version.software_version.software.framework.apache_htaccess_files %>
+          <a href="#apache_htaccess_files"><li>Apache .htaccess files</li></a>
+        <% end %>
+        <% if @blueprint_version.software_version.software.framework.apache_modules %>
+          <a href="#apache_modules"><li>Apache modules</li></a>
+        <% end %>
+        <% if @blueprint_version.software_version.software.framework.variables %>
+          <a href="#variables"><li>Variables</li></a>
+        <% end %>
+        <% if @blueprint_version.software_version.software.framework.component_sources %>
+          <a href="#component_sources"><li>Component sources</li></a>
+        <% end %>
       </small>
     </ul>
   </nav>

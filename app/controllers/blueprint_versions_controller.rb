@@ -66,7 +66,7 @@ class BlueprintVersionsController < ApplicationController
   def duplicate
     existing_blueprint_version = BlueprintVersion.find(params[:id])
     @blueprint_version = existing_blueprint_version.deep_clone include: attributes_for_duplicate
-    unique_record_label_for_duplicate
+    unique_name_for_duplicate
     if @blueprint_version.save
       # render text: @blueprint_version.as_json
       flash[:notice] = "Success."
@@ -128,11 +128,11 @@ class BlueprintVersionsController < ApplicationController
 
 private
 
-  def unique_record_label_for_duplicate
+  def unique_name_for_duplicate
     i = 1
-    original_record_label = @blueprint_version.record_label
-    while BlueprintVersion.find_by record_label: @blueprint_version.record_label
-      @blueprint_version.record_label = original_record_label + " (copy#{ i if i > 1})"
+    original_name = @blueprint_version.name
+    while BlueprintVersion.find_by name: @blueprint_version.name
+      @blueprint_version.name = original_name + " (copy#{ i if i > 1})"
       i += 1
     end
   end

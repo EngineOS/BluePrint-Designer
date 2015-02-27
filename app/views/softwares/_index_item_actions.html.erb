@@ -1,5 +1,5 @@
 <%  recent_blueprint = item.blueprint_versions.order(:updated_at).last
 
     if item.blueprint_versions.present? %>
-  <%= link_to content_tag(:i, "", class: "fa fa-file-text") + ' ' + recent_blueprint.record_label, blueprint_version_path(recent_blueprint), class: "btn btn-default btn-sm trigger-response-modal pull-right" %>
+  <%= link_to content_tag(:i, "", class: "fa fa-file-text") + ' ' + recent_blueprint.to_label, blueprint_version_path(recent_blueprint), class: "btn btn-default btn-sm trigger-response-modal pull-right" %>
 <% end %>

@@ -1,17 +1,20 @@
 class SoftwareVersion < ActiveRecord::Base
 
   attr_accessor :_destroy
-  
-  belongs_to :framework
-  belongs_to :language
-  belongs_to :license
-  belongs_to :deployment_type
 
   belongs_to :software
 
   has_many :blueprint_versions, dependent: :destroy
   
-  validates :record_label, presence: true
-  validates_uniqueness_of :record_label, :case_sensitive => false
+  # validates :record_label, presence: true
+  # validates_uniqueness_of :record_label, :case_sensitive => false
+
+  def to_handle
+    software.to_handle + ' ' + version.downcase.gsub(' ', '_')
+  end
+
+  def to_label
+    software.to_label + ' ' + version
+  end
 
 end

@@ -1,15 +1,15 @@
 <h1>Listing Frameworks</h1>
 
 <table>
- <tr>
-  <td>
+  <tr>
+   <td>
    <th>Name</th>
    <th>Comment</th>
  </tr>
  <% @frameworks.each do |framework| %>
  <tr>
-  <td><%= framework.record_label %></td>
-   <td><%=  Language.find(framework.language_id).record_label  %></td>
+  <td><%= framework.to_label %></td>
+   <td><%=  Language.find(framework.language_id).to_label  %></td>
   <td><%= framework.description %></td>
   <td><%= link_to 'Edit', [:edit, framework]   %></td>
    <td><%= link_to 'Remove', [  framework],

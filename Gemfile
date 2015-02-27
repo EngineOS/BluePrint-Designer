@@ -44,6 +44,8 @@ gem 'mysql2'
 # webserver
 gem 'thin'
 
+# export data from DB
+gem 'seed_dump'
 
 #thank Rails for the rest...
 

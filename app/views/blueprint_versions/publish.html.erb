@@ -1,1 +1,1 @@
-<%= render 'shared/show/default', record_object: @blueprint_version, as: :inspect, inspect_method: :as_json, fa: :'book', page_title: 'Publish ' + @blueprint_version.record_label, back_path: @blueprint_version %>
+<%= render 'shared/show/default', record_object: @blueprint_version, as: :inspect, inspect_method: :as_json, fa: :'book', page_title: 'Publish ' + @blueprint_version.to_label, back_path: @blueprint_version %>

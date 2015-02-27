@@ -2,7 +2,7 @@
     model_name = record_object.class.to_s.underscore
     back_path ||= url_for([model_name.pluralize])
     attributes ||= nil
-    page_title ||= model_name.humanize
+    page_title ||= model_name.humanize + (record_object.respond_to?(:to_label) ? ': ' + record_object.to_label.to_s : '')
     fa ||= false
     as ||= :panel
     inspect_method ||= nil %>

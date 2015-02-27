@@ -29,20 +29,32 @@ class Variable < ActiveRecord::Base
   end
 
   def as_json(options={})
-    options[:except] ||=
-      [ 
-        :created_at,
-        :updated_at,
-        :id,
-        :record_label,
-        :record_comment,
-        :value_confirmation,
-        :variable_consumer_id,
-        :variable_consumer_type,
-        :deprecated
-      ]
-    super
+    if variable_consumer_type == 'BlueprintVersion'
+      options[:except] ||=
+        [ 
+          :created_at,
+          :updated_at,
+          :id,
+          :value_confirmation,
+          :variable_consumer_id,
+          :variable_consumer_type,
+          :deprecated
+        ]
+      super
+    else
+      result = {}
+      result[name] = value
+      result
+    end 
   end 
+
+  # def to_handle
+  #   name.downcase.gsub(' ', '_')
+  # end
+
+  def to_label
+    ( label || name ) + ( ( ' = ' +  SharedViews.value_as_html(value) ) if value.present? ).to_s
+  end
 
 private
 

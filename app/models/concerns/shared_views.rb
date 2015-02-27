@@ -2,7 +2,14 @@ module SharedViews
 
   def self.resolve_value_for item, attribute, opts={}
 
-    label_method = opts[:label_method].present? ? opts[:label_method].to_sym : :to_s
+    label_method = if opts[:label_method].present?
+      opts[:label_method].to_sym
+    elsif item.respond_to?(:to_label)
+      :to_label
+    else
+      :to_s
+    end
+
     attribute = attribute.to_sym
 
     if item.class.reflect_on_association(attribute) && item.class.reflect_on_association(attribute).options[:polymorphic]
@@ -22,6 +29,19 @@ module SharedViews
     end 
     result
 
+  end
+
+  def self.value_as_html value
+    case value
+      when TrueClass
+        '<i class="fa fa-check"></i>'.html_safe
+      when FalseClass
+        '<i class="fa fa-times"></i>'.html_safe
+      when ActiveSupport::TimeWithZone
+        distance_of_time_in_words_to_now(value) + ' ago'
+      else
+        value
+    end
   end
 
 end

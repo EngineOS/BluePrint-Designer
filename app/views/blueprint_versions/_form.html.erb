@@ -2,11 +2,9 @@
 
   <%= render 'shared/form/errors', f: f %>
 
-  <%= render 'shared/show/labelled_text', label: "Software", text: @blueprint_version.software_version.record_label, offset: 2 %>
   <%= render 'shared/form/hidden_field', name: :software_version_id, f: f %>
 
-  <%= render 'shared/form/text_field', name: :record_label, f: f %>
-  <%= render 'shared/form/text_field', name: :record_comment, f: f %>
+  <%= render 'shared/form/text_field', name: :name, f: f %>
 
   <%= render 'shared/form/legend', text: "Blueprint version" %>
   <%= render 'shared/form/number_field', name: :major, label: "Major", f: f, width: 2, buffer: 0 %>

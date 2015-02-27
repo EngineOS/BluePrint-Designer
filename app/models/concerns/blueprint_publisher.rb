@@ -8,11 +8,11 @@ class BlueprintPublisher
     @blueprint_version = blueprint_version
     gitdir = ENV["GITDIR"]
     gitdir = "/var/lib/git" if gitdir == nil
-    @reponame = gitdir + "/blueprints/" + @blueprint_version.software_version.software.name 
+    @reponame = gitdir + "/blueprints/" + @blueprint_version.software_version.software.to_handle 
   end
   
   def commit_to_local_repository
-    p "===== Publishing " + @blueprint_version.software_version.software.name
+    p "===== Publishing " + @blueprint_version.software_version.software.to_label
     build_repo
     write_readme
     load_blueprint
@@ -63,7 +63,7 @@ private
   end
 
   def write_readme
-    line = "ReadMe for " + @blueprint_version.software_version.software.name.to_s + "\n" + @blueprint_version.software_version.description.to_s
+    line = "ReadMe for " + @blueprint_version.software_version.software.to_label + "\n" + @blueprint_version.software_version.software.description.to_s
     file_path =   "README.md" 
     out_file = File.new(@reponame + "/" + file_path,'w')
     out_file.write(line)

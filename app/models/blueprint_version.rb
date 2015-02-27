@@ -21,9 +21,9 @@ class BlueprintVersion < ActiveRecord::Base
   has_many :apache_htaccess_files, dependent: :destroy
   has_many :apache_modules, dependent: :destroy
   has_many :variables, as: :variable_consumer, dependent: :destroy
-  has_many :component_directories, dependent: :destroy
+  # has_many :component_directories, dependent: :destroy
   has_many :component_sources, dependent: :destroy
-  # has_many :ports, dependent: :destroy
+  has_many :ports, dependent: :destroy
 
   # accepts_nested_attributes_for :blocking_worker, reject_if: :all_blank, allow_destroy: true
   # # accepts_nested_attributes_for :software_services, reject_if: :all_blank, allow_destroy: true
@@ -43,23 +43,35 @@ class BlueprintVersion < ActiveRecord::Base
   # accepts_nested_attributes_for :apache_modules, reject_if: :all_blank, allow_destroy: true
   # accepts_nested_attributes_for :variables, reject_if: :all_blank, allow_destroy: true
   
-  validates :record_label, presence: true
-  validates_uniqueness_of :record_label, :case_sensitive => false
+  # validates :record_label, presence: true
+  # validates_uniqueness_of :record_label, :case_sensitive => false
 
   enum http_protocol: { :'HTTP and HTTPS' => 0, :'HTTPS only' => 1, :'HTTP only' => 2 }
   enum release_level: { :Alpha => 0, :Beta => 1, :'Release candidate' => 2, :Release => 3} 
 
   def as_json(options = {})
+    {
+      software:
       {
-        name: software_version.software.name,
+        name: software_version.software.to_handle,
         major: major,
         minor: minor,
         release_level: release_level,
         patch: patch,
-        blocking_worker_name: (blocking_worker.name if blocking_worker.present?),
+        license_name: software_version.software.license.to_handle,
+        license_sourceurl: software_version.software.license.source_url,
+        full_title: software_version.software.full_title,
+        short_title: software_version.software.short_title,
+        description: software_version.software.description,
+        icon_url: software_version.software.icon_url,
+        language: software_version.software.language.to_handle,
+        framework: software_version.software.framework.to_handle,
+        deployment_type: software_version.software.deployment_type.to_handle,
+        publisher: software_version.software.publisher.to_handle,
+        blocking_worker_name: (blocking_worker.to_handle if blocking_worker.present?),
         required_memory: required_memory,
         recommended_memory: recommended_memory,
-        http_protocol: http_protocol,
+        http_protocol: http_protocol_handle,
         framework_port_overide: framework_port_overide,
         custom_start_script: custom_start_script,
         custom_install_script: custom_install_script,
@@ -78,9 +90,23 @@ class BlueprintVersion < ActiveRecord::Base
         apache_htaccess_files: apache_htaccess_files.as_json,
         apache_modules: apache_modules.as_json,
         variables: variables.as_json,
-        component_directories: component_directories.as_json,
         component_sources: component_sources.as_json
       }
+    }
+  end
+
+  def to_handle
+    software_version.to_handle + '_' + name.downcase.gsub(' ', '_')
+  end
+
+  def to_label
+    software_version.to_label + ' ' + name
+  end
+
+private
+
+  def http_protocol_handle
+    http_protocol.downcase.gsub(' ', '_')
   end
   
 end
