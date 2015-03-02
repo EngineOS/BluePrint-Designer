@@ -1,0 +1,91 @@
+<%  record ||= f.object
+    offset ||= 2
+    width ||= 8
+    buffer ||= 2
+    record_class = record.class
+    record_class_name = record_class.to_s
+    label ||= attribute.to_s.humanize
+    nest_in ||= false
+    attribute_type ||= nil
+    select_collection ||= nil
+    tooltip ||= nil
+    hint ||= nil
+    placeholder ||= nil
+    comment ||= nil
+    
+    if attribute.kind_of?(Array)
+      label = attribute[1]
+      attribute = attribute[0]
+    end
+
+    if record_class.reflect_on_association(attribute)
+
+      if record_class.reflect_on_association(attribute).options[:polymorphic] %>
+
+        <%= render "shared/form/hidden_field", f: f, name: (attribute.to_s + '_id') %>
+        <%= render "shared/form/hidden_field", f: f, name: (attribute.to_s + '_type') %>
+
+  <%  elsif nest_in.to_s == attribute.to_s %>
+
+        <%= render "shared/form/hidden_field", f: f, name: (attribute.to_s + '_id') %>
+
+  <%  else %>
+
+        <% if attribute.to_s.camelcase.constantize.count < 0 %>
+          <%= render 'shared/form/association_radio_buttons', f: f, name: attribute, label: label, offset: offset, width: width, buffer: buffer, nest_in: nest_in %>
+        <% else %>
+          <%= render 'shared/form/association_select', f: f, name: attribute, label: label, offset: offset, width: width, buffer: buffer, nest_in: nest_in %>
+        <% end %>
+          
+  <%  end
+
+    else
+
+      if attribute_type.nil?
+
+        attribute_detail = record_class.columns_hash[attribute.to_s]
+
+        if attribute_detail
+
+          if attribute == (nest_in.to_s.underscore + '_id').to_sym ||
+            attribute.to_s.ends_with?('_consumer_type' )
+            attribute_type = :hidden
+          else
+            attribute_type = attribute_detail.type
+          end
+
+        else
+
+          attribute_type = :string
+
+        end
+
+      end
+
+      field_type = case (attribute_type.to_sym)
+        when :boolean
+          'checkbox'
+        when :date
+          'date_field'
+        when :datetime
+          'datetime_field'
+        when :decimal, :float, :integer, :binary
+          'number_field'
+        when :time, :timestamp
+          'time_field'
+        when :text
+          'text_area'
+        when :hidden
+          'hidden_field'
+        when :select, :select_single
+          'select'
+        else
+          'text_field'
+      end
+
+%>
+
+      <%= render partial: "shared/form/#{field_type}", locals: {f: f, name: attribute, label: label, offset: offset, width: width, buffer: buffer, nest_in: nest_in, select_collection: select_collection, tooltip: tooltip, hint: hint, placeholder: placeholder, comment: comment } %>
+
+<%  end %>
+

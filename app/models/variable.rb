@@ -1,10 +1,7 @@
 class Variable < ActiveRecord::Base
 
   belongs_to :variable_consumer, polymorphic: true
-
-  validate :regex_validation, on: :update
-  validate :value_confirmation_validation, on: :update
-  validate :value_present_validation, on: :update
+  # has_one :variable_setter, dependent: :destroy
 
   def field_types
     { :Text => :text_field,
@@ -54,29 +51,6 @@ class Variable < ActiveRecord::Base
 
   def to_label
     ( label || name ) + ( ( ' = ' +  SharedViews.value_as_html(value) ) if value.present? ).to_s
-  end
-
-private
-
-  def regex_validation
-    if (mandatory == true && 
-        ask_at_build_time == false &&
-        regex_validator.present? &&
-        !Regexp.new(regex_validator.to_s).match(value.to_s))
-      errors.add(name, [label, regex_invalid_message] || [label, "is invalid. (Expects regex /#{regex_validator}/ but got `#{value}` from user.)"])
-    end
-  end
-
-  def value_present_validation
-    if (mandatory == true && ask_at_build_time == false && value.blank?)
-      errors.add(name, [label, "must not be blank"])
-    end
-  end
-
-  def value_confirmation_validation
-    if (field_type == "password_with_confirmation" && value != value_confirmation)
-      errors.add(name, ["Passwords", "must match"])
-    end
   end
 
 end

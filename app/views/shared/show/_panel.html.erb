@@ -1,24 +1,11 @@
-<%  record_object ||= nil
-    nest_in ||= nil
-    show_all_associations ||= false
-    model_name = record_object.class.to_s
-    label ||= model_name.to_s.underscore.humanize
-    # new_record_object_path ||= [:new, model_name.underscore]
-    attributes ||= record_object.class.column_names.
-                      reject do |attribute|
-                        ['id', 'created_at', 'updated_at'].include?(attribute)
-                      end.
-                      reject do |attribute|
-                        attribute.ends_with?('_consumer_type')
-                      end.
-                      map do |attribute|
-                        attribute.sub(/_id\z/, '')
-                      end
-    if show_all_associations
-      attributes += record_object.class.reflect_on_all_associations(:has_many).map(&:name) + 
-                      record_object.class.reflect_on_all_associations(:has_one).map(&:name)
-    end
-    association_label_method ||= :to_label %>
+<% label ||= nil
+   record_object ||= nil
+   attributes ||= nil
+   nest_in ||= nil
+   association_label_method ||= nil
+   show_all_associations ||= nil
+   model_name = record_object.class.to_s.underscore
+%>
 
 <div class="panel panel-info top-gap">
   <div class="panel-heading clearfix">
@@ -33,23 +20,11 @@
     </div>
   </div>
   <div class="panel-body">
-    <%  attributes.each do |attribute|
-          if attribute.kind_of?(Array)
-            label = attribute[1]
-            attribute = attribute[0]
-          else
-            if record_object.class.reflect_on_all_associations.select{|association| association.options[:polymorphic]}.map(&:name).include? attribute.to_sym
-                label = record_object.send(attribute.to_s + '_type').humanize
-            else
-              label = attribute.to_s.humanize
-            end
-          end
-    %>
 
-    <div class="row">
-      <%= render 'shared/show/inline_labelled_text', label: label, object: record_object, field: attribute, nest_in: nest_in, association_label_method: association_label_method %>
-    </div>
-
+    <% if File.exists?(Rails.root.join("app", "views", model_name.pluralize, "_show_fields.html.erb")) %>
+      <%= render "#{model_name.pluralize}/show_fields" %>
+    <% else %>
+      <%= render 'shared/show/default_attributes', label: label, record_object: record_object, attributes: attributes, nest_in: nest_in, association_label_method: association_label_method, show_all_associations: show_all_associations %>
     <% end %>
 
   </div>

@@ -1,4 +1,5 @@
 <%  record_object ||= nil
+    nest_in ||= nil
     model_name = record_object.class.to_s.underscore
     back_path ||= url_for([model_name.pluralize])
     attributes ||= nil
@@ -23,7 +24,7 @@
 
   <div class="col-sm-12 show clearfix">
 
-    <%= render partial: "shared/show/#{as}", locals: {record_object: record_object, attributes: attributes, inspect_method: inspect_method} %>
+    <%= render "shared/show/#{as}", record_object: record_object, attributes: attributes, inspect_method: inspect_method, nest_in: nest_in %>
 
   </div>
 

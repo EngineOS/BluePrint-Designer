@@ -35,6 +35,7 @@ Rails.application.routes.draw do
             :apache_htaccess_files,
             :apache_modules,
             :variables,
+            :service_configuration_variables,
             :component_directories,
             :component_sources
 

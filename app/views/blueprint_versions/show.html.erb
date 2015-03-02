@@ -37,17 +37,17 @@
     <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :apache_htaccess_files, fa: :'caret-right' %>
   <% end %>
   <% if @blueprint_version.software_version.software.framework.apache_modules %>
-    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :apache_modules, fa: :'caret-right' %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :apache_modules, fa: :'caret-right', attributes: [[:os_package, "OS package"], :module] %>
   <% end %>
   <% if @blueprint_version.software_version.software.framework.variables %>
     <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :variables, fa: :'caret-right',attributes: [:to_label, :field_type, :value], new_item_path: url_for([:new, :variable, variable_consumer_id: @blueprint_version.id, variable_consumer_type: :BlueprintVersion]) %>
   <% end %>
   <% if @blueprint_version.software_version.software.framework.component_sources %>
-    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :component_sources, fa: :'caret-right' %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :component_sources, fa: :'caret-right', attributes: [[:url, "URL"]] %>
   <% end %>
 </div>
 
-<div class="col-md-2"><%= @blueprint_version.software_version.software.framework.apache_htaccess_files %>
+<div class="col-md-2">
   <nav class="affix top-gap hidden-xs hidden-sm" >
     <ul class="nav">
       <small>

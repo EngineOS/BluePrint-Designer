@@ -4,6 +4,7 @@ Rails.application.configure do
   config.before_initialize do
     FileUtils.cp '/opt/engines/lib/ruby/ManagedServices/SoftwareServices/SoftwareServiceDefinition.rb',
                   Rails.root.join('lib')
+    FileUtils.cp_r '/opt/engines/etc/services', Rails.root.join('lib'), remove_destination: true
     FileUtils.cp '/opt/engines/lib/ruby/SystemUtils.rb',
                   Rails.root.join('lib')
     FileUtils.cp '/opt/engines/lib/ruby/SysConfig.rb',

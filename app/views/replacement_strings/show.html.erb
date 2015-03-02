@@ -1,4 +1,4 @@
 <%
   back_path = url_for(@replacement_string.blueprint_version) + '#' + @replacement_string.class.name.underscore + '_' + @replacement_string.id.to_s
 %>
-<%= render 'shared/show/default', record_object: @replacement_string, fa: :'caret-right', back_path: back_path %>
+<%= render 'shared/show/default', record_object: @replacement_string, fa: :'caret-right', back_path: back_path, nest_in: :blueprint_version %>

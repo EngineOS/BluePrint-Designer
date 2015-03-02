@@ -3,4 +3,4 @@
                '/', @variable.variable_consumer_id.to_s,
                '#variables' ].join
 %>
-<%= render 'shared/show/default', record_object: @variable, fa: :'caret-right', back_path: back_path %>
+<%= render 'shared/show/default', record_object: @variable, fa: :'caret-right', back_path: back_path, nest_in: :blueprint_version %>

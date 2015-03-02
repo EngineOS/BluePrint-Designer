@@ -4,6 +4,7 @@
     fa ||= false
     attributes ||= nil
     show_add_button = true if show_add_button.nil?
+    map_to ||= nil
 
     # show_in ||= nil
     id_field_name = (record_object.class.name.underscore + "_id").to_sym
@@ -12,6 +13,8 @@
 
     new_item_path ||= url_for ( if nest_routes
                                   [ :new, record_object, association.to_s.singularize ]
+                                elsif map_to
+                                  [ :new, record_object, map_to]
                                 else
                                   [ :new, association.to_s.singularize, id_field_name => record_object.id ]
                                 end )
@@ -26,7 +29,7 @@
           <%= link_to (content_tag(:i, nil, class: 'fa fa-plus').html_safe + " Add"), new_item_path, class: "btn btn-primary trigger-response-modal" %>
         <% end %>
       </div>
-      <%= render 'shared/index/table', items: items, nest_routes: nest_routes, nest_in: nest_in, attributes: attributes %>
+      <%= render 'shared/index/table', items: items, nest_routes: nest_routes, nest_in: nest_in, map_to: map_to, attributes: attributes %>
     </div>
   </div>
 </div>

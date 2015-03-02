@@ -1,0 +1,47 @@
+<%  record_object ||= nil
+    nest_in ||= nil
+    show_all_associations ||= false
+    model_name = record_object.class.to_s
+    # new_record_object_path ||= [:new, model_name.underscore]
+    polymorphic_associations = record_object.class.reflect_on_all_associations.select{|association| association.options[:polymorphic]}.map(&:name)
+
+    attributes ||= record_object.class.column_names.
+                      reject do |attribute|
+                        ['id', 'created_at', 'updated_at'].include?(attribute)
+                      end.
+                      reject do |attribute|
+                        attribute.ends_with?('_consumer_type')
+                      end.
+                      map do |attribute|
+                        attribute.sub(/_id\z/, '')
+                      end.
+                      reject do |attribute|
+                        attribute == nest_in.to_s || (polymorphic_associations.include?(attribute.to_sym) && record_object.send(attribute.to_s + '_type').underscore == nest_in.to_s)
+                      end.
+                      reject do |attribute|
+                        attribute.to_sym == :value_confirmation
+                      end
+    if show_all_associations
+      attributes += record_object.class.reflect_on_all_associations(:has_many).map(&:name) + 
+                      record_object.class.reflect_on_all_associations(:has_one).map(&:name)
+    end
+    association_label_method ||= :to_label %>
+
+<%  attributes.each do |attribute|
+      if attribute.kind_of?(Array)
+        label = attribute[1]
+        attribute = attribute[0]
+      else
+        if polymorphic_associations.include? attribute.to_sym
+            label = record_object.send(attribute.to_s + '_type').underscore.humanize
+        else
+          label = attribute.to_s.humanize
+        end
+      end
+%>
+
+      <div class="row">
+        <%= render 'shared/show/inline_labelled_text', label: label, object: record_object, field: attribute, association_label_method: association_label_method %>
+      </div>
+
+    <% end %>

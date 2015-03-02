@@ -8,8 +8,8 @@
 
     label ||= name.to_s.humanize
 
-    collection = association_model.all.collect {|l| [ (l.respond_to?(:to_label) ? l.to_label : l.to_s), l.id ] }
+    select_collection = association_model.all.collect {|l| [ (l.respond_to?(:to_label) ? l.to_label : l.to_s), l.id ] }
 
     %>
 
-<%= render partial: 'shared/form/select', locals: {name: association_field, label: label, collection: collection, f: f, offset: offset, width: width, buffer: buffer } %>
+<%= render partial: 'shared/form/select', locals: {name: association_field, label: label, select_collection: select_collection, f: f, offset: offset, width: width, buffer: buffer } %>

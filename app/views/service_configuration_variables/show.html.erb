@@ -1,0 +1,4 @@
+<%
+  back_path = url_for(@service_configuration_variable.service_configuration)
+%>
+<%= render 'shared/show/default', record_object: @service_configuration_variable, fa: :'caret-right', back_path: back_path, attributes: [:'variable'] %>

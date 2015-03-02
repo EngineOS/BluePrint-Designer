@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150206032537) do
+ActiveRecord::Schema.define(version: 20150302073158) do
 
   create_table "apache_custom_site_files", force: true do |t|
     t.text     "site_configuration"
@@ -183,6 +183,12 @@ ActiveRecord::Schema.define(version: 20150206032537) do
     t.datetime "updated_at"
   end
 
+  create_table "service_configuration_variables", force: true do |t|
+    t.integer  "service_configuration_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "service_configurations", force: true do |t|
     t.string   "service_definition_id"
     t.integer  "blueprint_version_id"
@@ -231,6 +237,7 @@ ActiveRecord::Schema.define(version: 20150206032537) do
     t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "package"
   end
 
   create_table "template_files", force: true do |t|
@@ -281,7 +288,6 @@ ActiveRecord::Schema.define(version: 20150206032537) do
     t.boolean  "ask_at_build_time",      default: false
     t.boolean  "build_time_only",        default: false
     t.boolean  "immutable",              default: false
-    t.boolean  "lookup_system_values",   default: false
     t.boolean  "deprecated",             default: false
     t.datetime "created_at"
     t.datetime "updated_at"
