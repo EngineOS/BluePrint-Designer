@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150302073158) do
+ActiveRecord::Schema.define(version: 20150303010003) do
 
   create_table "apache_custom_site_files", force: true do |t|
     t.text     "site_configuration"
@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(version: 20150302073158) do
     t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "always_run"
   end
 
   create_table "replacement_strings", force: true do |t|
