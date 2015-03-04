@@ -2,8 +2,8 @@
     nest_routes ||= false
     nest_in ||= nest_routes ? record_object : nil
     map_to ||= nil
-    model_class = items.model
-    model_name = items.model_name.to_s
+    model_class = items.first.class
+    model_name = model_class.model_name.to_s
     label ||= model_name.humanize
     new_item_path ||= [:new, model_name.underscore]
     attributes ||=  if model_class.method_defined?(:to_label)

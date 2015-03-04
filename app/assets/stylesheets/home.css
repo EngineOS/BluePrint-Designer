@@ -1,6 +1,6 @@
 .home-page-logo-holder {
-  width: 75%;
-  max-width: 750px; 
+  width: 50%;
+  max-width: 500px; 
 }
 
 .home-page-banner {
@@ -12,8 +12,3 @@
   text-align: center;
 }
 
-
-
-/*.home-page-banner h2 {
-  color: #fff;
-}*/

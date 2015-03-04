@@ -1,5 +1,15 @@
 <div class="col-md-10 main-show-col-with-menu">
-  <%= render partial: 'shared/show/default', locals: {record_object: @blueprint_version, fa: :'file-text', back_path: @blueprint_version.software_version } %>
+  <%= render 'shared/show/default', record_object: @blueprint_version, fa: :'file-text', back_path: @blueprint_version.software_version, attributes: 
+        [ :name,
+          :version,
+          :memory,
+          [:http_protocol, "HTTP protocol"],
+          :framework_port_overide,
+          :blocking_worker,
+          :custom_start_script,
+          :custom_install_script,
+          :custom_post_install_script ]
+  %>
   <% if @blueprint_version.software_version.software.framework.service_configurations %>
     <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :service_configurations, attributes: [:service_definition, :variables], fa: :'caret-right' %>
   <% end %>

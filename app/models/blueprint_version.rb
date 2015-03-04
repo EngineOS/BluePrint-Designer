@@ -103,6 +103,14 @@ class BlueprintVersion < ActiveRecord::Base
     software_version.to_label + ' ' + name
   end
 
+  def version
+    "#{major}.#{minor}.#{release_level}.#{patch}"
+  end
+
+  def memory
+    "#{required_memory}/#{recommended_memory} MB"
+  end
+
 private
 
   def http_protocol_handle

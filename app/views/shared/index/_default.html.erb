@@ -1,18 +1,23 @@
 <%  items ||= []
-    model_name = items.model_name.to_s
+    model_name = items.first.class.model_name.to_s
     new_item_path_parameters ||= [:new, model_name.underscore]
     back_path ||= root_path
     attributes ||= nil 
     page_title ||= model_name.underscore.humanize.pluralize
+    show_back_button ||= true if show_back_button.nil?
+    show_add_button ||= true if show_back_button.nil?
     fa ||= false
     as ||= :table %>
 
 <div class="col-sm-12">
-
   <h2><% if fa %><%= content_tag(:i , nil, class: "fa fa-#{fa}") + ' ' %><% end %><%= page_title %></h2>
 
-  <%= link_to content_tag(:i, "", class: "fa fa-arrow-left") + ' Back', back_path, class: "btn btn-warning btn-lg trigger-response-modal" %>
-  <%= link_to content_tag(:i, "", class: "fa fa-plus") + " Add", new_item_path_parameters, class: "btn btn-primary trigger-response-modal" %>
+  <% if show_back_button %>
+    <%= link_to content_tag(:i, "", class: "fa fa-arrow-left") + ' Back', back_path, class: "btn btn-warning btn-lg trigger-response-modal" %>
+  <% end %>
+  <% if show_add_button %>
+    <%= link_to content_tag(:i, "", class: "fa fa-plus") + " Add", new_item_path_parameters, class: "btn btn-primary trigger-response-modal" %>
+  <% end %>
 
 </div>
 

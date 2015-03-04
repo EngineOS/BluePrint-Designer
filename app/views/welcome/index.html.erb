@@ -1,23 +1,10 @@
 
-<div class="col-sm-12 text-center top-gap">
+<div class="col-sm-12 text-center">
   <%= link_to image_tag("engines_logo.png", class: "home-page-logo-holder"), root_path, class: 'trigger-response-modal' %>
 </div>
 
-<div class="col-sm-10 col-sm-offset-1">
-  <div class="home-page-banner">
-    <h2>Blueprint Design Studio</h2>
-  </div>
-</div>
-
 <div class="col-sm-12 text-center top-gap">
-  <div class="btn-group-vertical">
-    <%= link_to content_tag(:i, "", class: "fa fa-tablet") + " Softwares", softwares_path, class: 'btn btn-xlg btn-default trigger-response-modal' %>
-    <%= link_to content_tag(:i, "", class: "fa fa-hdd-o") + " Services", service_definitions_path, class: 'btn btn-lg btn-default trigger-response-modal' %>
-    <%= link_to content_tag(:i, "", class: "fa fa-file-code-o") + " Publishers", publishers_path, class: 'btn btn-lg btn-default trigger-response-modal' %>
-    <%= link_to content_tag(:i, "", class: "fa fa-copyright") + " Licenses", licenses_path, class: 'btn btn-lg btn-default trigger-response-modal' %>
-    <%= link_to content_tag(:i, "", class: "fa fa-code") + " Languages", languages_path, class: 'btn btn-lg btn-default trigger-response-modal' %>
-    <%= link_to content_tag(:i, "", class: "fa fa-film") + " Frameworks", frameworks_path, class: 'btn btn-lg btn-default trigger-response-modal' %>
-    <%= link_to content_tag(:i, "", class: "fa fa-plug") + " Deployment types", deployment_types_path, class: 'btn btn-lg btn-default trigger-response-modal' %>
-    <%= link_to content_tag(:i, "", class: "fa fa-lightbulb-o") + " Service types", service_types_path, class: 'btn btn-lg btn-default trigger-response-modal' %>
-  </div>
+
+  <%= render 'shared/index/default', items: @blueprint_versions, fa: :'file-text', page_title: :'Recent blueprints', show_back_button: false, show_add_button: false %>
+
 </div>
