@@ -46,6 +46,9 @@
   <% if @blueprint_version.software_version.software.framework.apache_htaccess_files %>
     <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :apache_htaccess_files, fa: :'caret-right' %>
   <% end %>
+  <% if @blueprint_version.software_version.software.framework.apache_httpd_configurations %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :apache_httpd_configurations, fa: :'caret-right', attributes: [[:httpd_configuration, 'httpd configuration']] %>
+  <% end %>
   <% if @blueprint_version.software_version.software.framework.apache_modules %>
     <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :apache_modules, fa: :'caret-right', attributes: [[:os_package, "OS package"], :module] %>
   <% end %>
@@ -97,6 +100,9 @@
         <% end %>
         <% if @blueprint_version.software_version.software.framework.apache_htaccess_files %>
           <a href="#apache_htaccess_files"><li>Apache .htaccess files</li></a>
+        <% end %>
+        <% if @blueprint_version.software_version.software.framework.apache_httpd_configurations %>
+          <a href="#apache_httpd_configurations"><li>Apache httpd configurations</li></a>
         <% end %>
         <% if @blueprint_version.software_version.software.framework.apache_modules %>
           <a href="#apache_modules"><li>Apache modules</li></a>

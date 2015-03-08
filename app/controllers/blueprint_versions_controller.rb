@@ -170,13 +170,14 @@ private
 
     [
       # :software_version,
-      :blocking_worker,
+      # :blocking_worker,
       :service_configurations,
       :persistent_directories,
       :replacement_strings,
       :persistent_files,
       :installed_packages,
       :system_packages,
+      :ports,
       :workers,
       :rake_tasks,
       :template_files,
@@ -185,7 +186,6 @@ private
       :apache_htaccess_files,
       :apache_modules,
       :variables,
-      :component_directories,
       :component_sources
     ]
 

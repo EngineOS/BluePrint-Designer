@@ -53,12 +53,44 @@ class SysConfig
   #Cron
   @@CronDir = "/opt/engines/etc/cron/tabs"
   
+  @@PreStartScript="/home/engines/scripts/pre-runnning.sh"
+  @@InstallScript="/home/engines/scripts/custom_install.sh"
+  @@StartScript="/home/engines/scripts/custom_start.sh"
+  @@PostInstallScript="/home/engines/scripts/post_install.sh"
+  @@ScriptsDir="/home/engines/scripts/"
+  @@CustomPHPiniFile="/home/engines/configs/php/71-custom.ini"
+  @@CustomApacheConfFile="/home/engines/configs/apache2/extra.conf"
+  
+  
   #service Manager
   @@ServiceTreeFile = "/opt/engines/run/service_manager/services.yaml"
   @@ServiceMapTemplateDir="/opt/engines/etc/services/mapping/"
   @@ServiceTemplateDir="/opt/engines/etc/services/providers/"
   @@SetupParamsScript="/bin/bash /home/setup_params.sh"
   
+  
+  def SysConfig.CustomApacheConfFile
+    @@CustomApacheConfFile
+  end 
+  def SysConfig.CustomPHPiniFile
+    @@CustomPHPiniFile
+  end
+  def SysConfig.ScriptsDir
+    return @@ScriptsDir
+  end
+  def SysConfig.PreStartScript
+     return @@PreStartScript
+  end
+  def SysConfig.StartScript
+    return @@StartScript
+  end
+  
+  def SysConfig.InstallScript
+      return @@InstallScript
+  end
+  def SysConfig.PostInstallScript
+    return @@PostInstallScript
+  end
   def SysConfig.SetupParamsScript
     return @@SetupParamsScript
   end

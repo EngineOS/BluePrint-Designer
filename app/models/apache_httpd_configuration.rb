@@ -1,4 +1,4 @@
-class ApacheHttpdConfFile < ActiveRecord::Base
+class ApacheHttpdConfiguration < ActiveRecord::Base
   belongs_to :blueprint_version
 
   def as_json(options={})

@@ -2,7 +2,7 @@
     nest_routes ||= false
     nest_in ||= nest_routes ? record_object : nil
     map_to ||= nil
-    model_class = items.first.class
+    model_class = items.model
     model_name = model_class.model_name.to_s
     label ||= model_name.humanize
     new_item_path ||= [:new, model_name.underscore]
@@ -22,31 +22,6 @@
 <div class="col-sm-12">
 
   <table class="table table-condensed top-gap">
-    <tr>
-      <%  attributes.each do |attribute| 
-            if attribute.kind_of?(Array) 
-              label = attribute[1]
-              attribute = attribute[0] 
-            else 
-              label = attribute.to_s.humanize 
-            end
-      %>
-        
-        <th>
-          <% if attribute.to_sym == :to_label %>
-            &nbsp
-          <% else %>
-            <%= label %>
-          <% end %>
-        </th>
-
-      <% end %>
-
-      <% if show_index_actions %>
-          <th></th>
-      <% end %>
-
-    </tr>
 
     <% if items.empty? %>
       <tr>
@@ -54,35 +29,64 @@
           <i>none</i>
         </td>
       </tr>
-    <% end %>
+    <% else %>
 
-    <%  items.each do |item|
-
-          url_for_item = url_for (nest_routes ? [nest_in, item] : item)
-
-          if map_to
-            item = item.send(map_to)
-          end 
-     %>
-
-          <tr id="<%= item.class.name.underscore + '_' + item.id.to_s %>" class='clickable-table-row' href='<%= url_for_item %>'>
-            <% attributes.each do |attribute| %>
-              <% if attribute.kind_of?(Array) %>
-                <% attribute = attribute[0] %>
+      <% if attributes != [:to_label] %>
+        <tr>
+          <%  attributes.each do |attribute| 
+                if attribute.kind_of?(Array) 
+                  label = attribute[1]
+                  attribute = attribute[0] 
+                else 
+                  label = attribute.to_s.humanize 
+                end
+          %>
+            
+            <th>
+              <% if attribute.to_sym == :to_label %>
+                &nbsp
+              <% else %>
+                <%= label %>
               <% end %>
+            </th>
 
-              <td style="vertical-align: middle;">
-                <% value = SharedViews.resolve_value_for item, attribute #, label_method: :to_label %>
-                <%= SharedViews.value_as_html value %>
-              </td>
-            <% end %>
-            <% if show_index_actions %>
-              <td>
-                <%= render "#{model_name.pluralize.underscore}/index_item_actions", item: item %>
-              </td>
-            <% end %>
-          </tr>
+          <% end %>
 
+          <% if show_index_actions %>
+              <th></th>
+          <% end %>
+
+        </tr>
+      <% end %>
+
+      <%  items.each do |item|
+
+            url_for_item = url_for (nest_routes ? [nest_in, item] : item)
+
+            if map_to
+              item = item.send(map_to)
+            end 
+       %>
+
+            <tr id="<%= item.class.name.underscore + '_' + item.id.to_s %>" class='clickable-table-row' href='<%= url_for_item %>'>
+              <% attributes.each do |attribute| %>
+                <% if attribute.kind_of?(Array) %>
+                  <% attribute = attribute[0] %>
+                <% end %>
+
+                <td style="vertical-align: middle;">
+                  <% value = SharedViews.resolve_value_for item, attribute #, label_method: :to_label %>
+                  <%= SharedViews.value_as_html value %>
+                </td>
+              <% end %>
+              <% if show_index_actions %>
+                <td>
+                  <%= render "#{model_name.pluralize.underscore}/index_item_actions", item: item %>
+                </td>
+              <% end %>
+            </tr>
+
+      <%  end %>
     <%  end %>
 
   </table>

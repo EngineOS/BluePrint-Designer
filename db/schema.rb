@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150303010003) do
+ActiveRecord::Schema.define(version: 20150305015042) do
 
   create_table "apache_custom_site_files", force: true do |t|
     t.text     "site_configuration"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20150303010003) do
     t.datetime "updated_at"
   end
 
-  create_table "apache_httpd_conf_files", force: true do |t|
+  create_table "apache_httpd_configurations", force: true do |t|
     t.text     "httpd_configuration"
     t.integer  "blueprint_version_id"
     t.datetime "created_at"
@@ -93,24 +93,25 @@ ActiveRecord::Schema.define(version: 20150303010003) do
   create_table "frameworks", force: true do |t|
     t.string   "name"
     t.integer  "language_id"
-    t.boolean  "service_configurations", default: true
-    t.boolean  "persistent_directories", default: true
-    t.boolean  "replacement_strings",    default: true
-    t.boolean  "persistent_files",       default: true
-    t.boolean  "installed_packages",     default: true
-    t.boolean  "system_packages",        default: true
-    t.boolean  "ports",                  default: true
-    t.boolean  "workers",                default: true
-    t.boolean  "rake_tasks",             default: false
-    t.boolean  "template_files",         default: true
-    t.boolean  "file_write_permissions", default: true
-    t.boolean  "custom_php_inis",        default: false
-    t.boolean  "apache_htaccess_files",  default: false
-    t.boolean  "apache_modules",         default: false
-    t.boolean  "variables",              default: true
-    t.boolean  "component_sources",      default: true
+    t.boolean  "service_configurations",      default: true
+    t.boolean  "persistent_directories",      default: true
+    t.boolean  "replacement_strings",         default: true
+    t.boolean  "persistent_files",            default: true
+    t.boolean  "installed_packages",          default: true
+    t.boolean  "system_packages",             default: true
+    t.boolean  "ports",                       default: true
+    t.boolean  "workers",                     default: true
+    t.boolean  "rake_tasks",                  default: false
+    t.boolean  "template_files",              default: true
+    t.boolean  "file_write_permissions",      default: true
+    t.boolean  "custom_php_inis",             default: false
+    t.boolean  "apache_htaccess_files",       default: false
+    t.boolean  "apache_modules",              default: false
+    t.boolean  "variables",                   default: true
+    t.boolean  "component_sources",           default: true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "apache_httpd_configurations", default: true
   end
 
   create_table "installed_packages", force: true do |t|

@@ -4,7 +4,7 @@ class ServiceConfigurationVariable < ActiveRecord::Base
   has_one :variable, as: :variable_consumer, dependent: :destroy
 
   validate :regex_validation, on: :update
-  validate :value_confirmation_validation, on: :update
+  # validate :value_confirmation_validation, on: :update
   validate :value_present_validation, on: :update
 
   accepts_nested_attributes_for :variable

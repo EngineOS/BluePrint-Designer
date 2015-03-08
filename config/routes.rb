@@ -33,6 +33,7 @@ Rails.application.routes.draw do
             :file_write_permissions,
             :custom_php_inis,
             :apache_htaccess_files,
+            :apache_httpd_configurations,
             :apache_modules,
             :variables,
             :service_configuration_variables,

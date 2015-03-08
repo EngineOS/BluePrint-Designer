@@ -17,7 +17,7 @@
   <%= render 'shared/form/number_field', name: :recommended_memory, label: "Recommended", f: f, offset: 0, width: 4 %>
 
   <%= render 'shared/form/legend', text: "Deployment" %>
-  <%= render 'shared/form/radio_buttons', name: :http_protocol, label: "Protocol", f: f %>
+  <%= render 'shared/form/radio_buttons', name: :http_protocol, label: "Protocol", f: f, value: 'HTTP and HTTPS' %>
   <%= render 'shared/form/number_field', name: :framework_port_overide, f: f %>
 
   <%= render 'shared/form/association_select', name: :blocking_worker, class_name: :worker, f: f %>
@@ -32,19 +32,3 @@
   <%= render 'shared/form/cancel_and_submit_buttons', f: f, cancel_path: cancel_path %>
 
 <% end %>
-
-<% if false %>
-<!--   <%= render 'shared/form/legend', text: "System" %>
-  <%= render 'shared/form/checkbox', name: :mysql, label: "MySQL", f: f %>
-  <%= render 'shared/form/checkbox', name: :pgsql, label: "Postgres", f: f %>
-  <%= render 'shared/form/checkbox', name: :file_system, label: "File system", f: f %> -->
-
-  <%= f.fields_for :blocking_worker do |ff| %>
-    <%= render 'shared/form/text_field', name: :name, f: ff %>
-    <%= render 'shared/form/text_field', name: :comment, f: ff %>
-    <%= render 'shared/form/text_field', name: :command, code: true, f: ff %>
-  <% end %>
-
-
-<% end %>
-

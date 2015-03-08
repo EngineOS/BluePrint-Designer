@@ -7,7 +7,6 @@ class BlueprintVersion < ActiveRecord::Base
   belongs_to :blocking_worker, class_name: :Worker
 
   has_many :service_configurations, dependent: :destroy
-  # has_many :service_configuration_variables, as: :variable_consumer, through: :service_configurations
   has_many :persistent_directories, dependent: :destroy
   has_many :replacement_strings, dependent: :destroy
   has_many :persistent_files, dependent: :destroy
@@ -19,30 +18,12 @@ class BlueprintVersion < ActiveRecord::Base
   has_many :file_write_permissions, dependent: :destroy
   has_many :custom_php_inis, dependent: :destroy
   has_many :apache_htaccess_files, dependent: :destroy
+  has_many :apache_httpd_configurations, dependent: :destroy
   has_many :apache_modules, dependent: :destroy
   has_many :variables, as: :variable_consumer, dependent: :destroy
-  # has_many :component_directories, dependent: :destroy
   has_many :component_sources, dependent: :destroy
   has_many :ports, dependent: :destroy
 
-  # accepts_nested_attributes_for :blocking_worker, reject_if: :all_blank, allow_destroy: true
-  # # accepts_nested_attributes_for :software_services, reject_if: :all_blank, allow_destroy: true
-  # accepts_nested_attributes_for :service_configurations, reject_if: :all_blank, allow_destroy: true
-  # accepts_nested_attributes_for :persistent_directories, reject_if: :all_blank, allow_destroy: true
-  # accepts_nested_attributes_for :replacement_strings, reject_if: :all_blank, allow_destroy: true
-  # accepts_nested_attributes_for :persistent_files, reject_if: :all_blank, allow_destroy: true
-  # accepts_nested_attributes_for :installed_packages, reject_if: :all_blank, allow_destroy: true
-  # accepts_nested_attributes_for :system_packages, reject_if: :all_blank, allow_destroy: true
-  # # # accepts_nested_attributes_for :ports, reject_if: :all_blank, allow_destroy: true
-  # accepts_nested_attributes_for :workers, reject_if: :all_blank, allow_destroy: true
-  # accepts_nested_attributes_for :rake_tasks, reject_if: :all_blank, allow_destroy: true
-  # accepts_nested_attributes_for :template_files, reject_if: :all_blank, allow_destroy: true
-  # accepts_nested_attributes_for :file_write_permissions, reject_if: :all_blank, allow_destroy: true
-  # accepts_nested_attributes_for :custom_php_inis, reject_if: :all_blank, allow_destroy: true
-  # accepts_nested_attributes_for :apache_htaccess_files, reject_if: :all_blank, allow_destroy: true
-  # accepts_nested_attributes_for :apache_modules, reject_if: :all_blank, allow_destroy: true
-  # accepts_nested_attributes_for :variables, reject_if: :all_blank, allow_destroy: true
-  
   # validates :record_label, presence: true
   # validates_uniqueness_of :record_label, :case_sensitive => false
 
@@ -88,6 +69,7 @@ class BlueprintVersion < ActiveRecord::Base
         file_write_permissions: file_write_permissions.as_json,
         custom_php_inis: custom_php_inis.as_json,
         apache_htaccess_files: apache_htaccess_files.as_json,
+        apache_httpd_configurations: apache_httpd_configurations.as_json,
         apache_modules: apache_modules.as_json,
         variables: variables.as_json,
         component_sources: component_sources.as_json
@@ -104,11 +86,11 @@ class BlueprintVersion < ActiveRecord::Base
   end
 
   def version
-    "#{major}.#{minor}.#{release_level}.#{patch}"
+    "#{major.to_i}.#{minor.to_i}.#{release_level.nil? ? '?' : release_level}.#{patch.to_i}"
   end
 
   def memory
-    "#{required_memory}/#{recommended_memory} MB"
+    "#{required_memory.to_i}/#{recommended_memory.to_i} MB"
   end
 
 private
