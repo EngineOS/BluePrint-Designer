@@ -34,7 +34,7 @@ class BlueprintVersion < ActiveRecord::Base
     {
       software:
       {
-        name: software_version.software.to_handle,
+        name: software_version.software.default_engine_name,
         major: major,
         minor: minor,
         release_level: release_level,
@@ -72,7 +72,9 @@ class BlueprintVersion < ActiveRecord::Base
         apache_httpd_configurations: apache_httpd_configurations.as_json,
         apache_modules: apache_modules.as_json,
         variables: variables.as_json,
-        component_sources: component_sources.as_json
+        component_sources: component_sources.as_json,
+        component_path: software_version.software.component_path,
+        extract_components: software_version.software.extract_components
       }
     }
   end

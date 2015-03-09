@@ -16,7 +16,19 @@ class Software < ActiveRecord::Base
   validate :validate_uniqueness_of_handle
 
   def to_handle
-    publisher.to_handle + '_' + full_title.downcase.gsub(' ', '_')
+    publisher.to_handle + '_' + title.downcase.gsub(' ', '_')
+  end
+
+  def title
+    if short_title.gsub(' ', '').present?
+      short_title
+    else
+      full_title
+    end
+  end
+
+  def default_engine_name
+    title.downcase.gsub(' ', '_').gsub(/[^a-z_]/, "").first(16)
   end
 
   def to_label
