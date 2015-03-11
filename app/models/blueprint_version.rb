@@ -20,6 +20,7 @@ class BlueprintVersion < ActiveRecord::Base
   has_many :apache_htaccess_files, dependent: :destroy
   has_many :apache_httpd_configurations, dependent: :destroy
   has_many :apache_modules, dependent: :destroy
+  has_many :pear_modules, dependent: :destroy
   has_many :variables, as: :variable_consumer, dependent: :destroy
   has_many :component_sources, dependent: :destroy
   has_many :ports, dependent: :destroy

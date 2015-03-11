@@ -52,6 +52,9 @@
   <% if @blueprint_version.software_version.software.framework.apache_modules %>
     <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :apache_modules, fa: :'caret-right', attributes: [[:os_package, "OS package"], :module] %>
   <% end %>
+  <% if @blueprint_version.software_version.software.framework.pear_modules %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :pear_modules, fa: :'caret-right', attributes: [[:os_package, "OS package"], :module] %>
+  <% end %>
   <% if @blueprint_version.software_version.software.framework.variables %>
     <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :variables, fa: :'caret-right',attributes: [:to_label, :field_type, :value], new_item_path: url_for([:new, :variable, variable_consumer_id: @blueprint_version.id, variable_consumer_type: :BlueprintVersion]) %>
   <% end %>
@@ -106,6 +109,9 @@
         <% end %>
         <% if @blueprint_version.software_version.software.framework.apache_modules %>
           <a href="#apache_modules"><li>Apache modules</li></a>
+        <% end %>
+        <% if @blueprint_version.software_version.software.framework.pear_modules %>
+          <a href="#pear_modules"><li>Pear modules</li></a>
         <% end %>
         <% if @blueprint_version.software_version.software.framework.variables %>
           <a href="#variables"><li>Variables</li></a>

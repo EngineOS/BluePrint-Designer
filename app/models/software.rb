@@ -20,7 +20,7 @@ class Software < ActiveRecord::Base
   end
 
   def title
-    if short_title.gsub(' ', '').present?
+    if short_title.present? && short_title.gsub(' ', '').present?
       short_title
     else
       full_title
