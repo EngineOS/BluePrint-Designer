@@ -5,13 +5,13 @@ class ApacheModulesController < ApplicationController
   end
 
   def create
-    render text: params
-    # @apache_module = ApacheModule.new(apache_module_params)
-    # if @apache_module.save
-    #   redirect_to @apache_module
-    # else
-    #   render 'new'
-    # end
+    # render text: params
+    @apache_module = ApacheModule.new(apache_module_params)
+    if @apache_module.save
+      redirect_to @apache_module
+    else
+      render 'new'
+    end
   end
 
   def show
