@@ -40,6 +40,7 @@ class BlueprintVersion < ActiveRecord::Base
         release_level: release_level,
         patch: patch,
         license_name: software_version.software.license.to_handle,
+        license_label: software_version.software.license.to_label,
         license_sourceurl: software_version.software.license.source_url,
         full_title: software_version.software.full_title,
         short_title: software_version.software.short_title,
