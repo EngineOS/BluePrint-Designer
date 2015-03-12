@@ -73,6 +73,7 @@ class BlueprintVersion < ActiveRecord::Base
         apache_htaccess_files: apache_htaccess_files.as_json,
         apache_httpd_configurations: apache_httpd_configurations.as_json,
         apache_modules: apache_modules.as_json,
+        pear_modules: pear_modules.as_json,
         variables: variables.as_json,
         component_sources: component_sources.as_json,
         component_path: software_version.software.component_path,

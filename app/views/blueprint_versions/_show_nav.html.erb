@@ -1,0 +1,58 @@
+<nav class="affix top-gap hidden-xs hidden-sm" >
+  <ul class="nav">
+    <small>
+      <a href="#"><li>Top</li></a>
+              <% if @blueprint_version.software_version.software.framework.service_configurations %>
+        <a href="#service_configurations"><li>Service configurations</li></a>
+      <% end %>
+      <% if @blueprint_version.software_version.software.framework.persistent_directories %>
+        <a href="#persistent_directories"><li>Persistent directories</li></a>
+      <% end %>
+      <% if @blueprint_version.software_version.software.framework.replacement_strings %>
+        <a href="#replacement_strings"><li>Replacement strings</li></a>
+      <% end %>
+      <% if @blueprint_version.software_version.software.framework.persistent_files %>
+        <a href="#persistent_files"><li>Persistent files</li></a>
+      <% end %>
+      <% if @blueprint_version.software_version.software.framework.installed_packages %>
+        <a href="#installed_packages"><li>Installed packages</li></a>
+      <% end %>
+      <% if @blueprint_version.software_version.software.framework.system_packages %>
+        <a href="#system_packages"><li>System packages</li></a>
+      <% end %>
+      <% if @blueprint_version.software_version.software.framework.workers %>
+        <a href="#workers"><li>Workers</li></a>
+      <% end %>
+      <% if @blueprint_version.software_version.software.framework.rake_tasks %>
+        <a href="#rake_tasks"><li>Rake tasks</li></a>
+      <% end %>
+      <% if @blueprint_version.software_version.software.framework.template_files %>
+        <a href="#template_files"><li>Template files</li></a>
+      <% end %>
+      <% if @blueprint_version.software_version.software.framework.file_write_permissions %>
+        <a href="#file_write_permissions"><li>File write permissions</li></a>
+      <% end %>
+      <% if @blueprint_version.software_version.software.framework.custom_php_inis %>
+        <a href="#custom_php_inis"><li>Custom php.ini files</li></a>
+      <% end %>
+      <% if @blueprint_version.software_version.software.framework.apache_htaccess_files %>
+        <a href="#apache_htaccess_files"><li>Apache .htaccess files</li></a>
+      <% end %>
+      <% if @blueprint_version.software_version.software.framework.apache_httpd_configurations %>
+        <a href="#apache_httpd_configurations"><li>Apache httpd configurations</li></a>
+      <% end %>
+      <% if @blueprint_version.software_version.software.framework.apache_modules %>
+        <a href="#apache_modules"><li>Apache modules</li></a>
+      <% end %>
+      <% if @blueprint_version.software_version.software.framework.pear_modules %>
+        <a href="#pear_modules"><li>Pear modules</li></a>
+      <% end %>
+      <% if @blueprint_version.software_version.software.framework.variables %>
+        <a href="#variables"><li>Variables</li></a>
+      <% end %>
+      <% if @blueprint_version.software_version.software.framework.component_sources %>
+        <a href="#component_sources"><li>Component sources</li></a>
+      <% end %>
+    </small>
+  </ul>
+</nav>
