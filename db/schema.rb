@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150311230231) do
+ActiveRecord::Schema.define(version: 20150320010943) do
 
   create_table "apache_custom_site_files", force: true do |t|
     t.text     "site_configuration"
@@ -60,6 +60,9 @@ ActiveRecord::Schema.define(version: 20150311230231) do
     t.text     "custom_post_install_script"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "database_seed_file"
+    t.boolean  "continuos_deployment",         default: false
+    t.text     "installation_report_template"
   end
 
   create_table "component_sources", force: true do |t|
@@ -113,6 +116,8 @@ ActiveRecord::Schema.define(version: 20150311230231) do
     t.datetime "updated_at"
     t.boolean  "apache_httpd_configurations", default: true
     t.boolean  "pear_modules",                default: false
+    t.boolean  "continuos_deployment",        default: false
+    t.boolean  "database_seed_file",          default: true
   end
 
   create_table "installed_packages", force: true do |t|

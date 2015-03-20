@@ -1,0 +1,11 @@
+---
+persistent_directories:
+  - path
+
+replacement_strings:
+  - - replacement_string
+    - Hi
+  - name: file
+  - file
+
+

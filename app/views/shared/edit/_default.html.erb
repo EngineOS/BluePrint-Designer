@@ -8,7 +8,7 @@
 <h2><% if fa %><%= content_tag(:i , nil, class: "fa fa-#{fa}") + ' ' %><% end %><%= page_title %></h2>
 
 <% if File.exists?(Rails.root.join("app", "views", record_class_name.pluralize, "_form.html.erb")) %>
-  <%= render "#{record_class_name.pluralize}/form" %>
+  <%= render "#{record_class_name.pluralize}/form", record_object: record_object, nest_in: nest_in, attributes: attributes %>
 <% else %>
   <%= render "shared/form/default", record_object: record_object, attributes: attributes, nest_in: nest_in %>
 <% end %>

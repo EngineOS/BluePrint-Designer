@@ -12,16 +12,19 @@
     belongs_to_associations ||= record_class.reflect_on_all_associations(:belongs_to).map(&:name)
     belongs_to_fields = belongs_to_associations.map{|association| (association.to_s + '_id').to_sym}
 
-    attributes ||= (record_class.column_names.map(&:to_sym) - [:id, :created_at, :updated_at, :value_confirmation]).
+    attributes ||= (record_class.column_names.map(&:to_sym) - [:id, :created_at, :updated_at, :value_confirmation] ).
       map do |attribute|
         belongs_to_fields.include?(attribute) ? attribute.to_s.chomp('_id').to_sym : attribute
       end
+
+    if (nest_in.present? && attributes.exclude?(nest_in))
+      attributes << nest_in
+    end
 
      %>
 
 <% attributes.each do |attribute| %>
 
   <%= render "shared/form/field", f: f, attribute: attribute, offset: offset, width: width, buffer: buffer, nest_in: nest_in %>  
-
 
 <% end %>

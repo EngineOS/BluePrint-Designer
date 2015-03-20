@@ -21,11 +21,20 @@
   <%= render 'shared/form/number_field', name: :framework_port_overide, f: f %>
 
   <%= render 'shared/form/association_select', name: :blocking_worker, class_name: :worker, f: f %>
-
+  <% if @blueprint_version.software_version.software.framework.continuos_deployment %>
+    <%= render 'shared/form/checkbox', name: :continuos_deployment, f: f %>
+  <% end %>
+  <% if @blueprint_version.software_version.software.framework.database_seed_file %>
+    <%= render 'shared/form/legend', text: "Database" %>
+    <%= render 'shared/form/text_area', name: :database_seed_file, label: 'Seed file', f: f %>
+  <% end %>
   <%= render 'shared/form/legend', text: "Scripts" %>
   <%= render 'shared/form/text_area', name: :custom_install_script, code: true, rows: 6, label: "Install", f: f %>
   <%= render 'shared/form/text_area', name: :custom_post_install_script, code: true, rows: 6, label: "Post-install", f: f %>
   <%= render 'shared/form/text_area', name: :custom_start_script, code: true, rows: 6, label: "Start", f: f %>
+
+  <%= render 'shared/form/legend', text: "Installation report" %>
+  <%= render 'shared/form/text_area', name: :installation_report_template, label: 'Template', f: f %>
 
   <% cancel_path = @blueprint_version.new_record? ? software_version_path(@blueprint_version.software_version) : blueprint_version_path(@blueprint_version) %>
 

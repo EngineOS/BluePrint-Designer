@@ -6,4 +6,8 @@ class ReplacementString < ActiveRecord::Base
     super
   end 
 
+  def attributes_from_yaml
+    YAML.load_file('app/attributes.yml')["replacement_strings"]
+  end
+
 end

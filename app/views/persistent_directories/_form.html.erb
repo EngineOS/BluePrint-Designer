@@ -1,0 +1,5 @@
+<% cancel_path ||= nil
+   attributes = record_object.attributes_from_yaml
+ %>
+
+<%= render "shared/form/default", record_object: record_object, nest_in: nest_in, attributes: attributes, cancel_path: cancel_path %>

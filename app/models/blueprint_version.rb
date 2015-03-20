@@ -77,7 +77,10 @@ class BlueprintVersion < ActiveRecord::Base
         variables: variables.as_json,
         component_sources: component_sources.as_json,
         component_path: software_version.software.component_path,
-        extract_components: software_version.software.extract_components
+        extract_components: software_version.software.extract_components,
+        installation_report_template: installation_report_template,
+        continuos_deployment: continuos_deployment,
+        database_seed_file: database_seed_file
       }
     }
   end
