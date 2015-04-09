@@ -13,7 +13,8 @@ class SoftwareServiceDefinition
               :publisher_namespace,
               :service_container, 
               :persistant,
-              :target_environment_variables
+              :target_environment_variables,
+              :service_handle_field
 
   
   def SoftwareServiceDefinition.from_yaml( yaml )
@@ -30,25 +31,14 @@ class SoftwareServiceDefinition
   end
   
   def SoftwareServiceDefinition.find(service_type,provider)
-  
-#          p :looking_for
-#          p provider
-#          p service_type
 
-          #FIXME and support more than one dir
-          if service_type.include?('/')
-#            p :sub_service
-#           # provider += "/" + service_type.sub(/\/.*/,"")
-#           #service_type.sub(/.*\//,"")
-#           
-#            p :sub_service
-#            p provider 
-#            p service_type
-            
-          end
+    if service_type == nil  || provider == nil
+      
+  return nil
+end
+    
     dir = SysConfig.ServiceTemplateDir + "/" + provider
-            p :dir
-            p dir 
+
           if Dir.exist?(dir)
             service_def = SoftwareServiceDefinition.load_service_def(dir,service_type)
               if service_def == nil
@@ -58,21 +48,22 @@ class SoftwareServiceDefinition
                 p dir
                 return nil                
               end
-#              p :service_def
-#              p service_def.title
-#              p service_def.to_s
+
               return service_def.to_h
           end
     rescue Exception=>e
-     
+     p :service_type
+     p service_type.to_s
+     p :provider
+     p provider.to_s
         SystemUtils.log_exception(e)
-     
+       
+        return nil
   end
   
   def SoftwareServiceDefinition.load_service_def(dir,service_type)
     filename=dir + "/" + service_type + ".yaml"
-      p :loading_def_from
-      p filename
+
     if File.exist?(filename)
       yaml = File.read(filename)
   
@@ -106,8 +97,22 @@ class SoftwareServiceDefinition
            SystemUtils.log_exception(e)
   end
   
+  def SoftwareServiceDefinition.is_persistant?(params)
+   service =  SoftwareServiceDefinition.find(params[:type_path],params[:publisher_namespace])
+     if service == nil
+      return nil
+     end
+     return service[:persistant]
+  end
   
-
+  def SoftwareServiceDefinition.service_handle_field(params)
+     service =  SoftwareServiceDefinition.find(params[:type_path],params[:publisher_namespace])
+       if service == nil
+        return nil
+       end
+       return service[:service_handle_field]
+    end
+    
   def to_h   
        hash = {}
        instance_variables.each {|var| 
@@ -116,12 +121,7 @@ class SoftwareServiceDefinition
          hash[symbol] = instance_variable_get(var) }
        
          return SystemUtils.symbolize_keys(hash)
-#     end
-#    p self.to_s
-#    jason = self.to_json
-#    p :jason
-#    p jason.to_s
-#    return JSON.parse(jason, {:symbolize_names => true})
+
     rescue Exception=>e
         
            SystemUtils.log_exception(e)

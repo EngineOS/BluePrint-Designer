@@ -62,6 +62,10 @@ class ServiceConfiguration < ActiveRecord::Base
 
       service_configuration_variables.each do |service_configuration_variable|
         variable = service_configuration_variable.variable
+        variable_update_params = service_definition_variables.find{ |variable_definition| variable.name == variable_definition[:name] }.
+                                slice(:value_confirmation, :label, :field_type, :select_collection, :tooltip, :hint, :placeholder, :comment, :regex_validator, :regex_invalid_message, :mandatory, :ask_at_build_time, :build_time_only, :immutable).
+                                map { |key, value| { key => value.to_s } }.reduce(:merge)
+        variable.update(variable_update_params)
         if deprecated_variables.include? variable.name 
           variable.update_attribute(:deprecated, true)
         end

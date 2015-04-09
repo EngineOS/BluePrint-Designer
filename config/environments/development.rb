@@ -2,7 +2,7 @@ Rails.application.configure do
 
   # update service definitions lib file
   config.before_initialize do
-    FileUtils.cp '/opt/engines/lib/ruby/managed_services/software_services/SoftwareServiceDefinition.rb',
+    FileUtils.cp '/opt/engines/lib/ruby/managed_services/service_definitions/SoftwareServiceDefinition.rb',
                   Rails.root.join('lib')
     FileUtils.cp_r '/opt/engines/etc/services', Rails.root.join('lib'), remove_destination: true
     FileUtils.cp '/opt/engines/lib/ruby/system/SystemUtils.rb',

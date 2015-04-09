@@ -5,11 +5,12 @@ accepts:
 author: Engines
 title: Editor
 description: "Editor "
-service_type: editor 
-service_provider: EnginesSystem
+type_path: editor 
+publisher_namespace: EnginesSystem
 dedicated: true
 persistant: true
 image_name: engines/editor
+service_handle_field: name
 consumer_params:
 setup_params:
  dropbox_address:

@@ -39,7 +39,7 @@ class ServiceConfigurationsController < ApplicationController
 
   def reload_service_definition
     @service_configuration = ServiceConfiguration.find(params[:id])
-    @service_configuration.reload_service_definition
+    @service_configuration.reload_service_definition_variables
     @service_configuration.save
       render 'show'
   end

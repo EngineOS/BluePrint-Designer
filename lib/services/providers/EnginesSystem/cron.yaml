@@ -7,11 +7,12 @@ accepts:
 author: Engines
 title: Cron
 description: "Scheduales tasks"
-service_type: cron
+type_path: cron
 service_container: cron
-service_provider: EnginesSystem
+publisher_namespace: EnginesSystem
 dedicated: false
 persistant: false
+service_handle_field: name
 consumer_params:
 setup_params:
  name:
@@ -23,7 +24,7 @@ setup_params:
   hint: " "
   placeholder: " "
   mandatory: true
-  value: "$_Builder(engine_name)"
+  value: "_Builder(engine_name)"
   comment: " "
   regex_invalid_message: "wrong go back and try again"
  cron_job:
