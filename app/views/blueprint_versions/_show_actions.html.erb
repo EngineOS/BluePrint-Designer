@@ -4,7 +4,8 @@
       <i class="fa fa-crosshairs"> Actions</i>
     </a>
     <ul class="dropdown-menu record-info-dropdown">
-      <li><%= link_to content_tag(:i, "", class: "fa fa-book") + ' Publish', blueprint_version_publish_path(@blueprint_version), class: "btn-lg trigger-response-modal" %></li>
+      <li><%= link_to '{} JSON', blueprint_version_publish_path(@blueprint_version), class: "btn-lg trigger-response-modal" %></li>
+      <li><%= link_to content_tag(:i, "", class: "fa fa-git-square") + ' Commit', blueprint_version_commit_to_local_repository_path(@blueprint_version), class: "btn-lg trigger-response-modal" %></li>
       <li role="presentation" class="divider"></li>
       <li><%= link_to content_tag(:i, "", class: "fa fa-copy") + ' Duplicate', blueprint_version_duplicate_path(@blueprint_version), class: "btn-lg trigger-response-modal" %></li>
     </ul>

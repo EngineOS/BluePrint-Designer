@@ -83,11 +83,11 @@ class BlueprintVersionsController < ApplicationController
     publisher = BlueprintPublisher.new(@blueprint_version)
     @result =  publisher.commit_to_local_repository
     if @result
-      flash.now[:notice] = "Success"
+      flash[:notice] = "Success"
     else
-      flash.now[:error] = "Big fat fail." + @result.to_s
+      flash[:error] = "Big fat fail." + @result.to_s
     end
-    render :publish
+    redirect_to blueprint_version_path params[:id]
   end
 
   def test_install
