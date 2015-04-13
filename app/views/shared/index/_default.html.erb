@@ -1,5 +1,5 @@
 <%  items ||= []
-    model_name = items.first.class.model_name.to_s
+    model_name ||= items.model_name.to_s
     new_item_path_parameters ||= [:new, model_name.underscore]
     back_path ||= root_path
     attributes ||= nil 
