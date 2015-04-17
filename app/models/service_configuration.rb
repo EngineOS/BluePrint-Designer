@@ -41,7 +41,7 @@ class ServiceConfiguration < ActiveRecord::Base
 
   def reload_service_definition_variables
     if service_definition_from_file.present?
-      service_definition_variables = service_definition_from_file[:setup_params].values
+      service_definition_variables = service_definition_from_file[:consumer_params].values
       service_definition_variable_names = service_definition_variables.map{|variable| variable[:name]}
 
       service_configuration_variable_names = service_configuration_variables.map(&:variable).map(&:name)
