@@ -7,8 +7,8 @@
     # label ||= nil
     nest_in ||= nil
 
-    has_many_associations ||= record_class.reflect_on_all_associations(:has_many).map(&:name)
-    has_one_associations ||= record_class.reflect_on_all_associations(:has_one).map(&:name)
+    # has_many_associations ||= record_class.reflect_on_all_associations(:has_many).map(&:name)
+    # has_one_associations ||= record_class.reflect_on_all_associations(:has_one).map(&:name)
     belongs_to_associations ||= record_class.reflect_on_all_associations(:belongs_to).map(&:name)
     belongs_to_fields = belongs_to_associations.map{|association| (association.to_s + '_id').to_sym}
 

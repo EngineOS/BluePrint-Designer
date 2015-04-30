@@ -1,9 +1,34 @@
 <%  record ||= f.object
+    record_class = record.class
+    record_class_name = record_class.to_s
+    
+    if attribute.kind_of?(Array)
+      label = attribute[1]
+      attribute = attribute[0]
+    elsif attribute.kind_of?(Hash)
+      label = if attribute["label"].present?
+                attribute["label"].to_s
+              else
+                attribute["name"].to_s.humanize
+              end
+      attribute_type = attribute["attribute_type"]
+      select_collection = attribute["select_collection"]
+      tooltip = attribute["tooltip"]
+      hint = attribute["hint"]
+      placeholder = attribute["placeholder"]
+      comment = attribute["comment"]
+      offset = attribute["offset"]
+      width = attribute["width"]
+      buffer = attribute["buffer"]
+      nest_in = attribute["nest_in"]
+      attribute = attribute["name"]
+    else
+      label ||= attribute.to_s.humanize
+    end
+
     offset ||= 2
     width ||= 8
     buffer ||= 2
-    record_class = record.class
-    record_class_name = record_class.to_s
     nest_in ||= false
     attribute_type ||= nil
     select_collection ||= nil
@@ -11,26 +36,7 @@
     hint ||= nil
     placeholder ||= nil
     comment ||= nil
-    
-    if attribute.kind_of?(Array)
-      label = attribute[1]
-      attribute = attribute[0]
-    elsif attribute.kind_of?(Hash)
-      label = if attribute[:label].present?
-                attribute[:label].to_s
-              else
-                attribute[:name].to_s.humanize
-              end
-      attribute_type = attribute[:attribute_type]
-      select_collection = attribute[:select_collection]
-      tooltip = attribute[:tooltip]
-      hint = attribute[:hint]
-      placeholder = attribute[:placeholder]
-      comment = attribute[:comment]
-      attribute = attribute[:name]
-    else
-      label ||= attribute.to_s.humanize
-    end
+
 
     if record_class.reflect_on_association(attribute)
 
@@ -45,7 +51,7 @@
 
   <%  else %>
 
-        <% if attribute.to_s.camelcase.constantize.count < 0 %>
+        <% if attribute.to_s.camelcase.constantize.count < 5 %>
           <%= render 'shared/form/association_radio_buttons', f: f, name: attribute, label: label, offset: offset, width: width, buffer: buffer, nest_in: nest_in %>
         <% else %>
           <%= render 'shared/form/association_select', f: f, name: attribute, label: label, offset: offset, width: width, buffer: buffer, nest_in: nest_in %>
