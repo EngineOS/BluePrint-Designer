@@ -1,1 +1,4 @@
-<%= render 'shared/edit/default', record_object: @template_file, fa: :'caret-right', nest_in: :blueprint_version %>
+<% cancel_path = url_for(@template_file.blueprint_version) + '#' + @template_file.class.name.underscore + '_' + @template_file.id.to_s %>
+
+<%= render 'shared/edit/default', record_object: @template_file, fa: :'caret-right', nest_in: :blueprint_version,
+attributes: [:title, :path, {name: :content, attribute_type: :code_box, tooltip: "woooooooow", comment: "Hidddddddddd", hint: "sdf sdfsdf sdf sdf"} ], cancel_path: cancel_path  %>

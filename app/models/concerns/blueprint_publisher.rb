@@ -30,13 +30,13 @@ private
     if File.exists?(@reponame)
       repo = Rugged::Repository.new(@reponame)
     else
-      FileUtils.mkdir_p(@reponame )
+      FileUtils.mkdir_p(@reponame)
       repo  = Rugged::Repository.init_at(@reponame)
       index = repo.index
-      FileUtils.mkdir_p(@reponame + "/engines/scripts/")
-      FileUtils.mkdir_p(@reponame + "/engines/templates/")
-      FileUtils.mkdir_p(@reponame + "/engines/configs/")
-      FileUtils.mkdir_p(@reponame + "/engines/htaccess_files")
+      # FileUtils.mkdir_p(@reponame + "/engines/scripts/")
+      # FileUtils.mkdir_p(@reponame + "/engines/templates/")
+      # FileUtils.mkdir_p(@reponame + "/engines/configs/")
+      # FileUtils.mkdir_p(@reponame + "/engines/htaccess_files")
       touchcmd="touch \""+ @reponame +"/.git/git-daemon-export-ok\""
       system(touchcmd )
     end

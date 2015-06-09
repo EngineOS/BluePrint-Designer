@@ -38,6 +38,7 @@
             <li class="<%= 'active' if params[:controller] == 'frameworks' %>"><%= link_to content_tag(:i, "", class: "fa fa-film") + " Frameworks", frameworks_path, class: 'trigger-response-modal' %></li>
             <li class="<%= 'active' if params[:controller] == 'deployment_types' %>"><%= link_to content_tag(:i, "", class: "fa fa-plug") + " Deployment types", deployment_types_path, class: 'trigger-response-modal' %></li>
             <li class="<%= 'active' if params[:controller] == 'service_types' %>"><%= link_to content_tag(:i, "", class: "fa fa-lightbulb-o") + " Service types", service_types_path, class: 'trigger-response-modal' %></li>
+            <li class="<%= 'active' if params[:controller] == 'module_types' %>"><%= link_to content_tag(:i, "", class: "fa fa-cubes") + " Module types", module_types_path, class: 'trigger-response-modal' %></li>
           </ul>
         </li>
       </ul>

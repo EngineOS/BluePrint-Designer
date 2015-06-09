@@ -39,7 +39,9 @@ Rails.application.routes.draw do
             :variables,
             :service_configuration_variables,
             :component_directories,
-            :component_sources
+            :component_sources,
+            :module_types,
+            :blueprint_modules
 
   devise_for :users
   devise_scope :user do

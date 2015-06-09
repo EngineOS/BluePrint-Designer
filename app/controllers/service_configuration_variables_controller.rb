@@ -30,7 +30,7 @@ class ServiceConfigurationVariablesController < ApplicationController
     @service_configuration_variable = ServiceConfigurationVariable.find(params[:id])
 # render text: @service_configuration_variable.variable.to_label
     if @service_configuration_variable.update(service_configuration_variable_params)
-      redirect_to @service_configuration_variable
+      redirect_to @service_configuration_variable.service_configuration
     else
       render 'edit'
     end

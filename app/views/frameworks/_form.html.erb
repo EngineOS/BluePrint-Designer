@@ -1,0 +1,27 @@
+<%= form_for @framework do |f| %>
+  <%= render 'shared/form/errors', f: f %>
+  <%= render 'shared/form/text_field', name: :name, f: f %>
+  <%= render 'shared/form/association_select', name: :language, f: f %>
+  <%= render 'shared/form/nested_fields_for', association: :framework_modules, f: f %>
+  <%= render 'shared/form/checkbox', name: :service_configurations, f: f %>
+  <%= render 'shared/form/checkbox', name: :persistent_directories, f: f %>
+  <%= render 'shared/form/checkbox', name: :replacement_strings, f: f %>
+  <%= render 'shared/form/checkbox', name: :persistent_files, f: f %>
+  <%= render 'shared/form/checkbox', name: :installed_packages, f: f %>
+  <%= render 'shared/form/checkbox', name: :system_packages, f: f %>
+  <%= render 'shared/form/checkbox', name: :ports, f: f %>
+  <%= render 'shared/form/checkbox', name: :workers, f: f %>
+  <%= render 'shared/form/checkbox', name: :rake_tasks, f: f %>
+  <%= render 'shared/form/checkbox', name: :template_files, f: f %>
+  <%= render 'shared/form/checkbox', name: :file_write_permissions, f: f %>
+  <%= render 'shared/form/checkbox', name: :custom_php_inis, f: f %>
+  <%= render 'shared/form/checkbox', name: :apache_htaccess_files, f: f %>
+  <%= render 'shared/form/checkbox', name: :apache_modules, f: f %>
+  <%= render 'shared/form/checkbox', name: :variables, f: f %>
+  <%= render 'shared/form/checkbox', name: :component_sources, f: f %>
+  <%= render 'shared/form/checkbox', name: :apache_httpd_configurations, f: f %>
+  <%= render 'shared/form/checkbox', name: :pear_modules, f: f %>
+  <%= render 'shared/form/checkbox', name: :continuos_deployment, f: f %>
+  <%= render 'shared/form/checkbox', name: :database_seed_file, f: f %>
+  <%= render 'shared/form/cancel_and_submit_buttons', f: f, cancel_path: @software  %>
+<% end %>

@@ -16,7 +16,7 @@ class Software < ActiveRecord::Base
   validate :validate_uniqueness_of_handle
 
   def to_handle
-    publisher.to_handle + '_' + title.downcase.gsub(' ', '_')
+    publisher.to_handle + '/' + title.downcase.gsub(' ', '_')
   end
 
   def title

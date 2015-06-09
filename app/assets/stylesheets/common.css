@@ -13,12 +13,12 @@ body {
   font-size: 18px;
 }
 
-.show label,
 th
  {
   padding-top: 2px;
   font-size: 14px;
   color: #999;
+  min-width: 75px;
 }
 
 hr {

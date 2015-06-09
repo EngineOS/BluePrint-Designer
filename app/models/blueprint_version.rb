@@ -3,7 +3,7 @@ class BlueprintVersion < ActiveRecord::Base
   attr_accessor :_destroy
 
   belongs_to :software_version
- 
+
   belongs_to :blocking_worker, class_name: :Worker
 
   has_many :service_configurations, dependent: :destroy
@@ -24,6 +24,7 @@ class BlueprintVersion < ActiveRecord::Base
   has_many :variables, as: :variable_consumer, dependent: :destroy
   has_many :component_sources, dependent: :destroy
   has_many :ports, dependent: :destroy
+  has_many :blueprint_modules, dependent: :destroy
 
   # validates :record_label, presence: true
   # validates_uniqueness_of :record_label, :case_sensitive => false
@@ -47,6 +48,9 @@ class BlueprintVersion < ActiveRecord::Base
         short_title: software_version.software.short_title,
         description: software_version.software.description,
         icon_url: software_version.software.icon_url,
+        home_page_url: software_version.software.home_page_url,
+        support_page_url: software_version.software.support_page_url,
+        about: software_version.software.about,
         language: software_version.software.language.to_handle,
         framework: software_version.software.framework.to_handle,
         deployment_type: software_version.software.deployment_type.to_handle,
@@ -72,8 +76,7 @@ class BlueprintVersion < ActiveRecord::Base
         custom_php_inis: custom_php_inis.as_json,
         apache_htaccess_files: apache_htaccess_files.as_json,
         apache_httpd_configurations: apache_httpd_configurations.as_json,
-        apache_modules: apache_modules.as_json,
-        pear_modules: pear_modules.as_json,
+        modules: blueprint_modules.as_json,
         variables: variables.as_json,
         component_sources: component_sources.as_json,
         component_path: software_version.software.component_path,
@@ -106,5 +109,31 @@ private
   def http_protocol_handle
     http_protocol.downcase.gsub(' ', '_')
   end
+
+  class Hash
+    def clean!
+        self.delete_if do |key, val|
+            if block_given?
+                yield(key,val)
+            else
+                val.nil? || val.empty? if val.respond_to?('empty?')
+            end
+        end
+
+        self.each do |key, val|
+            if self[key].is_a?(Hash) && self[key].respond_to?('clean!')
+                if block_given?
+                    self[key] = self[key].clean!(&Proc.new)
+                else
+                    self[key] = self[key].clean!
+                end
+            end
+        end
+
+        return self
+    end
+
+end
+
   
 end

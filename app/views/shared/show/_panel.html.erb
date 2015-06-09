@@ -7,10 +7,10 @@
    model_name = record_object.class.to_s.underscore
 %>
 
-<div class="panel panel-info top-gap">
+<div id="<%= record_object.class.name.underscore + '_' + record_object.id.to_s %>" class="panel panel-default top-gap">
   <div class="panel-heading clearfix">
     <div class="col-sm-12">
-      <%= render partial: 'shared/show/record_info', locals: {record_object: record_object} %>
+      <%#= render partial: 'shared/show/record_info', locals: {record_object: record_object} %>
 
       <div class="pull-right">
         <%= (link_to content_tag(:i , nil, class: 'fa fa-arrow-right') + ' Show', record_object, class: 'btn btn-lg trigger-response-modal', title: 'Open record') if params['action'] == 'index' %>
@@ -20,6 +20,7 @@
     </div>
   </div>
   <div class="panel-body">
+
 
     <% if File.exists?(Rails.root.join("app", "views", model_name.pluralize, "_show_fields.html.erb")) %>
       <%= render "#{model_name.pluralize}/show_fields" %>

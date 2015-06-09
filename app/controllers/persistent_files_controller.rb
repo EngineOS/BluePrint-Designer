@@ -7,7 +7,7 @@ class PersistentFilesController < ApplicationController
   def create
     @persistent_file = PersistentFile.new(persistent_file_params)
     if @persistent_file.save
-      redirect_to @persistent_file
+      redirect_to ( url_for( @persistent_file.blueprint_version ) + '#' + @persistent_file.class.name.underscore + '_' + @persistent_file.id.to_s )
     else
       render 'new'
     end
@@ -25,7 +25,7 @@ class PersistentFilesController < ApplicationController
     @persistent_file = PersistentFile.find(params[:id])
 
     if @persistent_file.update(persistent_file_params)
-      redirect_to @persistent_file
+      redirect_to ( url_for( @persistent_file.blueprint_version ) + '#' + @persistent_file.class.name.underscore + '_' + @persistent_file.id.to_s )
     else
       render 'edit'
     end
@@ -34,7 +34,7 @@ class PersistentFilesController < ApplicationController
   def destroy
     @persistent_file = PersistentFile.find(params[:id])
     @persistent_file.destroy
-    redirect_to @persistent_file.blueprint_version
+    redirect_to ( url_for( @persistent_file.blueprint_version ) + '#' + @persistent_file.class.name.pluralize.underscore )
   end
 
 private

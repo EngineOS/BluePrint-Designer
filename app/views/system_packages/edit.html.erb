@@ -1,1 +1,5 @@
-<%= render 'shared/edit/default', record_object: @system_package, fa: :'caret-right', nest_in: :blueprint_version %>
+<%
+  cancel_path = url_for(@system_package.blueprint_version) + '#' + @system_package.class.name.underscore + '_' + @system_package.id.to_s
+%>
+
+<%= render 'shared/edit/default', record_object: @system_package, fa: :'caret-right', nest_in: :blueprint_version, cancel_path: cancel_path %>

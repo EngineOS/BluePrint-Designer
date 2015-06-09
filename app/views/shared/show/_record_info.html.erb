@@ -15,7 +15,7 @@
     <i class="fa fa-info"></i>
   </a>
   <ul class="dropdown-menu <%= align %> record-info-dropdown" role="menu">
-    <%= render partial: 'shared/show/labelled_text', locals: {record_object: record_object, label: 'ID', field: :id, offset: 0, width: 12, buffer: 0 } %>
+    <%#= render partial: 'shared/show/labelled_text', locals: {record_object: record_object, label: 'ID', field: :id, offset: 0, width: 12, buffer: 0 } %>
     <%= render partial: 'shared/show/labelled_text', locals: {record_object: record_object, value: distance_of_time_in_words_to_now(record_object.created_at) + ' ago', label: 'Created', field: :created_at, offset: 0 } %>
     <%= render partial: 'shared/show/labelled_text', locals: {record_object: record_object, value: distance_of_time_in_words_to_now(record_object.updated_at) + ' ago', label: 'Updated', field: :updated_at, offset: 0 } %>
   </ul>

@@ -1,5 +1,16 @@
-<%  recent_blueprint = item.blueprint_versions.order(:updated_at).last
+<%  blueprint_versions = item.blueprint_versions.order(:updated_at).reverse
 
-    if item.blueprint_versions.present? %>
-  <%= link_to content_tag(:i, "", class: "fa fa-file-text") + ' ' + recent_blueprint.to_label, blueprint_version_path(recent_blueprint), class: "btn-sm trigger-response-modal pull-right" %>
-<% end %>
+    if blueprint_versions.present? %>
+
+      <div class="btn-group">
+        <a class="dropdown-toggle btn btn-lg" title="Blueprint versions" type="button" data-toggle="dropdown">
+          <i class="fa fa-file-text"></i> <%= blueprint_versions.count %>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <% blueprint_versions.each do |blueprint_version| %>
+            <li><%= link_to blueprint_version.to_label, blueprint_version_path(blueprint_version), class: "trigger-response-modal" %></li>
+          <% end %>
+        </ul>
+      </div>
+
+    <% end %>

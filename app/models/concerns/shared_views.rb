@@ -1,14 +1,21 @@
 module SharedViews
+  
+  extend ActionView::Helpers::DateHelper
 
   def self.resolve_value_for item, attribute, opts={}
 
-    label_method = if opts[:label_method].present?
-      opts[:label_method].to_sym
-    elsif item.respond_to?(:to_label)
-      :to_label
-    else
-      :to_s
-    end
+    # nest_in = opts[:nest_in] || nil
+
+    label_method = 
+      if opts[:label_method].present?
+        opts[:label_method].to_sym
+      # elsif attribute.present?
+      #   item.attribute
+      elsif item.respond_to?(:to_label) || item.send(attribute).respond_to?(:to_label)
+        :to_label
+      else
+        :to_s
+      end
 
     attribute = attribute.to_sym
 
@@ -21,8 +28,8 @@ module SharedViews
         if result.count > 5
           overflow_count = result.count - 5
         end 
-        result = result.map{|record|record.send(label_method)}.first(5).join(', ').html_safe 
-        result += " + #{overflow_count} more" if overflow_count
+        result = result.map{|record|record.send(label_method)}.first(5).join('<br>').html_safe 
+        result += "<br>+ #{overflow_count} more".html_safe if overflow_count
       elsif result.class.superclass == ActiveRecord::Base 
         result = result.send(label_method)
       end 
@@ -42,6 +49,10 @@ module SharedViews
       else
         value
     end
+  end
+
+  def self.awesome_print value
+    (ap JSON.parse(value.to_json), plain: true, index: false).html_safe
   end
 
 end

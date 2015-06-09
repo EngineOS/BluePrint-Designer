@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
-  $(".clickable-table-row").click(function() {
-    window.document.location = $(this).attr("href");
+  $(".clickable-table-row td").not(".association_table_actions").click(function() {
+    window.document.location = $(this).parent().attr("href");
   });
-  $(".clickable-table-row").css('cursor', 'pointer');
-  $(".clickable-table-row").addClass('trigger-response-modal');
+  $(".clickable-table-row td").not(".association_table_actions").css('cursor', 'pointer');
+  $(".clickable-table-row td").not(".association_table_actions").addClass('trigger-response-modal');
 });

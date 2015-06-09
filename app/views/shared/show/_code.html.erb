@@ -1,0 +1,18 @@
+<%  field ||= :inspect
+    text ||= false
+    object ||= nil
+    association_label_method ||= nil
+    value ||= text || (object.present? ? (SharedViews.resolve_value_for object, field, label_method: association_label_method) : '?')
+    label ||= label.nil? ? field.to_s.humanize.capitalize : label
+ %>
+
+<% if label.present? %>
+  <div class="col-sm-12 clearfix">
+    <label class="control-label no-text-wrap pull-left-on-collapse show-labelled-text-label">
+      <%= label %>
+    </label>
+  </div>
+<% end %>
+<div class="col-sm-12">
+  <pre class="well"><%= value %>&nbsp;</pre>
+</div>

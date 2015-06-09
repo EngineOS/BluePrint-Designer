@@ -41,6 +41,9 @@
       <% if @blueprint_version.software_version.software.framework.apache_httpd_configurations %>
         <a href="#apache_httpd_configurations"><li>Apache httpd configurations</li></a>
       <% end %>
+      <% if @blueprint_version.software_version.software.framework.module_types.present? %>
+        <a href="#blueprint_modules"><li>Modules</li></a>
+      <% end %>
       <% if @blueprint_version.software_version.software.framework.apache_modules %>
         <a href="#apache_modules"><li>Apache modules</li></a>
       <% end %>

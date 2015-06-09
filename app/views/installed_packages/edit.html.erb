@@ -1,1 +1,5 @@
-<%= render 'shared/edit/default', record_object: @installed_package, fa: :'caret-right', nest_in: :blueprint_version %>
+<%= render 'shared/edit/default', record_object: @installed_package, fa: :'caret-right', nest_in: :blueprint_version, attributes: 
+
+[:name, :source_url, :destination, {name: :extraction_command, hint: "Hi"}, :path_to_extracted]
+
+ %>

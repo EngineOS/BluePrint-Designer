@@ -15,8 +15,9 @@
                       reject{ |attribute| attribute == nest_in.to_s}
                     end
 
-    show_index_actions = File.exists?(Rails.root.join("app", "views", model_name.pluralize.underscore, "_index_item_actions.html.erb"))
-
+    actions_from_file = File.exists?(Rails.root.join("app", "views", model_name.pluralize.underscore, "_index_item_actions.html.erb"))
+    default_actions ||= false
+    direct_to_edit ||= false
 %>
 
 <div class="col-sm-12">
@@ -35,8 +36,11 @@
         <tr>
           <%  attributes.each do |attribute| 
                 if attribute.kind_of?(Array) 
-                  label = attribute[1]
-                  attribute = attribute[0] 
+                  label = attribute[1].nil? ? attribute[0].to_s.humanize : attribute[1]
+                  attribute = attribute[0]
+                elsif attribute.kind_of?(Hash)
+                  label = attribute[:label].nil? ? attribute[:attribute].to_s.humanize : attribute[:label]
+                  attribute = attribute[:attribute]
                 else 
                   label = attribute.to_s.humanize 
                 end
@@ -46,14 +50,14 @@
               <% if attribute.to_sym == :to_label %>
                 &nbsp
               <% else %>
-                <%= label %>
+                <%= label if label.present? %>
               <% end %>
             </th>
 
           <% end %>
 
-          <% if show_index_actions %>
-              <th></th>
+          <% if actions_from_file || default_actions %>
+              <th class="association_table_actions"></th>
           <% end %>
 
         </tr>
@@ -61,7 +65,7 @@
 
       <%  items.each do |item|
 
-            url_for_item = url_for (nest_routes ? [nest_in, item] : item)
+            url_for_item = url_for ( ( direct_to_edit ? [:edit] : [] ) + ( nest_routes ? [nest_in, item] : [item] ) )
 
             if map_to
               item = item.send(map_to)
@@ -69,21 +73,37 @@
        %>
 
             <tr id="<%= item.class.name.underscore + '_' + item.id.to_s %>" class='clickable-table-row' href='<%= url_for_item %>'>
-              <% attributes.each do |attribute| %>
-                <% if attribute.kind_of?(Array) %>
-                  <% attribute = attribute[0] %>
-                <% end %>
+              <% attributes.each do |attribute| 
 
-                <td style="vertical-align: middle;">
-                  <% value = SharedViews.resolve_value_for item, attribute #, label_method: :to_label %>
-                  <%= SharedViews.value_as_html value %>
-                </td>
-              <% end %>
-              <% if show_index_actions %>
+                if attribute.kind_of?(Array) 
+                  show_as = attribute[2] || :default
+                  attribute = attribute[0]
+                elsif attribute.kind_of?(Hash)
+                  show_as = attribute[:show_as] || :default     
+                  attribute = attribute[:attribute]
+                else 
+                  show_as = :default
+                end
+
+              %>
+
                 <td>
-                  <%= render "#{model_name.pluralize.underscore}/index_item_actions", item: item %>
+                  <% value = SharedViews.resolve_value_for item, attribute #, label_method: :to_label %>
+                  <% if show_as == :default %>
+                    <%= SharedViews.value_as_html value %>
+                  <% elsif show_as == :code %>
+                    <pre><%= value %></pre>
+                  <% end %>
                 </td>
               <% end %>
+              <% if actions_from_file || default_actions %>
+                <td class="association_table_actions">
+                  <%= (render "#{model_name.pluralize.underscore}/index_item_actions", item: item) if actions_from_file %>
+                  <%#= link_to content_tag(:i , nil, class: 'fa fa-edit'), [:edit, item], class: 'btn btn-lg' %>
+                  <%= (link_to content_tag(:i , nil, class: 'fa fa-trash'), item, method: :delete, data: { confirm: 'Are you sure that you want to destroy this ' + label + '?' , title: 'Delete' }, class: 'btn btn-lg') if default_actions %>
+                </td>
+              <% end %>
+
             </tr>
 
       <%  end %>
@@ -93,12 +113,3 @@
 </div>
 
 
-  <% if false %>
-        <td>
-          <%= render partial: 'shared/show/record_info', locals: {record_object: item, align: :right, button_size: :large} %>
-        </td>
-        <td><%= link_to content_tag(:i , nil, class: 'fa fa-edit'), [:edit, item], class: 'btn btn-lg' %></td>
-        <td>
-          <%= link_to content_tag(:i , nil, class: 'fa fa-trash'), item, method: :delete, data: { confirm: 'Are you sure that you want to destroy this ' + label + '?' , title: 'Delete' }, class: 'btn btn-lg' %>
-        </td>
-  <% end %>

@@ -7,15 +7,15 @@ class WorkersController < ApplicationController
   def create
     @worker = Worker.new(worker_params)
     if @worker.save
-      redirect_to @worker
+      redirect_to ( url_for( @worker.blueprint_version ) + '#' + @worker.class.name.underscore + '_' + @worker.id.to_s )
     else
       render 'new'
     end
   end
 
-  def show
-    @worker = Worker.find(params[:id])
-  end
+  # def show
+  #   @worker = Worker.find(params[:id])
+  # end
 
   def edit
     @worker = Worker.find(params[:id])
@@ -25,7 +25,7 @@ class WorkersController < ApplicationController
     @worker = Worker.find(params[:id])
 
     if @worker.update(worker_params)
-      redirect_to @worker
+      redirect_to ( url_for( @worker.blueprint_version ) + '#' + @worker.class.name.underscore + '_' + @worker.id.to_s )
     else
       render 'edit'
     end
@@ -34,7 +34,7 @@ class WorkersController < ApplicationController
   def destroy
     @worker = Worker.find(params[:id])
     @worker.destroy
-    redirect_to @worker.blueprint_version
+    redirect_to ( url_for( @worker.blueprint_version ) + '#' + @worker.class.name.pluralize.underscore )
   end
 
 private

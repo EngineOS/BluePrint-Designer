@@ -1,5 +1,35 @@
-table tr.clickable-table-row:hover {background-color: #eee;}
+table tr.clickable-table-row:hover {background-color: #eee}
+
+.table-condensed tbody tr th.association_table_actions {
+  width: 1%;
+  padding: 0px;
+  min-width: 0px;
+  white-space:nowrap;
+
+}
+
+.table-condensed tbody tr td.association_table_actions {
+  width: 1%;
+  padding: 0px;
+  white-space:nowrap;
+}
+
+
+.table-condensed tbody tr td.association_table_actions .btn-lg {
+  height: 36px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 
 table {
   word-break: break-all;
+}
+
+table td {
+  height: 36px;
+}
+
+table pre {
+  white-space: pre-wrap;
+  max-height: 200px;
 }

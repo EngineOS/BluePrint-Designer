@@ -7,7 +7,7 @@ class TemplateFilesController < ApplicationController
   def create
     @template_file = TemplateFile.new(template_file_params)
     if @template_file.save
-      redirect_to @template_file
+      redirect_to ( url_for( @template_file.blueprint_version ) + '#' + @template_file.class.name.underscore + '_' + @template_file.id.to_s )
     else
       render 'new'
     end
@@ -25,7 +25,7 @@ class TemplateFilesController < ApplicationController
     @template_file = TemplateFile.find(params[:id])
 
     if @template_file.update(template_file_params)
-      redirect_to @template_file
+      redirect_to ( url_for( @template_file.blueprint_version ) + '#' + @template_file.class.name.underscore + '_' + @template_file.id.to_s )
     else
       render 'edit'
     end
@@ -34,7 +34,7 @@ class TemplateFilesController < ApplicationController
   def destroy
     @template_file = TemplateFile.find(params[:id])
     @template_file.destroy
-    redirect_to @template_file.blueprint_version
+    redirect_to ( url_for( @template_file.blueprint_version ) + '#' + @template_file.class.name.pluralize.underscore )
   end
 
 private

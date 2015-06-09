@@ -29,19 +29,26 @@
 
 <%  attributes.each do |attribute|
       if attribute.kind_of?(Array)
+        show_as = attribute[2] || :inline_labelled_text
         label = attribute[1]
         attribute = attribute[0]
+      elsif attribute.kind_of?(Hash)
+        label = attribute[:label].nil? ? attribute[:attribute].to_s.humanize : attribute[:label]
+        show_as = attribute[:show_as] || :inline_labelled_text     
+        attribute = attribute[:attribute]
       else
         if polymorphic_associations.include? attribute.to_sym
             label = record_object.send(attribute.to_s + '_type').underscore.humanize
         else
+          show_as = :inline_labelled_text
           label = attribute.to_s.humanize
         end
       end
 %>
 
       <div class="row">
-        <%= render 'shared/show/inline_labelled_text', label: label, object: record_object, field: attribute, association_label_method: association_label_method %>
+        <%= render "shared/show/#{show_as}", label: label, object: record_object, field: attribute, association_label_method: association_label_method %>
+        
       </div>
 
     <% end %>

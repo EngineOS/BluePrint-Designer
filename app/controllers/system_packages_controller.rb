@@ -7,15 +7,15 @@ class SystemPackagesController < ApplicationController
   def create
     @system_package = SystemPackage.new(system_package_params)
     if @system_package.save
-      redirect_to @system_package
+      redirect_to ( url_for( @system_package.blueprint_version ) + '#' + @system_package.class.name.underscore + '_' + @system_package.id.to_s )
     else
       render 'new'
     end
   end
 
-  def show
-    @system_package = SystemPackage.find(params[:id])
-  end
+  # def show
+  #   @system_package = SystemPackage.find(params[:id])
+  # end
 
   def edit
     @system_package = SystemPackage.find(params[:id])
@@ -25,7 +25,7 @@ class SystemPackagesController < ApplicationController
     @system_package = SystemPackage.find(params[:id])
 
     if @system_package.update(system_package_params)
-      redirect_to @system_package
+      redirect_to ( url_for( @system_package.blueprint_version ) + '#' + @system_package.class.name.underscore + '_' + @system_package.id.to_s )
     else
       render 'edit'
     end
@@ -34,7 +34,7 @@ class SystemPackagesController < ApplicationController
   def destroy
     @system_package = SystemPackage.find(params[:id])
     @system_package.destroy
-    redirect_to @system_package.blueprint_version
+      redirect_to ( url_for( @system_package.blueprint_version ) + '#' + @system_package.class.name.pluralize.underscore )
   end
 
 private

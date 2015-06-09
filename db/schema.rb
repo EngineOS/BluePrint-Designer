@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320010943) do
+ActiveRecord::Schema.define(version: 20150602024619) do
 
   create_table "apache_custom_site_files", force: true do |t|
     t.text     "site_configuration"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20150320010943) do
     t.string   "os_package"
     t.string   "module"
     t.integer  "blueprint_version_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "blueprint_modules", force: true do |t|
+    t.integer  "blueprint_version_id"
+    t.integer  "module_type_id"
+    t.string   "os_package"
+    t.string   "module_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -93,6 +102,13 @@ ActiveRecord::Schema.define(version: 20150320010943) do
     t.datetime "updated_at"
   end
 
+  create_table "framework_modules", force: true do |t|
+    t.integer  "framework_id"
+    t.integer  "module_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "frameworks", force: true do |t|
     t.string   "name"
     t.integer  "language_id"
@@ -140,6 +156,13 @@ ActiveRecord::Schema.define(version: 20150320010943) do
   create_table "licenses", force: true do |t|
     t.string   "name"
     t.string   "source_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "module_types", force: true do |t|
+    t.string   "name"
+    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -247,6 +270,9 @@ ActiveRecord::Schema.define(version: 20150320010943) do
     t.boolean  "extract_components", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "home_page_url"
+    t.string   "support_page_url"
+    t.text     "about"
   end
 
   create_table "system_packages", force: true do |t|

@@ -1,7 +1,9 @@
+<% cancel_path = @service_configuration_variable.service_configuration %>
+
 <%= form_for @service_configuration_variable do |f| %>
   <%= render 'shared/form/errors', f: f %>
   <%= f.fields_for :variable do |ff| %>
     <%= render 'shared/form/field', attribute: :value, f: ff, label: @service_configuration_variable.variable.label, attribute_type: @service_configuration_variable.variable.field_type, select_collection: @service_configuration_variable.variable.select_collection, tooltip: @service_configuration_variable.variable.tooltip, hint: @service_configuration_variable.variable.hint, placeholder: @service_configuration_variable.variable.placeholder, comment: @service_configuration_variable.variable.comment %>
     <% end %>
-  <%= render 'shared/form/cancel_and_submit_buttons', f: f %>
+  <%= render 'shared/form/cancel_and_submit_buttons', f: f, cancel_path: cancel_path %>
 <% end %>
