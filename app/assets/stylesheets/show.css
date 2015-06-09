@@ -1,3 +1,8 @@
 .main-show-col-with-menu {
   padding-left: 0px;
 }
+
+.code_well {
+  height: 200px;
+  resize: vertical;
+}

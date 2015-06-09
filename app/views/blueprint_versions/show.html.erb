@@ -15,7 +15,7 @@
       attributes += [ {attribute: :custom_start_script, show_as: :code},
                       {attribute: :custom_install_script, show_as: :code},
                       {attribute: :custom_post_install_script, show_as: :code},
-                      {attribute: :installation_report_template, show_as: :code} ]
+                      {attribute: :installation_report_template, show_as: :code}]
        %>
 
   <%= render 'shared/show/default', record_object: @blueprint_version, fa: :'file-text', back_path: @blueprint_version.software_version, attributes: attributes %>

@@ -21,7 +21,6 @@
   </div>
   <div class="panel-body">
 
-
     <% if File.exists?(Rails.root.join("app", "views", model_name.pluralize, "_show_fields.html.erb")) %>
       <%= render "#{model_name.pluralize}/show_fields" %>
     <% else %>

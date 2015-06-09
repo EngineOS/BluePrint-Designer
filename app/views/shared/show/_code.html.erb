@@ -14,5 +14,9 @@
   </div>
 <% end %>
 <div class="col-sm-12">
-  <pre class="well"><%= value %>&nbsp;</pre>
+  <% if value.present? %>
+    <pre class="well code_well"><%= value %>&nbsp;</pre>
+  <% else %>
+    <i>none</i><br><br>
+  <% end %>
 </div>

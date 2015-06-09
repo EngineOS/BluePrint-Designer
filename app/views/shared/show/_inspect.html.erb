@@ -6,9 +6,5 @@
 %>
 
 <div class="top-gap">
-  <div class="panel panel-info">
-    <div class="panel-body">
-      <%= (ap record_object.send(inspect_method), plain: true, index: false).html_safe %>
-    </div>
-  </div>
+  <%= (ap record_object.send(inspect_method), plain: true, index: false).html_safe %>
 </div>

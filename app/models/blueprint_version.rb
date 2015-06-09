@@ -35,7 +35,7 @@ class BlueprintVersion < ActiveRecord::Base
   def as_json(options = {})
     {
       software:
-      {
+      clean_hash({
         name: software_version.software.default_engine_name,
         major: major,
         minor: minor,
@@ -84,7 +84,7 @@ class BlueprintVersion < ActiveRecord::Base
         installation_report_template: installation_report_template,
         continuos_deployment: continuos_deployment,
         database_seed_file: database_seed_file
-      }
+      })
     }
   end
 
@@ -110,30 +110,9 @@ private
     http_protocol.downcase.gsub(' ', '_')
   end
 
-  class Hash
-    def clean!
-        self.delete_if do |key, val|
-            if block_given?
-                yield(key,val)
-            else
-                val.nil? || val.empty? if val.respond_to?('empty?')
-            end
-        end
-
-        self.each do |key, val|
-            if self[key].is_a?(Hash) && self[key].respond_to?('clean!')
-                if block_given?
-                    self[key] = self[key].clean!(&Proc.new)
-                else
-                    self[key] = self[key].clean!
-                end
-            end
-        end
-
-        return self
-    end
-
-end
+  def clean_hash(dirty_hash)
+    dirty_hash.select{|k,v| v.present?}
+  end
 
   
 end
