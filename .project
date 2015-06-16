@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>BluePrint_Studio</name>
+	<name>GalleryServer</name>
 	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
 		<buildCommand>
-			<name>com.aptana.ide.core.unifiedBuilder</name>
+			<name>org.eclipse.dltk.core.scriptbuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>org.radrails.rails.core.railsnature</nature>
-		<nature>com.aptana.ruby.core.rubynature</nature>
+		<nature>org.eclipse.dltk.ruby.core.nature</nature>
 	</natures>
 </projectDescription>
