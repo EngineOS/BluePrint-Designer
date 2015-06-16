@@ -42,7 +42,7 @@ gem 'therubyracer'
 gem 'mysql2'
 
 # webserver
-gem 'thin'
+# gem 'thin'
 
 # export data from DB
 gem 'seed_dump'
