@@ -5,6 +5,7 @@
   <%= render 'shared/form/hidden_field', name: :software_version_id, f: f %>
 
   <%= render 'shared/form/text_field', name: :name, f: f %>
+  <%= render 'shared/form/association_select', name: :software_version, f: f %>
 
   <%= render 'shared/form/legend', text: "Blueprint version" %>
   <%= render 'shared/form/number_field', name: :major, label: "Major", f: f, width: 2, buffer: 0 %>

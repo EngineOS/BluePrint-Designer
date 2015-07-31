@@ -17,7 +17,21 @@
       <%= label %>
     <% end %>
     <%= comment %>
+<% if f.object.defined_enums.has_key?(name.to_s) %>
+  <% enum_values = f.object.defined_enums[name.to_s].keys %>
+  <% if enum_values.count > 5 %>
+    <%= f.select name, enum_values, {selected: value, include_blank: false}, {title: tooltip, placeholder: placeholder, class: 'form-control input-lg'} %>
+  <% else %>
+    <br>
+    <%= f.collection_radio_buttons name, enum_values, :to_s, :to_s, {checked: value}, {title: tooltip} do |radio|
+           radio.label(class: "form-text-lg", :"data-value" => radio.value) { radio.radio_button + ' ' + radio.text } + '<br>'.html_safe
+         end %>
+  <% end %>
+
+<% else %>
     <%= f.number_field name, value: value, title: tooltip, placeholder: placeholder, class: 'form-control input-lg' %>
+<% end %>
+
     <% if errors.present? %>
       <div class='form-field-errors'>
         <% errors.each do |error| %>

@@ -186,7 +186,10 @@ private
       :apache_htaccess_files,
       :apache_modules,
       :variables,
-      :component_sources
+      :component_sources,
+      :apache_httpd_configurations,
+      :pear_modules,
+      :blueprint_modules
     ]
 
   # has_many :ports, dependent: :destroy

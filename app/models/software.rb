@@ -7,9 +7,8 @@ class Software < ActiveRecord::Base
   belongs_to :language
   belongs_to :license
   belongs_to :deployment_type
-  
-  has_many :software_versions, dependent: :destroy
 
+  has_many :software_versions, dependent: :destroy
   has_many :blueprint_versions, through: :software_versions
 
   validates :full_title, presence: true

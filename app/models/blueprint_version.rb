@@ -70,6 +70,7 @@ class BlueprintVersion < ActiveRecord::Base
         installed_packages: installed_packages.as_json,
         system_packages: system_packages.as_json,
         workers: workers.as_json,
+        ports: ports.as_json,
         rake_tasks: rake_tasks.as_json,
         template_files: template_files.as_json,
         file_write_permissions: file_write_permissions.as_json,
