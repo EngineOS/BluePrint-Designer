@@ -33,6 +33,7 @@ class BlueprintVersionsController < ApplicationController
   end
     
   def show
+    sleep 3
     @blueprint_version = BlueprintVersion.find(params[:id])
   end
 

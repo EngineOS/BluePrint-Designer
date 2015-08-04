@@ -43,6 +43,9 @@
   <% if @blueprint_version.software_version.software.framework.ports %>
     <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :ports, fa: :'caret-right', direct_to_edit: true, default_actions: true %>
   <% end %>
+  <% if @blueprint_version.software_version.software.framework.external_repositories %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :external_repositories, fa: :'caret-right', direct_to_edit: true, default_actions: true %>
+  <% end %>
   <% if @blueprint_version.software_version.software.framework.workers %>
     <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :workers, fa: :'caret-right', direct_to_edit: true, default_actions: true %>
   <% end %>

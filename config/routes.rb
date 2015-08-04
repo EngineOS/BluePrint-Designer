@@ -27,6 +27,7 @@ Rails.application.routes.draw do
             :installed_packages,
             :system_packages,
             :ports,
+            :external_repositories,
             :workers,
             :rake_tasks,
             :template_files,

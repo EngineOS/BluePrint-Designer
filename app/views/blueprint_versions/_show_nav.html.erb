@@ -23,6 +23,9 @@
       <% if @blueprint_version.software_version.software.framework.ports %>
         <a href="#ports"><li>Ports</li></a>
       <% end %>
+      <% if @blueprint_version.software_version.software.framework.external_repositories %>
+        <a href="#ports"><li>External repositories</li></a>
+      <% end %>
       <% if @blueprint_version.software_version.software.framework.workers %>
         <a href="#workers"><li>Workers</li></a>
       <% end %>

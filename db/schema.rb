@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150602024619) do
+ActiveRecord::Schema.define(version: 20150804011848) do
 
   create_table "apache_custom_site_files", force: true do |t|
     t.text     "site_configuration"
@@ -94,6 +94,11 @@ ActiveRecord::Schema.define(version: 20150602024619) do
     t.datetime "updated_at"
   end
 
+  create_table "external_repositories", force: true do |t|
+    t.integer "blueprint_version_id"
+    t.string  "repository"
+  end
+
   create_table "file_write_permissions", force: true do |t|
     t.string   "path"
     t.boolean  "recursive",            default: false
@@ -134,6 +139,7 @@ ActiveRecord::Schema.define(version: 20150602024619) do
     t.boolean  "pear_modules",                default: false
     t.boolean  "continuos_deployment",        default: false
     t.boolean  "database_seed_file",          default: true
+    t.boolean  "external_repositories",       default: false
   end
 
   create_table "installed_packages", force: true do |t|

@@ -24,6 +24,7 @@ class BlueprintVersion < ActiveRecord::Base
   has_many :variables, as: :variable_consumer, dependent: :destroy
   has_many :component_sources, dependent: :destroy
   has_many :ports, dependent: :destroy
+  has_many :external_repositories, dependent: :destroy
   has_many :blueprint_modules, dependent: :destroy
 
   # validates :record_label, presence: true
@@ -71,6 +72,7 @@ class BlueprintVersion < ActiveRecord::Base
         system_packages: system_packages.as_json,
         workers: workers.as_json,
         ports: ports.as_json,
+        external_repositories: external_repositories.as_json,
         rake_tasks: rake_tasks.as_json,
         template_files: template_files.as_json,
         file_write_permissions: file_write_permissions.as_json,

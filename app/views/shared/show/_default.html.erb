@@ -8,7 +8,8 @@
     page_title ||= model_name.humanize + (record_object.respond_to?(:to_label) ? ': ' + record_object.to_label.to_s : '')
     fa ||= false
     as ||= :panel
-    inspect_method ||= nil %>
+    inspect_method ||= nil
+    hide_edit_button ||= false %>
 
 <div class="show">
 
@@ -29,7 +30,7 @@
   </div>
 
   <div class="col-sm-12 show clearfix">
-    <%= render "shared/show/#{as}", record_object: record_object, attributes: attributes, inspect_method: inspect_method, nest_in: nest_in %>
+    <%= render "shared/show/#{as}", record_object: record_object, attributes: attributes, inspect_method: inspect_method, nest_in: nest_in, hide_edit_button: hide_edit_button %>
 
   </div>
 
