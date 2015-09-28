@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804011848) do
+ActiveRecord::Schema.define(version: 20150928104446) do
 
   create_table "apache_custom_site_files", force: true do |t|
     t.text     "site_configuration"
@@ -35,12 +35,8 @@ ActiveRecord::Schema.define(version: 20150804011848) do
     t.datetime "updated_at"
   end
 
-  create_table "apache_modules", force: true do |t|
-    t.string   "os_package"
-    t.string   "module"
-    t.integer  "blueprint_version_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "blueprint_commits", force: true do |t|
+    t.integer "blueprint_version_id"
   end
 
   create_table "blueprint_modules", force: true do |t|
@@ -62,7 +58,7 @@ ActiveRecord::Schema.define(version: 20150804011848) do
     t.integer  "blocking_worker_id"
     t.integer  "required_memory"
     t.integer  "recommended_memory"
-    t.integer  "http_protocol"
+    t.integer  "http_protocol",                default: 0
     t.integer  "framework_port_overide"
     t.text     "custom_start_script"
     t.text     "custom_install_script"
@@ -72,6 +68,9 @@ ActiveRecord::Schema.define(version: 20150804011848) do
     t.text     "database_seed_file"
     t.boolean  "continuos_deployment",         default: false
     t.text     "installation_report_template"
+    t.string   "first_run_url"
+    t.string   "web_root_directory"
+    t.text     "readme"
   end
 
   create_table "component_sources", force: true do |t|
@@ -130,13 +129,11 @@ ActiveRecord::Schema.define(version: 20150804011848) do
     t.boolean  "file_write_permissions",      default: true
     t.boolean  "custom_php_inis",             default: false
     t.boolean  "apache_htaccess_files",       default: false
-    t.boolean  "apache_modules",              default: false
     t.boolean  "variables",                   default: true
     t.boolean  "component_sources",           default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "apache_httpd_configurations", default: true
-    t.boolean  "pear_modules",                default: false
     t.boolean  "continuos_deployment",        default: false
     t.boolean  "database_seed_file",          default: true
     t.boolean  "external_repositories",       default: false
@@ -169,14 +166,6 @@ ActiveRecord::Schema.define(version: 20150804011848) do
   create_table "module_types", force: true do |t|
     t.string   "name"
     t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "pear_modules", force: true do |t|
-    t.string   "os_package"
-    t.string   "module"
-    t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

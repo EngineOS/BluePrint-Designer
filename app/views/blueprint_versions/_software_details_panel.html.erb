@@ -1,0 +1,26 @@
+
+<div class="modal fade" id="software_details_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+
+  <div id="software_detail_panel">
+    <div class='panel panel-default top-gap'>
+      <div class='panel-body'>
+        <%= render 'shared/show/default_attributes', record_object: @blueprint_version.software_version.software %>
+      </div>
+    </div>
+    <div class='panel panel-default top-gap'>
+      <div class='panel-body'>
+        <%= render 'shared/show/default_attributes', record_object: @blueprint_version.software_version, attributes: [:version] %>
+      </div>
+    </div>
+  </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,13 +2,17 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
   before_filter :configure_permitted_parameters, if: :devise_controller? 
-  before_action :authenticate_user!
+  before_action :authorize
   
   require "awesome_print"
 
   # Overwriting the devise sign_out redirect path method
   def after_sign_out_path_for(resource_or_scope)
     new_user_session_path
+  end
+
+  def authorize
+    params[:controller] == 'libraries' || authenticate_user!
   end
 
 protected

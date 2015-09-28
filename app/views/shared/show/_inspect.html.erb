@@ -2,9 +2,17 @@
     # json_method as string or sym
     # fa as string or sym
 
-    inspect_method ||= :as_json
+    inspect_method ||= :ap_json
 %>
 
 <div class="top-gap">
-  <%= (ap record_object.send(inspect_method), plain: true, index: false).html_safe %>
+  <% if inspect_method.to_sym == :ap_json %>
+    <%= (ap record_object.send(:as_json), plain: true, index: false).html_safe %>
+  <% else %>
+    <div class="panel">
+      <div class="panel-body">
+        <%= record_object.send(inspect_method).to_s.html_safe %>
+      </div>
+    </div>
+  <% end %>
 </div>

@@ -1,3 +1,4 @@
+<%= render 'software_details_panel' %>
 <div class="col-md-10 main-show-col-with-menu">
 
   <%  attributes = [ :name,
@@ -5,7 +6,10 @@
                      :memory,
                      [:http_protocol, "HTTP protocol"],
                      :framework_port_overide,
-                     :blocking_worker ]
+                     [:first_run_url, "First run URL"],
+                     :web_root_directory,
+                     :blocking_worker,
+                     :readme ]
       if @blueprint_version.software_version.software.framework.continuos_deployment
         attributes << :continuos_deployment
       end
@@ -17,11 +21,7 @@
                       {attribute: :custom_post_install_script, show_as: :code},
                       {attribute: :installation_report_template, show_as: :code}]
        %>
-
   <%= render 'shared/show/default', record_object: @blueprint_version, fa: :'file-text', back_path: @blueprint_version.software_version, attributes: attributes %>
-        
-
-
   <% if @blueprint_version.software_version.software.framework.service_configurations %>
     <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :service_configurations, attributes: [:service_definition, :variables], fa: :'caret-right' %>
   <% end %>
@@ -72,14 +72,6 @@
   <% if @blueprint_version.software_version.software.framework.module_types.present? %>
     <%= render 'shared/show/association_table', record_object: @blueprint_version, label: "Modules", association: :blueprint_modules, fa: :'caret-right', attributes: [{attribute: :module_type}, [:os_package, "OS package"], :module_name], direct_to_edit: true, default_actions: true %>
   <% end %>
-
-  <% if @blueprint_version.software_version.software.framework.apache_modules %>
-    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :apache_modules, fa: :'caret-right', attributes: [[:os_package, "OS package"], :module] %>
-  <% end %>
-  <% if @blueprint_version.software_version.software.framework.pear_modules %>
-    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :pear_modules, fa: :'caret-right', attributes: [[:os_package, "OS package"], :module] %>
-  <% end %>
-    
 
   <% if @blueprint_version.software_version.software.framework.variables %>
     <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :variables, fa: :'caret-right',attributes: [:to_label, :field_type, :value], new_item_path: url_for([:new, :variable, variable_consumer_id: @blueprint_version.id, variable_consumer_type: :BlueprintVersion]) %>

@@ -9,6 +9,15 @@ function bind_trigger_response_modal_events() {
   });
 };
 
+function show_submit_message() {
+    $('.form-buttons').hide();
+    $('.submit-message').show();
+};
+function show_cancel_message() {
+    $('.form-buttons').hide();
+    $('.cancel-message').show();
+};
+
 function bind_form_button_events() {
   $(".form-button-submit").click(function(){
     show_submit_message();
@@ -18,15 +27,6 @@ function bind_form_button_events() {
     show_cancel_message();
     show_waiting_for_response_modal();
   });
-  function show_submit_message() {
-      $('.form-buttons').hide();
-      $('.submit-message').show();
-  };
-  function show_cancel_message() {
-      $('.form-buttons').hide();
-      $('.cancel-message').show();
-  };
-
 };
 
 $(document).ready(function(){

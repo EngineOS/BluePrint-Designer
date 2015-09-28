@@ -1,9 +1,5 @@
 class BlueprintVersionsController < ApplicationController
 
-  before_action :authenticate_user!
-
-  require 'json'
-
   def new
     @blueprint_version = BlueprintVersion.new(software_version_id: params[:software_version_id])
     @blueprint_version.service_configurations.build
@@ -19,7 +15,6 @@ class BlueprintVersionsController < ApplicationController
     @blueprint_version.file_write_permissions.build
     @blueprint_version.custom_php_inis.build
     @blueprint_version.apache_htaccess_files.build
-    @blueprint_version.apache_modules.build
     @blueprint_version.variables.build
   end
     
@@ -33,7 +28,6 @@ class BlueprintVersionsController < ApplicationController
   end
     
   def show
-    sleep 3
     @blueprint_version = BlueprintVersion.find(params[:id])
   end
 
@@ -60,9 +54,7 @@ class BlueprintVersionsController < ApplicationController
     redirect_to @blueprint_version.software_version
   end
   
-  def publish
-    @blueprint_version = BlueprintVersion.find(params[:id])
-  end
+
 
   def duplicate
     existing_blueprint_version = BlueprintVersion.find(params[:id])
@@ -77,18 +69,6 @@ class BlueprintVersionsController < ApplicationController
       redirect_to existing_blueprint_version
     end
 
-  end
-
-  def commit_to_local_repository
-    @blueprint_version = BlueprintVersion.find(params[:id])
-    publisher = BlueprintPublisher.new(@blueprint_version)
-    @result =  publisher.commit_to_local_repository
-    if @result
-      flash[:notice] = "Success"
-    else
-      flash[:error] = "Big fat fail." + @result.to_s
-    end
-    redirect_to blueprint_version_path params[:id]
   end
 
   def test_install
@@ -115,17 +95,17 @@ class BlueprintVersionsController < ApplicationController
     render :publish
   end
 
-  def post_to_gallery
-    @blueprint_version = BlueprintVersion.find(params[:id])
-    # publisher = Publisher.new(@blueprint_version)
-    # @result =  publisher.publishtest
-    if false #@result.was_success?
-      flash.now[:notice] = "Success"
-    else
-      flash.now[:error] = "Big fat fail."
-    end
-    render :publish
-  end
+  # def post_to_gallery
+  #   @blueprint_version = BlueprintVersion.find(params[:id])
+  #   # publisher = Publisher.new(@blueprint_version)
+  #   # @result =  publisher.publishtest
+  #   if false #@result.was_success?
+  #     flash.now[:notice] = "Success"
+  #   else
+  #     flash.now[:error] = "Big fat fail."
+  #   end
+  #   render :publish
+  # end
 
 private
 
@@ -185,11 +165,9 @@ private
       :file_write_permissions,
       :custom_php_inis,
       :apache_htaccess_files,
-      :apache_modules,
       :variables,
       :component_sources,
       :apache_httpd_configurations,
-      :pear_modules,
       :blueprint_modules
     ]
 

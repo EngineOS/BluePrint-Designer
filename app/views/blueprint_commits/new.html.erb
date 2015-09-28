@@ -1,0 +1,1 @@
+<%= render 'shared/new/default', record_object: @blueprint_commit, nest_in: :blueprint_version, attributes: [:commit_message], fa: 'git-square', cancel_path: @blueprint_commit.blueprint_version, page_title: "Commit #{@blueprint_commit.blueprint_version.to_label}" %>

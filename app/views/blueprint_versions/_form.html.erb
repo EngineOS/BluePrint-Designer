@@ -18,13 +18,19 @@
   <%= render 'shared/form/number_field', name: :recommended_memory, label: "Recommended", f: f, offset: 0, width: 4 %>
 
   <%= render 'shared/form/legend', text: "Deployment" %>
-  <%= render 'shared/form/radio_buttons', name: :http_protocol, label: "Protocol", f: f, value: 'HTTP and HTTPS' %>
+  <%= render 'shared/form/radio_buttons', name: :http_protocol, label: "Protocol", f: f %>
   <%= render 'shared/form/number_field', name: :framework_port_overide, f: f %>
 
   <%= render 'shared/form/association_select', name: :blocking_worker, class_name: :worker, f: f %>
+  <% if @blueprint_version.software_version.software.deployment_type.to_handle == 'web' %>
+    <%= render 'shared/form/text_field', name: :web_root_directory, label: 'Web root directory', f: f %>
+  <% end %>
+  <%= render 'shared/form/text_field', name: :first_run_url, label: 'First run URL', f: f %>
   <% if @blueprint_version.software_version.software.framework.continuos_deployment %>
     <%= render 'shared/form/checkbox', name: :continuos_deployment, f: f %>
   <% end %>
+  <%= render 'shared/form/legend', text: "Readme" %>
+  <%= render 'shared/form/text_area', name: :readme, label: false, f: f %>
   <% if @blueprint_version.software_version.software.framework.database_seed_file %>
     <%= render 'shared/form/legend', text: "Database" %>
     <%= render 'shared/form/text_area', name: :database_seed_file, label: 'Seed file', f: f %>

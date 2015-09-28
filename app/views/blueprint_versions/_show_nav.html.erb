@@ -50,12 +50,6 @@
       <% if @blueprint_version.software_version.software.framework.module_types.present? %>
         <a href="#blueprint_modules"><li>Modules</li></a>
       <% end %>
-      <% if @blueprint_version.software_version.software.framework.apache_modules %>
-        <a href="#apache_modules"><li>Apache modules</li></a>
-      <% end %>
-      <% if @blueprint_version.software_version.software.framework.pear_modules %>
-        <a href="#pear_modules"><li>Pear modules</li></a>
-      <% end %>
       <% if @blueprint_version.software_version.software.framework.variables %>
         <a href="#variables"><li>Variables</li></a>
       <% end %>

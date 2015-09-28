@@ -46,6 +46,8 @@ module SharedViews
         '<i class="fa fa-times"></i>'.html_safe
       when ActiveSupport::TimeWithZone
         distance_of_time_in_words_to_now(value) + ' ago'
+      when String
+        value.gsub("\n",'<br>').html_safe
       else
         value
     end

@@ -19,8 +19,6 @@ class BlueprintVersion < ActiveRecord::Base
   has_many :custom_php_inis, dependent: :destroy
   has_many :apache_htaccess_files, dependent: :destroy
   has_many :apache_httpd_configurations, dependent: :destroy
-  has_many :apache_modules, dependent: :destroy
-  has_many :pear_modules, dependent: :destroy
   has_many :variables, as: :variable_consumer, dependent: :destroy
   has_many :component_sources, dependent: :destroy
   has_many :ports, dependent: :destroy
@@ -36,7 +34,7 @@ class BlueprintVersion < ActiveRecord::Base
   def as_json(options = {})
     {
       software:
-      clean_hash({
+      clean_data({
         name: software_version.software.default_engine_name,
         major: major,
         minor: minor,
@@ -55,6 +53,8 @@ class BlueprintVersion < ActiveRecord::Base
         language: software_version.software.language.to_handle,
         framework: software_version.software.framework.to_handle,
         deployment_type: software_version.software.deployment_type.to_handle,
+        web_root_directory: web_root_directory,
+        first_run_url: first_run_url,
         publisher: software_version.software.publisher.to_handle,
         blocking_worker_name: (blocking_worker.to_handle if blocking_worker.present?),
         required_memory: required_memory,
@@ -91,12 +91,20 @@ class BlueprintVersion < ActiveRecord::Base
     }
   end
 
+  def json_html
+    ap as_json, plain: true, index: false
+  end
+
   def to_handle
     software_version.to_handle + '_' + name.downcase.gsub(' ', '_')
   end
 
   def to_label
     software_version.to_label + ' ' + name
+  end
+
+  def humanize_html
+    BlueprintHumanizer::Blueprint.new(to_json).html
   end
 
   def version
@@ -107,15 +115,41 @@ class BlueprintVersion < ActiveRecord::Base
     "#{required_memory.to_i}/#{recommended_memory.to_i} MB"
   end
 
+
+  def library_software_record
+    {
+      label: software_version.software.short_title || software_version.software.default_engine_name,
+      detail: software_version.software.description,
+      repository_url: 'https://github.com/EnginesBlueprints/OwnCloud.git',
+      name: software_version.software.default_engine_name,
+      icon_url: software_version.software.icon_url
+    }
+  end
+
+
 private
 
   def http_protocol_handle
     http_protocol.downcase.gsub(' ', '_')
   end
 
-  def clean_hash(dirty_hash)
-    dirty_hash.select{|k,v| v.present?}
+  def clean_data(dirty_data)
+    if dirty_data.is_a? Array
+      dirty_data.map do |v|
+        clean_data v
+      end.compact
+    elsif dirty_data.is_a? Hash
+      {}.tap do |result|
+        dirty_data.map do |k, v|
+          v = clean_data v
+          result[k] = clean_data v if v.present?
+        end
+      end
+    elsif dirty_data.is_a? String
+      dirty_data.strip
+    else
+      dirty_data
+    end
   end
 
-  
 end
