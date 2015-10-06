@@ -25,3 +25,4 @@ git::
 git::/127.0.0.1/testdeploy/SoftwarePorter-test
 git::/127.0.0.1/testdeploy
 vendor
+/Gemfile.lock
