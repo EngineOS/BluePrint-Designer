@@ -7,7 +7,7 @@ gem 'rugged'
 
 # auth
 gem 'devise'
- gem  'json','1.8.3'
+gem  'json','1.8.3'
 # styling
 gem 'bootstrap3-rails'
 gem "font-awesome-rails"

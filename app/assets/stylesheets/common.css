@@ -38,3 +38,16 @@ hr {
 .btn-xlg {
   font-size: 30px;
 }
+
+.btn-noborder {
+  border: none;
+  color: #333;
+}
+
+.btn-noborder:hover {
+  background-color: #E6E6E6;
+}
+
+.panel.panel-default .panel-heading {
+  background-color: #FFFFFF;
+}

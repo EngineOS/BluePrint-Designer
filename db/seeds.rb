@@ -1,5 +1,5 @@
 User.create!([
-  {username: "admin", user_type: nil, email: "admin@engines.onl", password: "EngOS2014", password_confirmation: "EngOS2014"}
+  {username: "admin", user_type: nil, password: "EngOS2014", password_confirmation: "EngOS2014"}
 ])
 DeploymentType.create!([
   {name: "Web"},

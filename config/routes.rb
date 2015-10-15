@@ -49,7 +49,10 @@ Rails.application.routes.draw do
             :blueprint_jsons,
             :blueprint_commits
 
-  devise_for :users
+  # user registrations via console or admin panel.
+  devise_for :users, :skip => [:registrations]
+  # root routes
+  get 'user_home', :to => 'user_homes#show', :as => :user_root
   devise_scope :user do
     authenticated :user do
       root to: 'welcome#index'
@@ -58,6 +61,18 @@ Rails.application.routes.draw do
       root to: 'devise/sessions#new', as: :sign_in_root
     end
   end
+  # recreate the edit routes that were lost by skipping registrations
+  as :user do
+    get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
+    put 'users' => 'devise/registrations#update', :as => 'user_registration'
+  end
+  # resources :users do
+  #   member do
+  #     get :edit_password
+  #     patch :edit_password, to: "users#update_password"
+  #   end
+  # end
+
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 

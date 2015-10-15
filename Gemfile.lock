@@ -212,6 +212,7 @@ DEPENDENCIES
   i18n_country_select
   jbuilder (~> 2.0)
   jquery-rails
+  json (= 1.8.3)
   mysql2
   open_uri_redirections
   paperclip (~> 4.2)
