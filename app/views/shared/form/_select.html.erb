@@ -18,8 +18,7 @@
     width ||= 8
     buffer ||= 2
     include_blank ||= value.nil?
-    error_name = name[-3..-1] == '_id' ? name[0..-4] : name
-    errors ||= f.object.errors[error_name]
+    errors ||= f.object.errors[name]
     errors_class = "field_with_errors" if errors.present?
     collection_as_array = select_collection.class != Array ? JSON.parse(select_collection) : select_collection
 

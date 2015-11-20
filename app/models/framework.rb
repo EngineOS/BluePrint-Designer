@@ -14,9 +14,5 @@ class Framework < ActiveRecord::Base
   def to_label
     name
   end
-
-  # def service_configurations
-  #   nil
-  # end
   
 end

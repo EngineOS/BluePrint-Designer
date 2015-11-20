@@ -34,8 +34,8 @@ Publisher.create!([
 ])
 ServiceType.create!([
   {name: "File system", path: "filesystem"},
-  {name: "DNS", path: "dns"},
-  {name: "Cron", path: "cron"},
+  {name: "DNS", path: nil},
+  {name: "Cron", path: nil},
   {name: "MySQL database", path: "database/sql/mysql"},
   {name: "Postgres database", path: "database/sql/pgsql"}
 ])

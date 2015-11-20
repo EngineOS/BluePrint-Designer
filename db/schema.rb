@@ -11,12 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151113005029) do
-
-  create_table "accepts", force: true do |t|
-    t.integer "service_definition_id"
-    t.integer "service_type_id"
-  end
+ActiveRecord::Schema.define(version: 20150928104446) do
 
   create_table "apache_custom_site_files", force: true do |t|
     t.text     "site_configuration"
@@ -71,7 +66,7 @@ ActiveRecord::Schema.define(version: 20151113005029) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "database_seed_file"
-    t.boolean  "continuous_deployment",        default: false
+    t.boolean  "continuos_deployment",         default: false
     t.text     "installation_report_template"
     t.string   "first_run_url"
     t.string   "web_root_directory"
@@ -83,18 +78,6 @@ ActiveRecord::Schema.define(version: 20151113005029) do
     t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "configurators", force: true do |t|
-    t.integer "service_definition_id"
-    t.string  "name"
-    t.string  "label"
-    t.text    "description"
-    t.boolean "no_save"
-  end
-
-  create_table "consumers", force: true do |t|
-    t.integer "service_definition_id"
   end
 
   create_table "custom_php_inis", force: true do |t|
@@ -151,7 +134,7 @@ ActiveRecord::Schema.define(version: 20151113005029) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "apache_httpd_configurations", default: true
-    t.boolean  "continuous_deployment",       default: false
+    t.boolean  "continuos_deployment",        default: false
     t.boolean  "database_seed_file",          default: true
     t.boolean  "external_repositories",       default: false
   end
@@ -245,12 +228,6 @@ ActiveRecord::Schema.define(version: 20151113005029) do
     t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "service_definition_type_path"
-    t.string   "service_definition_publisher_namespace"
-  end
-
-  create_table "service_definition_commits", force: true do |t|
-    t.integer "service_definition_id"
   end
 
   create_table "service_definitions", force: true do |t|
@@ -258,22 +235,6 @@ ActiveRecord::Schema.define(version: 20151113005029) do
     t.integer  "publisher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "title"
-    t.text     "description"
-    t.integer  "major",                   default: 0
-    t.integer  "minor",                   default: 0
-    t.integer  "release_level",           default: 0
-    t.integer  "patch",                   default: 0
-    t.string   "service_container"
-    t.string   "service_handle_field"
-    t.boolean  "dedicated"
-    t.boolean  "persistant"
-    t.boolean  "immutable"
-    t.boolean  "attach_post_build"
-    t.boolean  "attach_requires_restart"
-    t.boolean  "accepts_managed_engine"
-    t.boolean  "accepts_managed_service"
-    t.text     "readme"
   end
 
   create_table "service_types", force: true do |t|
@@ -281,10 +242,6 @@ ActiveRecord::Schema.define(version: 20151113005029) do
     t.string   "path"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "setups", force: true do |t|
-    t.integer "service_definition_id"
   end
 
   create_table "software_versions", force: true do |t|

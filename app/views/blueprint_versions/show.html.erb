@@ -10,8 +10,8 @@
                      :web_root_directory,
                      :blocking_worker,
                      :readme ]
-      if @blueprint_version.software_version.software.framework.continuous_deployment
-        attributes << :continuous_deployment
+      if @blueprint_version.software_version.software.framework.continuos_deployment
+        attributes << :continuos_deployment
       end
       if @blueprint_version.software_version.software.framework.database_seed_file
         attributes << {attribute: :database_seed_file, show_as: :code}
@@ -19,7 +19,7 @@
       attributes += [ {attribute: :custom_start_script, show_as: :code},
                       {attribute: :custom_install_script, show_as: :code},
                       {attribute: :custom_post_install_script, show_as: :code},
-                      {attribute: :installation_report_template, show_as: :code} ]
+                      {attribute: :installation_report_template, show_as: :code}]
        %>
   <%= render 'shared/show/default', record_object: @blueprint_version, fa: :'file-text', back_path: @blueprint_version.software_version, attributes: attributes %>
   <% if @blueprint_version.software_version.software.framework.service_configurations %>

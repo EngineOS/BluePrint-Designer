@@ -26,8 +26,8 @@
     <%= render 'shared/form/text_field', name: :web_root_directory, label: 'Web root directory', f: f %>
   <% end %>
   <%= render 'shared/form/text_field', name: :first_run_url, label: 'First run URL', f: f %>
-  <% if @blueprint_version.software_version.software.framework.continuous_deployment %>
-    <%= render 'shared/form/checkbox', name: :continuous_deployment, f: f %>
+  <% if @blueprint_version.software_version.software.framework.continuos_deployment %>
+    <%= render 'shared/form/checkbox', name: :continuos_deployment, f: f %>
   <% end %>
   <%= render 'shared/form/legend', text: "Readme" %>
   <%= render 'shared/form/text_area', name: :readme, label: false, f: f %>

@@ -19,7 +19,7 @@
         <li class="<%= 'active' if params[:controller] == 'softwares' %>">
           <%= link_to content_tag(:i, "", class: "fa fa-tablet") + " Softwares", softwares_path, class: 'trigger-response-modal' %>
         </li>
-        <li class="<%= 'active' if params[:controller] == 'services' %>"><%= link_to content_tag(:i, "", class: "fa fa-hdd-o") + " Services", service_definitions_path, class: 'trigger-response-modal' %></li>
+        <li class="<%= 'active' if params[:controller] == 'service_definitions' %>"><%= link_to content_tag(:i, "", class: "fa fa-hdd-o") + " Services", service_definitions_path, class: 'trigger-response-modal' %></li>
 
         <%  if (  params[:controller] == 'languages' ||
                   params[:controller] == 'frameworks' ||

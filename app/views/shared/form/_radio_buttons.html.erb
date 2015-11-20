@@ -8,12 +8,12 @@
     hint ||= nil
     placeholder ||= nil
     comment ||= nil
-    error_name = name[-3..-1] == '_id' ? name[0..-4] : name
-    errors ||= f.object.errors[error_name]
+    errors ||= f.object.errors[name]
     errors_class = "field_with_errors" if errors.present? %>
 
 <div class="<%= errors_class %> col-sm-8 col-sm-offset-2">
   <div class="form-group">
+
     <% if label != false %>
       <%= f.label name, class: 'control-label' do %>
         <%= label %>

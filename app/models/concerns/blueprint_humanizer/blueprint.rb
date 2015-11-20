@@ -1,9 +1,8 @@
-module Humanizer
+module BlueprintHumanizer
   class Blueprint
 
-    def initialize(blueprint, title='Blueprint (v0.1)')
+    def initialize(blueprint)
       @blueprint = YAML.load(blueprint)
-      @title = title
     end
 
     def html
@@ -26,8 +25,36 @@ module Humanizer
       </style>"
     end
 
+    def component_names
+      [ 
+        "custom_start_script",
+        "service_configurations",
+        "persistent_files",
+        "installed_packages",
+        "template_files",
+        "file_write_permissions",
+        "custom_php_inis",
+        "modules",
+        "framework_modules",
+        "persistent_directories",
+        "replacement_strings",
+        "system_packages",
+        "ports",
+        "external_repositories",
+        "workers",
+        "rake_tasks",
+        "apache_htaccess_files",
+        "variables",
+        "component_sources",
+        "apache_httpd_configurations",
+        "continuos_deployment",
+        "database_seed file",
+      ]
+
+    end
+
     def software
-      @blueprint["software"].present? ? @blueprint["software"] : @blueprint
+      @blueprint["software"]
     end
 
     # def intro
@@ -36,7 +63,7 @@ module Humanizer
     # end
 
     def steps
-      Component.new(@title, software).humanize
+      Component.new("Blueprint (v0.1)", software).humanize
     end
 
     # def footer

@@ -1,4 +1,4 @@
 <%
-  back_path = url_for(@custom_php_ini.blueprint_version) + '#blueprint_version_' + @custom_php_ini.class.name.underscore + '_' + @custom_php_ini.id.to_s
+  back_path = url_for(@custom_php_ini.blueprint_version) + '#' + @custom_php_ini.class.name.underscore + '_' + @custom_php_ini.id.to_s
 %>
 <%= render 'shared/show/default', record_object: @custom_php_ini, fa: :'caret-right', back_path: back_path, nest_in: :blueprint_version %>

@@ -3,8 +3,6 @@ class Variable < ActiveRecord::Base
   belongs_to :variable_consumer, polymorphic: true
   # has_one :variable_setter, dependent: :destroy
 
-  validates :name, presence: true
-
   def field_types
     { :Text => :text_field,
       :Number => :number_field,
@@ -28,23 +26,23 @@ class Variable < ActiveRecord::Base
   end
 
   def as_json(options={})
-    options[:except] ||=
-      [ 
-        :created_at,
-        :updated_at,
-        :id,
-        :value_confirmation,
-        :variable_consumer_id,
-        :variable_consumer_type,
-        :deprecated
-      ]
-    super
-  end
-
-  def name_value_pair(options={})
-    result = {}
-    result[name] = value
-    result
+    if variable_consumer_type == 'BlueprintVersion'
+      options[:except] ||=
+        [ 
+          :created_at,
+          :updated_at,
+          :id,
+          :value_confirmation,
+          :variable_consumer_id,
+          :variable_consumer_type,
+          :deprecated
+        ]
+      super
+    else
+      result = {}
+      result[name] = value
+      result
+    end 
   end 
 
   # def to_handle
@@ -52,7 +50,7 @@ class Variable < ActiveRecord::Base
   # end
 
   def to_label
-    ( name ) + ( ( ' = ' +  SharedViews.value_as_html(value) ) if value.present? ).to_s
+    ( label || name ) + ( ( ' = ' +  SharedViews.value_as_html(value) ) if value.present? ).to_s
   end
 
 end

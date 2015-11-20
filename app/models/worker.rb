@@ -4,10 +4,6 @@ class Worker < ActiveRecord::Base
   def as_json(options={})
     options[:except] ||= [:created_at, :updated_at, :id, :blueprint_version_id]
     super
-  end
-
-  def to_label
-    name
-  end
+  end 
 
 end

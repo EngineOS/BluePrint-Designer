@@ -1,25 +1,24 @@
-class RepoCommit
+class LocalRepoCommit
 
   require 'git'
   require 'rugged'
   require 'digest/sha1'
 
-  def initialize(filename, file_content, username, commit_message, read_me, path_in_repo, repo_path)
-    @filename = filename.to_s
-    @file_content = file_content.to_s
+  def initialize(package_handle, blueprint_json, username, commit_message, read_me)
+    @package_handle = package_handle.to_s
+    @blueprint_json = blueprint_json.to_s
     @username = username.to_s
     @commit_message = commit_message.to_s
     @read_me = read_me.to_s
-    @path_in_repo = path_in_repo.to_s
-    @repo_path = repo_path
-    @repo_path = (ENV["GITDIR"] || "/var/lib/git") + '/' + @repo_path
   end
   
   def commit
+    set_repo_name
     build_repo
     write_readme
-    write_content
-    commit_file
+    load_blueprint
+    write_blueprint
+    commit_blueprint
     return true
   rescue Exception=>e
     log_exception(e)
@@ -28,30 +27,25 @@ class RepoCommit
 
 private
 
+  def set_repo_name
+    gitdir = ENV["GITDIR"] || "/var/lib/git"
+    @repo_name = gitdir + "/blueprints/" + @package_handle
+  end
+
   def setup_repo 
-    if File.exists?(@repo_path)
-
-p :FILE_EXISTS
-
-      repo = Rugged::Repository.new(@repo_path)
+    if File.exists?(@repo_name)
+      repo = Rugged::Repository.new(@repo_name)
     else
-
-p :NOT_FILE_EXISTS
-
-
-      FileUtils.mkdir_p(@repo_path)
-      repo  = Rugged::Repository.init_at(@repo_path)
+      FileUtils.mkdir_p(@repo_name)
+      repo  = Rugged::Repository.init_at(@repo_name)
       index = repo.index
-      touchcmd="touch \""+ @repo_path +"/.git/git-daemon-export-ok\""
+      touchcmd="touch \""+ @repo_name +"/.git/git-daemon-export-ok\""
       system(touchcmd)
     end
     return repo
-  end
-
-  def setup_directory 
-    if !File.exists?(@repo_path + '/' + @path_in_repo)
-      FileUtils.mkdir_p(@repo_path + '/' + @path_in_repo)
-    end
+  # rescue  Exception=>e
+  #   log_exception(e)
+  #   return false
   end
 
   def set_repo_options
@@ -72,34 +66,38 @@ p :NOT_FILE_EXISTS
   end
 
   def write_readme
-    filename =   "readme.txt" 
-    out_file = File.new(@repo_path + "/" + @path_in_repo + "/" + filename,'w')
+    file_path =   "README.md" 
+    out_file = File.new(@repo_name + "/" + file_path,'w')
     out_file.write(@read_me)
     out_file.close
-    @index.add(@path_in_repo + '/' + filename)   
+    @index.add(file_path)   
     oid = @repo.write(@read_me, :blob)            
-    @index.add(:path => (@path_in_repo + '/' + filename), :oid => oid, :mode => 0100644)
+    @index.add(:path => "README.md", :oid => oid, :mode => 0100644)
   end
 
   def build_repo
     @repo =  setup_repo
     @index = @repo.index
-    setup_directory
   end
 
+  def load_blueprint
+    @blueprint_json = @blueprint_json 
+    @blueprint_json_str = @blueprint_json.to_s
+  end
 
-  def write_content
-    out_file = File.new(@repo_path + "/" + @path_in_repo + '/' + @filename,'w', :crlf_newline => false)
-    out_file.write(@file_content)
+  def write_blueprint
+    file_path =  "blueprint.json" 
+    out_file = File.new(@repo_name + "/" + file_path,'w', :crlf_newline => false)
+    out_file.write(@blueprint_json_str)
     out_file.close
-    @index.add(@path_in_repo + '/' + @filename)
+    @index.add(file_path)
     @index.write
-    line = "#blueprint.json\n" + @file_content
-    oid = @repo.write(@file_content, :blob)
-    @index.add(:path => (@path_in_repo + '/' + @filename), :oid => oid, :mode => 0100644)
+    line = "#blueprint.json\n" + @blueprint_json_str
+    oid = @repo.write(@blueprint_json_str, :blob)
+    @index.add(:path => "blueprint.json", :oid => oid, :mode => 0100644)
   end
 
-  def commit_file
+  def commit_blueprint
     tree = @index.write_tree
     if set_repo_options  
       Rugged::Commit.create(@repo, @options)

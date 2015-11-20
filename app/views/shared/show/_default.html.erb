@@ -2,16 +2,10 @@
     nest_in ||= nil
     hide_back_button ||= false
     hide_page_title ||= false
-    show_nested_title ||= false
-    hide_delete_button ||= false
-    hide_edit_button ||= false
     model_name = record_object.class.to_s.underscore
-    back_path ||= nest_in.present? ? 
-                  (url_for(record_object.send(nest_in)) + '#' + 
-                    nest_in.to_s + '_' + model_name + '_' + record_object.id.to_s) :
-                  url_for([model_name.pluralize])
+    back_path ||= url_for([model_name.pluralize])
     attributes ||= nil
-    page_title ||= ( nest_in.present? ? (nest_in.to_s.humanize + ' ') : '' ) + model_name.humanize + (record_object.respond_to?(:to_label) ? ': ' + record_object.to_label.to_s : '')
+    page_title ||= model_name.humanize + (record_object.respond_to?(:to_label) ? ': ' + record_object.to_label.to_s : '')
     fa ||= false
     as ||= :panel
     inspect_method ||= nil
@@ -36,7 +30,7 @@
   </div>
 
   <div class="col-sm-12 show clearfix">
-    <%= render "shared/show/#{as}", record_object: record_object, attributes: attributes, inspect_method: inspect_method, nest_in: nest_in, hide_edit_button: hide_edit_button, hide_delete_button: hide_delete_button, show_nested_title: show_nested_title, fa: fa, page_title: page_title %>
+    <%= render "shared/show/#{as}", record_object: record_object, attributes: attributes, inspect_method: inspect_method, nest_in: nest_in, hide_edit_button: hide_edit_button %>
 
   </div>
 

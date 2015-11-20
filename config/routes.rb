@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # get 'blueprint_versions/:id/post_to_gallery', to: "blueprint_versions#post_to_gallery", as: :blueprint_version_post_to_gallery
   get 'blueprint_versions/:id/duplicate', to: "blueprint_versions#duplicate", as: :blueprint_version_duplicate
 
-  get 'service_configurations/:id/reload_variables', to: "service_configurations#reload_variables", as: :service_configurations_reload_variables
+  get 'service_configurations/:id/reload_service_definition', to: "service_configurations#reload_service_definition", as: :service_configuration_reload_service_definition
 
   resources :publishers,
             :languages,
@@ -19,20 +19,10 @@ Rails.application.routes.draw do
             :deployment_types,
             :service_types,
             :service_definitions,
-            :service_definition_commits,
-            :service_definition_jsons,
-            :service_definition_humanizers,
-            :service_definition_duplicates,
-            :service_definitions_loaders,
-            :configurators,
-            :accepts,
-            :consumers,
-            :setups,
             :softwares,
             :software_versions,
             :blueprint_versions,
             :service_configurations,
-            :service_configuration_variables,
             :persistent_directories,
             :replacement_strings,
             :persistent_files,
@@ -47,9 +37,10 @@ Rails.application.routes.draw do
             :custom_php_inis,
             :apache_htaccess_files,
             :apache_httpd_configurations,
-            # :apache_modules,
-            # :pear_modules,
+            :apache_modules,
+            :pear_modules,
             :variables,
+            :service_configuration_variables,
             :component_directories,
             :component_sources,
             :module_types,

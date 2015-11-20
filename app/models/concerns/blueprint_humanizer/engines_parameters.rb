@@ -1,4 +1,4 @@
-module Humanizer
+module BlueprintHumanizer
   class EnginesParameters
 
     def initialize(raw_string)

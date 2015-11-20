@@ -3,6 +3,6 @@
     <i class="fa fa-crosshairs"> Actions</i>
   </a>
   <ul class="dropdown-menu record-info-dropdown">
-    <li><%= link_to content_tag(:i, "", class: "fa fa-refresh") + ' Reload service definition', service_configurations_reload_variables_path(@service_configuration), class: "btn-lg trigger-response-modal" %></li>
+    <li><%= link_to content_tag(:i, "", class: "fa fa-refresh") + ' Reload service definition', service_configuration_reload_service_definition_path(@service_configuration), class: "btn-lg trigger-response-modal" %></li>
   </ul>
 </div>

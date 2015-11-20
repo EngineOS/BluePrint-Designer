@@ -1,30 +1,22 @@
-<% record_object ||= nil
+<% label ||= nil
+   record_object ||= nil
    attributes ||= nil
    nest_in ||= nil
-   show_nested_title ||= false
-   fa ||= nil
    association_label_method ||= nil
    show_all_associations ||= nil
    model_name = record_object.class.to_s.underscore
-   label ||= record_object.class.to_s.underscore.humanize
-   page_title ||= [nest_in.to_s.underscore.humanize, label].join(' ')
    hide_edit_button ||= false
-   hide_delete_button ||= false
 %>
 
 <div id="<%= record_object.class.name.underscore + '_' + record_object.id.to_s %>" class="panel panel-default top-gap">
   <div class="panel-heading clearfix">
-    <div class="col-sm-6">
+    <div class="col-sm-12">
       <%#= render partial: 'shared/show/record_info', locals: {record_object: record_object} %>
-      <% if show_nested_title %>
-        <h3><% if fa %><%= content_tag(:i , nil, class: "fa fa-#{fa}") + ' ' %><% end %><%= page_title %></h3>
-      <% end %>
-    </div>
-    <div class="col-sm-6">
+
       <div class="pull-right">
         <%= (link_to content_tag(:i , nil, class: 'fa fa-arrow-right') + ' Show', record_object, class: 'btn btn-lg trigger-response-modal', title: 'Open record') if params['action'] == 'index' %>
-        <%= (link_to content_tag(:i , nil, class: 'fa fa-edit') + ' Edit', [:edit, record_object], class: 'btn btn-lg trigger-response-modal', title: 'Edit record') unless hide_edit_button %>
-        <%= (link_to content_tag(:i , nil, class: 'fa fa-trash') + ' Delete', record_object, method: :delete, class: 'btn btn-lg', data: { confirm: 'Are you sure that you want to delete this ' + label.to_s + '?', confirm_title: 'Confirm delete' }, title: 'Delete') unless hide_delete_button %>
+        <%= (link_to content_tag(:i , nil, class: 'fa fa-edit') + ' Edit', [:edit, record_object], class: 'btn btn-lg trigger-response-modal', title: 'Edit record') if !hide_edit_button %>
+        <%= link_to content_tag(:i , nil, class: 'fa fa-trash') + ' Delete', record_object, method: :delete, class: 'btn btn-lg', data: { confirm: 'Are you sure that you want to delete this ' + label.to_s + '?', confirm_title: 'Confirm delete' }, title: 'Delete' %>
       </div>
     </div>
   </div>

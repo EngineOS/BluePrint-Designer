@@ -1,4 +1,4 @@
 <%
-  back_path = url_for(@pear_module.blueprint_version) + '#blueprint_version_' + @pear_module.class.name.underscore + '_' + @pear_module.id.to_s
+  back_path = url_for(@pear_module.blueprint_version) + '#' + @pear_module.class.name.underscore + '_' + @pear_module.id.to_s
 %>
 <%= render 'shared/show/default', record_object: @pear_module, fa: :'caret-right', back_path: back_path, nest_in: :blueprint_version, attributes: [[:os_package, "OS package"], :module] %>

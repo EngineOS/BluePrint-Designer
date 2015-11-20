@@ -2,6 +2,6 @@
   blueprint_modules = @blueprint_module.blueprint_version.
                         software_version.software.framework.module_types.
                         collect {|l| [ (l.respond_to?(:to_label) ? l.to_label : l.to_s), l.id ] }
-  cancel_path ||= url_for(@blueprint_module.blueprint_version) + '#blueprint_version_' + @blueprint_module.class.name.underscore.pluralize
+  cancel_path ||= url_for(@blueprint_module.blueprint_version) + '#' + @blueprint_module.class.name.underscore.pluralize
 %>
 <%= render "shared/form/default", record_object: @blueprint_module, nest_in: :blueprint_version, attributes: [{name: :module_type, label: "Type", select_collection: blueprint_modules}, [:os_package, "OS package"], :module_name, :blueprint_version_id], cancel_path: cancel_path %>

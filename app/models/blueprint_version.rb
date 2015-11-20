@@ -31,23 +31,15 @@ class BlueprintVersion < ActiveRecord::Base
   enum http_protocol: { :'HTTP and HTTPS' => 0, :'HTTPS only' => 1, :'HTTP only' => 2 }
   enum release_level: { :Alpha => 0, :Beta => 1, :'Release candidate' => 2, :Release => 3} 
 
-  # def as_json
-  #   as_json
-  # end
-
-  def as_json(options={})
+  def as_json(options = {})
     {
-      shema_version: 0,
       software:
       clean_data({
-        blueprint_version:
-          {
-            major: major,
-            minor: minor,
-            release_level: release_level,
-            patch: patch
-          },
         name: software_version.software.default_engine_name,
+        major: major,
+        minor: minor,
+        release_level: release_level,
+        patch: patch,
         license_name: software_version.software.license.to_handle,
         license_label: software_version.software.license.to_label,
         license_sourceurl: software_version.software.license.source_url,
@@ -64,7 +56,7 @@ class BlueprintVersion < ActiveRecord::Base
         web_root_directory: web_root_directory,
         first_run_url: first_run_url,
         publisher: software_version.software.publisher.to_handle,
-        blocking_worker_name: (blocking_worker.name if blocking_worker.present?),
+        blocking_worker_name: (blocking_worker.to_handle if blocking_worker.present?),
         required_memory: required_memory,
         recommended_memory: recommended_memory,
         http_protocol: http_protocol_handle,
@@ -93,7 +85,7 @@ class BlueprintVersion < ActiveRecord::Base
         component_path: software_version.software.component_path,
         extract_components: software_version.software.extract_components,
         installation_report_template: installation_report_template,
-        continuous_deployment: continuous_deployment,
+        continuos_deployment: continuos_deployment,
         database_seed_file: database_seed_file
       })
     }
@@ -112,7 +104,7 @@ class BlueprintVersion < ActiveRecord::Base
   end
 
   def humanize_html
-    Humanizer::Blueprint.new(to_json).html
+    BlueprintHumanizer::Blueprint.new(to_json).html
   end
 
   def version
@@ -126,7 +118,7 @@ class BlueprintVersion < ActiveRecord::Base
 
   def library_software_record
     {
-      label: name,
+      label: software_version.software.short_title || software_version.software.default_engine_name,
       detail: software_version.software.description,
       repository_url: 'https://github.com/EnginesBlueprints/OwnCloud.git',
       name: software_version.software.default_engine_name,

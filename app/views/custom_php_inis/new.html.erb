@@ -1,4 +1,4 @@
 <%
-  cancel_path = url_for(@custom_php_ini.blueprint_version) + '#blueprint_version_' + @custom_php_ini.class.name.underscore.pluralize
+  cancel_path = url_for(@custom_php_ini.blueprint_version) + '#' + @custom_php_ini.class.name.underscore.pluralize
 %>
 <%= render 'shared/new/default', record_object: @custom_php_ini, fa: :'caret-right', cancel_path: cancel_path, nest_in: :blueprint_version %>

@@ -1,34 +1,5 @@
 <%= form_for @service_definition do |f| %>
-
   <%= render 'shared/form/errors', f: f %>
-
-  <%= render 'shared/form/association_select', name: :service_type, f: f %>
-  <%= render 'shared/form/association_select', name: :publisher, f: f %>
-
-  <%= render 'shared/form/text_field', name: :title, f: f %>
-  <%= render 'shared/form/text_area', name: :description, f: f %>
-
-  <%= render 'shared/form/legend', text: "Version" %>
-  <%= render 'shared/form/number_field', name: :major, label: "Major", f: f, width: 2, buffer: 0 %>
-  <%= render 'shared/form/number_field', name: :minor, label: "Minor", f: f, offset: 0, width: 2, buffer: 0 %>
-  <%= render 'shared/form/select', name: :release_level, label: "Release level", f: f, offset: 0, width: 2, buffer: 0 %>
-  <%= render 'shared/form/number_field', name: :patch, label: "Patch", f: f, offset: 0, width: 2 %>
-
-  <%= render 'shared/form/legend', text: "Settings" %>
-  <%= render 'shared/form/text_field', name: :service_container, f: f %>
-  <%= render 'shared/form/text_field', name: :service_handle_field, f: f %>
-
-  <%= render 'shared/form/checkbox', name: :dedicated, f: f %>
-  <%= render 'shared/form/checkbox', name: :persistant, f: f %>
-  <%= render 'shared/form/checkbox', name: :immutable, f: f %>
-  <%= render 'shared/form/checkbox', name: :attach_post_build, f: f %>
-  <%= render 'shared/form/checkbox', name: :attach_requires_restart, f: f %>
-  <%= render 'shared/form/checkbox', name: :accepts_managed_engine, f: f %>
-  <%= render 'shared/form/checkbox', name: :accepts_managed_service, f: f %>
-
-  <%= render 'shared/form/legend', text: "Readme" %>
-  <%= render 'shared/form/text_area', name: :readme, label: false, f: f %>
-
-  <%= render 'shared/form/cancel_and_submit_buttons', f: f, cancel_path: service_definitions_path %>
-
+  <%= render 'service_definitions/fields', f: f %>
+  <%= render 'shared/form/cancel_and_submit_buttons', f: f, cancel_path: @service_definition  %>
 <% end %>
