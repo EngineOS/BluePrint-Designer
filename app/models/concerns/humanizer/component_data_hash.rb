@@ -1,4 +1,4 @@
-module BlueprintHumanizer
+module Humanizer
   class ComponentDataHash
 
     def initialize(hash)

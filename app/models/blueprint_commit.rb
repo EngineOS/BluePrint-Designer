@@ -7,11 +7,13 @@ class BlueprintCommit < ActiveRecord::Base
   def commit(username)
     valid? &&
     LocalRepoCommit.new(
-      blueprint_version.software_version.software.to_handle,
+      "blueprint.json",
       blueprint_version.to_json,
       username,
       commit_message,
-      blueprint_version.readme
+      blueprint_version.readme,
+      '',
+      "blueprints/#{blueprint_version.software_version.software.to_handle}"
     ).commit
   end
 

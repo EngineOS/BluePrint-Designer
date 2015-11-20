@@ -1,4 +1,4 @@
 <%
-  cancel_path = url_for(@apache_httpd_configuration.blueprint_version) + '#' + @apache_httpd_configuration.class.name.underscore.pluralize
+  cancel_path = url_for(@apache_httpd_configuration.blueprint_version) + '#blueprint_version_' + @apache_httpd_configuration.class.name.underscore.pluralize
 %>
 <%= render 'shared/new/default', record_object: @apache_httpd_configuration, fa: :'caret-right', cancel_path: cancel_path, nest_in: :blueprint_version, attributes: [[:httpd_configuration, 'httpd configuration']] %>

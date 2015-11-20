@@ -1,4 +1,4 @@
 <%
-  cancel_path = url_for(@external_repository.blueprint_version) + '#' + @external_repository.class.name.underscore + '_' + @external_repository.id.to_s
+  cancel_path = url_for(@external_repository.blueprint_version) + '#blueprint_version_' + @external_repository.class.name.underscore + '_' + @external_repository.id.to_s
 %>
 <%= render 'shared/edit/default', record_object: @external_repository, fa: :'caret-right', cancel_path: cancel_path, nest_in: :blueprint_version %>

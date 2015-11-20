@@ -1,15 +1,17 @@
 <%  record_object ||= nil
     attributes ||= nil
-    cancel_path ||= nil
-    nest_in ||= nil
     record_class_name = record_object.class.to_s.underscore
+    nest_in ||= nil
+    cancel_path ||= nest_in.present? ? (url_for(record_object.send(nest_in)) + '#' + nest_in.to_s + '_' + record_class_name.pluralize) : nil
     page_title ||= "New #{record_class_name.humanize}"
-    fa ||= 'circle-o' %>
+    fa ||= 'circle-o'
+    submit_label ||= nil
+ %>
 
 <h2><% if fa %><%= content_tag(:i , nil, class: "fa fa-#{fa}") + ' ' %><% end %><%= page_title %></h2>
 
 <% if File.exists?(Rails.root.join("app", "views", record_class_name.pluralize, "_form.html.erb")) %>
   <%= render "#{record_class_name.pluralize}/form", record_object: record_object, nest_in: nest_in, attributes: attributes, cancel_path: cancel_path %>
 <% else %>
-  <%= render "shared/form/default", record_object: record_object, nest_in: nest_in, attributes: attributes, cancel_path: cancel_path %>
+  <%= render "shared/form/default", record_object: record_object, nest_in: nest_in, attributes: attributes, cancel_path: cancel_path, submit_label: submit_label %>
 <% end %>

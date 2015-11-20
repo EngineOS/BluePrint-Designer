@@ -38,11 +38,11 @@
         attribute = attribute[:attribute]
       else
         if polymorphic_associations.include? attribute.to_sym
-            label = record_object.send(attribute.to_s + '_type').underscore.humanize
+          label = record_object.send(attribute.to_s + '_type').underscore.humanize
         else
-          show_as = :inline_labelled_text
           label = attribute.to_s.humanize
         end
+        show_as = :inline_labelled_text
       end
 %>
 

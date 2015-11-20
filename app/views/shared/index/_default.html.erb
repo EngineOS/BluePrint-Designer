@@ -1,9 +1,9 @@
 <%  items ||= []
-    model_name ||= items.model_name.to_s
-    new_item_path_parameters ||= [:new, model_name.underscore]
+    model_name ||= items.model_name.to_s.underscore
+    new_item_path_parameters ||= [:new, model_name]
     back_path ||= root_path
     attributes ||= nil 
-    page_title ||= model_name.underscore.humanize.pluralize
+    page_title ||= model_name.humanize.pluralize
     show_back_button ||= true if show_back_button.nil?
     show_add_button ||= true if show_add_button.nil?
     fa ||= false
@@ -16,7 +16,11 @@
     <%= link_to content_tag(:i, "", class: "fa fa-arrow-left") + ' Back', back_path, class: "btn btn-warning btn-lg trigger-response-modal" %>
   <% end %>
   <% if show_add_button %>
-    <%= link_to content_tag(:i, "", class: "fa fa-plus") + " Add", new_item_path_parameters, class: "btn btn-primary trigger-response-modal" %>
+    <%= link_to content_tag(:i, "", class: "fa fa-plus") + " Add", new_item_path_parameters, class: "btn btn-lg btn-primary trigger-response-modal" %>
+  <% end %>
+
+  <% if File.exists?(Rails.root.join("app", "views", model_name.pluralize, "_index_actions.html.erb")) %>
+    <%= render "#{model_name.pluralize}/index_actions" %>
   <% end %>
 
 </div>

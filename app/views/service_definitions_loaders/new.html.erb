@@ -1,0 +1,1 @@
+<%= render 'shared/new/default', record_object: @service_definitions_loader, attributes: [{name: :branch, attribute_type: :select, select_collection: @service_definitions_loader.repo_branch_list}], fa: :'file-text', cancel_path: service_definitions_path, submit_label: :Upload, page_title: "Upload service definition" %>

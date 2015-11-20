@@ -1,4 +1,4 @@
-module BlueprintHumanizer
+module Humanizer
   class ComponentDataString
 
     def initialize(string)

@@ -1,0 +1,5 @@
+<%= form_for @service do |f| %>
+  <%= render 'shared/form/errors', f: f %>
+  <%= render 'services/fields', f: f %>
+  <%= render 'shared/form/cancel_and_submit_buttons', f: f, cancel_path: @service  %>
+<% end %>

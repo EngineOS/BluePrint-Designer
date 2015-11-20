@@ -1,4 +1,4 @@
-module BlueprintHumanizer
+module Humanizer
   class ComponentData
 
     def initialize(component_data)

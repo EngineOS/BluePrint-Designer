@@ -1,4 +1,4 @@
 <%
-  cancel_path = url_for(@port.blueprint_version) + '#' + @port.class.name.underscore + '_' + @port.id.to_s
+  cancel_path = url_for(@port.blueprint_version) + '#blueprint_version_' + @port.class.name.underscore + '_' + @port.id.to_s
 %>
 <%= render 'shared/edit/default', record_object: @port, fa: :'caret-right', cancel_path: cancel_path, nest_in: :blueprint_version %>

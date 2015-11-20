@@ -1,0 +1,11 @@
+<%= form_for @consumer do |f| %>
+
+  <%= render 'shared/form/errors', f: f %>
+
+  <%= render 'shared/form/hidden_field', name: :service_definition_id, f: f %>
+
+  <% cancel_path = @consumer.new_record? ? software_version_path(@blueprint_version.software_version) : blueprint_version_path(@blueprint_version) %>
+
+  <%= render 'shared/form/cancel_and_submit_buttons', f: f, cancel_path: cancel_path %>
+
+<% end %>

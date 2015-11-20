@@ -1,4 +1,4 @@
-module BlueprintHumanizer
+module Humanizer
   class Component
 
     def initialize(component_name, component_data)
@@ -21,10 +21,10 @@ module BlueprintHumanizer
         data.humanize + "</div>".html_safe
       elsif data_class == Array && data
         "<label>".html_safe + @component_name + "</label>
-         <ul>#{ data.humanize }</ul>".html_safe 
+         <div style='display: inline-block; margin-top: 20px;'><ul>#{ data.humanize }</ul></div>".html_safe 
       elsif data_class == Hash && data
         "<label>".html_safe + @component_name + "</label>
-         <ul>#{data.humanize}</ul>".html_safe
+         <div><ul>#{data.humanize}</ul></div>".html_safe
       end
     end
 

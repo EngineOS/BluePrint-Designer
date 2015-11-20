@@ -95,13 +95,13 @@ class SoftwareServiceDefinition
     SystemUtils.log_exception(e)
   end
 
-  def SoftwareServiceDefinition.is_persistant?(params)
-    service =  SoftwareServiceDefinition.find(params[:type_path],params[:publisher_namespace])
-    if service == nil
-      return nil
-    end
-    return service[:persistant]
-  end
+  # def SoftwareServiceDefinition.is_persistant?(params)
+  #   service =  SoftwareServiceDefinition.find(params[:type_path],params[:publisher_namespace])
+  #   if service == nil
+  #     return nil
+  #   end
+  #   return service[:persistant]
+  # end
 
   def SoftwareServiceDefinition.service_handle_field(params)
     service =  SoftwareServiceDefinition.find(params[:type_path],params[:publisher_namespace])

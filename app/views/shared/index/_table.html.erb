@@ -17,7 +17,7 @@
 
     actions_from_file = File.exists?(Rails.root.join("app", "views", model_name.pluralize.underscore, "_index_item_actions.html.erb"))
     default_actions ||= false
-    direct_to_edit ||= false
+    direct_to_edit = direct_to_edit.nil? ? nil : direct_to_edit
 %>
 
 <div class="col-sm-12">
@@ -72,7 +72,7 @@
             end 
        %>
 
-            <tr id="<%= item.class.name.underscore + '_' + item.id.to_s %>" class='clickable-table-row' href='<%= url_for_item %>'>
+            <tr id="<%= ((nest_in.to_s + '_') if nest_in.present?).to_s + item.class.name.underscore + '_' + item.id.to_s %>" class='clickable-table-row' href='<%= url_for_item %>'>
               <% attributes.each do |attribute| 
 
                 if attribute.kind_of?(Array) 

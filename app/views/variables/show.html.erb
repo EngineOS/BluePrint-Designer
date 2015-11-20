@@ -1,6 +1,6 @@
 <%
   back_path = ['/', @variable.variable_consumer_type.underscore.pluralize,
                '/', @variable.variable_consumer_id.to_s,
-               '#variables' ].join
+               '#' + @variable.variable_consumer_type.underscore + '_variable_' + @variable.id.to_s ].join
 %>
-<%= render 'shared/show/default', record_object: @variable, fa: :'caret-right', back_path: back_path, nest_in: :blueprint_version %>
+<%= render 'shared/show/default', record_object: @variable, fa: :'caret-right', back_path: back_path, nest_in: @variable.variable_consumer_type.underscore %>

@@ -1,4 +1,4 @@
 <%
-  cancel_path = url_for(@replacement_string.blueprint_version) + '#' + @replacement_string.class.name.underscore.pluralize
+  cancel_path = url_for(@replacement_string.blueprint_version) + '#blueprint_version_' + @replacement_string.class.name.underscore.pluralize
 %>
 <%= render 'shared/new/default', record_object: @replacement_string, fa: :'caret-right', cancel_path: cancel_path, nest_in: :blueprint_version %>

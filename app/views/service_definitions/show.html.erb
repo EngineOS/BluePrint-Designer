@@ -1,1 +1,12 @@
-<%= render partial: 'shared/show/default', locals: {record_object: @service_definition, fa: :'hdd-o'} %>
+<div class="col-md-10">
+  <%= render partial: 'shared/show/default', locals: {record_object: @service_definition, fa: :'file-text', back_path: service_definitions_path } %>
+  <%= render 'shared/show/association_table', record_object: @service_definition, association: :accepts, fa: :'caret-right', direct_to_edit: true %>
+  <%= render 'shared/show/association_table', record_object: @service_definition.setup, association: :variables, fa: :'caret-right', label: 'Setup variables' %>
+  <%= render 'shared/show/association_table', record_object: @service_definition.consumer, association: :variables, fa: :'caret-right', label: 'Consumer variables' %>
+  <%= render 'shared/show/association_table', record_object: @service_definition, association: :configurators, fa: :'caret-right' %>
+</div>
+
+<div class="col-md-2">
+  <%= render 'show_nav' %>
+</div>
+

@@ -1,4 +1,4 @@
 <%
-  back_path = url_for(@rake_task.blueprint_version) + '#' + @rake_task.class.name.underscore + '_' + @rake_task.id.to_s
+  back_path = url_for(@rake_task.blueprint_version) + '#blueprint_version_' + @rake_task.class.name.underscore + '_' + @rake_task.id.to_s
 %>
 <%= render 'shared/show/default', record_object: @rake_task, fa: :'caret-right', back_path: back_path, nest_in: :blueprint_version %>

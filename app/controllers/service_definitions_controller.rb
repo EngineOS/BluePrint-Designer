@@ -2,7 +2,9 @@ class ServiceDefinitionsController < ApplicationController
 
   def new
     @service_definition = ServiceDefinition.new
-    # @service_definition.variables.build
+    # @service_definition.configurators.build.variables.build
+    # @service_definition.build_consumer.variables.build
+    # @service_definition.build_setup.variables.build
   end
 
   def create
@@ -39,7 +41,7 @@ class ServiceDefinitionsController < ApplicationController
   def destroy
     @service_definition = ServiceDefinition.find(params[:id])
     @service_definition.destroy
-    redirect_to service_definitions_path
+    redirect_to service_path(@service_definition.service)
   end
 
 private

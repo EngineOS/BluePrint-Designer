@@ -5,8 +5,9 @@ class ServiceConfigurationsController < ApplicationController
   end
 
   def create
+    # render text: params
     @service_configuration = ServiceConfiguration.new(service_configuration_params)
-    if @service_configuration.save
+    if @service_configuration.build_new
       redirect_to @service_configuration
     else
       render 'new'
@@ -37,10 +38,10 @@ class ServiceConfigurationsController < ApplicationController
     redirect_to @service_configuration.blueprint_version
   end
 
-  def reload_service_definition
+  def reload_variables
     @service_configuration = ServiceConfiguration.find(params[:id])
-    @service_configuration.reload_service_definition_variables
-    @service_configuration.save
+    @service_configuration.load_variables
+    # @service_configuration.save
       render 'show'
   end
 
