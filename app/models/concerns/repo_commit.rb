@@ -4,15 +4,14 @@ class RepoCommit
   require 'rugged'
   require 'digest/sha1'
 
-  def initialize(filename, file_content, username, commit_message, read_me, path_in_repo, repo_path)
+  def initialize(filename, file_content, username, commit_message, read_me, path)
     @filename = filename.to_s
     @file_content = file_content.to_s
     @username = username.to_s
     @commit_message = commit_message.to_s
     @read_me = read_me.to_s
-    @path_in_repo = path_in_repo.to_s
-    @repo_path = repo_path
-    @repo_path = (ENV["GITDIR"] || "/var/lib/git") + '/' + @repo_path
+    @path_in_repo = path.to_s
+    @repo_path = ENV["GITDIR"] || "/var/lib/git"
   end
   
   def commit
@@ -83,6 +82,7 @@ p :NOT_FILE_EXISTS
 
   def build_repo
     @repo =  setup_repo
+p :br2
     @index = @repo.index
     setup_directory
   end

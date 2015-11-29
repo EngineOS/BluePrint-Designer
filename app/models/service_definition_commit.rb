@@ -12,8 +12,7 @@ class ServiceDefinitionCommit < ActiveRecord::Base
       username,
       commit_message,
       service_definition.readme,
-      "providers/#{service_definition.publisher.namespace}/#{service_definition.service_type.path}",
-      "service_designs"
+      "service_designs/providers/#{service_definition.publisher.namespace}/#{service_definition.service_type.path}"
     ).commit
   end
 

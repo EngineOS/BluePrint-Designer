@@ -12,7 +12,7 @@ class ServiceDefinitionsLoader
 
   def upload_all
     ServiceDefinition.destroy_all
-    RepoInspector.new.files.each do |file_pair|
+    ServiceDesignsRepoInspector.new.files.each do |file_pair|
       ServiceDefinitionCreateFromFiles.create_from(file_pair[:service_design], file_pair[:readme])
     end.exclude? false
   end

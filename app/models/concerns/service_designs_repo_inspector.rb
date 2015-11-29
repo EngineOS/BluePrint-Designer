@@ -1,4 +1,4 @@
-class RepoInspector
+class ServiceDesignsRepoInspector
 
   require 'git'
   require 'rugged'
