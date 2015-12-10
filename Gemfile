@@ -6,6 +6,7 @@ gem 'git'
 gem 'rugged'
 
 # auth
+gem 'mysql2'
 gem 'devise'
 gem  'json','1.8.3'
 # styling
