@@ -1,12 +1,14 @@
 source 'https://rubygems.org'
 
+gem 'mysql2'
+
 gem 'git'
 
 # for git
 gem 'rugged'
 
 # auth
-gem 'mysql2'
+
 gem 'devise'
 gem  'json','1.8.3'
 # styling
@@ -40,7 +42,7 @@ gem 'rails_admin'
 gem 'therubyracer'
 
 # db
-gem 'mysql2'
+
 
 # webserver
 # gem 'thin'
