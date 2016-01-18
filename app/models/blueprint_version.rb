@@ -69,7 +69,7 @@ class BlueprintVersion < ActiveRecord::Base
     {
       label: software_version.software.short_title || software_version.software.default_engine_name,
       detail: software_version.software.description,
-      repository_url: 'https://github.com/EnginesBlueprints/OwnCloud.git',
+      repository_url: "http://__HOST_WITH_PORT__/api/v0/software/#{id}",
       name: software_version.software.default_engine_name,
       icon_url: software_version.software.icon_url
     }

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get '/api/v0/software', to: "libraries#engines_installer_software_json"
+  get '/api/v0/software/:id', to: "libraries#individual_software_json"
   get 'blueprint_versions/:id/humanized', to: "blueprint_versions#blueprint", as: :blueprint_version_humanized
   get 'blueprint_versions/:id/blueprint', to: "blueprint_versions#blueprint", as: :blueprint_version_blueprint
   get 'blueprint_versions/:id/publish', to: "blueprint_versions#publish", as: :blueprint_version_publish
