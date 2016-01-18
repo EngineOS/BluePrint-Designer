@@ -40,4 +40,9 @@ class Software < ActiveRecord::Base
     end
   end
 
+  def self.search(search)
+    where("short_title LIKE ?", "%#{search}%")
+    where("full_title LIKE ?", "%#{search}%")
+  end
+
 end

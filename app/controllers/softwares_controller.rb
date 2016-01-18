@@ -20,7 +20,11 @@ class SoftwaresController < ApplicationController
   end
 
   def index
-    @softwares = Software.all
+    if params[:search]
+      @softwares = Software.search(params[:search])
+    else
+      @softwares = Software.all
+    end
   end
 
   def edit

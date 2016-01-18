@@ -1,26 +1,30 @@
 source 'https://rubygems.org'
 
-gem 'mysql2'
-
 gem 'git'
+gem  'json' #,'1.8.3'
+
+# db
+gem 'mysql2'
 
 # for git
 gem 'rugged'
 
 # auth
-
 gem 'devise'
-gem  'json','1.8.3'
+
 # styling
 gem 'bootstrap3-rails'
 gem "font-awesome-rails"
 gem "selectize-rails"
 gem 'twitter-bootstrap-rails-confirm'
-gem 'awesome_print', '~> 1.2.0'
+gem 'awesome_print' #, '~> 1.2.0'
 gem 'i18n_country_select'
 
+# Markdown
+gem 'redcarpet'
+
 # file uploader
-gem "paperclip", "~> 4.2"
+gem "paperclip" #, "~> 4.2"
 
 # allow URI to handle redirections
 gem 'open_uri_redirections'
@@ -33,16 +37,13 @@ gem 'dependent-fields-rails'
 gem 'underscore-rails'
 
 # duplicate nested records
-gem 'deep_cloneable', '~> 2.0.2'
+gem 'deep_cloneable' #, '~> 2.0.2'
 
 # db admin
 gem 'rails_admin'
 
 # js runtime
 gem 'therubyracer'
-
-# db
-
 
 # webserver
 # gem 'thin'
@@ -89,4 +90,3 @@ gem 'spring',        group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-

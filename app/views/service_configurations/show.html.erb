@@ -1,7 +1,5 @@
 <%
   back_path = url_for(@service_configuration.blueprint_version) + '#' + @service_configuration.class.name.underscore + '_' + @service_configuration.id.to_s
 %>
-<%= render 'shared/show/default', record_object: @service_configuration, fa: :'caret-right', back_path: back_path, nest_in: :blueprint_version, hide_edit_button: true %>
-
-
-  <%= render 'shared/show/association_table', record_object: @service_configuration, association: :service_configuration_variables, map_to: :variable, fa: :'caret-right', attributes: [:label, :value, :status], direct_to_edit: true, show_add_button: false, new_item_path: url_for([:new, :service_configuration_variable, variable_consumer_id: @service_configuration.id, variable_consumer_type: :ServiceConfiguration]) %>
+<%= render 'shared/show/default', record_object: @service_configuration, attributes: [:service_definition_path], fa: :'caret-right', back_path: back_path, nest_in: :blueprint_version, hide_edit_button: true %>
+<%= render 'shared/show/association_table', record_object: @service_configuration, association: :service_configuration_variables, map_to: :variable, fa: :'caret-right', attributes: [:label, :value, :status], direct_to_edit: true, show_add_button: false, new_item_path: url_for([:new, :service_configuration_variable, variable_consumer_id: @service_configuration.id, variable_consumer_type: :ServiceConfiguration]) %>

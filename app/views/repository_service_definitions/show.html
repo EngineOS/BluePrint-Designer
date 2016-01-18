@@ -1,0 +1,11 @@
+<div class="col-sm-12">
+  <h2><%= content_tag(:i , nil, class: "fa fa-floppy-o") %> <%= params[:id] %></h2>
+  <%= link_to content_tag(:i , nil, class: "fa fa-arrow-left") + " Back",
+        repository_service_definitions_path,
+        class: 'btn btn-lg btn-warning trigger-response-modal' %>
+</div>
+<div class="col-sm-12 top-gap">
+  <pre><%= @repository_service_definition.except(:readme).to_yaml %></pre>
+  <%= render 'shared/form/legend', text: "Readme" %>
+  <%= Markdown.new(@repository_service_definition[:readme] || "None", :hard_wrap, :filter_html, :autolink, :no_intra_emphasis, :fenced_code_blocks).to_html.html_safe %>
+</div>

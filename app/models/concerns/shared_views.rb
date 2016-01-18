@@ -1,12 +1,12 @@
 module SharedViews
-  
+
   extend ActionView::Helpers::DateHelper
 
   def self.resolve_value_for item, attribute, opts={}
 
     # nest_in = opts[:nest_in] || nil
 
-    label_method = 
+    label_method =
       if opts[:label_method].present?
         opts[:label_method].to_sym
       # elsif attribute.present?
@@ -19,21 +19,21 @@ module SharedViews
 
     attribute = attribute.to_sym
 
-    if item.class.reflect_on_association(attribute) && item.class.reflect_on_association(attribute).options[:polymorphic]
-      result = item.send(attribute.to_s + '_type').camelize.constantize.find(item.send(attribute.to_s + '_id')).send(label_method)
-
-    else
+    # if item.class.reflect_on_association(attribute) && item.class.reflect_on_association(attribute).options[:polymorphic]
+    #   result = item.send(attribute.to_s + '_type').camelize.constantize.find(item.send(attribute.to_s + '_id')).send(label_method)
+    #
+    # else
       result = item.send(attribute)
       if result.class.superclass == ActiveRecord::Associations::CollectionProxy
         if result.count > 5
           overflow_count = result.count - 5
-        end 
-        result = result.map{|record|record.send(label_method)}.first(5).join('<br>').html_safe 
+        end
+        result = result.map{|record|record.send(label_method)}.first(5).join('<br>').html_safe
         result += "<br>+ #{overflow_count} more".html_safe if overflow_count
-      elsif result.class.superclass == ActiveRecord::Base 
+      elsif result.class.superclass == ActiveRecord::Base
         result = result.send(label_method)
-      end 
-    end 
+      end
+    # end
     result
 
   end

@@ -11,16 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150928104446) do
+ActiveRecord::Schema.define(version: 20160113223740) do
 
-  create_table "apache_custom_site_files", force: true do |t|
+  create_table "accepts", force: :cascade do |t|
+    t.integer  "service_definition_id"
+    t.string   "accepts_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "apache_custom_site_files", force: :cascade do |t|
     t.text     "site_configuration"
     t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "apache_htaccess_files", force: true do |t|
+  create_table "apache_htaccess_files", force: :cascade do |t|
     t.string   "directory"
     t.text     "htaccess_content"
     t.integer  "blueprint_version_id"
@@ -28,18 +35,18 @@ ActiveRecord::Schema.define(version: 20150928104446) do
     t.datetime "updated_at"
   end
 
-  create_table "apache_httpd_configurations", force: true do |t|
+  create_table "apache_httpd_configurations", force: :cascade do |t|
     t.text     "httpd_configuration"
     t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "blueprint_commits", force: true do |t|
+  create_table "blueprint_commits", force: :cascade do |t|
     t.integer "blueprint_version_id"
   end
 
-  create_table "blueprint_modules", force: true do |t|
+  create_table "blueprint_modules", force: :cascade do |t|
     t.integer  "blueprint_version_id"
     t.integer  "module_type_id"
     t.string   "os_package"
@@ -48,7 +55,7 @@ ActiveRecord::Schema.define(version: 20150928104446) do
     t.datetime "updated_at"
   end
 
-  create_table "blueprint_versions", force: true do |t|
+  create_table "blueprint_versions", force: :cascade do |t|
     t.string   "name"
     t.integer  "major"
     t.integer  "minor"
@@ -66,39 +73,55 @@ ActiveRecord::Schema.define(version: 20150928104446) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "database_seed_file"
-    t.boolean  "continuos_deployment",         default: false
+    t.boolean  "continuous_deployment",        default: false
     t.text     "installation_report_template"
     t.string   "first_run_url"
     t.string   "web_root_directory"
     t.text     "readme"
   end
 
-  create_table "component_sources", force: true do |t|
+  create_table "component_sources", force: :cascade do |t|
     t.string   "url"
     t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "custom_php_inis", force: true do |t|
+  create_table "configurators", force: :cascade do |t|
+    t.integer  "service_definition_id"
+    t.string   "name"
+    t.string   "label"
+    t.text     "description"
+    t.boolean  "no_save"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "consumers", force: :cascade do |t|
+    t.integer  "service_definition_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "custom_php_inis", force: :cascade do |t|
     t.text     "content"
     t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "deployment_types", force: true do |t|
+  create_table "deployment_types", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "external_repositories", force: true do |t|
+  create_table "external_repositories", force: :cascade do |t|
     t.integer "blueprint_version_id"
     t.string  "repository"
   end
 
-  create_table "file_write_permissions", force: true do |t|
+  create_table "file_write_permissions", force: :cascade do |t|
     t.string   "path"
     t.boolean  "recursive",            default: false
     t.integer  "blueprint_version_id"
@@ -106,14 +129,14 @@ ActiveRecord::Schema.define(version: 20150928104446) do
     t.datetime "updated_at"
   end
 
-  create_table "framework_modules", force: true do |t|
+  create_table "framework_modules", force: :cascade do |t|
     t.integer  "framework_id"
     t.integer  "module_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "frameworks", force: true do |t|
+  create_table "frameworks", force: :cascade do |t|
     t.string   "name"
     t.integer  "language_id"
     t.boolean  "service_configurations",      default: true
@@ -134,12 +157,12 @@ ActiveRecord::Schema.define(version: 20150928104446) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "apache_httpd_configurations", default: true
-    t.boolean  "continuos_deployment",        default: false
+    t.boolean  "continuous_deployment",       default: false
     t.boolean  "database_seed_file",          default: true
     t.boolean  "external_repositories",       default: false
   end
 
-  create_table "installed_packages", force: true do |t|
+  create_table "installed_packages", force: :cascade do |t|
     t.string   "name"
     t.string   "source_url"
     t.string   "destination"
@@ -150,41 +173,41 @@ ActiveRecord::Schema.define(version: 20150928104446) do
     t.datetime "updated_at"
   end
 
-  create_table "languages", force: true do |t|
+  create_table "languages", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "licenses", force: true do |t|
+  create_table "licenses", force: :cascade do |t|
     t.string   "name"
     t.string   "source_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "module_types", force: true do |t|
+  create_table "module_types", force: :cascade do |t|
     t.string   "name"
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "persistent_directories", force: true do |t|
+  create_table "persistent_directories", force: :cascade do |t|
     t.string   "path"
     t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "persistent_files", force: true do |t|
+  create_table "persistent_files", force: :cascade do |t|
     t.string   "path"
     t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "ports", force: true do |t|
+  create_table "ports", force: :cascade do |t|
     t.integer  "port"
     t.integer  "blueprint_version_id"
     t.integer  "external"
@@ -193,14 +216,14 @@ ActiveRecord::Schema.define(version: 20150928104446) do
     t.datetime "updated_at"
   end
 
-  create_table "publishers", force: true do |t|
+  create_table "publishers", force: :cascade do |t|
     t.string   "name"
     t.string   "namespace"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "rake_tasks", force: true do |t|
+  create_table "rake_tasks", force: :cascade do |t|
     t.string   "action"
     t.integer  "blueprint_version_id"
     t.datetime "created_at"
@@ -208,7 +231,7 @@ ActiveRecord::Schema.define(version: 20150928104446) do
     t.boolean  "always_run"
   end
 
-  create_table "replacement_strings", force: true do |t|
+  create_table "replacement_strings", force: :cascade do |t|
     t.string   "replacement_string"
     t.string   "file"
     t.string   "destination"
@@ -217,41 +240,65 @@ ActiveRecord::Schema.define(version: 20150928104446) do
     t.datetime "updated_at"
   end
 
-  create_table "service_configuration_variables", force: true do |t|
+  create_table "service_configuration_variables", force: :cascade do |t|
     t.integer  "service_configuration_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "service_configurations", force: true do |t|
+  create_table "service_configurations", force: :cascade do |t|
     t.string   "service_definition_id"
     t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "service_definition_path"
   end
 
-  create_table "service_definitions", force: true do |t|
+  create_table "service_definitions", force: :cascade do |t|
     t.integer  "service_type_id"
     t.integer  "publisher_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title"
+    t.text     "description"
+    t.string   "author"
+    t.string   "publisher_namespace"
+    t.string   "type_path"
+    t.integer  "major",                   default: 0
+    t.integer  "minor",                   default: 0
+    t.integer  "release_level",           default: 0
+    t.integer  "patch",                   default: 0
+    t.string   "service_container"
+    t.string   "service_handle_field"
+    t.boolean  "dedicated"
+    t.boolean  "persistant"
+    t.boolean  "immutable"
+    t.boolean  "attach_post_build"
+    t.boolean  "attach_requires_restart"
+    t.text     "readme"
   end
 
-  create_table "service_types", force: true do |t|
+  create_table "service_types", force: :cascade do |t|
     t.string   "name"
     t.string   "path"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "software_versions", force: true do |t|
+  create_table "setups", force: :cascade do |t|
+    t.integer  "service_definition_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "software_versions", force: :cascade do |t|
     t.string   "version"
     t.integer  "software_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "softwares", force: true do |t|
+  create_table "softwares", force: :cascade do |t|
     t.string   "full_title"
     t.string   "short_title"
     t.text     "description"
@@ -270,14 +317,14 @@ ActiveRecord::Schema.define(version: 20150928104446) do
     t.text     "about"
   end
 
-  create_table "system_packages", force: true do |t|
+  create_table "system_packages", force: :cascade do |t|
     t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "package"
   end
 
-  create_table "template_files", force: true do |t|
+  create_table "template_files", force: :cascade do |t|
     t.string   "title"
     t.string   "path"
     t.text     "content"
@@ -286,7 +333,7 @@ ActiveRecord::Schema.define(version: 20150928104446) do
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "user_type"
     t.string   "email",                  default: "", null: false
@@ -306,7 +353,7 @@ ActiveRecord::Schema.define(version: 20150928104446) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
-  create_table "variables", force: true do |t|
+  create_table "variables", force: :cascade do |t|
     t.integer  "variable_consumer_id"
     t.string   "variable_consumer_type"
     t.string   "name"
@@ -330,7 +377,7 @@ ActiveRecord::Schema.define(version: 20150928104446) do
     t.datetime "updated_at"
   end
 
-  create_table "worker_ports", force: true do |t|
+  create_table "worker_ports", force: :cascade do |t|
     t.string   "command"
     t.integer  "worker_id"
     t.integer  "port_id"
@@ -338,7 +385,7 @@ ActiveRecord::Schema.define(version: 20150928104446) do
     t.datetime "updated_at"
   end
 
-  create_table "workers", force: true do |t|
+  create_table "workers", force: :cascade do |t|
     t.string   "name"
     t.string   "command"
     t.integer  "blueprint_version_id"

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get '/api/v0/software', to: "libraries#engines_installer_software_json"
   get 'blueprint_versions/:id/humanized', to: "blueprint_versions#blueprint", as: :blueprint_version_humanized
   get 'blueprint_versions/:id/blueprint', to: "blueprint_versions#blueprint", as: :blueprint_version_blueprint
@@ -19,9 +18,17 @@ Rails.application.routes.draw do
             :deployment_types,
             :service_types,
             :service_definitions,
+            :service_definition_save_to_repositories,
+            :service_definition_yamls,
+            # :service_definition_commits,
+            :accepts,
+            :consumers,
+            :configurators,
+            :setups,
             :softwares,
             :software_versions,
             :blueprint_versions,
+            :blueprint_saves,
             :service_configurations,
             :persistent_directories,
             :replacement_strings,
@@ -37,8 +44,6 @@ Rails.application.routes.draw do
             :custom_php_inis,
             :apache_htaccess_files,
             :apache_httpd_configurations,
-            :apache_modules,
-            :pear_modules,
             :variables,
             :service_configuration_variables,
             :component_directories,
@@ -49,13 +54,20 @@ Rails.application.routes.draw do
             :blueprint_jsons,
             :blueprint_commits
 
+  resource  :welcome,
+            :upgrade
+
+  # resource :repository
+  resources :repository_service_definitions
+  resource :repository_reset_service_definitions, :repository_load_service_definitions
+
   # user registrations via console or admin panel.
   devise_for :users, :skip => [:registrations]
   # root routes
   get 'user_home', :to => 'user_homes#show', :as => :user_root
   devise_scope :user do
     authenticated :user do
-      root to: 'welcome#index'
+      root to: 'welcomes#show'
     end
     unauthenticated do
       root to: 'devise/sessions#new', as: :sign_in_root

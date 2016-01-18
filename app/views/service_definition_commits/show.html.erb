@@ -1,0 +1,11 @@
+<div class="col-sm-12">
+  <h2><%= content_tag(:i , nil, class: "fa fa-git-square") %> Commit <%= @service_definition_commit.service_definition.to_label %></h2>
+  <%= form_for @service_definition_commit, url: service_definition_commits_path, method: :post do |f| %>
+    <%= render 'shared/form/hidden_field', name: :service_definition_id, f: f %>
+    <%= render 'shared/form/text_field', name: :commit_message,
+          f: f %>
+    <%= render 'shared/form/cancel_and_submit_buttons', f: f,
+          cancel_path: service_definition_path(@service_definition_commit.service_definition_id),
+          submit_label: 'Commit', submitted_message: 'Committing...' %>
+  <% end %>
+</div>

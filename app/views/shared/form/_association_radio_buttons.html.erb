@@ -9,10 +9,6 @@
     collection = select_collection || association_model.all.collect {|l| [ (l.respond_to?(:to_label) ? l.to_label : l.to_s), l.id ] }
     collection_text_method ||= :first
     collection_value_method ||= :last
-
-p :collection
-p collection
-
     %>
 
 <%= render partial: 'shared/form/radio_buttons', locals: {name: association_field, label: label, collection: collection, collection_value_method: collection_value_method, collection_text_method: collection_text_method, f: f, offset: offset, width: width, buffer: buffer } %>

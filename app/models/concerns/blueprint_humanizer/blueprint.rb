@@ -47,7 +47,7 @@ module BlueprintHumanizer
         "variables",
         "component_sources",
         "apache_httpd_configurations",
-        "continuos_deployment",
+        "continuous_deployment",
         "database_seed file",
       ]
 

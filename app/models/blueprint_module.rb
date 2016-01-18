@@ -5,8 +5,4 @@ class BlueprintModule < ActiveRecord::Base
 
   attr_accessor :_destroy
 
-  def as_json
-    {os_package: os_package, module_name: module_name, module_type: module_type.name}
-  end 
-
 end

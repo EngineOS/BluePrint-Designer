@@ -1,7 +1,0 @@
-<%= form_for @license do |f| %>
-  <%= render partial: 'shared/form/errors', locals: {f: f} %>
-  <%= render partial: 'shared/form/text_field', locals: {name: :name, f: f} %>
-  <%= render partial: 'shared/form/text_field', locals: {name: :comment, f: f} %>
-  <%= render partial: 'shared/form/text_field', locals: {name: :source_url, label: 'Source URL', f: f} %>
-  <%= render partial: 'shared/form/cancel_and_submit_buttons', locals: {f: f, cancel_path: @license } %>
-<% end %>

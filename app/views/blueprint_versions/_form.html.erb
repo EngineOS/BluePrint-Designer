@@ -10,8 +10,8 @@
   <%= render 'shared/form/legend', text: "Blueprint version" %>
   <%= render 'shared/form/number_field', name: :major, label: "Major", f: f, width: 2, buffer: 0 %>
   <%= render 'shared/form/number_field', name: :minor, label: "Minor", f: f, offset: 0, width: 2, buffer: 0 %>
-  <%= render 'shared/form/select', name: :release_level, label: "Release level", f: f, offset: 0, width: 2, buffer: 0 %>
-  <%= render 'shared/form/number_field', name: :patch, label: "Patch", f: f, offset: 0, width: 2 %>
+  <%= render 'shared/form/number_field', name: :patch, label: "Patch", f: f, offset: 0, width: 2, buffer: 0 %>
+  <%= render 'shared/form/select', name: :release_level, label: "Release level", f: f, offset: 0, width: 2 %>
 
   <%= render 'shared/form/legend', text: "Memory" %>
   <%= render 'shared/form/number_field', name: :required_memory, label: "Required", f: f, width: 4, buffer: 0 %>
@@ -26,8 +26,8 @@
     <%= render 'shared/form/text_field', name: :web_root_directory, label: 'Web root directory', f: f %>
   <% end %>
   <%= render 'shared/form/text_field', name: :first_run_url, label: 'First run URL', f: f %>
-  <% if @blueprint_version.software_version.software.framework.continuos_deployment %>
-    <%= render 'shared/form/checkbox', name: :continuos_deployment, f: f %>
+  <% if @blueprint_version.software_version.software.framework.continuous_deployment %>
+    <%= render 'shared/form/checkbox', name: :continuous_deployment, f: f %>
   <% end %>
   <%= render 'shared/form/legend', text: "Readme" %>
   <%= render 'shared/form/text_area', name: :readme, label: false, f: f %>
