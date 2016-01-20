@@ -6,23 +6,16 @@
         <i class="fa fa-bars"></i>&nbsp<span class="caret"></span>
       </button>
       <ul class="dropdown-menu" role="menu">
-        <% if params[:controller].to_sym == :blueprint_versions %>
-          <li>
-            <a id="show_software_details" class="btn btn-lg" data-toggle="modal" data-target="#software_details_modal">
-               <span class="caret"></span> Software detail
-            </a>
-          </li>
-          <li class="divider"></li>
-        <% end %>
-        <li><%= link_to '{ } JSON', blueprint_json_path(blueprint_version_id: @blueprint_version.id), class: "btn-lg trigger-response-modal" %></li>
-        <li><%= link_to content_tag(:i, "", class: "fa fa-font") + ' Humanize', blueprint_humanizer_path(blueprint_version_id: @blueprint_version.id), class: "btn-lg trigger-response-modal" %></li>
-        <li><%= link_to content_tag(:i, "", class: "fa fa-git-square") + ' Commit', new_blueprint_commit_path(blueprint_commit: { blueprint_version_id: @blueprint_version.id }), class: "btn-lg trigger-response-modal" %></li>
+        <li>
+          <a id="show_software_details" class="btn btn-lg" data-toggle="modal" data-target="#software_details_modal">
+             <span class="caret"></span> Software detail
+          </a>
+        </li>
+        <li class="divider"></li>
+        <li><%= link_to '{ } JSON', blueprint_json_path(@blueprint_version), class: "btn-lg trigger-response-modal" %></li>
         <li class="divider"></li>
         <li><%= link_to content_tag(:i, "", class: "fa fa-copy") + ' Duplicate', blueprint_version_duplicate_path(@blueprint_version), class: "btn-lg trigger-response-modal" %></li>
       </ul>
     </div>
 
   </div>
-
-
-

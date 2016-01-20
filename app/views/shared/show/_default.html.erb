@@ -3,35 +3,29 @@
     hide_back_button ||= false
     hide_page_title ||= false
     model_name = record_object.class.to_s.underscore
-    back_path ||= url_for([model_name.pluralize])
+    back_path ||= nest_in.present? ? url_for(record_object.send(nest_in)) + "##{model_name}_#{record_object.id}" : url_for([model_name.pluralize])
     attributes ||= nil
-    page_title ||= model_name.humanize + (record_object.respond_to?(:to_label) ? ': ' + record_object.to_label.to_s : '')
+    page_title ||=  record_object.respond_to?(:to_title) ? record_object.to_title : model_name.humanize
     fa ||= false
     as ||= :panel
     inspect_method ||= nil
     hide_edit_button ||= false %>
 
 <div class="show">
-
   <div class="col-sm-12 show clearfix">
-
    <% if !hide_page_title %>
     <h2><% if fa %><%= content_tag(:i , nil, class: "fa fa-#{fa}") + ' ' %><% end %><%= page_title %></h2>
    <% end %>
-
    <% if !hide_back_button %>
     <%= link_to content_tag(:i, "", class: "fa fa-arrow-left") + ' Back', back_path, class: "btn btn-warning btn-lg trigger-response-modal" %>
    <% end %>
-
-    <% if File.exists?(Rails.root.join("app", "views", model_name.pluralize, "_show_actions.html.erb")) %>
-      <%= render "#{model_name.pluralize}/show_actions" %>
-    <% end %>
-
+   <% if File.exists?(Rails.root.join("app", "views", params[:controller], "_show_actions.html.erb")) %>
+     <%= render "#{params[:controller]}/show_actions" %>
+   <% end %>
   </div>
 
   <div class="col-sm-12 show clearfix">
     <%= render "shared/show/#{as}", record_object: record_object, attributes: attributes, inspect_method: inspect_method, nest_in: nest_in, hide_edit_button: hide_edit_button %>
-
   </div>
 
 </div>

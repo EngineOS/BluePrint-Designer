@@ -1,1 +1,5 @@
 <%= render partial: 'shared/show/default', locals: {record_object: @service_definition, fa: :'hdd-o'} %>
+<%= render 'shared/show/association_table', record_object: @service_definition, association: :accepts, fa: :'caret-right', direct_to_edit: true %>
+<%= render 'shared/show/association_table', record_object: @service_definition.setup, association: :variables, direct_to_edit: true, fa: :'caret-right', label: 'Setup variables' %>
+<%= render 'shared/show/association_table', record_object: @service_definition.consumer, association: :variables, direct_to_edit: true, fa: :'caret-right', label: 'Consumer variables' %>
+<%= render 'shared/show/association_table', record_object: @service_definition, association: :configurators, fa: :'caret-right' %>

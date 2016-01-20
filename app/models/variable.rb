@@ -25,25 +25,27 @@ class Variable < ActiveRecord::Base
     end
   end
 
-  def as_json(options={})
-    if variable_consumer_type == 'BlueprintVersion'
-      options[:except] ||=
-        [ 
-          :created_at,
-          :updated_at,
-          :id,
-          :value_confirmation,
-          :variable_consumer_id,
-          :variable_consumer_type,
-          :deprecated
-        ]
-      super
-    else
-      result = {}
-      result[name] = value
-      result
-    end 
-  end 
+
+
+  # def as_json(options={})
+  #   if variable_consumer_type == 'BlueprintVersion'
+  #     options[:except] ||=
+  #       [
+  #         :created_at,
+  #         :updated_at,
+  #         :id,
+  #         :value_confirmation,
+  #         :variable_consumer_id,
+  #         :variable_consumer_type,
+  #         :deprecated
+  #       ]
+  #     super
+  #   else
+  #     result = {}
+  #     result[name] = value
+  #     result
+  #   end
+  # end
 
   # def to_handle
   #   name.downcase.gsub(' ', '_')
@@ -51,6 +53,10 @@ class Variable < ActiveRecord::Base
 
   def to_label
     ( label || name ) + ( ( ' = ' +  SharedViews.value_as_html(value) ) if value.present? ).to_s
+  end
+
+  def to_title
+    variable_consumer_type.to_s.underscore.humanize + ' variable: ' + to_label
   end
 
 end

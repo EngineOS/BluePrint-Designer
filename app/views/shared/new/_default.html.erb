@@ -1,8 +1,8 @@
 <%  record_object ||= nil
     attributes ||= nil
-    cancel_path ||= nil
     nest_in ||= nil
     record_class_name = record_object.class.to_s.underscore
+    cancel_path ||= (url_for(record_object.send(nest_in)) + "##{record_class_name.pluralize}") if nest_in.present?
     page_title ||= "New #{record_class_name.humanize}"
     fa ||= 'circle-o' %>
 

@@ -1,13 +1,20 @@
 <%  items ||= record_object.send( association )
+    record_class = record_object.class.name.underscore.to_sym
     nest_routes ||= false
-    nest_in ||= record_object.class.name.underscore.to_sym
+    nest_in ||= record_class
     fa ||= false
     attributes ||= nil
     show_add_button = true if show_add_button.nil?
     map_to ||= nil
     direct_to_edit ||= nil
     # show_in ||= nil
-    id_field_name = (record_object.class.name.underscore + "_id").to_sym
+    is_polymorphic = record_object.class.reflect_on_association(association).options[:as].present?
+    if is_polymorphic
+      id_field_name = (association.to_s.singularize + "_consumer_id").to_sym
+      type_field_name = (association.to_s.singularize + "_consumer_type").to_sym
+    else
+      id_field_name = (record_class.to_s + "_id").to_sym
+    end
     default_actions ||= nil
 
     label ||= association.to_s.humanize
@@ -16,6 +23,9 @@
                                   [ :new, record_object, association.to_s.singularize ]
                                 elsif map_to
                                   [ :new, record_object, map_to]
+                                elsif is_polymorphic
+                                  [ :new, association.to_s.singularize,
+                                      id_field_name => record_object.id, type_field_name => record_object.class.name ]
                                 else
                                   [ :new, association.to_s.singularize, id_field_name => record_object.id ]
                                 end )
@@ -27,7 +37,7 @@
       <div class="col-sm-12">
         <h3><% if fa %><%= content_tag(:i , nil, class: "fa fa-#{fa}") + ' ' %><% end %><%= label %></h3>
         <% if show_add_button %>
-          <%= link_to (content_tag(:i, nil, class: 'fa fa-plus').html_safe + " Add"), new_item_path, class: "btn btn-primary trigger-response-modal" %>
+          <%= link_to (content_tag(:i, nil, class: 'fa fa-plus').html_safe + " Add"), new_item_path, class: "btn btn-lg btn-primary trigger-response-modal" %>
         <% end %>
       </div>
       <%= render 'shared/index/table', items: items, nest_routes: nest_routes, nest_in: nest_in, map_to: map_to, attributes: attributes, direct_to_edit: direct_to_edit, default_actions: default_actions %>

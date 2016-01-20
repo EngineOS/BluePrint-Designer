@@ -1,6 +1,10 @@
 <% cancel_path ||= nil
-   attributes = record_object.attributes_from_yaml.compact
- %>
+   attributes =
+     [ :replacement_string,
+       { name: :file, label: 'Source file' },
+       { name: :destination, label: 'Destination file' }
+     ]
+%>
 
 <%= render "shared/form/default", record_object: record_object, nest_in: nest_in, attributes: attributes, cancel_path: cancel_path %>
 

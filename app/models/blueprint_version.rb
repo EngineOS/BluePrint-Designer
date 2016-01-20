@@ -29,70 +29,11 @@ class BlueprintVersion < ActiveRecord::Base
   # validates_uniqueness_of :record_label, :case_sensitive => false
 
   enum http_protocol: { :'HTTP and HTTPS' => 0, :'HTTPS only' => 1, :'HTTP only' => 2 }
-  enum release_level: { :Alpha => 0, :Beta => 1, :'Release candidate' => 2, :Release => 3} 
+  enum release_level: { :Alpha => 0, :Beta => 1, :'Release candidate' => 2, :Release => 3}
 
-  def as_json(options = {})
-    {
-      software:
-      clean_data({
-        name: software_version.software.default_engine_name,
-        major: major,
-        minor: minor,
-        release_level: release_level,
-        patch: patch,
-        license_name: software_version.software.license.to_handle,
-        license_label: software_version.software.license.to_label,
-        license_sourceurl: software_version.software.license.source_url,
-        full_title: software_version.software.full_title,
-        short_title: software_version.software.short_title,
-        description: software_version.software.description,
-        icon_url: software_version.software.icon_url,
-        home_page_url: software_version.software.home_page_url,
-        support_page_url: software_version.software.support_page_url,
-        about: software_version.software.about,
-        language: software_version.software.language.to_handle,
-        framework: software_version.software.framework.to_handle,
-        deployment_type: software_version.software.deployment_type.to_handle,
-        web_root_directory: web_root_directory,
-        first_run_url: first_run_url,
-        publisher: software_version.software.publisher.to_handle,
-        blocking_worker_name: (blocking_worker.to_handle if blocking_worker.present?),
-        required_memory: required_memory,
-        recommended_memory: recommended_memory,
-        http_protocol: http_protocol_handle,
-        framework_port_overide: framework_port_overide,
-        custom_start_script: custom_start_script,
-        custom_install_script: custom_install_script,
-        custom_post_install_script: custom_post_install_script,
-        service_configurations: service_configurations.as_json,
-        persistent_directories: persistent_directories.as_json,
-        replacement_strings: replacement_strings.as_json,
-        persistent_files: persistent_files.as_json,
-        installed_packages: installed_packages.as_json,
-        system_packages: system_packages.as_json,
-        workers: workers.as_json,
-        ports: ports.as_json,
-        external_repositories: external_repositories.as_json,
-        rake_tasks: rake_tasks.as_json,
-        template_files: template_files.as_json,
-        file_write_permissions: file_write_permissions.as_json,
-        custom_php_inis: custom_php_inis.as_json,
-        apache_htaccess_files: apache_htaccess_files.as_json,
-        apache_httpd_configurations: apache_httpd_configurations.as_json,
-        modules: blueprint_modules.as_json,
-        variables: variables.as_json,
-        component_sources: component_sources.as_json,
-        component_path: software_version.software.component_path,
-        extract_components: software_version.software.extract_components,
-        installation_report_template: installation_report_template,
-        continuos_deployment: continuos_deployment,
-        database_seed_file: database_seed_file
-      })
-    }
-  end
 
-  def json_html
-    ap as_json, plain: true, index: false
+  def pretty_print
+    blueprint_save.blueprint_version_hash.deep_stringify_keys
   end
 
   def to_handle
@@ -103,12 +44,20 @@ class BlueprintVersion < ActiveRecord::Base
     software_version.to_label + ' ' + name
   end
 
+  def blueprint_save
+    BlueprintSave.new(self)
+  end
+
+  def save_to_repository
+    blueprint_save.save
+  end
+
   def humanize_html
     BlueprintHumanizer::Blueprint.new(to_json).html
   end
 
   def version
-    "#{major.to_i}.#{minor.to_i}.#{release_level.nil? ? '?' : release_level}.#{patch.to_i}"
+    "#{major.to_i}.#{minor.to_i}.#{patch.to_i} (#{release_level.nil? ? 'no release level' : release_level})"
   end
 
   def memory
@@ -120,36 +69,31 @@ class BlueprintVersion < ActiveRecord::Base
     {
       label: software_version.software.short_title || software_version.software.default_engine_name,
       detail: software_version.software.description,
-      repository_url: 'https://github.com/EnginesBlueprints/OwnCloud.git',
+      repository_url: "http://__HOST_WITH_PORT__/api/v0/software/#{id}",
       name: software_version.software.default_engine_name,
       icon_url: software_version.software.icon_url
     }
   end
 
-
 private
 
-  def http_protocol_handle
-    http_protocol.downcase.gsub(' ', '_')
-  end
-
-  def clean_data(dirty_data)
-    if dirty_data.is_a? Array
-      dirty_data.map do |v|
-        clean_data v
-      end.compact
-    elsif dirty_data.is_a? Hash
-      {}.tap do |result|
-        dirty_data.map do |k, v|
-          v = clean_data v
-          result[k] = clean_data v if v.present?
-        end
-      end
-    elsif dirty_data.is_a? String
-      dirty_data.strip
-    else
-      dirty_data
-    end
-  end
+  # def clean_data(dirty_data)
+  #   if dirty_data.is_a? Array
+  #     dirty_data.map do |v|
+  #       clean_data v
+  #     end.compact
+  #   elsif dirty_data.is_a? Hash
+  #     {}.tap do |result|
+  #       dirty_data.map do |k, v|
+  #         v = clean_data v
+  #         result[k] = clean_data v if v.present?
+  #       end
+  #     end
+  #   elsif dirty_data.is_a? String
+  #     dirty_data.strip
+  #   else
+  #     dirty_data
+  #   end
+  # end
 
 end

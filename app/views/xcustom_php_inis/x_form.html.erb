@@ -1,8 +1,0 @@
-<%= form_for [@custom_php_ini.software, @custom_php_ini] do |f| %>
-  <%= render 'shared/form/errors', f: f %>
-  <%= render 'shared/form/text_field', name: :name, placeholder: "James says hi!", comment: "Take care when typing in this field.", hint: "Remember: the slower you type the safer it is.", f: f %>
-  <%= render 'shared/form/text_field', name: :comment, f: f %>
-  <%= render 'shared/form/text_area', name: :content, f: f %>
-  <%= render 'shared/form/cancel_and_submit_buttons', f: f, cancel_path: edit_details_software_path(@custom_php_ini.software)
- %>
-<% end %>

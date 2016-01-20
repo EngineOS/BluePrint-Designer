@@ -10,8 +10,8 @@
                      :web_root_directory,
                      :blocking_worker,
                      :readme ]
-      if @blueprint_version.software_version.software.framework.continuos_deployment
-        attributes << :continuos_deployment
+      if @blueprint_version.software_version.software.framework.continuous_deployment
+        attributes << :continuous_deployment
       end
       if @blueprint_version.software_version.software.framework.database_seed_file
         attributes << {attribute: :database_seed_file, show_as: :code}
@@ -23,7 +23,7 @@
        %>
   <%= render 'shared/show/default', record_object: @blueprint_version, fa: :'file-text', back_path: @blueprint_version.software_version, attributes: attributes %>
   <% if @blueprint_version.software_version.software.framework.service_configurations %>
-    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :service_configurations, attributes: [:service_definition, :variables], fa: :'caret-right' %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :service_configurations, attributes: [:service_definition_path, :variables], fa: :'caret-right' %>
   <% end %>
   <% if @blueprint_version.software_version.software.framework.persistent_directories %>
     <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :persistent_directories, fa: :'caret-right', direct_to_edit: true, default_actions: true %>
@@ -74,7 +74,7 @@
   <% end %>
 
   <% if @blueprint_version.software_version.software.framework.variables %>
-    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :variables, fa: :'caret-right',attributes: [:to_label, :field_type, :value], new_item_path: url_for([:new, :variable, variable_consumer_id: @blueprint_version.id, variable_consumer_type: :BlueprintVersion]) %>
+    <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :variables, fa: :'caret-right',attributes: [:to_label, :field_type, :value] %>
   <% end %>
   <% if @blueprint_version.software_version.software.framework.component_sources %>
     <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :component_sources, fa: :'caret-right', attributes: [[:url, "URL"]], direct_to_edit: true %>
@@ -84,6 +84,3 @@
 <div class="col-md-2">
   <%= render 'show_nav' %>
 </div>
-
-
-

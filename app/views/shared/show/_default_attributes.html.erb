@@ -10,7 +10,7 @@
                         ['id', 'created_at', 'updated_at'].include?(attribute)
                       end.
                       reject do |attribute|
-                        attribute.ends_with?('_consumer_type')
+                        attribute.ends_with?('_consumer_type') || attribute.ends_with?('_consumer_id')
                       end.
                       map do |attribute|
                         attribute.sub(/_id\z/, '')
@@ -21,8 +21,9 @@
                       reject do |attribute|
                         attribute.to_sym == :value_confirmation
                       end
+
     if show_all_associations
-      attributes += record_object.class.reflect_on_all_associations(:has_many).map(&:name) + 
+      attributes += record_object.class.reflect_on_all_associations(:has_many).map(&:name) +
                       record_object.class.reflect_on_all_associations(:has_one).map(&:name)
     end
     association_label_method ||= :to_label %>
@@ -34,13 +35,13 @@
         attribute = attribute[0]
       elsif attribute.kind_of?(Hash)
         label = attribute[:label].nil? ? attribute[:attribute].to_s.humanize : attribute[:label]
-        show_as = attribute[:show_as] || :inline_labelled_text     
+        show_as = attribute[:show_as] || :inline_labelled_text
         attribute = attribute[:attribute]
       else
+        show_as = :inline_labelled_text
         if polymorphic_associations.include? attribute.to_sym
-            label = record_object.send(attribute.to_s + '_type').underscore.humanize
+          label = record_object.send(attribute.to_s + '_type').underscore.humanize
         else
-          show_as = :inline_labelled_text
           label = attribute.to_s.humanize
         end
       end
@@ -48,7 +49,7 @@
 
       <div class="row">
         <%= render "shared/show/#{show_as}", label: label, object: record_object, field: attribute, association_label_method: association_label_method %>
-        
+
       </div>
 
     <% end %>

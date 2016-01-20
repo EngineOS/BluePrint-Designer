@@ -34,7 +34,7 @@ class ServiceConfigurationsController < ApplicationController
   def destroy
     @service_configuration = ServiceConfiguration.find(params[:id])
     @service_configuration.destroy
-    redirect_to @service_configuration.blueprint_version
+    redirect_to (blueprint_version_path(@service_configuration.blueprint_version) + '#blueprint_version_service_configurations')
   end
 
   def reload_service_definition
