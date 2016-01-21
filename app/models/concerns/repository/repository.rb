@@ -40,13 +40,13 @@ module Repository
       filename = service_definition_path.split('/').last + '.yaml'
       filepath = path + '/' + filename
       readme_filepath = path + '/readme.md'
-      check_is_git git_path
+      git_repository git_path
       FileUtils.mkdir_p(path)
       File.write( filepath, service_definition_yaml)
       File.write( readme_filepath, readme) if readme.present?
       true
-    rescue
-      false
+    # rescue
+    #   false
     end
 
     def save_blueprint_version(blueprint_path, blueprint_json, readme=nil, name='no_username', email='no_email', message='no_message')
@@ -70,8 +70,8 @@ module Repository
       options[:parents] = repo.empty? ? [] : [ repo.head.target ].compact
       options[:update_ref] = 'HEAD'
       Rugged::Commit.create(repo, options)
-    rescue
-      false
+    # rescue
+    #   false
     end
 
     def git_repository(path)
