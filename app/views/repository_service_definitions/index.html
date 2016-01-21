@@ -21,7 +21,7 @@
   <table class="table table-condensed top-gap">
     <tbody>
       <% Repository::Repository.new.list_service_definition_paths.each do |service_definition| %>
-        <tr class="clickable-table-row" href="<%= repository_service_definition_path(id: service_definition) %>">
+        <tr class="clickable-table-row" href="<%= repository_service_definition_path(id: service_definition.gsub('/', '\\')) %>">
           <td class="trigger-response-modal" style="cursor: pointer;">
             <%= service_definition  %>
           </td>
