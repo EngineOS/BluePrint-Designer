@@ -17,7 +17,7 @@ class BlueprintVersionsController < ApplicationController
     @blueprint_version.apache_htaccess_files.build
     @blueprint_version.variables.build
   end
-    
+
   def create
     @blueprint_version = BlueprintVersion.new(blueprint_version_params)
     if @blueprint_version.save
@@ -26,7 +26,7 @@ class BlueprintVersionsController < ApplicationController
       render 'new'
     end
   end
-    
+
   def show
     @blueprint_version = BlueprintVersion.find(params[:id])
   end
@@ -38,7 +38,7 @@ class BlueprintVersionsController < ApplicationController
   def edit
      @blueprint_version = BlueprintVersion.find(params[:id])
   end
-  
+
   def update
     @blueprint_version = BlueprintVersion.find(params[:id])
     if @blueprint_version.update(blueprint_version_params)
@@ -53,7 +53,7 @@ class BlueprintVersionsController < ApplicationController
     @blueprint_version.destroy
     redirect_to @blueprint_version.software_version
   end
-  
+
 
 
   def duplicate
@@ -83,17 +83,17 @@ class BlueprintVersionsController < ApplicationController
     render :publish
   end
 
-  def commit_to_repository
-    @blueprint_version = BlueprintVersion.find(params[:id])
-    # publisher = Publisher.new(@blueprint_version)
-    # @result =  publisher.publishtest
-    if false #@result.was_success?
-      flash.now[:notice] = "Success"
-    else
-      flash.now[:error] = "Big fat fail."
-    end
-    render :publish
-  end
+  # def commit_to_repository
+  #   @blueprint_version = BlueprintVersion.find(params[:id])
+  #   # publisher = Publisher.new(@blueprint_version)
+  #   # @result =  publisher.publishtest
+  #   if false #@result.was_success?
+  #     flash.now[:notice] = "Success"
+  #   else
+  #     flash.now[:error] = "Big fat fail."
+  #   end
+  #   render :publish
+  # end
 
   # def post_to_gallery
   #   @blueprint_version = BlueprintVersion.find(params[:id])
@@ -109,14 +109,14 @@ class BlueprintVersionsController < ApplicationController
 
 private
 
-  def unique_name_for_duplicate
-    i = 1
-    original_name = @blueprint_version.name
-    while BlueprintVersion.find_by name: @blueprint_version.name
-      @blueprint_version.name = original_name + " (copy#{ i if i > 1})"
-      i += 1
-    end
-  end
+  # def unique_name_for_duplicate
+  #   i = 1
+  #   original_name = @blueprint_version.name
+  #   while BlueprintVersion.find_by name: @blueprint_version.name
+  #     @blueprint_version.name = original_name + " (copy#{ i if i > 1})"
+  #     i += 1
+  #   end
+  # end
 
   def blueprint_version_params
     params.require(:blueprint_version).permit!
@@ -147,33 +147,33 @@ private
     #   :web_port_overide)
   end
 
-  def attributes_for_duplicate
-
-    [
-      # :software_version,
-      # :blocking_worker,
-      :service_configurations,
-      :persistent_directories,
-      :replacement_strings,
-      :persistent_files,
-      :installed_packages,
-      :system_packages,
-      :ports,
-      :workers,
-      :rake_tasks,
-      :template_files,
-      :file_write_permissions,
-      :custom_php_inis,
-      :apache_htaccess_files,
-      :variables,
-      :component_sources,
-      :apache_httpd_configurations,
-      :blueprint_modules
-    ]
-
-  # has_many :ports, dependent: :destroy
-  # has_many :service_configuration_variables, as: :variable_consumer, through: :service_configurations
-
-  end
+  # def attributes_for_duplicate
+  #
+  #   [
+  #     # :software_version,
+  #     # :blocking_worker,
+  #     :service_configurations,
+  #     :persistent_directories,
+  #     :replacement_strings,
+  #     :persistent_files,
+  #     :installed_packages,
+  #     :system_packages,
+  #     :ports,
+  #     :workers,
+  #     :rake_tasks,
+  #     :template_files,
+  #     :file_write_permissions,
+  #     :custom_php_inis,
+  #     :apache_htaccess_files,
+  #     :variables,
+  #     :component_sources,
+  #     :apache_httpd_configurations,
+  #     :blueprint_modules
+  #   ]
+  #
+  # # has_many :ports, dependent: :destroy
+  # # has_many :service_configuration_variables, as: :variable_consumer, through: :service_configurations
+  #
+  # end
 
 end

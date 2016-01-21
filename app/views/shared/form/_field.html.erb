@@ -64,7 +64,7 @@
 
       if attribute_type.nil?
 
-        attribute_detail = record_class.columns_hash[name.to_s]
+        attribute_detail = record_class.columns_hash.stringify_keys[name.to_s]
 
         if attribute_detail
 
@@ -72,7 +72,11 @@
                               name.to_s.ends_with?('_consumer_type' )
             attribute_type = :hidden
           else
-            attribute_type = attribute_detail.type
+            if attribute_detail.is_a? Hash
+              attribute_type = attribute_detail[:type].to_s
+            else
+              attribute_type = attribute_detail.type
+            end
           end
 
         else
