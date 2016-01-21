@@ -35,32 +35,55 @@ module Repository
     end
 
     def save_service_definition(service_definition_path, service_definition_yaml, readme = nil)
-      # repo = Rugged::Repository.new(@local_repository_path)
+      git_path = @local_repository_path + '/service_definitions/'
       path = @local_repository_path + '/service_definitions/providers/' + service_definition_path
       filename = service_definition_path.split('/').last + '.yaml'
       filepath = path + '/' + filename
       readme_filepath = path + '/readme.md'
+      check_is_git git_path
       FileUtils.mkdir_p(path)
       File.write( filepath, service_definition_yaml)
       File.write( readme_filepath, readme) if readme.present?
       true
-    rescue => e
+    rescue
       false
     end
 
-    def save_blueprint_version(blueprint_path, blueprint_yaml, readme = nil)
-      # repo = Rugged::Repository.new(@local_repository_path)
+    def save_blueprint_version(blueprint_path, blueprint_json, readme=nil, name='no_username', email='no_email', message='no_message')
+      name = 'no_username' if name.empty?
+      email = 'no_email' if email.empty?
+      message = 'no_message' if message.empty?
       path = @local_repository_path + '/blueprints/' + blueprint_path
-      filename = blueprint_path.split('/').last + '.yaml'
-      filepath = path + '/' + filename
+      blueprint_filepath = path + '/blueprint.json'
       readme_filepath = path + '/readme.md'
       FileUtils.mkdir_p(path)
-      File.write( filepath, blueprint_yaml)
+      repo = git_repository path
+      File.write( blueprint_filepath, blueprint_json)
       File.write( readme_filepath, readme) if readme.present?
-      true
-    rescue => e
+      index = repo.index
+      repo.index.add_all()
+      options = {}
+      options[:tree] = index.write_tree(repo)
+      options[:author] = { :email => email, :name => name, :time => Time.now }
+      options[:committer] = { :email => email, :name => name, :time => Time.now }
+      options[:message] ||= message
+      options[:parents] = repo.empty? ? [] : [ repo.head.target ].compact
+      options[:update_ref] = 'HEAD'
+      Rugged::Commit.create(repo, options)
+    rescue
       false
     end
+
+    def git_repository(path)
+      Rugged::Repository.new(path)
+    rescue
+      Rugged::Repository.init_at(path)
+    end
+
+# p :is_a_git_repo
+# p repo
+#
+#     end
 
     private
 

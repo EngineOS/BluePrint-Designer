@@ -33,7 +33,7 @@ class BlueprintVersion < ActiveRecord::Base
 
 
   def pretty_print
-    blueprint_save.blueprint_version_hash.deep_stringify_keys
+    BlueprintSaveData.new(self).blueprint_version_hash.deep_stringify_keys
   end
 
   def to_handle
@@ -44,13 +44,10 @@ class BlueprintVersion < ActiveRecord::Base
     software_version.to_label + ' ' + name
   end
 
-  def blueprint_save
-    BlueprintSave.new(self)
-  end
-
-  def save_to_repository
-    blueprint_save.save
-  end
+  #
+  # def save_to_repository
+  #   blueprint_save.save
+  # end
 
   def humanize_html
     BlueprintHumanizer::Blueprint.new(to_json).html
