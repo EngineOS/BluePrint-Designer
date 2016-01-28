@@ -19,8 +19,6 @@ class BlueprintSave
   column_names.each { |name| attr_accessor name }
   def new_record?; false; end
 
-
-
   def save
     ::Repository::Repository.new.save_blueprint_version(
           blueprint_version_path,
