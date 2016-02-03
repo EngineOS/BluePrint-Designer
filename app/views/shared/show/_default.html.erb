@@ -9,7 +9,8 @@
     fa ||= false
     as ||= :panel
     inspect_method ||= nil
-    hide_edit_button ||= false %>
+    hide_edit_button ||= false
+    hide_delete_button ||= false %>
 
 <div class="show">
   <div class="col-sm-12 show clearfix">
@@ -25,7 +26,7 @@
   </div>
 
   <div class="col-sm-12 show clearfix">
-    <%= render "shared/show/#{as}", record_object: record_object, attributes: attributes, inspect_method: inspect_method, nest_in: nest_in, hide_edit_button: hide_edit_button %>
+    <%= render "shared/show/#{as}", record_object: record_object, attributes: attributes, inspect_method: inspect_method, nest_in: nest_in, hide_edit_button: hide_edit_button, hide_delete_button: hide_delete_button %>
   </div>
 
 </div>

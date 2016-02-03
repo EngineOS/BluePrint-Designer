@@ -6,6 +6,7 @@
    show_all_associations ||= nil
    model_name = record_object.class.to_s.underscore
    hide_edit_button ||= false
+   hide_delete_button ||= false
 %>
 
 <div id="<%= record_object.class.name.underscore + '_' + record_object.id.to_s %>" class="panel panel-default top-gap">
@@ -16,7 +17,7 @@
       <div class="pull-right">
         <%= (link_to content_tag(:i , nil, class: 'fa fa-arrow-right') + ' Show', record_object, class: 'btn btn-lg trigger-response-modal', title: 'Open record') if params['action'] == 'index' %>
         <%= (link_to content_tag(:i , nil, class: 'fa fa-edit') + ' Edit', [:edit, record_object], class: 'btn btn-lg trigger-response-modal', title: 'Edit record') if !hide_edit_button %>
-        <%= link_to content_tag(:i , nil, class: 'fa fa-trash') + ' Delete', record_object, method: :delete, class: 'btn btn-lg', data: { confirm: 'Are you sure that you want to delete this ' + label.to_s + '?', confirm_title: 'Confirm delete' }, title: 'Delete' %>
+        <%= link_to content_tag(:i , nil, class: 'fa fa-trash') + ' Delete', record_object, method: :delete, class: 'btn btn-lg', data: { confirm: 'Are you sure that you want to delete this ' + label.to_s + '?', confirm_title: 'Confirm delete' }, title: 'Delete'  if !hide_delete_button %>
       </div>
     </div>
   </div>

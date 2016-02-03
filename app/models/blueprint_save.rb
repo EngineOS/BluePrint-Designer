@@ -3,13 +3,15 @@ class BlueprintSave
   include ActiveModel::Model
   include ActiveModel::Validations
 
+  # before_create :set_defaults
+
   def self.reflect_on_all_associations(scope); []; end
   def self.reflect_on_association(name); nil; end
   def self.columns_hash
     {
       blueprint_version_id: {type: :hidden},
-      name: {label: 'Commit username'},
-      email: {label: 'User email address'},
+      name: {label: 'Commit username', value: CommitSettings.instance.name},
+      email: {label: 'User email address', value: CommitSettings.instance.email},
       message: {type: :text_area, label: 'Commit message'}
     }
   end
@@ -17,7 +19,7 @@ class BlueprintSave
     columns_hash.keys
   end
   column_names.each { |name| attr_accessor name }
-  def new_record?; false; end
+  def new_record?; true; end
 
   def save
     ::Repository::Repository.new.save_blueprint_version(
@@ -26,6 +28,11 @@ class BlueprintSave
           save_data.blueprint_version_readme,
           name, email, message)
   end
+
+  # def set_defaults
+  #    = CommitSettings.instance
+  # end
+
 
   def save_data
     BlueprintSaveData.new blueprint_version

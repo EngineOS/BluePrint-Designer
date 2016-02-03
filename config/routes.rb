@@ -52,8 +52,8 @@ Rails.application.routes.draw do
             :module_types,
             :blueprint_modules,
             :blueprint_humanizers,
-            :blueprint_jsons,
-            :blueprint_commits
+            :blueprint_jsons #,
+            # :blueprint_commits
 
   resource  :welcome,
             :upgrade
@@ -79,6 +79,8 @@ Rails.application.routes.draw do
     get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
     put 'users' => 'devise/registrations#update', :as => 'user_registration'
   end
+  resource :commit_setting
+
   # resources :users do
   #   member do
   #     get :edit_password

@@ -74,6 +74,17 @@
           else
             if attribute_detail.is_a? Hash
               attribute_type = attribute_detail[:type].to_s
+              value =  attribute_detail[:value]
+              label =  attribute_detail[:label]
+              offset =  attribute_detail[:offset]
+              width =  attribute_detail[:width]
+              buffer =  attribute_detail[:buffer]
+              nest_in =  attribute_detail[:nest_in]
+              select_collection =  attribute_detail[:select_collection]
+              tooltip =  attribute_detail[:tooltip]
+              hint =  attribute_detail[:hint]
+              placeholder =  attribute_detail[:placeholder]
+              comment =  attribute_detail[:comment]
             else
               attribute_type = attribute_detail.type
             end
@@ -112,6 +123,6 @@
 
 %>
 
-      <%= render "shared/form/#{field_type}", f: f, name: name, label: label, offset: offset, width: width, buffer: buffer, nest_in: nest_in, select_collection: select_collection, tooltip: tooltip, hint: hint, placeholder: placeholder, comment: comment %>
+      <%= render "shared/form/#{field_type}", f: f, name: name, value: value, label: label, offset: offset, width: width, buffer: buffer, nest_in: nest_in, select_collection: select_collection, tooltip: tooltip, hint: hint, placeholder: placeholder, comment: comment %>
 
 <%  end %>

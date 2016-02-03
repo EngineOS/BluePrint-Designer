@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160203003955) do
+ActiveRecord::Schema.define(version: 20160203051159) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer  "service_definition_id"
@@ -78,6 +78,13 @@ ActiveRecord::Schema.define(version: 20160203003955) do
     t.string   "first_run_url"
     t.string   "web_root_directory"
     t.text     "readme"
+  end
+
+  create_table "commit_settings", force: :cascade do |t|
+    t.string   "email"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "component_sources", force: :cascade do |t|

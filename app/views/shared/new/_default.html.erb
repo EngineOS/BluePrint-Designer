@@ -3,6 +3,7 @@
     nest_in ||= nil
     record_class_name = record_object.class.to_s.underscore
     cancel_path ||= (url_for(record_object.send(nest_in)) + "##{record_class_name.pluralize}") if nest_in.present?
+    submit_label ||= nil
     page_title ||= "New #{record_class_name.humanize}"
     fa ||= 'circle-o' %>
 
@@ -11,5 +12,5 @@
 <% if File.exists?(Rails.root.join("app", "views", record_class_name.pluralize, "_form.html.erb")) %>
   <%= render "#{record_class_name.pluralize}/form", record_object: record_object, nest_in: nest_in, attributes: attributes, cancel_path: cancel_path %>
 <% else %>
-  <%= render "shared/form/default", record_object: record_object, nest_in: nest_in, attributes: attributes, cancel_path: cancel_path %>
+  <%= render "shared/form/default", record_object: record_object, nest_in: nest_in, attributes: attributes, cancel_path: cancel_path, submit_label: submit_label %>
 <% end %>

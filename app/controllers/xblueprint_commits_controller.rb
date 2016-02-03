@@ -3,7 +3,7 @@ class BlueprintCommitsController < ApplicationController
   def new
     @blueprint_commit = BlueprintCommit.new(commit_params)
   end
-    
+
   def create
     @blueprint_commit = BlueprintCommit.new(commit_params)
     if @blueprint_commit.commit(current_user.username)
