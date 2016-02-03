@@ -3,14 +3,14 @@ class ServiceDefinition < ActiveRecord::Base
   belongs_to :publisher
   belongs_to :service_type
 
-  has_one :setup, dependent: :destroy
+  has_many :target_envs, dependent: :destroy
   has_one :consumer, dependent: :destroy
   has_many :configurators, dependent: :destroy
   has_many :accepts, dependent: :destroy
 
   accepts_nested_attributes_for :accepts
   accepts_nested_attributes_for :configurators
-  accepts_nested_attributes_for :setup
+  accepts_nested_attributes_for :target_envs
   accepts_nested_attributes_for :consumer
 
   before_create :build_nested_records
@@ -52,7 +52,6 @@ class ServiceDefinition < ActiveRecord::Base
   private
 
   def build_nested_records
-    build_setup if setup.nil?
     build_consumer if consumer.nil?
  end
 

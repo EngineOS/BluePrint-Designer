@@ -1,0 +1,13 @@
+<%
+  cancel_path = url_for(@target_env.service_definition) + '#target_env_' + @target_env.id.to_s
+
+  attributes = [
+    { name: :variable_name,
+      attribute_type: :select,
+      select_collection: @target_env.service_definition.consumer.variables.map(&:name)
+    },
+    :environment_name
+  ]
+%>
+
+<%= render 'shared/new/default', record_object: @target_env, fa: :'caret-right', nest_in: :service_definition, cancel_path: cancel_path, attributes: attributes %>

@@ -25,7 +25,7 @@ class BlueprintVersion < ActiveRecord::Base
   has_many :external_repositories, dependent: :destroy
   has_many :blueprint_modules, dependent: :destroy
 
-  # validates :record_label, presence: true
+  validates :name, presence: true
   # validates_uniqueness_of :record_label, :case_sensitive => false
 
   enum http_protocol: { :'HTTP and HTTPS' => 0, :'HTTPS only' => 1, :'HTTP only' => 2 }

@@ -29,7 +29,7 @@ module Repository
           attach_post_build: service_definition[:attach_post_build] == true,
           attach_requires_restart: service_definition[:attach_requires_restart] == true,
           readme: @readme_file,
-          setup_attributes: setup_attributes,
+          target_envs_attributes: target_envs_attributes,
           consumer_attributes: consumer_attributes,
           configurators_attributes: configurators_attributes,
         }
@@ -42,9 +42,11 @@ module Repository
           end
       end
 
-      def setup_attributes
-        service_definition[:setup_params].present? ? {variables_attributes: service_definition[:setup_params].values.map{|param| param[:select_collection] = param[:select_collection].to_s; param}} : {}
-      end
+      def target_envs_attributes
+        if service_definition[:target_environment_variables].present?
+          service_definition[:target_environment_variables].values
+        end || []
+       end
 
       def consumer_attributes
         service_definition[:consumer_params].present? ? {variables_attributes: service_definition[:consumer_params].values.map{|param| param[:select_collection] = param[:select_collection].to_s; param}} : {}

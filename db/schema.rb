@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113223740) do
+ActiveRecord::Schema.define(version: 20160203003955) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer  "service_definition_id"
@@ -285,12 +285,6 @@ ActiveRecord::Schema.define(version: 20160113223740) do
     t.datetime "updated_at"
   end
 
-  create_table "setups", force: :cascade do |t|
-    t.integer  "service_definition_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "software_versions", force: :cascade do |t|
     t.string   "version"
     t.integer  "software_id"
@@ -322,6 +316,14 @@ ActiveRecord::Schema.define(version: 20160113223740) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "package"
+  end
+
+  create_table "target_envs", force: :cascade do |t|
+    t.integer  "service_definition_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "variable_name"
+    t.string   "environment_name"
   end
 
   create_table "template_files", force: :cascade do |t|

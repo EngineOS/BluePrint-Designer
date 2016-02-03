@@ -1,4 +1,6 @@
-<% cancel_path ||=
+<%
+  nest_in ||= nil
+  cancel_path ||=
     if f.object.new_record?
       if nest_in.present?
         url_for(f.object.send(nest_in)) + '#' + f.object.class.model_name.plural.underscore

@@ -37,7 +37,7 @@ class ServiceDefinitionSave
       immutable: service_definition.immutable,
       attach_post_build: service_definition.attach_post_build,
       attach_requires_restart: service_definition.attach_requires_restart,
-      setup_params: setup_params_for_service_definition_hash,
+      target_environment_variables: target_envs_for_service_definition_hash,
       consumer_params: consumer_params_for_service_definition_hash,
       configurators: configurators_for_service_definition_hash,
     }
@@ -47,26 +47,13 @@ class ServiceDefinitionSave
     service_definition.accepts.map(&:accepts_type)
   end
 
-  def setup_params_for_service_definition_hash
-    service_definition.setup.variables.map do |variable|
+  def target_envs_for_service_definition_hash
+    service_definition.target_envs.map do |target_env|
       {
-        variable.name.to_sym =>
+        target_env.environment_name.to_sym =>
           {
-            name: variable.name,
-            value: variable.value,
-            label: variable.label,
-            field_type: variable.field_type,
-            select_collection: variable.select_collection,
-            tooltip: variable.tooltip,
-            hint: variable.hint,
-            placeholder: variable.placeholder,
-            comment: variable.comment,
-            regex_validator: variable.regex_validator,
-            regex_invalid_message: variable.regex_invalid_message,
-            mandatory: variable.mandatory,
-            ask_at_build_time: variable.ask_at_build_time,
-            build_time_only: variable.build_time_only,
-            immutable: variable.immutable
+            environment_name: target_env.environment_name,
+            variable_name: target_env.variable_name
            }
       }
     end.reduce(:merge)
@@ -107,7 +94,7 @@ class ServiceDefinitionSave
           description: configurator.description,
           no_save: configurator.no_save
         }
-        result[configurator.name.to_sym][:variables] =
+        result[configurator.name.to_sym][:params] =
           configurator.variables.map do |variable|
             {
               variable.name.to_sym =>

@@ -1,4 +1,4 @@
-class Setup < ActiveRecord::Base
+class TargetEnv < ActiveRecord::Base
 
   belongs_to :service_definition
 
@@ -6,7 +6,7 @@ class Setup < ActiveRecord::Base
   accepts_nested_attributes_for :variables, reject_if: :all_blank, allow_destroy: true
 
   def to_label
-    "Setup needs label"
+    [variable_name, environment_name].join ' to '
   end
 
 end

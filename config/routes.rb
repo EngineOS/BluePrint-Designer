@@ -25,7 +25,7 @@ Rails.application.routes.draw do
             :accepts,
             :consumers,
             :configurators,
-            :setups,
+            :target_envs,
             :softwares,
             :software_versions,
             :blueprint_versions,

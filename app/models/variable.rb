@@ -2,6 +2,7 @@ class Variable < ActiveRecord::Base
 
   belongs_to :variable_consumer, polymorphic: true
   # has_one :variable_setter, dependent: :destroy
+  validates :name, presence: true
 
   def field_types
     { :Text => :text_field,
@@ -52,7 +53,7 @@ class Variable < ActiveRecord::Base
   # end
 
   def to_label
-    ( label || name ) + ( ( ' = ' +  SharedViews.value_as_html(value) ) if value.present? ).to_s
+    ( name.present? ? name : '?' ) + ( ( ' = ' +  SharedViews.value_as_html(value) ) if value.present? ).to_s
   end
 
   def to_title

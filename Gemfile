@@ -14,10 +14,10 @@ gem 'devise'
 
 # styling
 gem 'bootstrap3-rails'
-gem "font-awesome-rails"
 gem "selectize-rails"
 gem 'twitter-bootstrap-rails-confirm'
-gem 'awesome_print' #, '~> 1.2.0'
+gem "font-awesome-rails", git: "https://github.com/bokmann/font-awesome-rails.git"
+gem 'awesome_print'
 gem 'i18n_country_select'
 
 # Markdown
@@ -77,7 +77,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
+# gem 'spring',        group: :development
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

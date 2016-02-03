@@ -124,7 +124,7 @@ class BlueprintSaveData
   end
 
   def persistent_directories_for_blueprint_version_hash
-    blueprint_version.persistent_directories.map(& :path)
+    blueprint_version.persistent_directories.map{ |persistent_directory| {path: persistent_directory.path} }
   end
 
   def replacement_strings_for_blueprint_version_hash

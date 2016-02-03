@@ -12,7 +12,12 @@ class Software < ActiveRecord::Base
   has_many :blueprint_versions, through: :software_versions
 
   validates :full_title, presence: true
-  validate :validate_uniqueness_of_handle
+  validates :short_title, presence: true
+  validates :language_id, presence: true
+  validates :license, presence: true
+  validates :framework, presence: true
+  validates :deployment_type, presence: true
+  validates :publisher, presence: true
 
   def to_handle
     publisher.to_handle + '/' + title.downcase.gsub(' ', '_')
@@ -32,12 +37,6 @@ class Software < ActiveRecord::Base
 
   def to_label
     publisher.to_label + ' ' + full_title
-  end
-
-  def validate_uniqueness_of_handle
-    if Software.all.where.not(id: id).map(&:to_handle).include?(to_handle)
-      errors.add(:full_title, ["Full title", "must be unique for publisher #{publisher.to_label}"])
-    end
   end
 
   def self.search(search)
