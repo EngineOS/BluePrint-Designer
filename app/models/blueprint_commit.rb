@@ -1,4 +1,4 @@
-class BlueprintSave
+class BlueprintCommit
 
   include ActiveModel::Model
   include ActiveModel::Validations
@@ -35,7 +35,7 @@ class BlueprintSave
 
 
   def save_data
-    BlueprintSaveData.new blueprint_version
+    BlueprintCommitData.new blueprint_version
   end
 
   def blueprint_version_path

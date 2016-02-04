@@ -34,22 +34,34 @@ module Repository
       File.read filepath if File.exist? filepath
     end
 
-    def save_service_definition(service_definition_path, service_definition_yaml, readme = nil)
+    def save_service_definition(service_definition_path, service_definition_yaml, readme=nil, name=nil, email=nil, message=nil)
+      name = 'no_username' if name.empty?
+      email = 'no_email' if email.empty?
+      message = 'no_message' if message.empty?
       git_path = @local_repository_path + '/service_definitions/'
-      path = @local_repository_path + '/service_definitions/providers/' + service_definition_path
+      path = git_path + 'providers/' + service_definition_path
       filename = service_definition_path.split('/').last + '.yaml'
       filepath = path + '/' + filename
       readme_filepath = path + '/readme.md'
-      git_repository git_path
+      repo = git_repository git_path
       FileUtils.mkdir_p(path)
       File.write( filepath, service_definition_yaml)
       File.write( readme_filepath, readme) if readme.present?
-      true
+      index = repo.index
+      repo.index.add_all()
+      options = {}
+      options[:tree] = index.write_tree(repo)
+      options[:author] = { :email => email, :name => name, :time => Time.now }
+      options[:committer] = { :email => email, :name => name, :time => Time.now }
+      options[:message] ||= message
+      options[:parents] = repo.empty? ? [] : [ repo.head.target ].compact
+      options[:update_ref] = 'HEAD'
+      Rugged::Commit.create(repo, options)
     # rescue
     #   false
     end
 
-    def save_blueprint_version(blueprint_path, blueprint_json, readme=nil, name='no_username', email='no_email', message='no_message')
+    def save_blueprint_version(blueprint_path, blueprint_json, readme=nil, name=nil, email=nil, message=nil)
       name = 'no_username' if name.empty?
       email = 'no_email' if email.empty?
       message = 'no_message' if message.empty?

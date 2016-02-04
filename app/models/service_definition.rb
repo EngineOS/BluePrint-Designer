@@ -37,16 +37,8 @@ class ServiceDefinition < ActiveRecord::Base
     created_at != updated_at
   end
 
-  def service_definition_save
-    @service_definition_save ||= ServiceDefinitionSave.new(self)
-  end
-
-  def save_to_repository
-    service_definition_save.save
-  end
-
   def pretty_print
-    service_definition_save.service_definition_yaml
+    ServiceDefinitionCommitData.new(self).service_definition_yaml
   end
 
   private

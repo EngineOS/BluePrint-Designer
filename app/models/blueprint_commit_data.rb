@@ -1,4 +1,4 @@
-class BlueprintSaveData
+class BlueprintCommitData
 
   attr_accessor :blueprint_version
 

@@ -1,17 +1,9 @@
-class ServiceDefinitionSave
+class ServiceDefinitionCommitData
 
   attr_accessor :service_definition
 
   def initialize(service_definition)
     @service_definition = service_definition
-  end
-
-  def save
-    ::Repository::Repository.new.save_service_definition(service_definition_path, service_definition_yaml, service_definition_readme)
-  end
-
-  def service_definition_path
-    service_definition.publisher_namespace + '/' + service_definition.type_path
   end
 
   def service_definition_yaml

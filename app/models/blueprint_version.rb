@@ -33,7 +33,7 @@ class BlueprintVersion < ActiveRecord::Base
 
 
   def pretty_print
-    BlueprintSaveData.new(self).blueprint_version_hash.deep_stringify_keys
+    BlueprintCommitData.new(self).blueprint_version_hash.deep_stringify_keys
   end
 
   def to_handle
@@ -46,7 +46,7 @@ class BlueprintVersion < ActiveRecord::Base
 
   #
   # def save_to_repository
-  #   blueprint_save.save
+  #   blueprint_commit.save
   # end
 
   def humanize_html
