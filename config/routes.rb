@@ -18,6 +18,7 @@ Rails.application.routes.draw do
             :licenses,
             :deployment_types,
             :service_types,
+            :type_consumers,
             :service_definitions,
             :service_definition_commits,
             :service_definition_yamls,

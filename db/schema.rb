@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160203051159) do
+ActiveRecord::Schema.define(version: 20160209032751) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer  "service_definition_id"
@@ -340,6 +340,10 @@ ActiveRecord::Schema.define(version: 20160203051159) do
     t.integer  "blueprint_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "type_consumers", force: :cascade do |t|
+    t.integer "accept_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,0 +1,5 @@
+<%
+  back_path = url_for(@accept.service_definition) + '#' + @accept.class.name.underscore + '_' + @accept.id.to_s
+%>
+<%= render 'shared/show/default', record_object: @accept, fa: :'caret-right', back_path: back_path, nest_in: :service_definition %>
+<%= render 'shared/show/association_table', record_object: @accept.type_consumer, association: :variables, fa: :'caret-right', label: 'Type consumer variables' %>

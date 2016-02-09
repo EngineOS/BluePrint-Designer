@@ -1,22 +1,21 @@
 class AcceptsController < ApplicationController
 
   def new
-    @accept = Accept.new(service_definition_id: ServiceDefinition.first.id)
+    @accept = Accept.new(service_definition_id: params[:service_definition_id])
   end
 
   def create
     @accept = Accept.new(accept_params)
     if @accept.save
-      redirect_to ServiceDefinition.first
+      redirect_to @accept
     else
       render 'new'
     end
   end
 
-  # def show
-  #   @accept = Accept.find(params[:id])
-  #   redirect_to @accept.service_definition
-  # end
+  def show
+    @accept = Accept.find(params[:id])
+  end
   #
   # def index
   #   @accepts = Accept.all
@@ -30,7 +29,7 @@ class AcceptsController < ApplicationController
   def update
     @accept = Accept.find(params[:id])
     if @accept.update(accept_params)
-      redirect_to ServiceDefinition.first
+      redirect_to @accept
     else
       render 'edit'
     end
@@ -39,7 +38,7 @@ class AcceptsController < ApplicationController
   def destroy
     @accept = Accept.find(params[:id])
     @accept.destroy
-    redirect_to accepts_path
+    redirect_to url_for(@accept.service_definition) + '#accepts'
   end
 
 private

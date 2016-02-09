@@ -31,6 +31,7 @@ class ServiceDefinitionCommitData
       attach_requires_restart: service_definition.attach_requires_restart,
       target_environment_variables: target_envs_for_service_definition_hash,
       consumer_params: consumer_params_for_service_definition_hash,
+      type_consumer_params: type_consumer_params_for_service_definition_hash,
       configurators: configurators_for_service_definition_hash,
     }
   end
@@ -73,7 +74,38 @@ class ServiceDefinitionCommitData
             immutable: variable.immutable
            }
       }
-    end.reduce(:merge)
+    end.reduce(:merge) || {}
+  end
+
+  def type_consumer_params_for_service_definition_hash
+    {}.tap do |result|
+      service_definition.accepts.each do |accepts|
+        next if accepts.type_consumer.variables.empty?
+        result[accepts.accepts_type.to_sym] =
+            accepts.type_consumer.variables.map do |variable|
+            {
+              variable.name.to_sym =>
+                {
+                  name: variable.name,
+                  value: variable.value,
+                  label: variable.label,
+                  field_type: variable.field_type,
+                  select_collection: variable.select_collection,
+                  tooltip: variable.tooltip,
+                  hint: variable.hint,
+                  placeholder: variable.placeholder,
+                  comment: variable.comment,
+                  regex_validator: variable.regex_validator,
+                  regex_invalid_message: variable.regex_invalid_message,
+                  mandatory: variable.mandatory,
+                  ask_at_build_time: variable.ask_at_build_time,
+                  build_time_only: variable.build_time_only,
+                  immutable: variable.immutable
+                 }
+            }
+          end.reduce(:merge)
+      end
+    end
   end
 
   def configurators_for_service_definition_hash
