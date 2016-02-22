@@ -21,7 +21,8 @@
   <%= render 'shared/form/radio_buttons', name: :http_protocol, label: "Protocol", f: f %>
   <%= render 'shared/form/number_field', name: :framework_port_overide, f: f %>
 
-  <%= render 'shared/form/association_select', name: :blocking_worker, class_name: :worker, f: f %>
+  <%= render 'shared/form/association_select', name: :blocking_worker, class_name: :worker,
+        select_collection: @blueprint_version.workers.map {|l| [ l.to_label, l.id ] }, f: f %>
   <% if @blueprint_version.software_version.software.deployment_type.to_handle == 'web' %>
     <%= render 'shared/form/text_field', name: :web_root_directory, label: 'Web root directory', f: f %>
   <% end %>
