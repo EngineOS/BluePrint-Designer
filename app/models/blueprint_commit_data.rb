@@ -76,7 +76,7 @@ class BlueprintCommitData
         web_root_directory: blueprint_version.web_root_directory,
         first_run_url: blueprint_version.first_run_url,
         publisher: blueprint_version.software_version.software.publisher.to_handle,
-        blocking_worker_name: (blueprint_version.blocking_worker.to_handle if blueprint_version.blocking_worker.present?),
+        blocking_worker_name: (blueprint_version.blocking_worker.name if blueprint_version.blocking_worker.present?),
         required_memory: blueprint_version.required_memory,
         recommended_memory: blueprint_version.recommended_memory,
         http_protocol: http_protocol_handle_for_blueprint_version_hash,
