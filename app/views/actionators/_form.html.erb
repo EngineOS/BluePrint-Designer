@@ -2,7 +2,9 @@
       attributes: [:name, :label, :description,
         {name: :return_type, attribute_type: :radios, tooltip: "woooo",
          select_collection: [ [nil, 'None'],
-                              [:file, 'File'],
                               [:plain_text, 'Plain text'],
                               [:markdown, 'Markdown text'],
-                              [:json, 'JSON']] }] %>
+                              [:json, 'JSON'],
+                              [:file, 'File']
+                            ]
+         }] %>
