@@ -43,7 +43,9 @@
         <%= label %>
       <% end %>
       <%= comment %>
-      <%= f.select name, collection_as_array, {selected: value, include_blank: include_blank}, {title: tooltip, placeholder: placeholder, class: select_class, id: id, data: select_data_options} %>
+      <%= f.select name, collection_as_array,
+          {selected: value, include_blank: include_blank},
+          {title: tooltip, placeholder: placeholder, class: select_class, id: id, data: select_data_options} %>
       <% if errors.present? %>
         <div class='form-field-errors'>
           <% errors.each do |error| %>

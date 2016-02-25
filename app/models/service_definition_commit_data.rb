@@ -25,7 +25,7 @@ class ServiceDefinitionCommitData
       service_container: service_definition.service_container,
       service_handle_field: service_definition.service_handle_field,
       dedicated: service_definition.dedicated,
-      persistant: service_definition.persistant,
+      persistent: service_definition.persistent,
       immutable: service_definition.immutable,
       attach_post_build: service_definition.attach_post_build,
       attach_requires_restart: service_definition.attach_requires_restart,
@@ -33,6 +33,7 @@ class ServiceDefinitionCommitData
       consumer_params: consumer_params_for_service_definition_hash,
       type_consumer_params: type_consumer_params_for_service_definition_hash,
       configurators: configurators_for_service_definition_hash,
+      actionators: actionators_for_service_definition_hash,
     }
   end
 
@@ -120,6 +121,43 @@ class ServiceDefinitionCommitData
         }
         result[configurator.name.to_sym][:params] =
           configurator.variables.map do |variable|
+            {
+              variable.name.to_sym =>
+                {
+                  name: variable.name,
+                  value: variable.value,
+                  label: variable.label,
+                  field_type: variable.field_type,
+                  select_collection: variable.select_collection,
+                  tooltip: variable.tooltip,
+                  hint: variable.hint,
+                  placeholder: variable.placeholder,
+                  comment: variable.comment,
+                  regex_validator: variable.regex_validator,
+                  regex_invalid_message: variable.regex_invalid_message,
+                  mandatory: variable.mandatory,
+                  ask_at_build_time: variable.ask_at_build_time,
+                  build_time_only: variable.build_time_only,
+                  immutable: variable.immutable
+                 }
+            }
+          end.reduce(:merge)
+      end
+    end
+  end
+
+  def actionators_for_service_definition_hash
+    {}.tap do |result|
+      service_definition.actionators.each do |actionator|
+        result[actionator.name.to_sym] =
+        {
+          name: actionator.name,
+          label: actionator.label,
+          description: actionator.description,
+          return_type: actionator.return_type
+        }
+        result[actionator.name.to_sym][:params] =
+          actionator.variables.map do |variable|
             {
               variable.name.to_sym =>
                 {
