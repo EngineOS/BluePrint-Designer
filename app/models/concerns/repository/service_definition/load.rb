@@ -24,7 +24,7 @@ module Repository
           service_container: service_definition[:service_container],
           service_handle_field: service_definition[:service_handle_field],
           dedicated: service_definition[:dedicated] == true,
-          persistant: service_definition[:persistant] == true,
+          persistent: service_definition[:persistent] == true,
           immutable: service_definition[:immutable] == true,
           attach_post_build: service_definition[:attach_post_build] == true,
           attach_requires_restart: service_definition[:attach_requires_restart] == true,

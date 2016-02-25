@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160209032751) do
+ActiveRecord::Schema.define(version: 20160225021817) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer  "service_definition_id"
@@ -278,7 +278,7 @@ ActiveRecord::Schema.define(version: 20160209032751) do
     t.string   "service_container"
     t.string   "service_handle_field"
     t.boolean  "dedicated"
-    t.boolean  "persistant"
+    t.boolean  "persistent"
     t.boolean  "immutable"
     t.boolean  "attach_post_build"
     t.boolean  "attach_requires_restart"
