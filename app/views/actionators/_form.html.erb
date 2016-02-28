@@ -1,11 +1,11 @@
 <%= render "shared/form/default", record_object: @actionator, nest_in: :service_definition,
       attributes: [:name, :label, :description,
         {name: :return_type, attribute_type: :radios, tooltip: "woooo",
-         select_collection: [ [nil, 'None'],
+         select_collection: [ [:none, 'None'],
                               [:plain_text, 'Plain text'],
                               [:markdown, 'Markdown text'],
-                              [:html, 'HTML'],
                               [:json, 'JSON'],
+                              [:url, 'URL'],
                               [:file, 'File']
                             ]
          }] %>
