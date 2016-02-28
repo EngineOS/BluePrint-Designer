@@ -3,8 +3,6 @@ class BlueprintCommit
   include ActiveModel::Model
   include ActiveModel::Validations
 
-  # before_create :set_defaults
-
   def self.reflect_on_all_associations(scope); []; end
   def self.reflect_on_association(name); nil; end
   def self.columns_hash
@@ -28,11 +26,6 @@ class BlueprintCommit
           save_data.blueprint_version_readme,
           name, email, message)
   end
-
-  # def set_defaults
-  #    = CommitSettings.instance
-  # end
-
 
   def save_data
     BlueprintCommitData.new blueprint_version
