@@ -4,8 +4,8 @@
     value ||= f.object.send(name); value = default_value if value.blank?
 	  select_collection ||= ( (f.object.class.send(name.to_s.pluralize).keys if f.object.class.respond_to?(name.to_s.pluralize)) || [] )
     if select_collection.first.is_a? Array
-		  value_method ||= :first
-		  text_method ||= :last
+		  value_method ||= :last
+		  text_method ||= :first
 	  else
 		  value_method ||= :to_s
 		  text_method ||= :to_s
@@ -22,7 +22,6 @@
     field_class ||= nil  %>
 
   <div class="<%= errors_class %> col-sm-offset-<%= offset %> col-sm-<%= width %>">
-
     <% if label %>
 	    <%= f.label name, class: 'control-label' do %>
 	      <%= label %>

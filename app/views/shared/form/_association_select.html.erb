@@ -5,6 +5,7 @@
     width ||= 8
     buffer ||= 2
     allow_blank ||= nil
+    errors = f.object.errors[name]
     # nest_in ||= nil
 
     label ||= name.to_s.humanize
@@ -13,4 +14,4 @@
 
     %>
 
-<%= render 'shared/form/select', name: association_field, label: label, select_collection: select_collection, f: f, allow_blank: allow_blank, offset: offset, width: width, buffer: buffer %>
+<%= render 'shared/form/select', name: association_field, label: label, select_collection: select_collection, f: f, allow_blank: allow_blank, offset: offset, width: width, buffer: buffer, errors: errors %>
