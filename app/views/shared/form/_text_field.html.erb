@@ -10,36 +10,56 @@
     errors_class = "field_with_errors" if errors.present?
     offset ||= 2
     width ||= 8
-    buffer ||= 2 %>
+    buffer ||= 2
+    dependent ||= false
 
-<div class="<%= errors_class %> col-sm-offset-<%= offset %> col-sm-<%= width %>">
-  <div class="form-group">
-    <%= f.label name, class: 'control-label' do %>
-      <%= label %>
-    <% end %>
-    <%= comment %>
-    <%= f.text_field name, value: value, title: tooltip, placeholder: placeholder, spellcheck: ("false" if code), style: ("font-family:monospace;" if code), class: 'form-control input-lg' %>
-    <% if errors.present? %>
-      <div class='form-field-errors'>
-        <% errors.each do |error| %>
-          <%if error.class == Array %>
-            <%= error[1] %>
-          <% else %>
-            <%= error %>
+    dependent_options = {}
+    dependent_class = ''
+    if dependent
+      dependent_class = 'js-dependent-fields'
+      if dependent.is_a? Array
+        dependent_options['select-id'] = dependent[0]
+        dependent_options['option-value'] = dependent[1]
+      elsif dependent.is_a? Hash
+        dependent_options = dependent
+      end
+      dependent_options['option-duration'] ||= '500'
+    end
+ %>
+
+<%= tag :div, class: dependent_class, data: dependent_options %>
+
+  <div class="<%= errors_class %> col-sm-offset-<%= offset %> col-sm-<%= width %>">
+
+    <div class="form-group">
+      <%= f.label name, class: 'control-label' do %>
+        <%= label %>
+      <% end %>
+      <%= comment %>
+      <%= f.text_field name, value: value, title: tooltip, placeholder: placeholder, spellcheck: ("false" if code), style: ("font-family:monospace;" if code), class: 'form-control input-lg' %>
+      <% if errors.present? %>
+        <div class='form-field-errors'>
+          <% errors.each do |error| %>
+            <%if error.class == Array %>
+              <%= error[1] %>
+            <% else %>
+              <%= error %>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
-    <% end %>
-    <% if hint.present? %>
-      <div class='form-field-hint'>
-        <%= hint %>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
+      <% if hint.present? %>
+        <div class='form-field-hint'>
+          <%= hint %>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
 
-<% if buffer > 0 %>
-  <div class="col-sm-<%= buffer %> grid-buffer-col">
-    &nbsp;
-  </div>
-<% end %>
+  <% if buffer > 0 %>
+    <div class="col-sm-<%= buffer %> grid-buffer-col">
+      &nbsp;
+    </div>
+  <% end %>
+
+</div>

@@ -33,7 +33,7 @@ class ServiceDefinitionCommitData
       consumer_params: consumer_params_for_service_definition_hash,
       type_consumer_params: type_consumer_params_for_service_definition_hash,
       configurators: configurators_for_service_definition_hash,
-      actionators: actionators_for_service_definition_hash,
+      service_actionators: service_actionators_for_service_definition_hash,
     }
   end
 
@@ -146,18 +146,19 @@ class ServiceDefinitionCommitData
     end
   end
 
-  def actionators_for_service_definition_hash
+  def service_actionators_for_service_definition_hash
     {}.tap do |result|
-      service_definition.actionators.each do |actionator|
-        result[actionator.name.to_sym] =
+      service_definition.service_actionators.each do |service_actionator|
+        result[service_actionator.name.to_sym] =
         {
-          name: actionator.name,
-          label: actionator.label,
-          description: actionator.description,
-          return_type: actionator.return_type
+          name: service_actionator.name,
+          label: service_actionator.label,
+          description: service_actionator.description,
+          return_type: service_actionator.return_type,
+          return_file_name: service_actionator.return_file_name
         }
-        result[actionator.name.to_sym][:params] =
-          actionator.variables.map do |variable|
+        result[service_actionator.name.to_sym][:params] =
+          service_actionator.variables.map do |variable|
             {
               variable.name.to_sym =>
                 {

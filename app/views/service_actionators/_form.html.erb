@@ -1,0 +1,13 @@
+<%= render "shared/form/default", record_object: @service_actionator, nest_in: :service_definition,
+      attributes: [:name, :label, :description,
+        {name: :return_type, attribute_type: :radios,
+         select_collection: [ ['None', :none],
+                              ['Plain text', :plain_text],
+                              ['Markdown text', :markdown],
+                              ['JSON', :json],
+                              ['URL', :url],
+                              ['File', :file]
+                            ]},
+         {name: :return_file_name,
+           dependent: {'radio-name': 'service_actionator[return_type]',
+                       'radio-value': 'file' }}] %>

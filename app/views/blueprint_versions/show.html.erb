@@ -79,6 +79,8 @@
   <% if @blueprint_version.software_version.software.framework.component_sources %>
     <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :component_sources, fa: :'caret-right', attributes: [[:url, "URL"]], direct_to_edit: true %>
   <% end %>
+  <%= render 'shared/show/association_table', record_object: @blueprint_version, association: :software_actionators, fa: :'caret-right' %>
+  
 </div>
 
 <div class="col-md-2">

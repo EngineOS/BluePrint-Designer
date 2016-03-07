@@ -3,4 +3,4 @@
 <%= render 'shared/show/association_table', record_object: @service_definition, association: :target_envs, direct_to_edit: true, fa: :'caret-right', label: 'Target environment variables', default_actions: true %>
 <%= render 'shared/show/association_table', record_object: @service_definition.consumer, association: :variables, fa: :'caret-right', label: 'Consumer variables' %>
 <%= render 'shared/show/association_table', record_object: @service_definition, association: :configurators, fa: :'caret-right' %>
-<%= render 'shared/show/association_table', record_object: @service_definition, association: :actionators, fa: :'caret-right' %>
+<%= render 'shared/show/association_table', record_object: @service_definition, association: :service_actionators, fa: :'caret-right' %>

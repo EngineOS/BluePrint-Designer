@@ -11,21 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160225050620) do
+ActiveRecord::Schema.define(version: 20160307035332) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer  "service_definition_id"
     t.string   "accepts_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "actionators", force: :cascade do |t|
-    t.integer  "service_definition_id"
-    t.string   "name"
-    t.string   "label"
-    t.text     "description"
-    t.string   "return_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -257,6 +247,17 @@ ActiveRecord::Schema.define(version: 20160225050620) do
     t.datetime "updated_at"
   end
 
+  create_table "service_actionators", force: :cascade do |t|
+    t.integer  "service_definition_id"
+    t.string   "name"
+    t.string   "label"
+    t.text     "description"
+    t.string   "return_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "return_file_name"
+  end
+
   create_table "service_configuration_variables", force: :cascade do |t|
     t.integer  "service_configuration_id"
     t.datetime "created_at"
@@ -300,6 +301,16 @@ ActiveRecord::Schema.define(version: 20160225050620) do
     t.string   "path"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "software_actionators", force: :cascade do |t|
+    t.integer "blueprint_version_id"
+    t.string  "name"
+    t.text    "command"
+    t.string  "label"
+    t.text    "description"
+    t.string  "return_type"
+    t.string  "return_file_name"
   end
 
   create_table "software_versions", force: :cascade do |t|

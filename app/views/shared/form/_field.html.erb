@@ -23,6 +23,7 @@
       buffer = attribute[:buffer]
       nest_in = attribute[:nest_in]
       name = attribute[:name].to_sym
+      dependent ||= attribute[:dependent]
     else
       label ||= attribute.to_s.humanize
       name = attribute.to_sym
@@ -38,6 +39,7 @@
     hint ||= nil
     placeholder ||= nil
     comment ||= nil
+    dependent ||= nil
 
     if record_class.reflect_on_association(name)
 
@@ -53,9 +55,9 @@
   <%  else %>
 
         <% if name.to_s.camelcase.constantize.count < 5 %>
-          <%= render 'shared/form/association_radio_buttons', f: f, name: name, select_collection: select_collection, label: label, offset: offset, width: width, buffer: buffer, nest_in: nest_in %>
+          <%= render 'shared/form/association_radio_buttons', f: f, name: name, select_collection: select_collection, label: label, offset: offset, width: width, buffer: buffer, nest_in: nest_in, dependent: dependent %>
         <% else %>
-          <%= render 'shared/form/association_select', f: f, name: name, select_collection: select_collection, label: label, offset: offset, width: width, buffer: buffer, nest_in: nest_in %>
+          <%= render 'shared/form/association_select', f: f, name: name, select_collection: select_collection, label: label, offset: offset, width: width, buffer: buffer, nest_in: nest_in, dependent: dependent %>
         <% end %>
 
   <%  end
@@ -85,6 +87,7 @@
               hint =  attribute_detail[:hint]
               placeholder =  attribute_detail[:placeholder]
               comment =  attribute_detail[:comment]
+              dependent ||= attribute[:dependent]
             else
               attribute_type = attribute_detail.type
             end
@@ -125,6 +128,6 @@
 
 %>
 
-      <%= render "shared/form/#{field_type}", f: f, name: name, value: value, label: label, offset: offset, width: width, buffer: buffer, nest_in: nest_in, select_collection: select_collection, tooltip: tooltip, hint: hint, placeholder: placeholder, comment: comment %>
+      <%= render "shared/form/#{field_type}", f: f, name: name, value: value, label: label, offset: offset, width: width, buffer: buffer, nest_in: nest_in, select_collection: select_collection, tooltip: tooltip, hint: hint, placeholder: placeholder, comment: comment, dependent: dependent %>
 
 <%  end %>

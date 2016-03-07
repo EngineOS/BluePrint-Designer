@@ -39,7 +39,7 @@ class ConfiguratorsController < ApplicationController
   def destroy
     @configurator = Configurator.find(params[:id])
     @configurator.destroy
-    redirect_to url_for(@actionator.service_definition) + '#actionators'
+    redirect_to url_for(@service_actionator.service_definition) + '#service_actionators'
   end
 
 private

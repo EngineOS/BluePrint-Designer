@@ -1,0 +1,13 @@
+<%= render "shared/form/default", record_object: @software_actionator, nest_in: :blueprint_version,
+      attributes: [:name, :label, :description, {name: :command, attribute_type: :code_box},
+        {name: :return_type, attribute_type: :radios, tooltip: "woooo",
+          select_collection: [ ['None', :none],
+                               ['Plain text', :plain_text],
+                               ['Markdown text', :markdown],
+                               ['JSON', :json],
+                               ['URL', :url],
+                               ['File', :file]
+                             ]},
+          {name: :return_file_name,
+            dependent: {'radio-name': 'software_actionator[return_type]',
+                        'radio-value': 'file' }}] %>

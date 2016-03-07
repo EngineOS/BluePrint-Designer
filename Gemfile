@@ -33,7 +33,7 @@ gem 'open_uri_redirections'
 gem "cocoon"
 gem 'dependent-fields-rails'
 
-# for 'dependent-fields-rails'
+# for 'underscore-rails' required for 'dependent-fields-rails'
 gem 'underscore-rails'
 
 # duplicate nested records

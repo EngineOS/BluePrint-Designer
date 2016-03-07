@@ -1,4 +1,4 @@
-class Actionator < ActiveRecord::Base
+class ServiceActionator < ActiveRecord::Base
 
   belongs_to :service_definition
 

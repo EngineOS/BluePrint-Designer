@@ -106,7 +106,8 @@ class BlueprintCommitData
         extract_components: blueprint_version.software_version.software.extract_components,
         installation_report_template: blueprint_version.installation_report_template,
         continuous_deployment: blueprint_version.continuous_deployment,
-        database_seed_file: blueprint_version.database_seed_file
+        database_seed_file: blueprint_version.database_seed_file,
+        actionators: software_actionators_for_blueprint_version_hash
       }
     }
   end
@@ -272,6 +273,45 @@ class BlueprintCommitData
   def component_sources_for_blueprint_version_hash
     blueprint_version.component_sources.map do |component_source|
       { url: component_source.url }
+    end
+  end
+
+  def software_actionators_for_blueprint_version_hash
+    {}.tap do |result|
+      blueprint_version.software_actionators.each do |software_actionator|
+        result[software_actionator.name.to_sym] =
+        {
+          name: software_actionator.name,
+          label: software_actionator.label,
+          description: software_actionator.description,
+          command: software_actionator.command,
+          return_type: software_actionator.return_type,
+          return_file_name: software_actionator.return_file_name
+        }
+        result[software_actionator.name.to_sym][:params] =
+          software_actionator.variables.map do |variable|
+            {
+              variable.name.to_sym =>
+                {
+                  name: variable.name,
+                  value: variable.value,
+                  label: variable.label,
+                  field_type: variable.field_type,
+                  select_collection: variable.select_collection,
+                  tooltip: variable.tooltip,
+                  hint: variable.hint,
+                  placeholder: variable.placeholder,
+                  comment: variable.comment,
+                  regex_validator: variable.regex_validator,
+                  regex_invalid_message: variable.regex_invalid_message,
+                  mandatory: variable.mandatory,
+                  ask_at_build_time: variable.ask_at_build_time,
+                  build_time_only: variable.build_time_only,
+                  immutable: variable.immutable
+                 }
+            }
+          end.reduce(:merge)
+      end
     end
   end
 

@@ -24,13 +24,13 @@ class BlueprintVersion < ActiveRecord::Base
   has_many :ports, dependent: :destroy
   has_many :external_repositories, dependent: :destroy
   has_many :blueprint_modules, dependent: :destroy
+  has_many :software_actionators, dependent: :destroy
 
   validates :name, presence: true
   # validates_uniqueness_of :record_label, :case_sensitive => false
 
   enum http_protocol: { :'HTTP and HTTPS' => 0, :'HTTPS only' => 1, :'HTTP only' => 2 }
   enum release_level: { :Alpha => 0, :Beta => 1, :'Release candidate' => 2, :Release => 3}
-
 
   def pretty_print
     BlueprintCommitData.new(self).blueprint_version_hash.deep_stringify_keys
@@ -44,11 +44,6 @@ class BlueprintVersion < ActiveRecord::Base
     software_version.to_label + ' ' + name
   end
 
-  #
-  # def save_to_repository
-  #   blueprint_commit.save
-  # end
-
   def humanize_html
     BlueprintHumanizer::Blueprint.new(to_json).html
   end
@@ -61,7 +56,6 @@ class BlueprintVersion < ActiveRecord::Base
     "#{required_memory.to_i}/#{recommended_memory.to_i} MB"
   end
 
-
   def library_software_record
     {
       label: software_version.software.short_title || software_version.software.default_engine_name,
@@ -71,26 +65,5 @@ class BlueprintVersion < ActiveRecord::Base
       icon_url: software_version.software.icon_url
     }
   end
-
-private
-
-  # def clean_data(dirty_data)
-  #   if dirty_data.is_a? Array
-  #     dirty_data.map do |v|
-  #       clean_data v
-  #     end.compact
-  #   elsif dirty_data.is_a? Hash
-  #     {}.tap do |result|
-  #       dirty_data.map do |k, v|
-  #         v = clean_data v
-  #         result[k] = clean_data v if v.present?
-  #       end
-  #     end
-  #   elsif dirty_data.is_a? String
-  #     dirty_data.strip
-  #   else
-  #     dirty_data
-  #   end
-  # end
 
 end
