@@ -9,9 +9,11 @@
     attributes ||= nil
     cancel_path ||= nil
     submit_label ||= nil
+    submit_url ||= nil
+    submit_method ||= nil
 %>
 
-<%= form_for record_object do |f| %>
+<%= form_for record_object, url: submit_url, method: submit_method do |f| %>
   <%= render 'shared/form/errors',f: f, attributes: attributes, label: label, offset: offset, width: width, buffer: buffer %>
   <%= render 'shared/form/default_fields',f: f, attributes: attributes, nest_in: nest_in, label: label, offset: offset, width: width, buffer: buffer %>
   <%= render 'shared/form/cancel_and_submit_buttons', f: f, nest_in: nest_in, cancel_path: cancel_path, submit_label: submit_label   %>

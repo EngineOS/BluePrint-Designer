@@ -4,12 +4,18 @@
     record_class_name = record_object.class.to_s.underscore
     page_title ||= "Edit #{record_class_name.humanize}"
     fa ||= 'circle-o'
-    cancel_path ||= nil %>
+    submit_label ||= nil
+    cancel_path ||= nil
+    submit_url ||= nil
+    submit_method ||= nil
+ %>
 
 <h2><% if fa %><%= content_tag(:i , nil, class: "fa fa-#{fa}") + ' ' %><% end %><%= page_title %></h2>
 
 <% if File.exists?(Rails.root.join("app", "views", record_class_name.pluralize, "_form.html.erb")) %>
   <%= render "#{record_class_name.pluralize}/form", record_object: record_object, nest_in: nest_in, attributes: attributes, cancel_path: cancel_path %>
 <% else %>
-  <%= render "shared/form/default", record_object: record_object, attributes: attributes, nest_in: nest_in, cancel_path: cancel_path %>
+  <%= render "shared/form/default", record_object: record_object, attributes: attributes,
+        nest_in: nest_in, cancel_path: cancel_path, submit_label: submit_label,
+        submit_url: submit_url, submit_method: submit_method %>
 <% end %>

@@ -1,0 +1,7 @@
+<%= render 'shared/new/default', record_object: @service_definitions_commit,
+      page_title: "Commit all service definitions",
+      fa: 'floppy-o',
+      submit_label: 'Commit',
+      cancel_path: service_definitions_path,
+      submit_url: service_definitions_commit_path,
+      submit_method: :post %>

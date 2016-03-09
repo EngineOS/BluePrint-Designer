@@ -58,7 +58,8 @@ Rails.application.routes.draw do
             # :blueprint_commits
 
   resource  :welcome,
-            :upgrade
+            :upgrade,
+            :service_definitions_commit
 
   # resource :repository
   resources :repository_service_definitions
