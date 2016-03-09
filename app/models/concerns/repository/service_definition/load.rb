@@ -32,6 +32,7 @@ module Repository
           target_envs_attributes: target_envs_attributes,
           consumer_attributes: consumer_attributes,
           configurators_attributes: configurators_attributes,
+          service_actionators_attributes: actionators_attributes,
         }
       end
 
@@ -55,8 +56,27 @@ module Repository
       def configurators_attributes
         if service_definition[:configurators].present?
           service_definition[:configurators].values.map do |configurator|
-            configurator[:variables_attributes] = configurator[:params].values.map{|param| param[:select_collection] = param[:select_collection].to_s; param}
+            if configurator[:params].present?
+              configurator[:variables_attributes] = configurator[:params].values.map{|param| param[:select_collection] = param[:select_collection].to_s; param}
+            else
+              configurator[:variables_attributes] = []
+            end
             configurator.except(:params)
+          end
+        else
+          []
+        end
+      end
+
+      def actionators_attributes
+        if service_definition[:actionators].present?
+          service_definition[:actionators].values.map do |actionator|
+            if actionator[:params].present?
+              actionator[:variables_attributes] = actionator[:params].values.map{|param| param[:select_collection] = param[:select_collection].to_s; param}
+            else
+              actionator[:variables_attributes] = []
+            end
+            actionator.except(:params)
           end
         else
           []

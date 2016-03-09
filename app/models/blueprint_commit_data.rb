@@ -284,6 +284,7 @@ class BlueprintCommitData
           name: software_actionator.name,
           label: software_actionator.label,
           description: software_actionator.description,
+          log: software_actionator.log,
           script: software_actionator.script,
           return_type: software_actionator.return_type,
           return_file_name: software_actionator.return_file_name

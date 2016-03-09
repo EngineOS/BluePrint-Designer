@@ -1,5 +1,6 @@
 <%= render "shared/form/default", record_object: @service_actionator, nest_in: :service_definition,
       attributes: [:name, :label, :description,
+        {name: :log, label: 'Enable logging'},
         {name: :return_type, attribute_type: :radios,
          select_collection: [ ['None', :none],
                               ['Plain text', :plain_text],

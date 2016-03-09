@@ -1,2 +1,4 @@
-<%= render partial: 'shared/show/default', locals: {record_object: @software_actionator, fa: :'caret-right', nest_in: :blueprint_version } %>
-<%= render 'shared/show/association_table', record_object: @software_actionator, association: :variables, fa: :'caret-right' %>
+<%= render 'shared/show/default', 
+      record_object: @software_actionator, fa: :'caret-right', nest_in: :blueprint_version %>
+<%= render 'shared/show/association_table',
+      record_object: @software_actionator, association: :variables, fa: :'caret-right' %>

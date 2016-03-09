@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160307062242) do
+ActiveRecord::Schema.define(version: 20160308235710) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer  "service_definition_id"
@@ -256,6 +256,7 @@ ActiveRecord::Schema.define(version: 20160307062242) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "return_file_name"
+    t.boolean  "log"
   end
 
   create_table "service_configuration_variables", force: :cascade do |t|
@@ -311,6 +312,7 @@ ActiveRecord::Schema.define(version: 20160307062242) do
     t.text    "description"
     t.string  "return_type"
     t.string  "return_file_name"
+    t.boolean "log"
   end
 
   create_table "software_versions", force: :cascade do |t|

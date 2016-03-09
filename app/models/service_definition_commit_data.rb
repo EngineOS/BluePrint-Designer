@@ -154,6 +154,7 @@ class ServiceDefinitionCommitData
           name: service_actionator.name,
           label: service_actionator.label,
           description: service_actionator.description,
+          log: service_actionator.log,
           return_type: service_actionator.return_type,
           return_file_name: service_actionator.return_file_name
         }
