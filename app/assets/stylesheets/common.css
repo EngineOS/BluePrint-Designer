@@ -35,6 +35,10 @@ hr {
   white-space:nowrap;
 }
 
+.dropdown-menu li .btn-lg {
+	border-radius: 0px;
+}
+
 .btn-xlg {
   font-size: 30px;
 }

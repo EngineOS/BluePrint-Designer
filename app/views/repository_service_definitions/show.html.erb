@@ -6,6 +6,8 @@
 </div>
 <div class="col-sm-12 top-gap">
   <pre><%= @repository_service_definition.except(:readme).to_yaml %></pre>
-  <%= render 'shared/form/legend', text: "Readme" %>
+</div>
+<%= render 'shared/form/legend', text: "Readme" %>
+<div class="col-sm-12">
   <%= Markdown.new(@repository_service_definition[:readme] || "None", :hard_wrap, :filter_html, :autolink, :no_intra_emphasis, :fenced_code_blocks).to_html.html_safe %>
 </div>

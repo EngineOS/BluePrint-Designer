@@ -2,3 +2,7 @@
       fa: 'hdd-o', page_title: 'Service definition YAML',
       as: :inspect, inspect_method: :pretty_print,
       back_path: service_definition_path(@service_definition) %>
+<%= render 'shared/form/legend', text: "Readme" %>
+<div class="col-sm-12">
+  <%= Markdown.new(@service_definition.readme || "None", :hard_wrap, :filter_html, :autolink, :no_intra_emphasis, :fenced_code_blocks).to_html.html_safe %>
+</div>

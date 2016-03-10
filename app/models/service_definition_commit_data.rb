@@ -34,6 +34,7 @@ class ServiceDefinitionCommitData
       type_consumer_params: type_consumer_params_for_service_definition_hash,
       configurators: configurators_for_service_definition_hash,
       service_actionators: service_actionators_for_service_definition_hash,
+      constants: constants_for_service_definition_hash,
     }
   end
 
@@ -184,6 +185,19 @@ class ServiceDefinitionCommitData
       end
     end
   end
+
+  def constants_for_service_definition_hash
+    service_definition.constants.map do |constant|
+      {
+        constant.name.to_sym =>
+          {
+            name: constant.name,
+            value: constant.value
+           }
+      }
+    end.reduce(:merge) || {}
+  end
+
 
   # def humanize_html
   #   Humanizer::Blueprint.new(to_json, 'Service definition (v0.1)').html

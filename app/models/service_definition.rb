@@ -8,10 +8,12 @@ class ServiceDefinition < ActiveRecord::Base
   has_many :configurators, dependent: :destroy
   has_many :service_actionators, dependent: :destroy
   has_many :accepts, dependent: :destroy
+  has_many :constants, dependent: :destroy
 
   accepts_nested_attributes_for :accepts
   accepts_nested_attributes_for :configurators
   accepts_nested_attributes_for :service_actionators
+  accepts_nested_attributes_for :constants
   accepts_nested_attributes_for :target_envs
   accepts_nested_attributes_for :consumer
 

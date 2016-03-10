@@ -10,7 +10,7 @@ module Repository
       end
 
       def attributes
-        {
+  a =      {
           accepts_attributes: accepts_attributes,
           title: service_definition[:title],
           description: service_definition[:description],
@@ -28,12 +28,18 @@ module Repository
           immutable: service_definition[:immutable] == true,
           attach_post_build: service_definition[:attach_post_build] == true,
           attach_requires_restart: service_definition[:attach_requires_restart] == true,
-          readme: @readme_file,
+          readme: service_definition[:readme],
           target_envs_attributes: target_envs_attributes,
           consumer_attributes: consumer_attributes,
           configurators_attributes: configurators_attributes,
           service_actionators_attributes: actionators_attributes,
+          constants_attributes: constants_attributes
         }
+
+p :sd________________________________________
+p a
+a
+
       end
 
       def accepts_attributes
@@ -63,9 +69,7 @@ module Repository
             end
             configurator.except(:params)
           end
-        else
-          []
-        end
+        end || []
       end
 
       def actionators_attributes
@@ -78,10 +82,14 @@ module Repository
             end
             actionator.except(:params)
           end
-        else
-          []
-        end
+        end || []
       end
+
+      def constants_attributes
+        if service_definition[:constants].present?
+          service_definition[:constants].values
+        end || []
+       end
 
       def service_definition
         @service_definition ||= repository.

@@ -54,6 +54,7 @@ $.rails.showConfirmDialog = function(link) {
     $(document).on('hidden', '#confirmation-dialog', function () {
       $(this).remove();
     });
+    show_waiting_for_response_modal();
     $.rails.confirmed(link);
   });
 

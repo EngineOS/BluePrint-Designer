@@ -31,6 +31,11 @@ module Repository
 
     def service_definition_readme_for(service_definition_path)
       filepath = readme_filepath_for(service_definition_path)
+
+p :filepath
+p filepath
+p File.exist? filepath
+
       File.read filepath if File.exist? filepath
     end
 
@@ -104,7 +109,7 @@ module Repository
     end
 
     def readme_filepath_for(service_definition_path)
-      service_definitions_directory + '/providers/' + service_definition_path + '/readme.*'
+      service_definitions_directory + '/providers/' + service_definition_path + '/readme.md'
     end
 
     def clear_local_service_definitions

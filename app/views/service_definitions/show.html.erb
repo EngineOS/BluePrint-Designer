@@ -4,3 +4,4 @@
 <%= render 'shared/show/association_table', record_object: @service_definition.consumer, association: :variables, fa: :'caret-right', label: 'Consumer variables' %>
 <%= render 'shared/show/association_table', record_object: @service_definition, association: :configurators, fa: :'caret-right' %>
 <%= render 'shared/show/association_table', record_object: @service_definition, association: :service_actionators, fa: :'caret-right' %>
+<%= render 'shared/show/association_table', record_object: @service_definition, association: :constants, fa: :'caret-right', direct_to_edit: true %>

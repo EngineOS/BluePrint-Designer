@@ -26,6 +26,7 @@ Rails.application.routes.draw do
             :consumers,
             :configurators,
             :service_actionators,
+            :constants,
             :target_envs,
             :softwares,
             :software_versions,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308235710) do
+ActiveRecord::Schema.define(version: 20160310053845) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer  "service_definition_id"
@@ -102,6 +102,12 @@ ActiveRecord::Schema.define(version: 20160308235710) do
     t.boolean  "no_save"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "constants", force: :cascade do |t|
+    t.integer "service_definition_id"
+    t.string  "name"
+    t.string  "value"
   end
 
   create_table "consumers", force: :cascade do |t|
