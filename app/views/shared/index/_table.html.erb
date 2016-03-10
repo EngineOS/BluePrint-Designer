@@ -21,7 +21,6 @@
 %>
 
 <div class="col-sm-12">
-
   <table class="table table-condensed top-gap">
 
     <% if items.empty? %>
@@ -34,23 +33,23 @@
 
       <% if attributes != [:to_label] %>
         <tr>
-          <%  attributes.each do |attribute| 
-                if attribute.kind_of?(Array) 
-                  label = attribute[1].nil? ? attribute[0].to_s.humanize : attribute[1]
+          <%  attributes.each do |attribute|
+                if attribute.kind_of?(Array)
+                  field_label = attribute[1].nil? ? attribute[0].to_s.humanize : attribute[1]
                   attribute = attribute[0]
                 elsif attribute.kind_of?(Hash)
-                  label = attribute[:label].nil? ? attribute[:attribute].to_s.humanize : attribute[:label]
+                  field_label = attribute[:label].nil? ? attribute[:attribute].to_s.humanize : attribute[:label]
                   attribute = attribute[:attribute]
-                else 
-                  label = attribute.to_s.humanize 
+                else
+                  field_label = attribute.to_s.humanize
                 end
           %>
-            
+
             <th>
               <% if attribute.to_sym == :to_label %>
                 &nbsp
               <% else %>
-                <%= label if label.present? %>
+                <%= field_label if field_label.present? %>
               <% end %>
             </th>
 
@@ -69,19 +68,19 @@
 
             if map_to
               item = item.send(map_to)
-            end 
+            end
        %>
 
             <tr id="<%= item.class.name.underscore + '_' + item.id.to_s %>" class='clickable-table-row' href='<%= url_for_item %>'>
-              <% attributes.each do |attribute| 
+              <% attributes.each do |attribute|
 
-                if attribute.kind_of?(Array) 
+                if attribute.kind_of?(Array)
                   show_as = attribute[2] || :default
                   attribute = attribute[0]
                 elsif attribute.kind_of?(Hash)
-                  show_as = attribute[:show_as] || :default     
+                  show_as = attribute[:show_as] || :default
                   attribute = attribute[:attribute]
-                else 
+                else
                   show_as = :default
                 end
 
@@ -111,5 +110,3 @@
 
   </table>
 </div>
-
-
